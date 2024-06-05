@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <Artworks />,
       },
       {
-        path: "/oeuvre/details",
+        path: "/oeuvre/:id",
         element: <ArtworkDetails />,
       },
       {
