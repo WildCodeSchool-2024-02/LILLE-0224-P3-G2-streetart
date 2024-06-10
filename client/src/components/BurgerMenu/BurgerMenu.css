@@ -1,0 +1,41 @@
+.burger-menu-container {
+  font-family: var(--primary-font);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  font-size: 2.5rem;
+  letter-spacing: 0.15rem;
+  color: var(--white);
+  background-color: black;
+  opacity: 90%;
+  text-align: center;
+  z-index: 999;
+}
+
+.close-button {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.img-cross {
+  width: 2rem;
+}
+
+.button-cross {
+  background-color: transparent;
+  border: none;
+  padding: 1em;
+}
+
+/*****************************DESKTOP VERSION **************************/
+
+@media screen and (min-width: 768px) {
+  .burger-menu-container {
+    display: none;
+  }
+}

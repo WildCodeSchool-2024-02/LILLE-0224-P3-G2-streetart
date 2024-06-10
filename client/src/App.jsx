@@ -1,12 +1,16 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
+import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
+import { BurgerMenuProvider } from "./contexts/BurgerMenuContext";
 
 function App() {
   return (
-    <main className="container">
-      <p>COUCOU</p>
-      <Outlet />
-    </main>
+    <BurgerMenuProvider>
+      <main className="container">
+        <NavBarBottom />
+        <Outlet />
+      </main>
+    </BurgerMenuProvider>
   );
 }
 

@@ -1,0 +1,28 @@
+.menu-bottom {
+  height: 9vh;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-top: solid 2px black;
+}
+
+.menu-bottom img {
+  width: 2.5rem;
+  padding: 0.3rem 0.8rem 0rem;
+}
+
+.menu-bottom button {
+  all: unset;
+}
+
+/*****************************DESKTOP VERSION **************************/
+
+@media screen and (min-width: 768px) {
+  .menu-bottom-container {
+    display: none;
+  }
+}
