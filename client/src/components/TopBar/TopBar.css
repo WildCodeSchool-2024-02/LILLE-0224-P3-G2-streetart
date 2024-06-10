@@ -1,0 +1,123 @@
+.top-bar {
+  background-color: var(--white);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.top-bar.desktop {
+  display: none;
+}
+
+.top-bar.mobile {
+  width: 100%;
+  height: 9vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  color: var(--white);
+  position: relative;
+}
+
+.top-bar .title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--primary-font);
+  text-shadow: 2px 2px 2px var(--black);
+  cursor: pointer;
+  letter-spacing: 0.15rem;
+}
+
+.splash {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: url("/assets/images/paint-splash.png") 55% -80%;
+  opacity: 80%;
+}
+
+/* //////////////////////////////////////////////////////////// DESKTOP VERSION */
+
+@media screen and (min-width: 768px) {
+  .top-bar.mobile {
+    display: none;
+  }
+
+  .top-bar.desktop {
+    padding: 0.5rem 1rem;
+    font-size: 1.7rem;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .top-bar.desktop .left-container {
+    display: flex;
+  }
+
+  .top-bar.desktop .logo {
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    border-radius: 10px;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+
+  .top-bar.desktop .title {
+    text-shadow: 2px 2px 2px lightgray;
+    letter-spacing: 0.15rem;
+  }
+
+  .right-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .top-bar.desktop a {
+    display: flex;
+  }
+
+  .top-bar.desktop .register-btn {
+    background-image: linear-gradient(#cc83fc, #9803fc);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.5em;
+    margin-right: 1rem;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .top-bar.desktop .login-btn {
+    background-image: linear-gradient(#0dccea, #0d70ea);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.5em;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .top-bar.desktop .register-btn:hover,
+  .top-bar.desktop .login-btn:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+  }
+}
