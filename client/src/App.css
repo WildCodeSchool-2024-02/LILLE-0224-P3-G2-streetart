@@ -2,19 +2,20 @@
   --primary-font: "Amsterdam";
   --secondary-font: "Quicksand";
   --font-size: 16px;
-  --white: #F8F8F8 ;
-  --black: #1A1616;
+  --white: #f8f8f8;
+  --black: #1a1616;
   --breakpoint-small: 576px;
   --breakpoint-medium: 768px;
-  --shadow-container: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  --shadow-container: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 /* à utiliser pour le breakpoint
 @media screen and (min-width: var(--breakpoint-medium)) */
 
 @font-face {
-  font-family: 'Amsterdam';
-  src: url('../src/assets/fonts/amsterdam.ttf') format('truetype');
+  font-family: "Amsterdam";
+  src: url("../src/assets/fonts/amsterdam.ttf") format("truetype");
 }
 
 .quicksand {
@@ -33,8 +34,27 @@ body {
   padding: 0;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
+}
+.about-container,
+.artworkdetails-container,
+.artworks-container,
+.contact-container,
+.homepage-container,
+.login-container,
+.paneladmin-container,
+.login-container,
+.ranking-container,
+.register-container,
+.roadmap-container {
+  margin-bottom: 9vh;
 }
 
 a {

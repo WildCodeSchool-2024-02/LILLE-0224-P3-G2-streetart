@@ -3,7 +3,7 @@ import "./styles/ArtworkDetails.css";
 
 function ArtworkDetails() {
   return (
-    <>
+    <div className="artworkdetails-container">
       <div className="img-title-map-artwork">
         <h2 className="artwork-title">CHAT JAUNE</h2>
         <div className="desktop-container">
@@ -40,7 +40,7 @@ function ArtworkDetails() {
         </div>
       </div>
       <OthersArtworks />
-    </>
+    </div>
   );
 }
 
