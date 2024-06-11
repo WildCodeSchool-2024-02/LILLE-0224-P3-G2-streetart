@@ -127,5 +127,6 @@ input:focus + .line:after {
 @media screen and (min-width: 768px) {
   .main-container {
     margin-bottom: 0;
+    margin-left: 30vh;
   }
 }
