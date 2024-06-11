@@ -1,0 +1,99 @@
+.artworkdetails-container {
+  font-family: var(--secondary-font);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.artwork-title {
+  font-size: 2rem;
+}
+
+.artwork-img {
+  width: 100%;
+  height: 45vh;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-container);
+}
+
+/* MAP HIDDEN IN MOBILE */
+.map {
+  display: none;
+}
+
+.about-user-artwork {
+  background-color: aliceblue;
+  width: 100%;
+  height: 9vh;
+  border-radius: 1rem;
+  padding: 1.5px;
+  box-shadow: var(--shadow-container);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.user-img-artwork {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.about-artwork {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+/************************** DESKTOP VERSION **************************/
+@media screen and (min-width: 768px) {
+  .artwork-img {
+    width: 35vw;
+    height: 50vh;
+  }
+
+  .map {
+    display: block;
+    width: 35vw;
+    height: 35vh;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  .about-user-artwork {
+    width: 35vw;
+  }
+
+  /******************* GRID *******************/
+  .artworkdetails-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 15px;
+  }
+  .artwork-title {
+    grid-area: 1 / 1 / 2 / 3;
+    text-align: center;
+  }
+  .artwork-img {
+    grid-area: 2 / 1 / 4 / 2;
+    align-self: flex-start;
+  }
+  .map {
+    grid-area: 2 / 2 / 3 / 3;
+    width: 100%;
+  }
+  .about-user-artwork {
+    grid-area: 3 / 2 / 4 / 3;
+    align-self: flex-start;
+    width: 100%;
+  }
+  .about-artwork {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+}

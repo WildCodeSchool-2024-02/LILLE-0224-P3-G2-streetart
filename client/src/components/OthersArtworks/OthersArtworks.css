@@ -1,0 +1,16 @@
+.others-artworks {
+  display: none;
+}
+
+/********************** DESKTOP VERSION **********************/
+@media screen and (min-width: 768px) {
+  .others-artworks {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .others-title {
+    font-size: 2.5rem;
+    margin-left: 8rem;
+  }
+}
