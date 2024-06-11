@@ -1,0 +1,35 @@
+.profile-details {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.profile-details .profile-picture {
+  border-radius: 50%;
+  overflow: hidden;
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile-details .profile-picture img {
+  height: 50px;
+  width: 50px;
+}
+
+.profile-details .profile-info {
+  margin-left: 1rem;
+  font-size: 0.7em;
+  cursor: pointer;
+}
+
+.profile-details:hover {
+  transform: scale(1.1);
+}
+
+.profile-details #coin {
+  width: 20px;
+  height: 20px;
+  margin-bottom: -4px;
+}
