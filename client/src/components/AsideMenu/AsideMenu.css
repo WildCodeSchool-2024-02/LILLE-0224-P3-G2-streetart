@@ -1,0 +1,34 @@
+.aside-menu-container {
+  display: none;
+}
+
+/*****************************DESKTOP VERSION **************************/
+
+@media screen and (min-width: 768px) {
+  .aside-menu-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 30vh;
+    font-family: var(--primary-font);
+    font-size: 2.5rem;
+    letter-spacing: 0.15rem;
+    color: var(--black);
+    background-color: aliceblue;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+
+  .aside-menu {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+  }
+  .aside-menu-top,
+  .aside-menu-bottom {
+    padding: 1rem;
+  }
+}
