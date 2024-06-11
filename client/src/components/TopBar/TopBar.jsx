@@ -26,12 +26,12 @@ function TopBar ({ title }) {
                 </div>
                 <div className="right-container">
                     <Link to="/inscription">
-                        <button type="button" className="register-btn">
+                        <button type="button" className="register-btn btn">
                             Inscription
                         </button>
                     </Link>
                     <Link to="/connexion">
-                        <button type="button" className="login-btn">
+                        <button type="button" className="login-btn btn">
                             Connexion
                         </button>
                     </Link>

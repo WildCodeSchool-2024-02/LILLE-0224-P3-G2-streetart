@@ -82,42 +82,6 @@
 
   .top-bar.desktop .register-btn {
     background-image: linear-gradient(#cc83fc, #9803fc);
-    border: 0;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: Montserrat, sans-serif;
-    font-size: 0.5em;
     margin-right: 1rem;
-    padding: 0.6rem 1rem;
-    text-align: center;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-
-  .top-bar.desktop .login-btn {
-    background-image: linear-gradient(#0dccea, #0d70ea);
-    border: 0;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: Montserrat, sans-serif;
-    font-size: 0.5em;
-    padding: 0.6rem 1rem;
-    text-align: center;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-
-  .top-bar.desktop .register-btn:hover,
-  .top-bar.desktop .login-btn:hover {
-    opacity: 0.8;
-    transition: 0.3s;
   }
 }
