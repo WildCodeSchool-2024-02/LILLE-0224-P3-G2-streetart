@@ -1,0 +1,36 @@
+.register-container {
+  height: 93%;
+}
+
+.register-formulaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: var(--shadow-container);
+  height: 100%;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.register-formulaire button {
+  width: 8rem;
+  font-size: 1em;
+}
+
+.register-title {
+  display: none;
+}
+
+/**************************DESKTOP VERSION****************************/
+
+@media screen and (min-width: 768px) {
+  .register-title {
+    display: flex;
+    font-family: var(--secondary-font);
+    font-size: 2rem;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+  }
+}

@@ -55,6 +55,9 @@ a {
 
 .main-container {
   margin-bottom: 9vh;
+  height: calc(100vh - 18vh);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Bouton par défaut, modifier le background-image pour la couleur du bouton. */
@@ -127,5 +130,6 @@ input:focus + .line:after {
 @media screen and (min-width: 768px) {
   .main-container {
     margin-bottom: 0;
+    margin-left: 30vh;
   }
 }
