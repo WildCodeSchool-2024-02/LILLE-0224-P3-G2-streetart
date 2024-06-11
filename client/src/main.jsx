@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import PanelAdmin from "./pages/PanelAdmin";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/profil",
+        element: <Profile />,
       },
     ],
   },

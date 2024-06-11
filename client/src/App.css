@@ -11,7 +11,7 @@
 }
 
 /* à utiliser pour le breakpoint
-@media screen and (min-width: var(--breakpoint-medium)) */
+@media screen and (min-width: 768px) */
 
 @font-face {
   font-family: "Amsterdam";
@@ -51,69 +51,4 @@ a {
   color: inherit;
   text-decoration: none;
   display: block;
-}
-
-/* Bouton par défaut, modifier le background-image pour la couleur du bouton. */
-.btn {
-  background-image: linear-gradient(#0dccea, #0d70ea);
-  border: 0;
-  border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: Montserrat, sans-serif;
-  font-size: 0.5em;
-  padding: 0.6rem 1rem;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.btn:hover {
-  opacity: 0.8;
-  transition: 0.3s;
-}
-
-/* Input par défaut */
-input {
-  background: 0;
-  border: 0;
-  outline: none;
-  width: 40vw;
-  max-width: 400px;
-  font-size: 0.7em;
-  transition: padding 0.3s 0.2s ease;
-}
-
-input:focus {
-  padding-bottom: 5px;
-}
-
-input:focus + .line:after {
-  transform: scaleX(1);
-}
-
-.field {
-  position: relative;
-}
-
-.field .line {
-  width: 100%;
-  height: 3px;
-  position: absolute;
-  bottom: -8px;
-  background: #bdc3c7;
-}
-
-.field .line:after {
-  content: " ";
-  position: absolute;
-  float: right;
-  width: 100%;
-  height: 3px;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-  background: #0dccea;
 }
