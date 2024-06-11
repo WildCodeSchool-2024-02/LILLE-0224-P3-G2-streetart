@@ -1,10 +1,11 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
+import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   return (
     <main className="container">
-      <p>COUCOU</p>
+      <TopBar title="Spot Lille Art" />
       <Outlet />
     </main>
   );
