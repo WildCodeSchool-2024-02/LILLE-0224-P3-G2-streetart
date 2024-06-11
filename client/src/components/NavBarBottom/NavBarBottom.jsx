@@ -21,7 +21,11 @@ function NavBarBottom() {
           />
         </button>
         <Link to="/profil">
-          <img src="/assets/images/icons/profile.png" alt="Acceder au profil" />
+          <img
+            id="img-profile"
+            src="/assets/images/icons/profile.png"
+            alt="Acceder au profil"
+          />
         </Link>
       </div>
     </div>

@@ -16,7 +16,11 @@ function BurgerMenu() {
           <img src={ImgCross} alt="Fermer le menu" className="img-cross" />
         </button>
       </div>
-      <div onClick={handleCloseMenu} role="presentation">
+      <div
+        className="burger-links"
+        onClick={handleCloseMenu}
+        role="presentation"
+      >
         <Link to="/">Accueil</Link>
         <Link to="/oeuvres">Les oeuvres</Link>
         <Link to="/carte">Roadmap</Link>
