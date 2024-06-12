@@ -24,6 +24,14 @@ h2 {
   margin: 1rem;
 }
 
+.about-us {
+  margin-top: 2rem;
+  padding: 1rem;
+  box-shadow: var(--shadow-container);
+  background-color: aliceblue;
+  border-radius: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   .splash-img {
     width: 50vw;

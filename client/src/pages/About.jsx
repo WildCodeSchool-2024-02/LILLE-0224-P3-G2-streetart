@@ -65,6 +65,18 @@ function About() {
         formes.
       </p>
       <Link to="/inscription">Inscrivez-vous dès maintenant !</Link>
+      <div className="about-us">
+        <p>
+          Ceci est un site que nous avons réalisé dans le cadre d'un projet
+          pédagogique au cours de notre formation 'Développeur Web Full Stack" à
+          la Wild Code School. Nous avons réalisé le frontend du site en
+          utilisant React.js et nous avons utilisé express.js pour le backend.
+        </p>
+        <p>
+          Site réalisé par Alexis Estrine, Elodie Régnier, Audrey Baudry et
+          Sébastien Van Clemputte.
+        </p>
+      </div>
     </div>
   );
 }
