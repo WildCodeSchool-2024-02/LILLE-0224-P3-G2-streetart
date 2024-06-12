@@ -132,4 +132,8 @@ input:focus + .line:after {
     margin-bottom: 0;
     margin-left: 30vh;
   }
+
+  input {
+    width: 25vw;
+  }
 }
