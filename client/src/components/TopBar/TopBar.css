@@ -47,11 +47,14 @@
   .top-bar.desktop {
     padding: 0.5rem 1rem;
     font-size: 1.7rem;
-    height: auto;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     z-index: 2;
   }
 
