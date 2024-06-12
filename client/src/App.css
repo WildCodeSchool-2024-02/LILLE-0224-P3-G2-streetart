@@ -127,5 +127,10 @@ input:focus + .line:after {
 @media screen and (min-width: 768px) {
   .main-container {
     margin-bottom: 0;
+    margin-left: 30vh;
+    margin-top: 4rem;
+    padding: 1rem;
+    height: 100%;
+    overflow: auto;
   }
 }
