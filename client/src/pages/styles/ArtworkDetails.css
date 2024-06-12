@@ -91,7 +91,7 @@
   /******************* GRID *******************/
   .artworkdetails-container {
     margin-top: 2rem;
-    height: 80%;
+    height: 70%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 30vh 30vh;
