@@ -51,6 +51,7 @@
     flex-direction: column;
     box-shadow: none;
     width: 50%;
+    margin: 0;
   }
 
   .inscription-img-container {
