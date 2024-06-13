@@ -136,4 +136,8 @@ input:focus + .line:after {
     height: 100%;
     overflow: auto;
   }
+
+  input {
+    width: 25vw;
+  }
 }
