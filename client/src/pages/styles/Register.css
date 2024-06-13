@@ -1,5 +1,6 @@
 .register-container {
   height: 93%;
+  padding: 1rem;
 }
 
 .register-formulaire {
@@ -9,7 +10,6 @@
   align-items: center;
   box-shadow: var(--shadow-container);
   height: 100%;
-  margin-top: 1rem;
   font-size: 1.2rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -34,6 +34,7 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    padding: 0;
   }
 
   .register-title {

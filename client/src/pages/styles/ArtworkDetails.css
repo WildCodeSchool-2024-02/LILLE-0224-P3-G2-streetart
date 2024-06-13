@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  padding: 0 1rem;
 }
 
 .artwork-title {
@@ -90,7 +91,7 @@
 
   /******************* GRID *******************/
   .artworkdetails-container {
-    margin-top: 2rem;
+    padding: 1rem;
     height: 70%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
