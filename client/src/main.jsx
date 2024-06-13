@@ -16,6 +16,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 
+import FillArtwork from "./pages/FillArtwork";
+import Camera from "./components/NewArtwork/Camera/Camera";
+import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
+
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -65,6 +69,20 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
     ],
+  },
+
+  {
+    element: <FillArtwork />,
+    children: [
+      {
+        path: "/ajouter-oeuvre/camera",
+        element: <Camera />,
+      },
+      {
+        path: "/ajouter-oeuvre/formulaire",
+        element: <FormArtwork />,
+      }
+    ]
   },
 ]);
 
