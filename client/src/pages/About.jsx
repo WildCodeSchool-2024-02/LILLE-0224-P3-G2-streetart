@@ -11,7 +11,7 @@ function About() {
         curieux de découvrir de nouvelles œuvres, notre plateforme participative
         est là pour vous.{" "}
       </p>
-      <h2>À propos de Spot Lille Art</h2>
+      <h2 className="titles-about">À propos de Spot Lille Art</h2>
       <p>
         Spot Lille Art est bien plus qu'un simple site de référencement d'œuvres
         de street art. C'est une communauté dynamique et engagée qui célèbre la
@@ -19,22 +19,24 @@ function About() {
         Nous mettons en lumière les artistes locaux, les fresques emblématiques
         et les lieux où l'art urbain prend vie.
       </p>
-      <img
-        className="img-about"
-        src="https://www.sncf-connect.com/assets/styles/scale_max_width_961/public/media/2020-07/Roubaix%20Street%20Art%20%C2%A9Des%20Friches%20et%20des%20Lettres.jpg?itok=8MAH9aRw"
-        alt="oeuvre de street art"
-      />
-      <img
-        className="img-about"
-        src="https://www.sncf-connect.com/assets/styles/scale_max_width_961/public/media/2020-07/Roubaix%20Street%20Art%20%C2%A9Des%20Friches%20et%20des%20Lettres.jpg?itok=8MAH9aRw"
-        alt="oeuvre de street art"
-      />
-      <img
-        className="img-about"
-        src="https://www.sncf-connect.com/assets/styles/scale_max_width_961/public/media/2020-07/Roubaix%20Street%20Art%20%C2%A9Des%20Friches%20et%20des%20Lettres.jpg?itok=8MAH9aRw"
-        alt="oeuvre de street art"
-      />
-      <h2>Comment participer ?</h2>
+      <div className="images-about">
+        <img
+          className="img-about"
+          src="https://www.sncf-connect.com/assets/styles/scale_max_width_961/public/media/2020-07/Roubaix%20Street%20Art%20%C2%A9Des%20Friches%20et%20des%20Lettres.jpg?itok=8MAH9aRw"
+          alt="oeuvre de street art"
+        />
+        <img
+          className="img-about"
+          src="https://www.lescachotteriesdelille.com/wp-content/uploads/2023/12/KatAction.jpeg"
+          alt="oeuvre de street art"
+        />
+        <img
+          className="img-about"
+          src="https://www.tourisme-en-hautsdefrance.com/app/uploads/crt-hautsdefrance/2020/12/thumbs/roubaix-fresque-de-tednomad--credit-roubaixtourisme-1-640x640.jpg"
+          alt="oeuvre de street art"
+        />
+      </div>
+      <h2 className="titles-about">Comment participer ?</h2>
       <p>
         C'est simple et gratuit ! En créant un compte sur Spot Lille Art, vous
         devenez membre de notre communauté artistique. Une fois inscrit, vous
@@ -57,18 +59,20 @@ function About() {
         src="assets/images/paint-splash.png"
         alt="peinture qui coule"
       />
-      <h2>Rejoignez-nous dès maintenant !</h2>
+      <h2 className="titles-about">Rejoignez-nous dès maintenant !</h2>
       <p>
         Prêt à embarquer dans cette aventure artistique ? Rejoignez-nous dès
         aujourd'hui en créant votre compte sur Spot Lille Art. Ensemble,
         explorons les rues de la MEL et célébrons l'art urbain sous toutes ses
         formes.
       </p>
-      <Link to="/inscription">Inscrivez-vous dès maintenant !</Link>
+      <div className="btn inscription-btn">
+        <Link to="/inscription">Inscrivez-vous dès maintenant !</Link>
+      </div>
       <div className="about-us">
         <p>
           Ceci est un site que nous avons réalisé dans le cadre d'un projet
-          pédagogique au cours de notre formation 'Développeur Web Full Stack" à
+          pédagogique au cours de notre formation "Développeur Web Full Stack" à
           la Wild Code School. Nous avons réalisé le frontend du site en
           utilisant React.js et nous avons utilisé express.js pour le backend.
         </p>
