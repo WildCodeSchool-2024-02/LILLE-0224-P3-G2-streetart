@@ -1,0 +1,75 @@
+.profile-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.my-profile {
+  box-shadow: var(--shadow-container);
+  background-color: rgb(230, 232, 234);
+  border-radius: 1rem;
+  padding: 0.8rem;
+  margin: 1rem;
+}
+
+.top-profile {
+  display: flex;
+  justify-content: space-around;
+}
+
+.image-profile {
+  width: 10rem;
+  border-radius: 50%;
+}
+
+.pseudo-profile {
+  text-align: center;
+}
+
+.edit-profile {
+  box-shadow: var(--shadow-container);
+  background-color: rgb(222, 237, 250);
+  border-radius: 0.4rem;
+  height: 5vh;
+}
+
+.level-points {
+  box-shadow: var(--shadow-container);
+  background-color: rgb(196, 225, 250);
+  border-radius: 0.4rem;
+  height: auto;
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.points-edit {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.info-profile {
+  box-shadow: var(--shadow-container);
+  background-color: rgb(237, 238, 238);
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.my-artworks {
+  display: flex;
+}
+.my-artworks .artwork-card {
+  width: 30vw;
+  height: 30vw;
+}
+
+.my-artworks .artwork-info {
+  height: 1.5rem;
+  font-size: 0.8rem;
+}
