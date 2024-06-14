@@ -39,6 +39,7 @@ ol {
   font-size: 1rem;
   width: 50vw;
   margin-top: 0.5rem;
+  background-image: linear-gradient(#eedf9b, #ebc315);
 }
 
 .about-us {

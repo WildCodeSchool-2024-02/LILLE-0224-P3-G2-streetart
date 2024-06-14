@@ -15,13 +15,13 @@ function Login() {
         <div className="connexion-field">
           <h2 className="login-title">Connexion</h2>
           <div className="field">
-            <input type="text" className="input" placeholder="Pseudo" />
+            <input type="text" className="input-default" placeholder="Pseudo" />
             <div className="line" />
           </div>
           <div className="field">
             <input
               type="password"
-              className="input"
+              className="input-default"
               placeholder="Mot de passe"
             />
             <div className="line" />
@@ -31,9 +31,8 @@ function Login() {
           </button>
         </div>
         <div className="inscription-field">
-          <p className="inscription-text">Pas encore inscrit ? C'est par ici</p>
-          <Link to="/inscription" className="btn link-inscription-btn">
-            M'inscrire
+          <Link to="/inscription" className="link-inscription">
+            Pas encore inscrit ? C'est par ici
           </Link>
         </div>
       </form>

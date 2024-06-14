@@ -23,16 +23,17 @@
   display: none;
 }
 
-.link-inscription-btn {
-  font-size: 0.8rem;
-  width: 6.7rem;
+.link-inscription {
+  text-decoration: underline;
+  color: #0d70ea;
+  font-size: 1rem;
 }
 
 .inscription-field {
   display: flex;
   flex-direction: column;
   height: 20%;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 .connexion-field {

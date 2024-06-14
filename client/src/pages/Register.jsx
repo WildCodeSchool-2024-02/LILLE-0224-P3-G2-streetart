@@ -13,39 +13,47 @@ function Register() {
       <form className="register-formulaire">
         <h2 className="register-title">Inscription</h2>
         <div className="field">
-          <input type="text" className="input" placeholder="Pseudo" />
+          <input type="text" className="input-default" placeholder="Pseudo" />
           <div className="line" />
         </div>
 
         <div className="field">
-          <input type="text" className="input" placeholder="Nom" />
+          <input type="text" className="input-default" placeholder="Nom" />
           <div className="line" />
         </div>
         <div className="field">
-          <input type="text" className="input" placeholder="Prénom" />
+          <input type="text" className="input-default" placeholder="Prénom" />
           <div className="line" />
         </div>
 
         <div className="field">
-          <input type="email" className="input" placeholder="Email" />
+          <input type="email" className="input-default" placeholder="Email" />
           <div className="line" />
         </div>
         <div className="field">
-          <input type="number" className="input" placeholder="Code Postal" />
+          <input
+            type="number"
+            className="input-default"
+            placeholder="Code Postal"
+          />
           <div className="line" />
         </div>
         <div className="field">
-          <input type="text" className="input" placeholder="Ville" />
-          <div className="line" />
-        </div>
-        <div className="field">
-          <input type="password" className="input" placeholder="Mot de passe" />
+          <input type="text" className="input-default" placeholder="Ville" />
           <div className="line" />
         </div>
         <div className="field">
           <input
             type="password"
-            className="input"
+            className="input-default"
+            placeholder="Mot de passe"
+          />
+          <div className="line" />
+        </div>
+        <div className="field">
+          <input
+            type="password"
+            className="input-default"
             placeholder="Confirmer le mot de passe"
           />
           <div className="line" />
