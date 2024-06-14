@@ -1,12 +1,14 @@
 import "./Camera.css"
 import { useRef, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useNewArtwork } from "../../../contexts/NewArtworkContext";
 
 function Camera() {
 
     const { image, setImage, deletePicture, setLatitude, setLongitude } = useNewArtwork();
+
+    const navigate = useNavigate();
 
     const webcamRef = useRef(null);
   
@@ -44,12 +46,14 @@ function Camera() {
         setErrorLocation("La géolocalisation n'est pas suportée par ce naviguateur.");
       }
     }, [setLatitude, setLongitude]);
+
+    if (errorLocation) {
+      navigate("/ajouter-oeuvre/localisation");
+    }
   
     return (
       <div className="App">
         <div className="webcam-container">
-            {/* MESSAGE D'ERREUR A REPLACER */}
-            <p>{errorLocation}</p>
             {image ? <img src={image} alt="Oeuvre capturé" /> :  
             <Webcam
                 audio={false}
