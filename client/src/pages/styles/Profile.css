@@ -135,8 +135,8 @@
     box-shadow: var(--shadow-container);
     background-color: rgb(230, 232, 234);
     border-radius: 1rem;
-    padding: 0.8rem;
-    margin: 2.5rem;
+    padding: 1.5rem;
+    margin: 2rem;
   }
 
   .artwork4,
