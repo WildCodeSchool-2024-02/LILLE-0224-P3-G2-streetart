@@ -43,7 +43,7 @@
   text-align: center;
 }
 
-.points-edit {
+.points-edit-mobile {
   height: 20vh;
   display: flex;
   flex-direction: column;
@@ -72,4 +72,93 @@
 .my-artworks .artwork-info {
   height: 1.5rem;
   font-size: 0.8rem;
+}
+
+.artworks-profile {
+  display: flex;
+  width: 100vw;
+}
+
+.artwork4,
+.title-my-artworks,
+.points-edit-desktop {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .my-profile {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem;
+    margin-bottom: 0;
+    padding: 1.5rem;
+  }
+
+  .image-profile {
+    width: 15rem;
+  }
+
+  .info-profile {
+    width: 30vw;
+    font-size: 1.3rem;
+    line-height: 2.8rem;
+    padding-left: 1.5rem;
+    box-shadow: none;
+  }
+
+  .info-desktop {
+    box-shadow: var(--shadow-container);
+    border-radius: 1rem;
+    background-color: rgb(237, 238, 238);
+    display: flex;
+  }
+
+  .points-edit-desktop {
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-right: 1.5rem;
+  }
+
+  .edit-profile-desktop {
+    width: 2.5rem;
+    align-self: center;
+    box-shadow: var(--shadow-container);
+    background-color: rgb(222, 237, 250);
+    border-radius: 0.4rem;
+    height: 5vh;
+    padding: 0.2rem;
+  }
+
+  .my-artworks {
+    box-shadow: var(--shadow-container);
+    background-color: rgb(230, 232, 234);
+    border-radius: 1rem;
+    padding: 0.8rem;
+    margin: 2.5rem;
+  }
+
+  .artwork4,
+  .title-my-artworks {
+    display: block;
+  }
+
+  .my-artworks {
+    flex-direction: column;
+  }
+
+  .my-artworks .artworks-profile {
+    margin: 0 auto;
+    display: flex;
+  }
+
+  .my-artworks .artwork-card {
+    width: 17vw;
+    height: 17vw;
+  }
+
+  .points-edit-mobile {
+    display: none;
+  }
 }
