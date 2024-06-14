@@ -1,12 +1,12 @@
 import "./Camera.css"
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Link } from "react-router-dom";
 import { useNewArtwork } from "../../../contexts/NewArtworkContext";
 
 function Camera() {
 
-    const { image, setImage, deletePicture } = useNewArtwork();
+    const { image, setImage, deletePicture, setLatitude, setLongitude } = useNewArtwork();
 
     const webcamRef = useRef(null);
   
@@ -15,20 +15,48 @@ function Camera() {
       setImage(imageSrc);
     };
 
+    // A REMETTRE POUR LA VUE ENVIRONNEMENT DE LA CAMERA POUR MOBILE
     // const videoConstraints = {
     //     facingMode: { exact: "environment" }
     //   };
+
+    // *//////////////////////////////// LOCALISATION ///////////////////////////////////*
+
+    const [errorLocation, setErrorLocation] = useState(null);
+  
+    useEffect(() => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            setErrorLocation(error.message);
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+          }
+        );
+      } else {
+        setErrorLocation("La géolocalisation n'est pas suportée par ce naviguateur.");
+      }
+    }, [setLatitude, setLongitude]);
   
     return (
       <div className="App">
         <div className="webcam-container">
+            {/* MESSAGE D'ERREUR A REPLACER */}
+            <p>{errorLocation}</p>
             {image ? <img src={image} alt="Oeuvre capturé" /> :  
             <Webcam
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 className="webcam"
-                // Décommenter VideoConstraints pour la caméra environnement du téléphone
+                // A REMETTRE POUR LA VUE ENVIRONNEMENT DE LA CAMERA POUR MOBILE
                 // videoConstraints={videoConstraints}
             />
             }

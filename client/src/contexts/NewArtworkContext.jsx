@@ -10,10 +10,22 @@ import {
   }) {
 
     const [image, setImage] = useState(null);
+    const [title, setTitle] = useState("")
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
 
     const deletePicture = () => {
         setImage(null)
     }
+
+    // */////////////////////////////// Obtenir la date du jour formatée pour la BDD ////////////////////////////*
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
 
     // Fonction à mettre en place une fois le back prêt
     
@@ -33,8 +45,15 @@ import {
           image,
           setImage,
           deletePicture,
+          title,
+          setTitle,
+          latitude,
+          setLatitude,
+          longitude,
+          setLongitude,
+          formattedDate
         }),
-        [image]
+        [image, title, latitude, longitude, formattedDate]
       );    
 
     return (

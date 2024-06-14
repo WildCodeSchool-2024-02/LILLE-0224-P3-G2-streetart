@@ -38,7 +38,6 @@
   cursor: pointer;
   position: absolute;
   bottom: 0.5rem;
-  /* margin-bottom: -1rem; */
 }
 
 .after-picture-btn {
@@ -52,4 +51,8 @@
 .after-picture-btn img {
   width: 60px;
   height: 60px;
+}
+
+.after-picture-btn button:hover {
+  transform: scale(1.1);
 }

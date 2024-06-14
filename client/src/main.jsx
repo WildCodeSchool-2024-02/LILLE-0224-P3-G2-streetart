@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
 import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
+import ValidationArtwork from "./pages/ValidationArtwork";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/ajouter-oeuvre/formulaire",
         element: <FormArtwork />,
+      },
+      {
+        path: "/ajouter-oeuvre/validation",
+        element: <ValidationArtwork />,
       }
     ]
   },
