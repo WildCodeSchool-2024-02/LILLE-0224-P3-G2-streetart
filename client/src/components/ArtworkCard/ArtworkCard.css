@@ -1,0 +1,55 @@
+.artwork-card {
+  width: 40vw;
+  height: 40vw;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: var(--shadow-container);
+  margin: 1rem 0.5rem;
+  position: relative;
+}
+
+.artwork-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artwork-card img:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.artwork-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--white);
+}
+
+@media screen and (min-width: 768px) {
+  .artwork-card {
+    width: 16vw;
+    height: 16vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .artwork-card {
+    width: 19vw;
+    height: 19vw;
+    margin: 1rem 0.7rem;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .artwork-card {
+    width: 20vw;
+    height: 20vw;
+  }
+}

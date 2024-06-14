@@ -8,13 +8,12 @@
   .aside-menu-container {
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
     bottom: 0;
     width: 30vh;
     font-family: var(--primary-font);
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     letter-spacing: 0.15rem;
     color: var(--black);
     background-color: aliceblue;
@@ -28,6 +27,12 @@
     text-align: center;
     justify-content: space-between;
   }
+
+  .aside-menu a:hover {
+    opacity: 0.5;
+    transition: 0.3s;
+  }
+
   .aside-menu-top,
   .aside-menu-bottom {
     padding: 1rem;
