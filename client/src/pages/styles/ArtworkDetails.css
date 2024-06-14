@@ -1,13 +1,11 @@
 .artworkdetails-container {
-  font-family: var(--secondary-font);
-  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  height: 81vh;
   align-items: center;
 }
 
 .artwork-title {
+  color: var(--white);
   font-size: 2rem;
   position: absolute;
   bottom: 0;
@@ -18,12 +16,10 @@
   align-items: center;
   height: 3rem;
   background-color: rgba(0, 0, 0, 0.4);
-  color: var(--white);
 }
 
 .artwork-img {
-  width: 100%;
-  height: 45vh;
+  height: 50vh;
   position: relative;
   border-radius: 1rem;
   box-shadow: var(--shadow-container);
@@ -65,20 +61,85 @@
   font-weight: bold;
   font-size: 1.1rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 15vh;
+  justify-content: space-around;
+}
+
+.report-artworkdetails {
+  display: flex;
   justify-content: center;
+}
+
+.report-btn {
+  color: #1368d0b0;
+  border: 1px solid #1368d0b0;
+  background-color: aliceblue;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  padding: 0.3rem;
+  box-shadow: var(--shadow-container);
+}
+
+.report-btn:active {
+  box-shadow: none;
+}
+
+.flex-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 23vh;
+}
+
+.artworkdetails-info {
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  justify-content: space-evenly;
+}
+
+.artworkdetails-all-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 70vh;
 }
 
 /************************** DESKTOP VERSION **************************/
 @media screen and (min-width: 768px) {
+  .artworkdetails-container {
+    box-shadow: var(--shadow-container);
+    height: 50vh;
+    padding: 1.5rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    background-color: aliceblue;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+  }
+
   .artwork-img img {
     width: 100%;
     height: 100%;
   }
 
+  .artwork-img {
+    margin-right: 0.5rem;
+  }
+
+  .flex-right {
+    height: 50vh;
+    margin-left: 0.5rem;
+    justify-content: space-between;
+  }
+
   .map {
     display: block;
     width: 35vw;
-    height: 38vh;
+    height: 25vh;
     object-fit: cover;
     border-radius: 1rem;
   }
@@ -88,35 +149,8 @@
     height: 9vh;
   }
 
-  /******************* GRID *******************/
-  .artworkdetails-container {
-    margin-top: 2rem;
-    height: 70%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 30vh 30vh;
-    grid-column-gap: 10px;
-    grid-row-gap: 0px;
-  }
-  .artwork-img {
-    grid-area: 1 / 1 / 2 / 2;
-    align-self: flex-start;
-    width: 35vw;
-    height: 60vh;
-  }
-  .map {
-    grid-area: 1 / 2 / 2 / 3;
-    width: 100%;
-    align-self: flex-start;
-  }
-  .about-artwork {
-    grid-area: 2 / 2 / 3 / 3;
-    align-self: center;
-    width: 100%;
-  }
-  .about-user-artwork {
-    grid-area: 2 / 2 / 3 / 3;
-    align-self: flex-end;
-    width: 100%;
+  .artworksdetails-all-info {
+    display: flex;
+    flex-direction: row;
   }
 }
