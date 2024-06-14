@@ -1,0 +1,69 @@
+.rank-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.rank-boxes {
+  box-shadow: var(--shadow-container);
+  height: 9vh;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.thead-rank-boxes {
+  margin-bottom: 0;
+}
+
+.user-img-ranking {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.td-position {
+  width: 7%;
+}
+
+.td-pseudo {
+  width: 33%;
+}
+
+.td-img {
+  width: 20%;
+}
+
+.td-points {
+  width: 25%;
+}
+
+.td-badge {
+  width: 10%;
+}
+
+.rank-display-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+/************************** DESKTOP VERSION **************************/
+@media screen and (min-width: 768px) {
+  .rank-box {
+    width: 50%;
+  }
+
+  .rank-display-columns {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .rank-explain {
+    width: 50%;
+  }
+}
