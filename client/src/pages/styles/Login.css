@@ -29,21 +29,22 @@
 
 .link-inscription-btn {
   font-size: 0.8rem;
+  width: 6.7rem;
 }
 
 .inscription-field {
-  background-color: red;
   display: flex;
   flex-direction: column;
   height: 20%;
   justify-content: space-evenly;
+  align-items: center;
 }
 .connexion-field {
   display: flex;
-  background-color: red;
   height: 50%;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 /**************************DESKTOP VERSION****************************/
