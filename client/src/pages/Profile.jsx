@@ -64,8 +64,8 @@ function Profile() {
                 alt="crayon pour modifier les infos du profil"
               />
               <div className="level-points">
-                <p>LVL 87</p>
-                <p>173 points</p>
+                <p>LVL {profile.level}</p>
+                <p>{profile.points} points</p>
               </div>
             </div>
           </div>
