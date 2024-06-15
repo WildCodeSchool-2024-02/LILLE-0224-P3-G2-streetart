@@ -28,10 +28,8 @@
 }
 
 .edit-profile {
-  box-shadow: var(--shadow-container);
-  background-color: rgb(222, 237, 250);
-  border-radius: 0.4rem;
-  height: 5vh;
+  height: 4.5vh;
+  width: 7.5vw;
 }
 
 .level-points {
@@ -117,17 +115,17 @@
     width: 6rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-right: 1.5rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
   }
 
   .edit-profile-desktop {
     width: 2.5rem;
-    align-self: center;
-    box-shadow: var(--shadow-container);
-    background-color: rgb(222, 237, 250);
-    border-radius: 0.4rem;
-    height: 5vh;
+    align-self: end;
+    height: 4vh;
+    width: 2.2vw;
     padding: 0.2rem;
   }
 
