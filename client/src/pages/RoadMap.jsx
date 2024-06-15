@@ -1,6 +1,9 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+import "leaflet-control-geocoder";
+import SearchRoadMap from "../components/SearchRoadMap/SearchRoadMap";
 import "./styles/RoadMap.css";
 
 // Fix marker icon issues with Webpack
@@ -31,6 +34,7 @@ function RoadMap() {
               <br /> Ici, c'est le centre.
             </Popup>
           </Marker>
+          <SearchRoadMap />
         </MapContainer>
       </div>
     </>
