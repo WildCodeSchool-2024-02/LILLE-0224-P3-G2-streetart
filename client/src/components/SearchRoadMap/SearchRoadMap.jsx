@@ -15,7 +15,7 @@ function SearchRoadMap() {
       geocoder,
     }).addTo(map);
 
-    // gestionnaire d'événement pour markgeocode (recherche sélectionnée)
+    // events manager for markgeocode (selected research)
     const onMarkGeocode = (e) => {
       const { bbox } = e.geocode;
       const southWest = bbox.getSouthWest();
