@@ -22,9 +22,9 @@ CREATE TABLE account (
   email VARCHAR(100) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   role VARCHAR(15) NOT NULL,
-  id_user_fk INT UNSIGNED,
+  id_user_fk INT UNSIGNED DEFAULT NULL,
   FOREIGN KEY (id_user_fk) REFERENCES user(id_user) ON DELETE SET NULL,
-  id_admin_fk INT UNSIGNED,
+  id_admin_fk INT UNSIGNED DEFAULT NULL,
   FOREIGN KEY (id_admin_fk) REFERENCES admin(id_admin) ON DELETE SET NULL
 );
    

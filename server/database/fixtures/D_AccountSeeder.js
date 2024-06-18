@@ -3,7 +3,10 @@ const AbstractSeeder = require("./AbstractSeeder");
 class AccountSeeder extends AbstractSeeder {
   constructor() {
     // Call the constructor of the parent class (AbstractSeeder) with appropriate options
-    super({ table: "account", truncate: true });
+    super({
+      table: "account",
+      truncate: true,
+    });
   }
 
   // The run method - Populate the 'account' table with fake data
@@ -14,7 +17,7 @@ class AccountSeeder extends AbstractSeeder {
         email: "admin@gmail.com",
         password: "admin",
         role: "admin",
-        // id_admin_fk: 1,
+        id_admin_fk: 1,
       },
     ];
 

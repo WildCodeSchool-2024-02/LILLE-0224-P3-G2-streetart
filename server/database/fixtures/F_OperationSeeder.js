@@ -14,6 +14,8 @@ class OperationSeeder extends AbstractSeeder {
         type: "validation",
         description: "Oeuvre validée",
         date: "2024-06-15",
+        id_artwork_fk: 1,
+        id_account_fk: 1,
       },
     ];
 
