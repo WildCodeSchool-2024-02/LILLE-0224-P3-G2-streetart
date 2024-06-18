@@ -4,6 +4,28 @@
   padding: 1rem;
 }
 
+.rank-display-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+.rank-explain-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: var(--shadow-container);
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: aliceblue;
+  margin: 1rem 0;
+}
+
+.points-explain {
+  padding-bottom: 2rem;
+}
+
 .rank-boxes {
   box-shadow: var(--shadow-container);
   height: 9vh;
@@ -47,23 +69,37 @@
   width: 10%;
 }
 
-.rank-display-columns {
-  display: flex;
-  flex-direction: column;
-}
-
 /************************** DESKTOP VERSION **************************/
 @media screen and (min-width: 768px) {
-  .rank-box {
-    width: 50%;
-  }
-
   .rank-display-columns {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  .classement-title {
+    text-align: center;
+  }
+
+  .rank-explain-box {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0rem;
+    background-color: transparent;
+    position: sticky;
+    top: 1rem;
+    margin: 0.5rem 0;
   }
 
   .rank-explain {
+    box-shadow: var(--shadow-container);
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: aliceblue;
+  }
+
+  .rank-box {
     width: 50%;
   }
 }
