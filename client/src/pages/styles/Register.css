@@ -1,0 +1,68 @@
+.register-container {
+  height: 93%;
+  padding: 1rem;
+}
+
+.register-formulaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: var(--shadow-container);
+  height: 100%;
+  font-size: 1.2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.register-formulaire button {
+  font-size: 0.8em;
+}
+
+.register-title {
+  display: none;
+}
+
+.inscription-img {
+  display: none;
+}
+
+/**************************DESKTOP VERSION****************************/
+
+@media screen and (min-width: 768px) {
+  .register-container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .register-title {
+    display: flex;
+    font-family: var(--secondary-font);
+    font-size: 2rem;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+  }
+
+  .register-formulaire {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    width: 50%;
+  }
+
+  .inscription-img-container {
+    width: 50%;
+    object-fit: cover;
+  }
+
+  .inscription-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

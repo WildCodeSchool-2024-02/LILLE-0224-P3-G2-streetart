@@ -1,0 +1,33 @@
+.map {
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+.text-roadmap {
+  display: none;
+}
+
+.carte {
+  width: 100%;
+  height: 100%;
+}
+
+/* ************************* DESKTOP VERSION **************************/
+@media screen and (min-width: 768px) {
+  .text-roadmap {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.8rem;
+  }
+  .map {
+    height: 90%;
+    width: 90%;
+    position: relative;
+    box-shadow: var(--shadow-container);
+    margin: 0 auto;
+  }
+}
