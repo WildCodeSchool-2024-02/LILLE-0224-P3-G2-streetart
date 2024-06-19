@@ -1,3 +1,4 @@
+import { useLoaderData } from "react-router-dom";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 
@@ -18,6 +19,9 @@ const profiles = [
 ];
 
 function Profile() {
+
+  const memberArtworks = useLoaderData();
+
   return (
     <div className="profile-container">
       {profiles.map((profile) => (
@@ -76,12 +80,18 @@ function Profile() {
           <h2>Mes oeuvres</h2>
         </div>
         <div className="artworks-profile">
-          <ArtworkCard picture="/assets/images/artworks/artwork6.png" />
-          <ArtworkCard picture="/assets/images/artworks/artwork7.png" />
-          <ArtworkCard picture="/assets/images/artworks/artwork8.png" />
-          <div className="artwork4">
-            <ArtworkCard picture="/assets/images/artworks/artwork5.png" />
-          </div>
+          {memberArtworks.length > 0 ? (
+            memberArtworks.slice(0, 4).map((memberArtwork, index) => (
+              <div
+                key={memberArtwork.id_artwork}
+                className={index === 3 ? "artwork4" : "artwork-profile"}
+              >
+                <ArtworkCard artwork={memberArtwork} />
+              </div>
+            ))
+          ) : (
+              <p>Tu n'as posté aucune oeuvre pour le moment.</p>
+          )}
         </div>
       </div>
     </div>

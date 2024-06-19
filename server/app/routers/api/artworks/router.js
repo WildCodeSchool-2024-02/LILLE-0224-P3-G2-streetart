@@ -3,20 +3,14 @@ const express = require("express");
 const router = express.Router();
 
 /* ************************************************************************* */
-// Import And Use Routers Here
+// Define Your API Routes Here
 /* ************************************************************************* */
 
-const itemsRouter = require("./items/router");
+// Import item-related actions
+const { browseMemberArtwork } = require("../../../controllers/artworkActions");
 
-router.use("/items", itemsRouter);
-
-const artworksRouter = require("./artworks/router")
-
-router.use("/artworks", artworksRouter)
-
-const membersRouter = require("./members/router");
-
-router.use("/members-ranked", membersRouter);
+// Route to get a list of items
+router.get("/profile/:id", browseMemberArtwork);
 
 /* ************************************************************************* */
 
