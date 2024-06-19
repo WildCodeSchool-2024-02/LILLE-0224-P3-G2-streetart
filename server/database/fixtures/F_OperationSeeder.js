@@ -20,7 +20,7 @@ class OperationSeeder extends AbstractSeeder {
     ];
 
     operations.forEach((operation) => {
-      this.insert(operation); // insert into program(title, synopsis, poster, country, year, category_id) values (?, ?, ?, ?, ?, ?)
+      this.insert(operation); // insert into operation(type, description, date, id_artwork_fk, id_account_fk) values (?, ?, ?, ?, ?)
     });
   }
 }
