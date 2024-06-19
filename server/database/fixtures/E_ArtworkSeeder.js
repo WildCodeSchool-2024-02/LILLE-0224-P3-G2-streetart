@@ -1,3 +1,5 @@
+/* eslint-disable no-loss-of-precision */
+
 const AbstractSeeder = require("./AbstractSeeder");
 
 class ArtworkSeeder extends AbstractSeeder {
@@ -12,7 +14,7 @@ class ArtworkSeeder extends AbstractSeeder {
     const artworks = [
       {
         title: "L'été",
-        picture: "/assets/images/artwork/artwork8.png",
+        picture: "/assets/images/artworks/artwork8.png",
         date_creation: `2024-06-13`,
         longitude: 3.0228591932181317,
         latitude: 50.63385933978443,
@@ -20,9 +22,25 @@ class ArtworkSeeder extends AbstractSeeder {
       },
       {
         title: "L'hiver",
-        picture: "/assets/images/artwork/artwork5.png",
-        date_creation: `2024-06-13`,
+        picture: "/assets/images/artworks/artwork5.png",
+        date_creation: `2024-06-14`,
         longitude: 3.0446955064558257,
+        latitude: 50.64068204396465,
+        validate: true,
+      },
+      {
+        title: "Le printemp",
+        picture: "/assets/images/artworks/artwork4.png",
+        date_creation: `2024-06-15`,
+        longitude: 3.0446955064558340,
+        latitude: 50.64068204396465,
+        validate: true,
+      },
+      {
+        title: "L'automne",
+        picture: "/assets/images/artworks/artwork3.png",
+        date_creation: `2024-06-16`,
+        longitude: 3.0446955064558210,
         latitude: 50.64068204396465,
         validate: true,
       },
