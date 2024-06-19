@@ -1,15 +1,15 @@
 const AbstractSeeder = require("./AbstractSeeder");
 
-class UserSeeder extends AbstractSeeder {
+class MemberSeeder extends AbstractSeeder {
   constructor() {
     // Call the constructor of the parent class (AbstractSeeder) with appropriate options
-    super({ table: "user", truncate: true });
+    super({ table: "member", truncate: true });
   }
 
   // The run method - Populate the 'user' table with fake data
 
   run() {
-    const users = [
+    const members = [
       {
         firstname: "Elodie",
         lastname: "Regnier",
@@ -47,11 +47,11 @@ class UserSeeder extends AbstractSeeder {
       },
     ];
 
-    users.forEach((user) => {
-      this.insert(user); // insert into user(firstname, lastname, pseudo, city, postcode, birthdate, points) values (?, ?, ?, ?, ?, ?, ?)
+    members.forEach((member) => {
+      this.insert(member); // insert into member(firstname, lastname, pseudo, city, postcode, birthdate, points) values (?, ?, ?, ?, ?, ?, ?)
     });
   }
 }
 
 // Export the UserSeeder class
-module.exports = UserSeeder;
+module.exports = MemberSeeder;

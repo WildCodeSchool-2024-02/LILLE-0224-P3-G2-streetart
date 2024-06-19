@@ -1,5 +1,5 @@
-CREATE TABLE user (
-  id_user INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+CREATE TABLE member (
+  id_member INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   firstname VARCHAR(25) NOT NULL, 
   lastname VARCHAR(25) NOT NULL, 
   pseudo VARCHAR(15) NOT NULL, 
@@ -10,8 +10,8 @@ CREATE TABLE user (
   points INT NOT NULL DEFAULT 0
 );
 
-CREATE TABLE admin (
-  id_admin INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+CREATE TABLE administrator (
+  id_administrator INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   firstname VARCHAR(25) NOT NULL, 
   lastname VARCHAR(25) NOT NULL, 
   pseudo VARCHAR(15) NOT NULL
@@ -20,29 +20,29 @@ CREATE TABLE admin (
 CREATE TABLE account (
   id_account INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-  role VARCHAR(15) NOT NULL,
-  id_user_fk INT UNSIGNED DEFAULT NULL,
-  FOREIGN KEY (id_user_fk) REFERENCES user(id_user) ON DELETE SET NULL,
-  id_admin_fk INT UNSIGNED DEFAULT NULL,
-  FOREIGN KEY (id_admin_fk) REFERENCES admin(id_admin) ON DELETE SET NULL
+  pwd VARCHAR(255) NOT NULL,
+  assignment VARCHAR(15) NOT NULL,
+  id_member_fk INT UNSIGNED DEFAULT NULL,
+  FOREIGN KEY (id_member_fk) REFERENCES member(id_member) ON DELETE SET NULL,
+  id_administrator_fk INT UNSIGNED DEFAULT NULL,
+  FOREIGN KEY (id_administrator_fk) REFERENCES administrator(id_administrator) ON DELETE SET NULL
 );
    
 CREATE TABLE artwork (
   id_artwork INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   title VARCHAR(45) NOT NULL,
   picture TEXT NOT NULL, 
-  date DATE NOT NULL,
+  date_creation DATE NOT NULL,
   longitude DECIMAL NOT NULL, 
   latitude DECIMAL NOT NULL, 
-  validation BOOLEAN NOT NULL DEFAULT false
+  validate BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE operation (
   id_operation INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  type VARCHAR(25) NOT NULL,
-  description TEXT NULL, 
-  date DATE NOT NULL, 
+  kind VARCHAR(25) NOT NULL,
+  details TEXT NULL, 
+  date_operation DATE NOT NULL, 
   id_account_fk INT UNSIGNED,
   FOREIGN KEY (id_account_fk) REFERENCES account(id_account) ON DELETE SET NULL,
   id_artwork_fk INT UNSIGNED,
