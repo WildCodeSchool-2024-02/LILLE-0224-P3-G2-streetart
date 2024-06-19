@@ -33,8 +33,8 @@ CREATE TABLE artwork (
   title VARCHAR(45) NOT NULL,
   picture TEXT NOT NULL, 
   date_creation DATE NOT NULL,
-  longitude DECIMAL NOT NULL, 
-  latitude DECIMAL NOT NULL, 
+  longitude DECIMAL(17, 16) NOT NULL, 
+  latitude DECIMAL(16, 14) NOT NULL, 
   validate BOOLEAN NOT NULL DEFAULT false
 );
 

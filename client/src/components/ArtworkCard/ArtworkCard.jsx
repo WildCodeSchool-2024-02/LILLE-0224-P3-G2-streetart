@@ -1,21 +1,23 @@
-import "./ArtworkCard.css"
+import "./ArtworkCard.css";
 import PropTypes from "prop-types";
 
-function ArtworkCard({ picture }) {
-    return (
-        <div className="artwork-card">
-            <img src={picture} alt="Nom oeuvre" />
-            <div className="artwork-info">
-                <h3>
-                    Name of art
-                </h3>
-            </div>
-        </div>
-    )
+function ArtworkCard({ artwork }) {
+  return (
+    <div className="artwork-card">
+      <img src={artwork.picture} alt={artwork.id_artwork} />
+      <div className="artwork-info">
+        <h3>{artwork.title}</h3>
+      </div>
+    </div>
+  );
 }
 
 ArtworkCard.propTypes = {
-    picture: PropTypes.string.isRequired
+  artwork: PropTypes.shape({
+    picture: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    id_artwork: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-export default ArtworkCard; 
+export default ArtworkCard;

@@ -1,10 +1,11 @@
+import { useLoaderData, Link } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder";
-import SearchRoadMap from "../components/SearchRoadMap/SearchRoadMap";
 import "./styles/RoadMap.css";
+import SearchRoadMap from "../components/SearchRoadMap/SearchRoadMap";
 
 // Fix marker icon issues with Webpack
 delete L.Icon.Default.prototype._getIconUrl;
@@ -17,6 +18,8 @@ L.Icon.Default.mergeOptions({
 });
 
 function RoadMap() {
+  const artworkMap = useLoaderData();
+
   return (
     <>
       <p className="text-roadmap">
@@ -28,12 +31,27 @@ function RoadMap() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <Marker position={[50.632557, 3.065451]}>
-            <Popup>
-              Lille, France
-              <br /> Ici, c'est le centre.
-            </Popup>
-          </Marker>
+          {artworkMap.map((markerArtwork) => (
+            <Marker
+              position={[markerArtwork.latitude, markerArtwork.longitude]}
+              key={markerArtwork.artwork_id}
+            >
+              <Popup className="popup" key={markerArtwork.artwork_id}>
+                <img
+                  src={markerArtwork.picture}
+                  alt={markerArtwork.artwork_id}
+                  className="marker-img"
+                />
+                <br />
+                <p className="marker-title">{markerArtwork.title}</p>
+                <div className="link-artwork-maproad">
+                  <Link to="/" className="btn link-roadmap">
+                    Voir l'oeuvre
+                  </Link>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
           <SearchRoadMap />
         </MapContainer>
       </div>
