@@ -1,57 +1,8 @@
+import { useLoaderData } from "react-router-dom";
 import "./styles/Ranking.css";
 
 function Ranking() {
-  const tableData = [
-    {
-      position: 1,
-      pseudo: "Dodo59",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 110,
-    },
-    {
-      position: 2,
-      pseudo: "Floflo",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 80,
-    },
-    {
-      position: 3,
-      pseudo: "BGdu59",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 45,
-    },
-    {
-      position: 4,
-      pseudo: "AliceSmith",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 30,
-    },
-    {
-      position: 5,
-      pseudo: "MaxPower",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 20,
-    },
-    {
-      position: 6,
-      pseudo: "SarahC",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 18,
-    },
-    {
-      position: 7,
-      pseudo: "Lucas33",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 15,
-    },
-  ];
+  const rankingData = useLoaderData();
 
   const badges = [
     {
@@ -96,8 +47,14 @@ function Ranking() {
               <h3>Les badges</h3>
               <br />
               {badges.map((badge) => (
-                <p key={badge.range}>
-                  {badge.range} 🟡 = {badge.name} {badge.logo}
+                <p key={badge.range} className="badge-info">
+                  {badge.range}
+                  <img
+                    src="../../public/assets/images/icons/coin.png"
+                    alt="badge"
+                    className="img-coin"
+                  />
+                  = {badge.name} {badge.logo}
                 </p>
               ))}
             </div>
@@ -105,28 +62,43 @@ function Ranking() {
         </div>
         <table className="rank-box">
           <tbody>
-            {tableData.map((item) => (
-              <tr key={item.position} className="rank-boxes">
-                <td className="td-position">{item.position}</td>
-                <td className="td-pseudo">{item.pseudo}</td>
+            {rankingData.map((member, index) => (
+              <tr key={member.id_member} className="rank-boxes">
+                <td className="td-position">{index + 1}</td>
+                <td className="td-pseudo">{member.pseudo}</td>
                 <td className="td-img">
                   <img
                     className="user-img-ranking"
-                    src={item.avatar}
+                    src={
+                      member.avatar
+                        ? member.avatar
+                        : "../../public/assets/images/icons/profile.png"
+                    }
                     alt="avatar"
                   />
                 </td>
-                <td className="td-points">{item.points} 🟡</td>
-                {item.points < 20 &&
-                  badges.find((badge) => badge.id === 1).logo}
-                {item.points >= 20 &&
-                  item.points < 50 &&
-                  badges.find((badge) => badge.id === 2).logo}
-                {item.points >= 50 &&
-                  item.points < 100 &&
-                  badges.find((badge) => badge.id === 3).logo}
-                {item.points >= 100 &&
-                  badges.find((badge) => badge.id === 4).logo}
+                <td className="td-points">
+                  {member.points}{" "}
+                  <img
+                    src="../../public/assets/images/icons/coin.png"
+                    alt="badge"
+                    className="img-coin"
+                  />{" "}
+                </td>
+                <td className="td-badge">
+                  {member.points < 20
+                    ? badges.find((badge) => badge.id === 1).logo
+                    : ""}
+                  {member.points >= 20 && member.points < 50
+                    ? badges.find((badge) => badge.id === 2).logo
+                    : ""}
+                  {member.points >= 50 && member.points < 100
+                    ? badges.find((badge) => badge.id === 3).logo
+                    : ""}
+                  {member.points >= 100
+                    ? badges.find((badge) => badge.id === 4).logo
+                    : ""}
+                </td>
               </tr>
             ))}
           </tbody>
