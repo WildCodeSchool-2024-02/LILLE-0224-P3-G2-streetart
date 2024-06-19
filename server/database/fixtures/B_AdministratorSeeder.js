@@ -1,15 +1,15 @@
 const AbstractSeeder = require("./AbstractSeeder");
 
-class AdminSeeder extends AbstractSeeder {
+class AdministratorSeeder extends AbstractSeeder {
   constructor() {
     // Call the constructor of the parent class (AbstractSeeder) with appropriate options
-    super({ table: "admin", truncate: true });
+    super({ table: "administrator", truncate: true });
   }
 
   // The run method - Populate the 'admin' table with fake data
 
   run() {
-    const admins = [
+    const administrators = [
       {
         firstname: "John",
         lastname: "Doe",
@@ -17,11 +17,11 @@ class AdminSeeder extends AbstractSeeder {
       },
     ];
 
-    admins.forEach((admin) => {
-      this.insert(admin); // insert into program(title, synopsis, poster, country, year, category_id) values (?, ?, ?, ?, ?, ?)
+    administrators.forEach((administrator) => {
+      this.insert(administrator); // insert into program(title, synopsis, poster, country, year, category_id) values (?, ?, ?, ?, ?, ?)
     });
   }
 }
 
 // Export the adminSeeder class
-module.exports = AdminSeeder;
+module.exports = AdministratorSeeder;

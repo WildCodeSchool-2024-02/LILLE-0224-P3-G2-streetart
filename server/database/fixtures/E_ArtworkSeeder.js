@@ -13,23 +13,23 @@ class ArtworkSeeder extends AbstractSeeder {
       {
         title: "L'été",
         picture: "/assets/images/artwork/artwork8.png",
-        date: `2024-06-13`,
+        date_creation: `2024-06-13`,
         longitude: 3.0228591932181317,
         latitude: 50.63385933978443,
-        validation: true,
+        validate: true,
       },
       {
         title: "L'hiver",
         picture: "/assets/images/artwork/artwork5.png",
-        date: `2024-06-13`,
+        date_creation: `2024-06-13`,
         longitude: 3.0446955064558257,
         latitude: 50.64068204396465,
-        validation: true,
+        validate: true,
       },
     ];
 
     artworks.forEach((artwork) => {
-      this.insert(artwork); // insert into program(title, synopsis, poster, country, year, category_id) values (?, ?, ?, ?, ?, ?)
+      this.insert(artwork); // insert into artwork(title, picture, date_creation, longitude, latitude, validate) values (?, ?, ?, ?, ?, ?)
     });
   }
 }
