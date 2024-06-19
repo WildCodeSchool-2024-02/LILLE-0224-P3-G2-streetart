@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import myAxios from "./services/myAxios";
 
 import App from "./App";
 import Homepage from "./pages/Homepage";
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/classement",
         element: <Ranking />,
+        loader: async () => {
+          const response = await myAxios.get("/api/members-ranked");
+          return response.data;
+        },
       },
       {
         path: "/inscription",
