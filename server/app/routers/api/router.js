@@ -15,6 +15,14 @@ const artworksRouter = require("./artworks/router");
 
 router.use("/artworks", artworksRouter);
 
+const artworksRouter = require("./artworks/router")
+
+router.use("/artworks", artworksRouter)
+
+const membersRouter = require("./members/router");
+
+router.use("/members-ranked", membersRouter);
+
 /* ************************************************************************* */
 
 module.exports = router;

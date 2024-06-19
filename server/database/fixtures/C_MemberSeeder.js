@@ -17,7 +17,8 @@ class MemberSeeder extends AbstractSeeder {
         city: "Templemars",
         postcode: 59175,
         birthdate: `1992-06-23`,
-        points: 15,
+        points: 80,
+        avatar:"https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn",
       },
       {
         firstname: "Alexis",
@@ -26,6 +27,7 @@ class MemberSeeder extends AbstractSeeder {
         city: "Lille",
         postcode: 59000,
         birthdate: `1998-11-25`,
+        avatar:"https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn",
       },
       {
         firstname: "Sebastien",

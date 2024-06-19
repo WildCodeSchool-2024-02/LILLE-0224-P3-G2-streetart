@@ -7,15 +7,11 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import item-related actions
-const { browse } = require("../../../controllers/artworkActions");
+const { browseRanking } = require("../../../controllers/memberActions");
 
-// Route to get a list of artworks
-router.get("/", browse);
+// Route to get a list of members
+router.get("/", browseRanking);
 
-const { browseMemberArtwork } = require("../../../controllers/artworkActions");
-
-// Route to get a list of items
-router.get("/profile/:id", browseMemberArtwork);
 
 /* ************************************************************************* */
 

@@ -21,6 +21,21 @@ class ArtworkRepository extends AbstractRepository {
     // Return the array of items
     return rows;
   }
+
+  async readAllMemberArtwork(id) {
+// Execute the SQL SELECT query to retrieve a specific category by its ID
+const [rows] = await this.database.query(
+    `SELECT a.id_artwork, a.title, a.picture, DATE_FORMAT(a.date_creation, '%d-%m-%Y') AS date_creation, a.validate, o.id_operation, o.id_account_fk, o.id_artwork_fk, ac.id_member_fk
+FROM artwork AS a
+INNER JOIN operation AS o ON id_artwork_fk=id_artwork
+INNER JOIN account AS ac ON id_account=id_account_fk
+WHERE o.id_account_fk=(?);`,
+    [id]
+  );
+
+  return rows;
+}
+ 
 }
 
 module.exports = ArtworkRepository;
