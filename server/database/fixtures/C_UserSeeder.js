@@ -17,11 +17,12 @@ class UserSeeder extends AbstractSeeder {
         city: "Templemars",
         postcode: 59175,
         birthdate: `1992-06-23`,
+        points: 15,
       },
       {
         firstname: "Alexis",
         lastname: "Estrine",
-        pseudo: "Lebgdu59",
+        pseudo: "Lebgdu59260RPZA",
         city: "Lille",
         postcode: 59000,
         birthdate: `1998-11-25`,
@@ -33,6 +34,7 @@ class UserSeeder extends AbstractSeeder {
         city: "Lille",
         postcode: 59000,
         birthdate: `1977-05-19`,
+        points: 10,
       },
       {
         firstname: "Audrey",
@@ -41,11 +43,12 @@ class UserSeeder extends AbstractSeeder {
         city: "Lille",
         postcode: 59000,
         birthdate: `1992-09-12`,
+        points: 5,
       },
     ];
 
     users.forEach((user) => {
-      this.insert(user); // insert into program(title, synopsis, poster, country, year, category_id) values (?, ?, ?, ?, ?, ?)
+      this.insert(user); // insert into user(firstname, lastname, pseudo, city, postcode, birthdate, points) values (?, ?, ?, ?, ?, ?, ?)
     });
   }
 }

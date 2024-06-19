@@ -11,7 +11,7 @@ class ArtworkSeeder extends AbstractSeeder {
   run() {
     const artworks = [
       {
-        title: "L'été à Lille",
+        title: "L'été",
         picture: "/assets/images/artwork/artwork8.png",
         date: `2024-06-13`,
         longitude: 3.0228591932181317,
@@ -19,7 +19,7 @@ class ArtworkSeeder extends AbstractSeeder {
         validation: true,
       },
       {
-        title: "L'été",
+        title: "L'hiver",
         picture: "/assets/images/artwork/artwork5.png",
         date: `2024-06-13`,
         longitude: 3.0446955064558257,

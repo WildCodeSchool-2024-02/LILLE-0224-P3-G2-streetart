@@ -19,6 +19,30 @@ class AccountSeeder extends AbstractSeeder {
         role: "admin",
         id_admin_fk: 1,
       },
+      {
+        email: "user1@gmail.com",
+        password: "user",
+        role: "user",
+        id_user_fk: 1,
+      },
+      {
+        email: "user2@gmail.com",
+        password: "user",
+        role: "user",
+        id_user_fk: 2,
+      },
+      {
+        email: "user3@gmail.com",
+        password: "user",
+        role: "user",
+        id_user_fk: 3,
+      },
+      {
+        email: "user4@gmail.com",
+        password: "user",
+        role: "user",
+        id_user_fk: 4,
+      },
     ];
 
     accounts.forEach((account) => {
