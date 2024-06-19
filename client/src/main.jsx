@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import myAxios from "./services/myAxios";
 
+
 import App from "./App";
 import Homepage from "./pages/Homepage";
 import Artworks from "./pages/Artworks";
@@ -66,8 +67,13 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/profil",
+        path: "/profil/:id",
         element: <Profile />,
+        loader: async ({ params }) => {
+          const artworks = await myAxios.get(`/api/artworks/profile/${params.id}`);
+      
+          return artworks.data;
+        },
       },
     ],
   },
