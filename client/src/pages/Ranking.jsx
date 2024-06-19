@@ -7,180 +7,73 @@ function Ranking() {
       pseudo: "Dodo59",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 30,
-      badge: "🎨",
+      points: 110,
     },
     {
       position: 2,
       pseudo: "Floflo",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 25,
-      badge: "❇️",
+      points: 80,
     },
     {
       position: 3,
       pseudo: "BGdu59",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 35,
-      badge: "💎",
+      points: 45,
     },
     {
       position: 4,
       pseudo: "AliceSmith",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 22,
-      badge: "🌟",
+      points: 30,
     },
     {
       position: 5,
       pseudo: "MaxPower",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 28,
-      badge: "🔥",
+      points: 20,
     },
     {
       position: 6,
       pseudo: "SarahC",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 33,
-      badge: "⭐",
+      points: 18,
     },
     {
       position: 7,
       pseudo: "Lucas33",
       avatar:
         "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 27,
-      badge: "💫",
-    },
-    {
-      position: 20,
-      pseudo: "EvaGreen",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 100,
-      badge: "🌠",
-    },
-    {
-      position: 5,
-      pseudo: "MaxPower",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 28,
-      badge: "🔥",
-    },
-    {
-      position: 6,
-      pseudo: "SarahC",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 33,
-      badge: "⭐",
-    },
-    {
-      position: 7,
-      pseudo: "Lucas33",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 27,
-      badge: "💫",
-    },
-    {
-      position: 20,
-      pseudo: "EvaGreen",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 100,
-      badge: "🌠",
-    },
-    {
-      position: 5,
-      pseudo: "MaxPower",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 28,
-      badge: "🔥",
-    },
-    {
-      position: 6,
-      pseudo: "SarahC",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 33,
-      badge: "⭐",
-    },
-    {
-      position: 7,
-      pseudo: "Lucas33",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 27,
-      badge: "💫",
-    },
-    {
-      position: 20,
-      pseudo: "EvaGreen",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 100,
-      badge: "🌠",
-    },
-    {
-      position: 5,
-      pseudo: "MaxPower",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 28,
-      badge: "🔥",
-    },
-    {
-      position: 6,
-      pseudo: "SarahC",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 33,
-      badge: "⭐",
-    },
-    {
-      position: 7,
-      pseudo: "Lucas33",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 27,
-      badge: "💫",
-    },
-    {
-      position: 20,
-      pseudo: "EvaGreen",
-      avatar:
-        "https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg",
-      points: 100,
-      badge: "🌠",
+      points: 15,
     },
   ];
 
   const badges = [
     {
+      id: 1,
       range: "0-20",
       logo: "👀",
       name: "chercheur",
     },
     {
+      id: 2,
       range: "20-50",
       logo: "🔍",
       name: "explorateur",
     },
     {
+      id: 3,
       range: "50-100",
       logo: "🕵️",
       name: "detective",
     },
     {
+      id: 4,
       range: "100+",
       logo: "📷",
       name: "archeologue",
@@ -204,7 +97,7 @@ function Ranking() {
               <br />
               {badges.map((badge) => (
                 <p key={badge.range}>
-                  {badge.range} points = {badge.name} {badge.logo}
+                  {badge.range} 🟡 = {badge.name} {badge.logo}
                 </p>
               ))}
             </div>
@@ -223,8 +116,17 @@ function Ranking() {
                     alt="avatar"
                   />
                 </td>
-                <td className="td-points">{item.points}</td>
-                <td className="td-badge">{item.badge}</td>
+                <td className="td-points">{item.points} 🟡</td>
+                {item.points < 20 &&
+                  badges.find((badge) => badge.id === 1).logo}
+                {item.points >= 20 &&
+                  item.points < 50 &&
+                  badges.find((badge) => badge.id === 2).logo}
+                {item.points >= 50 &&
+                  item.points < 100 &&
+                  badges.find((badge) => badge.id === 3).logo}
+                {item.points >= 100 &&
+                  badges.find((badge) => badge.id === 4).logo}
               </tr>
             ))}
           </tbody>
