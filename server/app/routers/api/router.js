@@ -10,6 +10,11 @@ const itemsRouter = require("./items/router");
 
 router.use("/items", itemsRouter);
 
+// ROAD TO GET ALL THE ARTWORKS
+const artworksRouter = require("./artworks/router");
+
+router.use("/artworks", artworksRouter);
+
 const artworksRouter = require("./artworks/router")
 
 router.use("/artworks", artworksRouter)

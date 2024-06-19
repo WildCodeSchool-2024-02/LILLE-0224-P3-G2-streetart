@@ -1,6 +1,5 @@
-import "./ArtworkCard.css"
+import "./ArtworkCard.css";
 import PropTypes from "prop-types";
-
 function ArtworkCard({ artwork }) {
 
     return (
@@ -22,4 +21,4 @@ ArtworkCard.propTypes = {
     }).isRequired,
 };
 
-export default ArtworkCard; 
+export default ArtworkCard;

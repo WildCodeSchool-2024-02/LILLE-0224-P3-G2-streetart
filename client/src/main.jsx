@@ -4,7 +4,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import myAxios from "./services/myAxios";
 
-
 import App from "./App";
 import Homepage from "./pages/Homepage";
 import Artworks from "./pages/Artworks";
@@ -29,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/oeuvres",
         element: <Artworks />,
+        loader: async () => {
+          const response = await myAxios.get("/api/artworks");
+          return response.data;
+        },
       },
       {
         path: "/oeuvre/:id",
@@ -37,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/carte",
         element: <RoadMap />,
+        loader: async () => {
+          const response = await myAxios.get("/api/artworks");
+          return response.data;
+        },
       },
       {
         path: "/classement",
