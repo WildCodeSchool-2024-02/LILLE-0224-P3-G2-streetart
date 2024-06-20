@@ -36,6 +36,11 @@ const router = createBrowserRouter([
       {
         path: "/oeuvre/:id",
         element: <ArtworkDetails />,
+        loader: async ({ params }) => {
+          const artwork = await myAxios.get(`/api/artworks/${params.id}`);
+      
+          return artwork.data;
+        },
       },
       {
         path: "/carte",

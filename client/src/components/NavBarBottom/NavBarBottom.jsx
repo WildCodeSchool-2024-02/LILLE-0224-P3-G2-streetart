@@ -20,7 +20,7 @@ function NavBarBottom() {
             className="img-appareil"
           />
         </button>
-        <Link to="/profil">
+        <Link to="/profil/2">
           <img
             id="img-profile"
             src="/assets/images/icons/profile.png"
