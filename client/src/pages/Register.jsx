@@ -16,12 +16,12 @@ function Register() {
 
   const [samePwd, setSamePwd] = useState("");
 
-  const [pwdVisibile, setPwdVisibile] = useState(false);
+  const [pwdVisible, setPwdVisible] = useState(false);
   const [confPwdVisible, setConfPwdVisible] = useState(false);
 
   // TOGGLE VISIBILITY PASSWORD
   const toggleVisibilityPwd = () => {
-    setPwdVisibile(!pwdVisibile);
+    setPwdVisible(!pwdVisible);
   };
 
   const toggleVisibilityConf = () => {
@@ -146,7 +146,7 @@ function Register() {
 
         <div className="field field-password input-default">
           <input
-            type={pwdVisibile ? "text" : "password"}
+            type={pwdVisible ? "text" : "password"}
             name="pwd"
             className="input-default"
             placeholder="Mot de passe"
@@ -157,7 +157,7 @@ function Register() {
           />
           <div className="line" />
           <div className="password-visible">
-            {pwdVisibile ? (
+            {pwdVisible ? (
               <img
                 src="/assets/images/icons/oeil-barre.png"
                 className="eye-pwd"
