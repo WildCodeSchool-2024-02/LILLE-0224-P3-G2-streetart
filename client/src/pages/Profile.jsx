@@ -5,6 +5,8 @@ import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 function Profile() {
   const { member, memberArtworks } = useLoaderData();
 
+  const hidePassword = (password) => "*".repeat(password.length);
+
   return (
     <div className="profile-container">
       {member && (
@@ -42,7 +44,7 @@ function Profile() {
               <p>
                 {member.postcode} {member.city}
               </p>
-              <p>{member.pwd}</p>
+              <p>{hidePassword(member.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
               <img
