@@ -2,32 +2,17 @@ import { useLoaderData, Link } from "react-router-dom";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 
-const profiles = [
-  {
-    picture:
-      "https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn",
-    firstName: "François",
-    lastName: "Civil",
-    pseudo: "pseudo",
-    email: "françois.civil@gmail.com",
-    password: "**********",
-    postcode: "770012 ",
-    city: "Paris",
-    level: "87",
-    points: "187",
-  },
-];
-
 function Profile() {
+  const { member, memberArtworks } = useLoaderData();
 
-  const memberArtworks = useLoaderData();
+  const hidePassword = (password) => "*".repeat(password.length);
 
   return (
     <div className="profile-container">
-      {profiles.map((profile) => (
+      {member && (
         <div
           className="my-profile"
-          key={`${profile.firstName} {profile.lastName}`}
+          key={`${member.firstName} ${member.lastName}`}
         >
           <div className="top-profile">
             <div className="img-profile">
@@ -36,7 +21,7 @@ function Profile() {
                 src="https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn"
                 alt="profil"
               />
-              <p className="pseudo-profile">{profile.pseudo}</p>
+              <p className="pseudo-profile">{member.pseudo}</p>
             </div>
             <div className="points-edit-mobile">
               <img
@@ -45,21 +30,21 @@ function Profile() {
                 alt="crayon pour modifier les infos du profil"
               />
               <div className="level-points">
-                <p>LVL {profile.level}</p>
-                <p>{profile.points} points</p>
+                <p>LVL </p>
+                <p>{member.points} points</p>
               </div>
             </div>
           </div>
           <div className="info-desktop">
             <div className="info-profile">
               <p>
-                {profile.firstName} {profile.lastName}
+                {member.firstName} {member.lastName}
               </p>
-              <p>{profile.email}</p>
+              <p>{member.email}</p>
               <p>
-                {profile.postcode} {profile.city}
+                {member.postcode} {member.city}
               </p>
-              <p>{profile.password}</p>
+              <p>{hidePassword(member.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
               <img
@@ -68,13 +53,14 @@ function Profile() {
                 alt="crayon pour modifier les infos du profil"
               />
               <div className="level-points">
-                <p>LVL {profile.level}</p>
-                <p>{profile.points} points</p>
+                <p>badge ? </p>
+                <p>{member.points} points</p>
               </div>
             </div>
           </div>
         </div>
-      ))}
+      )}
+
       <div className="my-artworks">
         <div className="title-my-artworks">
           <h2>Mes oeuvres</h2>
@@ -92,7 +78,7 @@ function Profile() {
               </div>
             ))
           ) : (
-              <p>Tu n'as posté aucune oeuvre pour le moment.</p>
+            <p>Tu n'as posté aucune oeuvre pour le moment.</p>
           )}
         </div>
       </div>

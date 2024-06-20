@@ -15,9 +15,11 @@ const artworksRouter = require("./artworks/router");
 
 router.use("/artworks", artworksRouter);
 
+// ROAD TO GET MEMBERS RANKED BY POINT
+// ROAD TO GET MEMBER BY ID
 const membersRouter = require("./members/router");
 
-router.use("/members-ranked", membersRouter);
+router.use("/members", membersRouter);
 
 /* ************************************************************************* */
 
