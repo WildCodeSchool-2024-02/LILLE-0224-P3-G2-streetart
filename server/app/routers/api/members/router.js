@@ -10,7 +10,14 @@ const router = express.Router();
 const { browseRanking } = require("../../../controllers/memberActions");
 
 // Route to get a list of members
-router.get("/", browseRanking);
+router.get("/ranked", browseRanking);
+
+// Import item-related actions
+const { browseMemberById } = require("../../../controllers/memberActions");
+
+// Route to get a member by ID
+router.get("/:id", browseMemberById);
+
 
 
 /* ************************************************************************* */
