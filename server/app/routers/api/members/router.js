@@ -7,11 +7,16 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import item-related actions
-const { browseRanking } = require("../../../controllers/memberActions");
+const {
+  browseRanking,
+  createMember,
+} = require("../../../controllers/memberActions");
 
 // Route to get a list of members
-router.get("/", browseRanking);
+router.get("/ranked", browseRanking);
 
+// // Route to get a new member
+router.post("/new-member", createMember);
 
 /* ************************************************************************* */
 

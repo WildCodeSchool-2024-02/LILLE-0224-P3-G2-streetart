@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         path: "/classement",
         element: <Ranking />,
         loader: async () => {
-          const response = await myAxios.get("/api/members-ranked");
+          const response = await myAxios.get("/api/members/ranked");
           return response.data;
         },
       },
@@ -77,8 +77,10 @@ const router = createBrowserRouter([
         path: "/profil/:id",
         element: <Profile />,
         loader: async ({ params }) => {
-          const artworks = await myAxios.get(`/api/artworks/profile/${params.id}`);
-      
+          const artworks = await myAxios.get(
+            `/api/artworks/profile/${params.id}`
+          );
+
           return artworks.data;
         },
       },

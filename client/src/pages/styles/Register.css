@@ -19,11 +19,16 @@
   font-size: 0.8em;
 }
 
+.input-default {
+  font-size: 0.8rem;
+}
+
 .register-title {
   display: none;
 }
 
-.inscription-img {
+.inscription-img,
+.eye-pwd {
   display: none;
 }
 
@@ -64,5 +69,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .password-visible {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .eye-pwd {
+    display: inline;
+    width: 1.2rem;
+  }
+  .field-password {
+    display: inline-flex;
+  }
+  .input-default {
+    font-size: 1rem;
   }
 }
