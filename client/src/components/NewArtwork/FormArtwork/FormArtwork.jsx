@@ -5,7 +5,7 @@ import TopBar from "../../TopBar/TopBar";
 
 function FormArtwork() {
 
-    const { image, deletePicture, title, setTitle } = useNewArtwork();
+    const { image, deletePicture, title, setTitle, handleSubmit } = useNewArtwork();
 
     const navigate = useNavigate();
 
@@ -16,10 +16,6 @@ function FormArtwork() {
 
     function handleChange(event) {
         setTitle(event.target.value)
-    }
-
-    function sendArtwork() {
-        navigate("/ajouter-oeuvre/validation")
     }
 
     return (
@@ -38,7 +34,7 @@ function FormArtwork() {
                     <div>
                         <p className="warning">Attention : La photo doit être prise au format portrait. Ton œuvre sera ensuite validée par un administrateur avant d'être affichée sur le site.</p>
                     </div>
-                    <button type="button" onClick={sendArtwork} className="btn send-picture-btn">Envoyer</button>
+                    <button type="button" onClick={handleSubmit} className="btn send-picture-btn">Envoyer</button>
                 </div>
             </div>
         </>

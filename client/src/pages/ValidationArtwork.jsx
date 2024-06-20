@@ -5,7 +5,7 @@ import TopBar from "../components/TopBar/TopBar";
 
 function ValidationArtwork() {
 
-    const { image, title, latitude, longitude, formattedDate } = useNewArtwork();
+    const { title, latitude, longitude, formattedDate, imageUrl } = useNewArtwork();
 
     return (
         <>
@@ -13,9 +13,10 @@ function ValidationArtwork() {
             <div className="validation-artwork-container">
                 <div className="validation-artwork">
                     <div className="camera-picture">
-                        <img src={image} alt="Oeuvre capturé" />
+                        <img src={imageUrl} alt="Oeuvre capturé" />
                     </div>
                     <h3>Titre : {title}</h3>
+                    <p>Chemin : "{imageUrl}"</p>
                     <p>Latitude : {latitude}</p>
                     <p>Longitude : {longitude}</p>
                     <p>Date : {formattedDate}</p>

@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import {
     createContext, useContext, useState, useMemo
   } from "react";
+  import { useNavigate } from "react-router-dom";
+import myAxios from "../services/myAxios"
 
   const NewArtworkContext = createContext();
 
@@ -9,8 +11,10 @@ import {
     children,
   }) {
 
+    const navigate = useNavigate();
+
     const [image, setImage] = useState(null);
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("");
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
 
@@ -18,7 +22,7 @@ import {
         setImage(null)
     }
 
-    // */////////////////////////////// Obtenir la date du jour formatée pour la BDD ////////////////////////////*
+    // */////////////////////////////// Get the date of the day formated for BDD ////////////////////////////*
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
@@ -27,18 +31,60 @@ import {
     const formattedDay = day < 10 ? `0${day}` : day;
     const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
 
-    // Fonction à mettre en place une fois le back prêt
+    // Function for upload the picture of artwork
+    const handleUpload = async () => {
+      if (!image) {
+        console.error('No image to upload');
+        return null;
+      }
+  
+      // Convert base64 image to file
+      const blob = await fetch(image).then(res => res.blob());
+      const file = new File([blob], 'artwork.jpg', { type: 'image/jpeg' });
+  
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      // Post the picture
+      try {
+        const response = await myAxios.post('/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+        });
+
+        // Get the path of the uploaded picture
+        const filePath = `/assets/images${response.data.filePath}`;
+        return filePath
+        
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        return null;
+      }
+    };
     
-    // const uploadPicture = async () => {
-    //     if (image) {
-    //       try {
-    //         const response = await axios.post('/upload', { image });
-    //         console.log('Image uploaded:', response.data);
-    //       } catch (error) {
-    //         console.error('Error uploading image', error);
-    //       }
-    //     }
-    //   };
+    const handleSubmit = async () => {
+      // Launch the function for upload the picture        
+      try {
+        const picture = await handleUpload();
+        // Get the informations for add a new artwork
+        const formData = {
+          title,
+          picture,
+          date_creation: formattedDate,
+          longitude,
+          latitude,
+        };
+
+        // Post the new artwork
+        await myAxios.post("/api/artworks", formData);
+
+        navigate("/ajouter-oeuvre/validation")
+
+      } catch (error) {
+        console.error("Erreur", error);
+      }
+    }
 
     const contextValue = useMemo(
         () => ({
@@ -51,9 +97,10 @@ import {
           setLatitude,
           longitude,
           setLongitude,
-          formattedDate
+          formattedDate,
+          handleSubmit,
         }),
-        [image, title, latitude, longitude, formattedDate]
+        [image, title, latitude, longitude, formattedDate, handleSubmit]
       );    
 
     return (

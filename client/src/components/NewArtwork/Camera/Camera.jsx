@@ -18,7 +18,7 @@ function Camera() {
     // A REMETTRE POUR LA VUE ENVIRONNEMENT DE LA CAMERA POUR MOBILE
     // const videoConstraints = {
     //     facingMode: { exact: "environment" }
-    //   };
+    // };
 
     // *//////////////////////////////// LOCALISATION ///////////////////////////////////*
 
