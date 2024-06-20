@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 
@@ -72,7 +72,9 @@ function Profile() {
                 key={memberArtwork.id_artwork}
                 className={index === 3 ? "artwork4" : "artwork-profile"}
               >
-                <ArtworkCard artwork={memberArtwork} />
+                <Link to={`/oeuvre/${memberArtwork.id_artwork_fk}`}>
+                  <ArtworkCard artwork={memberArtwork} />
+                </Link>
               </div>
             ))
           ) : (
