@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import myAxios from "./services/myAxios";
 
 import App from "./App";
 import Homepage from "./pages/Homepage";
@@ -32,18 +33,35 @@ const router = createBrowserRouter([
       {
         path: "/oeuvres",
         element: <Artworks />,
+        loader: async () => {
+          const response = await myAxios.get("/api/artworks");
+          return response.data;
+        },
       },
       {
         path: "/oeuvre/:id",
         element: <ArtworkDetails />,
+        loader: async ({ params }) => {
+          const artwork = await myAxios.get(`/api/artworks/${params.id}`);
+      
+          return artwork.data;
+        },
       },
       {
         path: "/carte",
         element: <RoadMap />,
+        loader: async () => {
+          const response = await myAxios.get("/api/artworks");
+          return response.data;
+        },
       },
       {
         path: "/classement",
         element: <Ranking />,
+        loader: async () => {
+          const response = await myAxios.get("/api/members/ranked");
+          return response.data;
+        },
       },
       {
         path: "/inscription",
@@ -66,8 +84,20 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/profil",
+        path: "/profil/:id",
         element: <Profile />,
+        loader: async ({ params }) => {
+          // 2 API calls, 1 for artworks of member, 1 for member informations
+          const [artworksResponse, membersResponse] = await Promise.all([
+            myAxios.get(`/api/artworks/profile/${params.id}`),
+            myAxios.get(`/api/members/${params.id}`),
+          ]);
+
+          const memberArtworks = artworksResponse.data;
+          const member = membersResponse.data;
+
+          return { memberArtworks, member };
+        },
       },
     ],
   },

@@ -10,26 +10,21 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   --fullHeightInVH: 100vh;
 }
-
 /* à utiliser pour le breakpoint
 @media screen and (min-width: 768px) */
-
 @font-face {
   font-family: "Amsterdam";
   src: url("/assets/fonts/amsterdam.ttf") format("truetype");
 }
-
 .quicksand {
   font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
-
 * {
   margin: 0;
 }
-
 body {
   margin: 0;
   padding: 0;
@@ -37,7 +32,6 @@ body {
   background-color: var(--white);
   color: var(--black);
 }
-
 p,
 h1,
 h2,
@@ -47,19 +41,16 @@ h5,
 h6 {
   margin: 0;
 }
-
 a {
   color: inherit;
   text-decoration: none;
   display: block;
 }
-
 .main-container {
   margin-bottom: 9vh;
   height: calc(100vh - 18vh);
   overflow: auto;
 }
-
 /* Bouton par défaut, modifier le background-image pour la couleur du bouton. */
 .btn {
   background-image: linear-gradient(#0dccea, #0d70ea);
@@ -69,7 +60,7 @@ a {
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: Montserrat, sans-serif;
+  font-family: var(--secondary-font);
   font-size: 0.5em;
   padding: 0.6rem 1rem;
   text-align: center;
@@ -77,14 +68,12 @@ a {
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-
 .btn:hover {
   opacity: 0.8;
   transition: 0.3s;
 }
-
 /* Input par défaut */
-input {
+.input-default {
   background: 0;
   border: 0;
   outline: none;
@@ -93,19 +82,15 @@ input {
   font-size: 0.7em;
   transition: padding 0.3s 0.2s ease;
 }
-
-input:focus {
+.input-default:focus {
   padding-bottom: 5px;
 }
-
-input:focus + .line:after {
+.input-default:focus + .line:after {
   transform: scaleX(1);
 }
-
 .field {
   position: relative;
 }
-
 .field .line {
   width: 100%;
   height: 3px;
@@ -113,7 +98,6 @@ input:focus + .line:after {
   bottom: -8px;
   background: #bdc3c7;
 }
-
 .field .line:after {
   content: " ";
   position: absolute;
@@ -143,13 +127,12 @@ input:focus + .line:after {
     margin-bottom: 0;
     margin-left: 30vh;
     margin-top: 4rem;
-    /* height: 91.8vh; */
     min-height: calc(100vh - 4rem);
     overflow: auto;
     padding: 0;
   }
 
-  input {
+  .input-default {
     width: 25vw;
   }
 }

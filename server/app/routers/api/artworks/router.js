@@ -6,8 +6,17 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Import artwork-related actions
-const { add } = require("../../../controllers/artworkActions");
+// Import item-related actions
+const { browse, browseMemberArtwork, read, add } = require("../../../controllers/artworkActions");
+
+// Route to get a list of artworks
+router.get("/", browse);
+
+// Route to get one specific artwork with user info
+router.get("/:id", read)
+
+// Route to get a list of artwork of the profile
+router.get("/profile/:id", browseMemberArtwork);
 
 // Route to add a new artwork
 router.post("/", add);
