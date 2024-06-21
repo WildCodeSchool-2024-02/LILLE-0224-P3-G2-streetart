@@ -1,16 +1,11 @@
-// Import access to database tables
 const tables = require("../../database/tables");
 
 // The B of BREAD - Browse (Read All) operation
 const browseRanking = async (req, res, next) => {
   try {
-    // Fetch all items from the database
     const members = await tables.member.readAll();
-
-    // Respond with the members in JSON format
     res.json(members);
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
@@ -33,10 +28,21 @@ const browseMemberById = async (req, res, next) => {
     }
   };
 
+// The A of BREAD - Add (Create) operation
+const createMember = async (req, res, next) => {
+  const { pseudo, firstname, lastname, city, postcode, email, pwd } = req.body;
+  
+  try {
+    const member = { pseudo, firstname, lastname, city, postcode, email, pwd };
+    const insertId = await tables.member.create(member);
+    res.status(201).json({ insertId });
+  } catch (err) {
+    next(err);
+  }
+};
 
-
-// Ready to export the controller functions
 module.exports = {
   browseRanking,
   browseMemberById,
+  createMember
 };

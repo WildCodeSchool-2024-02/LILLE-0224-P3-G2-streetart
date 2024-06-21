@@ -6,7 +6,6 @@ CREATE TABLE member (
   city VARCHAR(50) NOT NULL, 
   postcode VARCHAR(5) NOT NULL, 
   avatar TEXT NULL, 
-  birthdate DATE NOT NULL, 
   points INT NOT NULL DEFAULT 0
 );
 
@@ -20,7 +19,7 @@ CREATE TABLE administrator (
 CREATE TABLE account (
   id_account INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
-  pwd VARCHAR(255) NOT NULL,
+  pwd VARCHAR(25) NOT NULL,
   assignment VARCHAR(15) NOT NULL,
   id_member_fk INT UNSIGNED DEFAULT NULL,
   FOREIGN KEY (id_member_fk) REFERENCES member(id_member) ON DELETE SET NULL,
