@@ -7,7 +7,7 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import item-related actions
-const { browse, browseMemberArtwork, read } = require("../../../controllers/artworkActions");
+const { browse, browseMemberArtwork, read, add } = require("../../../controllers/artworkActions");
 
 // Route to get a list of artworks
 router.get("/", browse);
@@ -17,6 +17,9 @@ router.get("/:id", read)
 
 // Route to get a list of artwork of the profile
 router.get("/profile/:id", browseMemberArtwork);
+
+// Route to add a new artwork
+router.post("/", add);
 
 /* ************************************************************************* */
 

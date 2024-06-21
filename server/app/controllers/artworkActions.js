@@ -1,6 +1,23 @@
 // Import access to database tables
 const tables = require("../../database/tables");
 
+// The A of BREAD - Add (Create) operation
+const add = async (req, res, next) => {
+  // Extract the artwork data from the request body
+  const artwork = req.body;
+
+  try {
+    // Insert the artwork into the database
+    const insertId = await tables.artwork.create(artwork);
+
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted artwork
+    res.status(201).json({ insertId });
+      } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
@@ -9,11 +26,11 @@ const browse = async (req, res, next) => {
 
     // Respond with the items in JSON format
     res.json(artworks);
-  } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
-  }
-};
+      } catch (err) {
+        // Pass any errors to the error-handling middleware
+        next(err);
+      }
+    };
 
 const browseMemberArtwork = async (req, res, next) => {
     try {
@@ -54,5 +71,6 @@ const browseMemberArtwork = async (req, res, next) => {
 module.exports = {
   browse,
   browseMemberArtwork,
-  read
+  read,
+  add
 };

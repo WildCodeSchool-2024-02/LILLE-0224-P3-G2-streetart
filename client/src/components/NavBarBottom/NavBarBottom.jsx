@@ -13,14 +13,16 @@ function NavBarBottom() {
         <button onClick={handleOpenMenu} type="button">
           <img src={ImgMenu} alt="Ouvrir le menu" className="img-hamburger" />
         </button>
-        <button type="button">
-          <img
-            src="/assets/images/icons/appareil_photo.png"
-            alt="Ouvrir l'appareil"
-            className="img-appareil"
-          />
-        </button>
-        <Link to="/profil/2">
+        <Link to="/ajouter-oeuvre/camera">
+          <button type="button">
+            <img
+              src="/assets/images/icons/appareil_photo.png"
+              alt="Ouvrir l'appareil"
+              className="img-appareil"
+            />
+          </button>
+        </Link>
+        <Link to="/profil">
           <img
             id="img-profile"
             src="/assets/images/icons/profile.png"

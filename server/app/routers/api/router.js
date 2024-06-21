@@ -21,6 +21,10 @@ const membersRouter = require("./members/router");
 
 router.use("/members", membersRouter);
 
+const uploadRouter = require("./upload/router")
+
+router.use("/upload", uploadRouter);
+
 /* ************************************************************************* */
 
 module.exports = router;
