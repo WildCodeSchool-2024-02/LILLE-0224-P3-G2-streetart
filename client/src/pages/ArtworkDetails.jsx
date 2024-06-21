@@ -1,17 +1,59 @@
+import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import OthersArtworks from "../components/OthersArtworks/OthersArtworks";
 import "./styles/ArtworkDetails.css";
 
 function ArtworkDetails() {
+
+  const artwork = useLoaderData();
+
+  const [city, setCity] = useState(null)
+
+  // StreetMap API for get the adress with latitude and longitude
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artwork.latitude}&lon=${artwork.longitude}&zoom=10&addressdetails=1`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.address) {
+        setCity(data.address.city || data.address.town || data.address.village)
+      } else {
+        setCity("inconnu")
+      }
+    })
+
+  // Function for open the picture on full screen
+  const fullScreenPicture = () => {
+    const image = document.getElementById('fullscreen-image');
+    if (image.requestFullscreen) {
+      image.requestFullscreen();
+    } else if (image.mozRequestFullScreen) { // Firefox
+      image.mozRequestFullScreen();
+    } else if (image.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      image.webkitRequestFullscreen();
+    } else if (image.msRequestFullscreen) { // IE/Edge
+      image.msRequestFullscreen();
+    }
+  };
+
   return (
     <>
       <div className="artworkdetails-container">
         <div className="artworksdetails-all-info">
           <div className="artwork-img">
-            <h2 className="artwork-title">CHAT JAUNE</h2>
-            <img
-              src="https://www.lescachotteriesdelille.com/wp-content/uploads/2023/12/Monsieur-Chat_640x479.jpg"
-              alt="oeuvre de street art"
-            />
+            <h2 className="artwork-title">{artwork.title}</h2>
+            <button
+              type="button"
+              onClick={fullScreenPicture}
+              style={{ border: 'none', padding: 0, background: 'none', cursor: 'pointer' }}
+              aria-label="Voir l'image en plein écran"
+            >
+              <img
+                id="fullscreen-image"
+                src={artwork.picture}
+                alt={artwork.title}
+              />
+            </button>
           </div>
           <div className="flex-right">
             <div className="map-artworkdetails">
@@ -31,11 +73,11 @@ function ArtworkDetails() {
                     alt="avatar de la personne qui a ajouté l'oeuvre"
                   />
                   <div>
-                    <p>Pierrot</p>
+                    <p>{artwork.pseudo}</p>
                     <p>lvl 56</p>
                   </div>
                 </div>
-                <p className="about-artwork">À Lille, le 03/06/2024</p>
+                <p className="about-artwork">À {city}, le {artwork.date_creation}</p>
               </div>
             </div>
             <div className="report-artworkdetails">

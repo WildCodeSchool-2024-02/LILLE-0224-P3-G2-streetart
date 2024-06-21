@@ -17,6 +17,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 
+import FillArtwork from "./pages/FillArtwork";
+import Camera from "./components/NewArtwork/Camera/Camera";
+import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
+import ValidationArtwork from "./pages/ValidationArtwork";
+
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -36,6 +41,11 @@ const router = createBrowserRouter([
       {
         path: "/oeuvre/:id",
         element: <ArtworkDetails />,
+        loader: async ({ params }) => {
+          const artwork = await myAxios.get(`/api/artworks/${params.id}`);
+      
+          return artwork.data;
+        },
       },
       {
         path: "/carte",
@@ -77,14 +87,37 @@ const router = createBrowserRouter([
         path: "/profil/:id",
         element: <Profile />,
         loader: async ({ params }) => {
-          const artworks = await myAxios.get(
-            `/api/artworks/profile/${params.id}`
-          );
+          // 2 API calls, 1 for artworks of member, 1 for member informations
+          const [artworksResponse, membersResponse] = await Promise.all([
+            myAxios.get(`/api/artworks/profile/${params.id}`),
+            myAxios.get(`/api/members/${params.id}`),
+          ]);
 
-          return artworks.data;
+          const memberArtworks = artworksResponse.data;
+          const member = membersResponse.data;
+
+          return { memberArtworks, member };
         },
       },
     ],
+  },
+
+  {
+    element: <FillArtwork />,
+    children: [
+      {
+        path: "/ajouter-oeuvre/camera",
+        element: <Camera />,
+      },
+      {
+        path: "/ajouter-oeuvre/formulaire",
+        element: <FormArtwork />,
+      },
+      {
+        path: "/ajouter-oeuvre/validation",
+        element: <ValidationArtwork />,
+      }
+    ]
   },
 ]);
 

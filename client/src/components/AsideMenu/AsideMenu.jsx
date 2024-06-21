@@ -10,7 +10,7 @@ function AsideMenu() {
           <Link to="/oeuvres">Les oeuvres</Link>
           <Link to="/carte">Roadmap</Link>
           <Link to="/classement">Classement</Link>
-          <Link to="/profil">Profil</Link>
+          <Link to="/profil/2">Profil</Link>
         </div>
         <div className="aside-menu-bottom">
           <Link to="/a-propos">A propos</Link>

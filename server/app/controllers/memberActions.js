@@ -10,10 +10,28 @@ const browseRanking = async (req, res, next) => {
   }
 };
 
+const browseMemberById = async (req, res, next) => {
+  try {
+      // Fetch a specific category from the database based on the provided ID
+      const member = await tables.member.readMember(req.params.id);
+  
+      // If the category is not found, respond with HTTP 404 (Not Found)
+      // Otherwise, respond with the category in JSON format
+      if (member == null) {
+        res.sendStatus(404);
+      } else {
+        res.status(200).json(member);
+      }
+    } catch (err) {
+      // Pass any errors to the error-handling middleware
+      next(err);
+    }
+  };
+
 // The A of BREAD - Add (Create) operation
 const createMember = async (req, res, next) => {
   const { pseudo, firstname, lastname, city, postcode, email, pwd } = req.body;
-
+  
   try {
     const member = { pseudo, firstname, lastname, city, postcode, email, pwd };
     const insertId = await tables.member.create(member);
@@ -25,5 +43,6 @@ const createMember = async (req, res, next) => {
 
 module.exports = {
   browseRanking,
-  createMember,
+  browseMemberById,
+  createMember
 };

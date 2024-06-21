@@ -1,35 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import "./styles/Ranking.css";
+import { useBadges } from "../contexts/GlobalContext";
 
 function Ranking() {
   const rankingData = useLoaderData();
 
-  const badges = [
-    {
-      id: 1,
-      range: "0-20",
-      logo: "👀",
-      name: "chercheur",
-    },
-    {
-      id: 2,
-      range: "20-50",
-      logo: "🔍",
-      name: "explorateur",
-    },
-    {
-      id: 3,
-      range: "50-100",
-      logo: "🕵️",
-      name: "detective",
-    },
-    {
-      id: 4,
-      range: "100+",
-      logo: "📷",
-      name: "archeologue",
-    },
-  ];
+  const { badges, getBadgeForPoints } = useBadges();
 
   return (
     <div className="rank-container">
@@ -62,45 +38,35 @@ function Ranking() {
         </div>
         <table className="rank-box">
           <tbody>
-            {rankingData.map((member, index) => (
-              <tr key={member.id_member} className="rank-boxes">
-                <td className="td-position">{index + 1}</td>
-                <td className="td-pseudo">{member.pseudo}</td>
-                <td className="td-img">
-                  <img
-                    className="user-img-ranking"
-                    src={
-                      member.avatar
-                        ? member.avatar
-                        : "../../public/assets/images/icons/profile.png"
-                    }
-                    alt="avatar"
-                  />
-                </td>
-                <td className="td-points">
-                  {member.points}{" "}
-                  <img
-                    src="../../public/assets/images/icons/coin.png"
-                    alt="badge"
-                    className="img-coin"
-                  />{" "}
-                </td>
-                <td className="td-badge">
-                  {member.points < 20
-                    ? badges.find((badge) => badge.id === 1).logo
-                    : ""}
-                  {member.points >= 20 && member.points < 50
-                    ? badges.find((badge) => badge.id === 2).logo
-                    : ""}
-                  {member.points >= 50 && member.points < 100
-                    ? badges.find((badge) => badge.id === 3).logo
-                    : ""}
-                  {member.points >= 100
-                    ? badges.find((badge) => badge.id === 4).logo
-                    : ""}
-                </td>
-              </tr>
-            ))}
+            {rankingData.map((member, index) => {
+              const LeBadge = getBadgeForPoints(member.points);
+              return (
+                <tr key={member.id_member} className="rank-boxes">
+                  <td className="td-position">{index + 1}</td>
+                  <td className="td-pseudo">{member.pseudo}</td>
+                  <td className="td-img">
+                    <img
+                      className="user-img-ranking"
+                      src={
+                        member.avatar
+                          ? member.avatar
+                          : "../../public/assets/images/icons/profile.png"
+                      }
+                      alt="avatar"
+                    />
+                  </td>
+                  <td className="td-points">
+                    {member.points}{" "}
+                    <img
+                      src="../../public/assets/images/icons/coin.png"
+                      alt="piece"
+                      className="img-coin"
+                    />{" "}
+                  </td>
+                  <td className="td-badge">{LeBadge ? LeBadge.logo : ""}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

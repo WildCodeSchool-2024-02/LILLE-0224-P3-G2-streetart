@@ -18,6 +18,7 @@ L.Icon.Default.mergeOptions({
 });
 
 function RoadMap() {
+  
   const artworkMap = useLoaderData();
 
   return (
@@ -34,18 +35,18 @@ function RoadMap() {
           {artworkMap.map((markerArtwork) => (
             <Marker
               position={[markerArtwork.latitude, markerArtwork.longitude]}
-              key={markerArtwork.artwork_id}
+              key={markerArtwork.id_artwork}
             >
               <Popup className="popup" key={markerArtwork.artwork_id}>
                 <img
                   src={markerArtwork.picture}
-                  alt={markerArtwork.artwork_id}
+                  alt={markerArtwork.title}
                   className="marker-img"
                 />
                 <br />
                 <p className="marker-title">{markerArtwork.title}</p>
                 <div className="link-artwork-maproad">
-                  <Link to="/" className="btn link-roadmap">
+                  <Link to={`/oeuvre/${markerArtwork.id_artwork}`} className="btn link-roadmap">
                     Voir l'oeuvre
                   </Link>
                 </div>

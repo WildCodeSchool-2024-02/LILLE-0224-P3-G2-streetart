@@ -10,14 +10,20 @@ const itemsRouter = require("./items/router");
 
 router.use("/items", itemsRouter);
 
-// ROAD TO GET ALL THE ARTWORKS
+// ROAD FOR ARTWORKS
 const artworksRouter = require("./artworks/router");
 
 router.use("/artworks", artworksRouter);
 
+// ROAD FOR MEMBERS
 const membersRouter = require("./members/router");
 
 router.use("/members", membersRouter);
+
+// ROAD TO UPLOAD
+const uploadRouter = require("./upload/router")
+
+router.use("/upload", uploadRouter);
 
 /* ************************************************************************* */
 
