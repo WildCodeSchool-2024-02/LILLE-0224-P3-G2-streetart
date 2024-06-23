@@ -42,10 +42,64 @@
   border-radius: 1rem;
 }
 
+.bottom-desktop-container {
+  display: contents;
+}
+
+.ranking-homepage {
+  display: none;
+}
+
 /* ************************* DESKTOP VERSION **************************/
 @media screen and (min-width: 768px) {
   .link-homepage {
     width: 25%;
     font-size: 1.2rem;
+  }
+
+  .titles-homepage {
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .artworks-homepage {
+    /* width: 90%; */
+    justify-content: space-evenly;
+    margin: 0 auto;
+  }
+
+  .artworks-news-homepage .artwork-card {
+    width: 16vw;
+    height: 16vw;
+  }
+
+  .roadmap-homepage .text-roadmap {
+    display: none;
+  }
+
+  .bottom-desktop-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .roadmap-homepage {
+    width: 35vw;
+    height: 20vw;
+  }
+
+  .ranking-homepage {
+    display: block;
+  }
+
+  .ranking-homepage .rank-boxes {
+    width: 35vw;
+  }
+
+  .ranking-homepage .rank-container {
+    padding: 0;
+  }
+
+  .top3-mobile {
+    display: none;
   }
 }

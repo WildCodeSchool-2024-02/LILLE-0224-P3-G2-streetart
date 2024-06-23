@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import myAxios from "../../services/myAxios";
-import "./Top3.css";
 
-function Top3() {
-  const [topMembers, setTopMembers] = useState([]);
+function RankingHomepage() {
+  //   const { getBadgeForPoints } = useBadges();
+  const [memberRanking, setMemberRanking] = useState([]);
 
   useEffect(() => {
-    const getTop3 = async () => {
+    const getMemberRanking = async () => {
       try {
-        const response = await myAxios.get("/api/members/ranked");
-        setTopMembers(response.data);
+        const response = await myAxios.get("/api/members/Ranked");
+        setMemberRanking(response.data);
       } catch (error) {
         console.error("Erreur", error);
       }
     };
-    getTop3();
+    getMemberRanking();
   }, []);
 
   return (
-    <div className="top3-container">
+    <div className="rank-container">
       <table className="rank-box">
         <tbody>
-          {topMembers.slice(0, 3).map((member, index) => (
-            //   const LeBadge = getBadgeForPoints(member.points);
+          {memberRanking.map((member, index) => (
+            // const LeBadge = getBadgeForPoints(member.points);
+
             <tr key={member.id_member} className="rank-boxes">
               <td className="td-position">{index + 1}</td>
               <td className="td-pseudo">{member.pseudo}</td>
@@ -54,4 +55,4 @@ function Top3() {
   );
 }
 
-export default Top3;
+export default RankingHomepage;
