@@ -1,0 +1,16 @@
+.top3-container {
+  display: flex;
+  justify-content: center;
+}
+
+.top3-container .rank-boxes {
+  height: 2.5rem;
+  width: 90vw;
+  border-radius: 0.4rem;
+  margin: 0;
+}
+
+.top3-container .user-img-ranking {
+  width: 2rem;
+  height: 2rem;
+}
