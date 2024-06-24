@@ -20,6 +20,7 @@ L.Icon.Default.mergeOptions({
 
 function RoadMapDetails() {
   const [mapAD, setMapAD] = useState([]);
+  const [center, setCenter] = useState([]);
 
   useEffect(() => {
     const mapArtworkDetails = async () => {
@@ -33,10 +34,26 @@ function RoadMapDetails() {
     mapArtworkDetails();
   }, []);
 
+  useEffect(() => {
+    const selectedArtwork = async () => {
+      try {
+        const artworkById = await myAxios.get(`/api/artworks`);
+        setCenter(artworkById);
+      } catch (error) {
+        console.error("Erreur", error);
+      }
+    };
+    selectedArtwork();
+  }, []);
+
   return (
     <div>
       <div className="carte">
-        <MapContainer className="map" center={[50.632557, 3.065451]} zoom={13}>
+        <MapContainer
+          className="map"
+          center={[center.latitude, center.longitude]}
+          zoom={13}
+        >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
