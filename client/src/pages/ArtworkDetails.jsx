@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./styles/ArtworkDetails.css";
 import OthersArtworks from "../components/OthersArtworks/OthersArtworks";
 import RoadMapDetails from "../components/RoadMapDetails/RoadMapDetails";
+import { useBadges } from "../contexts/GlobalContext";
 
 function ArtworkDetails() {
   const artwork = useLoaderData();
@@ -39,6 +40,9 @@ function ArtworkDetails() {
     }
   };
 
+  const { getBadgeForPoints } = useBadges();
+  const ownBadge = getBadgeForPoints(artwork.points);
+
   return (
     <div className="artworkdetails-container">
       <div className="artworkdetails-right-container">
@@ -74,17 +78,18 @@ function ArtworkDetails() {
             <div className="artworkdetails-user">
               <div className="artworkdetails-addby">
                 <p>Ajoutée par :</p>
-                <p>{artwork.pseudo}</p>
+                <p className="focus-text">{artwork.pseudo}</p>
               </div>
               <img
                 className="user-img-artwork"
                 src="https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg"
                 alt="avatar de la personne qui a ajouté l'oeuvre"
               />
-              <p>badge</p>
+              <p className="focus-text">{artwork.points} points</p>
+              <p>{ownBadge.logo}</p>
             </div>
 
-            <p className="about-artwork">
+            <p className="about-artwork focus-text">
               À {city}, le {artwork.date_creation}
             </p>
           </div>
