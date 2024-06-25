@@ -28,11 +28,11 @@ function FormArtwork() {
                         <img src={image} alt="Oeuvre capturé" />
                     </div>
                     <div className="field input-title-artwork">
-                        <input type="text" className="input" placeholder="Donne un titre à l'oeuvre" value={title} onChange={handleChange} />
+                        <input type="text" className="input-default" placeholder="Donne un titre à l'oeuvre" value={title} onChange={handleChange} />
                         <div className="line" />
                     </div>
                     <div>
-                        <p className="warning">Attention : La photo doit être prise au format portrait. Ton œuvre sera ensuite validée par un administrateur avant d'être affichée sur le site.</p>
+                        <p className="warning">Attention : La photo doit être prise au format portrait.</p>
                     </div>
                     <button type="button" onClick={handleSubmit} className="btn send-picture-btn">Envoyer</button>
                 </div>
