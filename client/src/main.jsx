@@ -101,14 +101,14 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/profil/editer/:id",
+        path: "/profil/edit/:id",
         element: <ProfileEdition />,
         loader: async ({ params }) => {
           const [membersResponse] = await Promise.all([
             myAxios.get(`/api/members/${params.id}`),
           ]);
           const member = membersResponse.data;
-          return member;
+          return { member };
         },
       },
     ],

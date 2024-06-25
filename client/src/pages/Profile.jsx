@@ -55,16 +55,18 @@ function Profile() {
               <p>{hidePassword(member.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
-              <Link to={`/profil/editer/${member.id_member}`}>
-                <img
-                  className="edit-profile-desktop"
-                  src="/assets/images/icons/edit.png"
-                  alt="crayon pour modifier les infos du profil"
-                />
+              <Link to={`/profil/edit/${member.id_member}`}>
+                <div>
+                  <img
+                    className="edit-profile-desktop"
+                    src="/assets/images/icons/edit.png"
+                    alt="crayon pour modifier les infos du profil"
+                  />
+                </div>
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{member.points} points</p>
+                <p>{member.points} point</p>
               </div>
             </div>
           </div>

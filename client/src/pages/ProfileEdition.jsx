@@ -1,11 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import { useBadges } from "../contexts/GlobalContext";
+import myAxios from "../services/myAxios";
 import "./styles/ProfileEdition.css";
 
 function ProfileEdition() {
-  const member = useLoaderData();
-
+  const { member } = useLoaderData();
   // const hidePassword = (password) => "*".repeat(password.length);
 
   const { getBadgeForPoints } = useBadges();
@@ -15,7 +15,7 @@ function ProfileEdition() {
   // the field become an input if it's true
   const [isEditingCity, setIsEditingCity] = useState(false);
   // the input field contain initial user informations
-  const [editedCity, setEditedCity] = useState("");
+  const [editedCity, setEditedCity] = useState(member.city);
 
   const handleEditCity = () => {
     if (isEditingCity) {
@@ -28,7 +28,7 @@ function ProfileEdition() {
 
   // Modify field of postcode
   const [isEditingPostcode, setIsEditingPostcode] = useState(false);
-  const [editedPostcode, setEditedPostcode] = useState("");
+  const [editedPostcode, setEditedPostcode] = useState(member.postcode);
 
   const handleEditPostcode = () => {
     if (isEditingPostcode) {
@@ -41,7 +41,7 @@ function ProfileEdition() {
 
   // Modify field of email
   const [isEditingEmail, setIsEditingEmail] = useState(false);
-  const [editedEmail, setEditedEmail] = useState("");
+  const [editedEmail, setEditedEmail] = useState(member.email);
 
   const handleEditEmail = () => {
     if (isEditingEmail) {
@@ -54,7 +54,7 @@ function ProfileEdition() {
 
   // Modify field of pwd
   const [isEditingPwd, setIsEditingPwd] = useState(false);
-  const [editedPwd, setEditedPwd] = useState("");
+  const [editedPwd, setEditedPwd] = useState(member.pwd);
 
   const handleEditPwd = () => {
     if (isEditingPwd) {
@@ -68,19 +68,32 @@ function ProfileEdition() {
   const handleUpdateProfile = async (e) => {
     // connection to complete DB with new informations
     e.preventDefault();
-    // try {
-    //   const response = await myAxios.post("/api/members/???", formData);
-    //   console.info("Modifications enregistrées", response.data);
+    try {
+      const response = await myAxios.put(
+        `/api/members/edit-member/${member.id_member}`,
+        {
+          city: editedCity,
+          postcode: editedPostcode,
+          email: editedEmail,
+          pwd: editedPwd,
+        }
+      );
+      member.city = editedCity;
+      member.postcode = editedPostcode;
+      member.email = editedEmail;
+      member.pwd = editedPwd;
 
-    // } catch (error) {
-    //   console.error("Erreur", error);
-    // }
+      // update input field in fix field
+      setIsEditingCity(false);
+      setIsEditingPostcode(false);
+      setIsEditingEmail(false);
+      setIsEditingPwd(false);
 
-    // update input field in fix field
-    setIsEditingCity(false);
-    setIsEditingPostcode(false);
-    setIsEditingEmail(false);
-    setIsEditingPwd(false);
+      console.info("Modifications enregistrées", response.data);
+      // Mettre à jour les données du membre avec les informations modifiées
+    } catch (error) {
+      console.error("Erreur", error);
+    }
   };
 
   return (
