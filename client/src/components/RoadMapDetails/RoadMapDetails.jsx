@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -20,7 +20,7 @@ L.Icon.Default.mergeOptions({
 
 function RoadMapDetails() {
   const [mapAD, setMapAD] = useState([]);
-  const [center, setCenter] = useState([]);
+  const artwork = useLoaderData();
 
   useEffect(() => {
     const mapArtworkDetails = async () => {
@@ -34,57 +34,46 @@ function RoadMapDetails() {
     mapArtworkDetails();
   }, []);
 
-  useEffect(() => {
-    const selectedArtwork = async () => {
-      try {
-        const artworkById = await myAxios.get(`/api/artworks`);
-        setCenter(artworkById);
-      } catch (error) {
-        console.error("Erreur", error);
-      }
-    };
-    selectedArtwork();
-  }, []);
-
   return (
     <div>
       <div className="carte">
         <MapContainer
           className="map"
-          center={[center.latitude, center.longitude]}
-          zoom={13}
+          center={[artwork.latitude, artwork.longitude]}
+          zoom={15}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {mapAD.map((markerArtworkDetails) => (
-            <Marker
-              position={[
-                markerArtworkDetails.latitude,
-                markerArtworkDetails.longitude,
-              ]}
-              key={markerArtworkDetails.id_artwork}
-            >
-              <Popup className="popup" key={markerArtworkDetails.artwork_id}>
-                <img
-                  src={markerArtworkDetails.picture}
-                  alt={markerArtworkDetails.title}
-                  className="marker-img"
-                />
-                <br />
-                <p className="marker-title">{markerArtworkDetails.title}</p>
-                <div className="link-artwork-maproad">
-                  <Link
-                    to={`/oeuvre/${markerArtworkDetails.id_artwork}`}
-                    className="btn link-roadmap"
-                  >
-                    Voir l'oeuvre
-                  </Link>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
+          {mapAD &&
+            mapAD.map((markerArtworkDetails) => (
+              <Marker
+                position={[
+                  markerArtworkDetails.latitude,
+                  markerArtworkDetails.longitude,
+                ]}
+                key={markerArtworkDetails.id_artwork}
+              >
+                <Popup className="popup" key={markerArtworkDetails.artwork_id}>
+                  <img
+                    src={markerArtworkDetails.picture}
+                    alt={markerArtworkDetails.title}
+                    className="marker-img"
+                  />
+                  <br />
+                  <p className="marker-title">{markerArtworkDetails.title}</p>
+                  <div className="link-artwork-maproad">
+                    <Link
+                      to={`/oeuvre/${markerArtworkDetails.id_artwork}`}
+                      className="btn link-roadmap"
+                    >
+                      Voir l'oeuvre
+                    </Link>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
           <SearchRoadMap />
         </MapContainer>
       </div>
