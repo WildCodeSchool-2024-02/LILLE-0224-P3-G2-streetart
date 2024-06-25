@@ -39,7 +39,7 @@ function Ranking() {
         <table className="rank-box">
           <tbody>
             {rankingData.map((member, index) => {
-              const LeBadge = getBadgeForPoints(member.points);
+              const ownBadge = getBadgeForPoints(member.points);
               return (
                 <tr key={member.id_member} className="rank-boxes">
                   <td className="td-position">{index + 1}</td>
@@ -63,7 +63,7 @@ function Ranking() {
                       className="img-coin"
                     />{" "}
                   </td>
-                  <td className="td-badge">{LeBadge ? LeBadge.logo : ""}</td>
+                  <td className="td-badge">{ownBadge ? ownBadge.logo : ""}</td>
                 </tr>
               );
             })}

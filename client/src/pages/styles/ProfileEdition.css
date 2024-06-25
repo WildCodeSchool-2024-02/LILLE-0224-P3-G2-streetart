@@ -1,0 +1,67 @@
+.profile-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.profile-edit-box {
+  width: 90%;
+  box-shadow: var(--shadow-container);
+  background-color: rgb(230, 232, 234);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-profile-edit {
+  width: 6rem;
+  border-radius: 50%;
+}
+
+.pen-edit {
+  width: 2rem;
+}
+
+.modify-profil {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  height: 3rem;
+}
+
+.modify-profil-avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  height: 7rem;
+}
+
+.btn-modifications {
+  margin: 1rem;
+  font-size: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+  .profile-edit-box {
+    width: 60%;
+  }
+
+  .avatar-profile-edit {
+    width: 8rem;
+  }
+
+  .modify-profil {
+    width: 50%;
+  }
+
+  .modify-profil-avatar {
+    height: 8rem;
+  }
+}

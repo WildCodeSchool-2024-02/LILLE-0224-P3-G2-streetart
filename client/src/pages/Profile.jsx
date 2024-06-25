@@ -1,4 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
+import { useBadges } from "../contexts/GlobalContext";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 
@@ -6,6 +7,9 @@ function Profile() {
   const { member, memberArtworks } = useLoaderData();
 
   const hidePassword = (password) => "*".repeat(password.length);
+
+  const { getBadgeForPoints } = useBadges();
+  const ownBadge = getBadgeForPoints(member.points);
 
   return (
     <div className="profile-container">
@@ -18,7 +22,11 @@ function Profile() {
             <div className="img-profile">
               <img
                 className="image-profile"
-                src="https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn"
+                src={
+                  member.avatar
+                    ? member.avatar
+                    : "../../public/assets/images/icons/profile.png"
+                }
                 alt="profil"
               />
               <p className="pseudo-profile">{member.pseudo}</p>
@@ -30,7 +38,7 @@ function Profile() {
                 alt="crayon pour modifier les infos du profil"
               />
               <div className="level-points">
-                <p>LVL </p>
+                <p>{ownBadge ? ownBadge.logo : ""}</p>
                 <p>{member.points} points</p>
               </div>
             </div>
@@ -47,13 +55,15 @@ function Profile() {
               <p>{hidePassword(member.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
-              <img
-                className="edit-profile-desktop"
-                src="/assets/images/icons/edit.png"
-                alt="crayon pour modifier les infos du profil"
-              />
+              <Link to={`/profil/editer/${member.id_member}`}>
+                <img
+                  className="edit-profile-desktop"
+                  src="/assets/images/icons/edit.png"
+                  alt="crayon pour modifier les infos du profil"
+                />
+              </Link>
               <div className="level-points">
-                <p>badge ? </p>
+                <p>{ownBadge ? ownBadge.logo : ""}</p>
                 <p>{member.points} points</p>
               </div>
             </div>
@@ -72,9 +82,7 @@ function Profile() {
                 key={memberArtwork.id_artwork}
                 className={index === 3 ? "artwork4" : "artwork-profile"}
               >
-                <Link to={`/oeuvre/${memberArtwork.id_artwork_fk}`}>
-                  <ArtworkCard artwork={memberArtwork} />
-                </Link>
+                <ArtworkCard artwork={memberArtwork} />
               </div>
             ))
           ) : (
