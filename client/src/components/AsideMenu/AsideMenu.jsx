@@ -7,8 +7,8 @@ function AsideMenu() {
       <div className="aside-menu" role="presentation">
         <div className="aside-menu-top">
           <Link to="/">Accueil</Link>
-          <Link to="/oeuvres">Les oeuvres</Link>
-          <Link to="/carte">Roadmap</Link>
+          <Link to="/oeuvres">Oeuvres</Link>
+          <Link to="/carte">Carte</Link>
           <Link to="/classement">Classement</Link>
           <Link to="/profil/2">Profil</Link>
         </div>

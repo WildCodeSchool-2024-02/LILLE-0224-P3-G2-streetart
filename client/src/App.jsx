@@ -1,6 +1,7 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import NavBarBottomTest from "./components/NavBarBottom/NavBarBottom";
 import { BurgerMenuProvider } from "./contexts/BurgerMenuContext";
 import { BadgeProvider } from "./contexts/GlobalContext";
 import AsideMenu from "./components/AsideMenu/AsideMenu";
@@ -9,6 +10,9 @@ import TopBar from "./components/TopBar/TopBar";
 import "leaflet/dist/leaflet.css";
 
 function App() {
+
+  const isMobile = useMediaQuery('(max-width:768px)');
+
   return (
     <BurgerMenuProvider>
       <BadgeProvider>
@@ -17,7 +21,7 @@ function App() {
         <main className="main-container">
           <Outlet />
         </main>
-        <NavBarBottom />
+        {isMobile && <NavBarBottomTest />}
       </BadgeProvider>
     </BurgerMenuProvider>
   );

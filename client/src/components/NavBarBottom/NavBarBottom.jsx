@@ -1,37 +1,52 @@
-import { Link } from "react-router-dom";
-import { useBurgerMenu } from "../../contexts/BurgerMenuContext";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import "./NavBarBottom.css";
-import ImgMenu from "../../../public/assets/images/icons/hamburger_icon.svg";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Menu from '@mui/icons-material/Menu';
+import Camera from '@mui/icons-material/AddAPhoto';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Paper from '@mui/material/Paper';
+import { useNavigate } from 'react-router-dom';
+import { useBurgerMenu } from '../../contexts/BurgerMenuContext';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-function NavBarBottom() {
-  const { isMenuOpen, handleOpenMenu } = useBurgerMenu();
+
+export default function FixedBottomNavigation() {
+  const [value, setValue] = React.useState(null);
+  const ref = React.useRef(null);
+
+    const navigate = useNavigate()
+
+    const { isMenuOpen, handleOpenMenu } = useBurgerMenu();
+
+  function goToCamera() {
+    navigate("/ajouter-oeuvre/camera")
+  }
+
+  function goToProfile() {
+    navigate("/profil/2")
+  }
+
   return (
-    <div className="menu-bottom-container">
-      {isMenuOpen && <BurgerMenu />}
-      <div className="menu-bottom">
-        <button onClick={handleOpenMenu} type="button">
-          <img src={ImgMenu} alt="Ouvrir le menu" className="img-hamburger" />
-        </button>
-        <Link to="/ajouter-oeuvre/camera">
-          <button type="button">
-            <img
-              src="/assets/images/icons/appareil_photo.png"
-              alt="Ouvrir l'appareil"
-              className="img-appareil"
-            />
-          </button>
-        </Link>
-        <Link to="/profil">
-          <img
-            id="img-profile"
-            src="/assets/images/icons/profile.png"
-            alt="Acceder au profil"
-          />
-        </Link>
-      </div>
-    </div>
+    <>
+        {isMenuOpen && <BurgerMenu />}
+        <Box sx={{ pb: 7 }} ref={ref}>
+        <CssBaseline />
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 3 }} elevation={4}>
+            <BottomNavigation
+            showLabel={false}
+            value={value}
+            onChange={(event, newValue) => {
+                setValue(newValue);
+            }}
+            >
+            <BottomNavigationAction icon={<Menu fontSize="large" />} onClick={handleOpenMenu}/>
+            <BottomNavigationAction icon={<Camera fontSize="large" />} onClick={() => goToCamera()} />
+            <BottomNavigationAction icon={<AccountCircle fontSize="large" />} onClick={() => goToProfile()} />
+            </BottomNavigation>
+        </Paper>
+        </Box>
+    </>
   );
 }
-
-export default NavBarBottom;

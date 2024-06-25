@@ -2,6 +2,8 @@ import "./styles/ValidationArtwork.css"
 import "../components/NewArtwork/FormArtwork/FormArtwork.css"
 import { useNewArtwork } from "../contexts/NewArtworkContext";
 import TopBar from "../components/TopBar/TopBar";
+import NavBarBottom from "../components/NavBarBottom/NavBarBottom"
+import { BurgerMenuProvider } from "../contexts/BurgerMenuContext";
 
 function ValidationArtwork() {
 
@@ -22,6 +24,9 @@ function ValidationArtwork() {
                     <p>Date : {formattedDate}</p>
                 </div>
             </div>
+            <BurgerMenuProvider>
+                <NavBarBottom />
+            </BurgerMenuProvider>
         </>
     )
 }

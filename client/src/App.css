@@ -47,7 +47,6 @@ a {
   display: block;
 }
 .main-container {
-  margin-bottom: 9vh;
   height: calc(100vh - 18vh);
   overflow: auto;
 }
