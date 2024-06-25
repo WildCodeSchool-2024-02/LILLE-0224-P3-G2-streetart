@@ -40,7 +40,7 @@ function Homepage() {
           </Link>
         </div>
         <div className="top3-mobile">
-          <h3 className="titles-homepage">Le top 3 des membres</h3>
+          <h3 className="titles-homepage">Le top 3</h3>
           <Top3 />
         </div>
         <div className="ranking-homepage">

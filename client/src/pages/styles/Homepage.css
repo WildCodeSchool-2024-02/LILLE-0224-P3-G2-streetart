@@ -50,6 +50,10 @@
   display: none;
 }
 
+.badge-homepage {
+  margin: 0.5rem;
+}
+
 /* ************************* DESKTOP VERSION **************************/
 @media screen and (min-width: 768px) {
   .link-homepage {

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import myAxios from "../../services/myAxios";
+import { useBadges } from "../../contexts/GlobalContext";
 import "./Top3.css";
 
 function Top3() {
   const [topMembers, setTopMembers] = useState([]);
 
+  // TO GET TOP 3 MEMBERS
   useEffect(() => {
     const getTop3 = async () => {
       try {
@@ -17,37 +19,42 @@ function Top3() {
     getTop3();
   }, []);
 
+  // TO GET THE BADGES
+  const { getBadgeForPoints } = useBadges();
+
   return (
     <div className="top3-container">
       <table className="rank-box">
         <tbody>
-          {topMembers.slice(0, 3).map((member, index) => (
-            //   const LeBadge = getBadgeForPoints(member.points);
-            <tr key={member.id_member} className="rank-boxes">
-              <td className="td-position">{index + 1}</td>
-              <td className="td-pseudo">{member.pseudo}</td>
-              <td className="td-img">
-                <img
-                  className="user-img-ranking"
-                  src={
-                    member.avatar
-                      ? member.avatar
-                      : "../../public/assets/images/icons/profile.png"
-                  }
-                  alt="avatar"
-                />
-              </td>
-              <td className="td-points">
-                {member.points}{" "}
-                <img
-                  src="../../public/assets/images/icons/coin.png"
-                  alt="piece"
-                  className="img-coin"
-                />{" "}
-              </td>
-              {/* <td className="td-badge">{LeBadge ? LeBadge.logo : ""}</td> */}
-            </tr>
-          ))}
+          {topMembers.slice(0, 3).map((member, index) => {
+            const ownBadge = getBadgeForPoints(member.points);
+            return (
+              <tr key={member.id_member} className="rank-boxes">
+                <td className="td-position">{index + 1}</td>
+                <td className="td-pseudo">{member.pseudo}</td>
+                <td className="td-img">
+                  <img
+                    className="user-img-ranking"
+                    src={
+                      member.avatar
+                        ? member.avatar
+                        : "../../public/assets/images/icons/profile.png"
+                    }
+                    alt="avatar"
+                  />
+                </td>
+                <td className="td-points td-points-homepage">
+                  {member.points}{" "}
+                  <img
+                    src="../../public/assets/images/icons/coin.png"
+                    alt="piece"
+                    className="img-coin"
+                  />{" "}
+                  <p className="badge-homepage">{ownBadge.logo}</p>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
