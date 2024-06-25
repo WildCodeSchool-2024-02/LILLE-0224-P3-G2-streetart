@@ -6,7 +6,6 @@ import "../../pages/styles/Homepage.css";
 function RankingHomepage() {
   const [memberRanking, setMemberRanking] = useState([]);
 
-  // TO GET THE RANKING OF MEMBERS
   useEffect(() => {
     const getMemberRanking = async () => {
       try {
@@ -19,7 +18,6 @@ function RankingHomepage() {
     getMemberRanking();
   }, []);
 
-  // TO GET THE BADGES
   const { getBadgeForPoints } = useBadges();
 
   return (

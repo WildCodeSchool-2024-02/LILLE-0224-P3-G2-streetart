@@ -6,7 +6,6 @@ import "./Top3.css";
 function Top3() {
   const [topMembers, setTopMembers] = useState([]);
 
-  // TO GET TOP 3 MEMBERS
   useEffect(() => {
     const getTop3 = async () => {
       try {
@@ -19,7 +18,6 @@ function Top3() {
     getTop3();
   }, []);
 
-  // TO GET THE BADGES
   const { getBadgeForPoints } = useBadges();
 
   return (
