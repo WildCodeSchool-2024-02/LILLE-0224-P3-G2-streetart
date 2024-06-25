@@ -1,7 +1,7 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
-import NavBarBottomTest from "./components/NavBarBottom/NavBarBottom";
+import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
 import { BurgerMenuProvider } from "./contexts/BurgerMenuContext";
 import { BadgeProvider } from "./contexts/GlobalContext";
 import AsideMenu from "./components/AsideMenu/AsideMenu";
@@ -21,7 +21,7 @@ function App() {
         <main className="main-container">
           <Outlet />
         </main>
-        {isMobile && <NavBarBottomTest />}
+        {isMobile && <NavBarBottom />}
       </BadgeProvider>
     </BurgerMenuProvider>
   );
