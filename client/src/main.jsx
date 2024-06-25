@@ -29,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+        loader: async () => {
+          const response = await myAxios.get("/api/artworks");
+          return response.data;
+        },
       },
       {
         path: "/oeuvres",
@@ -43,7 +47,7 @@ const router = createBrowserRouter([
         element: <ArtworkDetails />,
         loader: async ({ params }) => {
           const artwork = await myAxios.get(`/api/artworks/${params.id}`);
-      
+
           return artwork.data;
         },
       },
@@ -116,8 +120,8 @@ const router = createBrowserRouter([
       {
         path: "/ajouter-oeuvre/validation",
         element: <ValidationArtwork />,
-      }
-    ]
+      },
+    ],
   },
 ]);
 
