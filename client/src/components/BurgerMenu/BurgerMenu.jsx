@@ -35,8 +35,8 @@ function BurgerMenu() {
       opacity: 1,
       y: 0,
       transition: {
-        delayChildren: 0.2, // Délai initial pour tous les enfants
-        staggerChildren: 0.1, // Délai entre chaque enfant
+        delayChildren: 0.2, // Time between each child at closing
+        staggerChildren: 0.1, // Reverse animation
       },
     },
     closed: {
