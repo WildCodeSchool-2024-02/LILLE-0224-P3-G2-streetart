@@ -13,7 +13,13 @@ class ArtworkRepository extends AbstractRepository {
     // Execute the SQL INSERT query to add a new item to the "artwork" table
     const [result] = await this.database.query(
       `insert into ${this.table} (title, picture, date_creation, longitude, latitude) values (?, ?, ?, ?, ?)`,
-      [artwork.title, artwork.picture, artwork.date_creation, artwork.longitude, artwork.latitude ]
+      [
+        artwork.title,
+        artwork.picture,
+        artwork.date_creation,
+        artwork.longitude,
+        artwork.latitude,
+      ]
     );
 
     // Return the ID of the newly inserted item
@@ -43,7 +49,7 @@ class ArtworkRepository extends AbstractRepository {
       `SELECT id_artwork, title, picture, DATE_FORMAT(date_creation, '%d-%m-%Y') AS formatted_date, longitude, latitude, validate
       FROM ${this.table} 
       WHERE validate = true 
-      ORDER BY date_creation ASC`
+      ORDER BY date_creation DESC`
     );
 
     // Return the array of items
@@ -51,19 +57,18 @@ class ArtworkRepository extends AbstractRepository {
   }
 
   async readAllMemberArtwork(id) {
-  // Execute the SQL SELECT query to retrieve a specific category by its ID
-  const [rows] = await this.database.query(
-    `SELECT a.id_artwork, a.title, a.picture, DATE_FORMAT(a.date_creation, '%d-%m-%Y') AS date_creation, a.validate, o.id_operation, o.id_account_fk, o.id_artwork_fk, ac.id_member_fk
+    // Execute the SQL SELECT query to retrieve a specific category by its ID
+    const [rows] = await this.database.query(
+      `SELECT a.id_artwork, a.title, a.picture, DATE_FORMAT(a.date_creation, '%d-%m-%Y') AS date_creation, a.validate, o.id_operation, o.id_account_fk, o.id_artwork_fk, ac.id_member_fk
     FROM artwork AS a
     INNER JOIN operation AS o ON id_artwork_fk=id_artwork
     INNER JOIN account AS ac ON id_account=id_account_fk
     WHERE o.id_account_fk=(?);`,
-    [id]
-  );
+      [id]
+    );
 
-  return rows;
-}
- 
+    return rows;
+  }
 }
 
 module.exports = ArtworkRepository;

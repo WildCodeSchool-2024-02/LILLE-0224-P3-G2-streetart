@@ -1,5 +1,7 @@
 import "./styles/ValidationArtwork.css"
 import "../components/NewArtwork/FormArtwork/FormArtwork.css"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useNewArtwork } from "../contexts/NewArtworkContext";
 import TopBar from "../components/TopBar/TopBar";
 import NavBarBottom from "../components/NavBarBottom/NavBarBottom"
@@ -7,26 +9,54 @@ import { BurgerMenuProvider } from "../contexts/BurgerMenuContext";
 
 function ValidationArtwork() {
 
-    const { title, latitude, longitude, formattedDate, imageUrl } = useNewArtwork();
+    const navigate = useNavigate()
+    const { title, image } = useNewArtwork();
+    const [loader, setLoader] = useState(true);
+
+    useEffect(
+        () => {
+            setTimeout(() => {
+                setLoader(false)
+            }, 5000);
+        }, []
+    );
+
+    const navigateToHome = () => {
+        navigate("/")
+    }
 
     return (
         <>
             <TopBar title="Spot Lille Art" />
-            <div className="validation-artwork-container">
-                <div className="validation-artwork">
+            {loader ?            
+                <div className="loader-container">
+                    <span className="loader" />
+                </div>
+                :
+                <div className="validation-artwork-container">
+                                    <div className="validation-artwork">
                     <div className="camera-picture">
-                        <img src={imageUrl} alt="Oeuvre capturé" />
+                        <img src={image} alt={title} />
                     </div>
-                    <h3>Titre : {title}</h3>
-                    <p>Chemin : "{imageUrl}"</p>
-                    <p>Latitude : {latitude}</p>
-                    <p>Longitude : {longitude}</p>
-                    <p>Date : {formattedDate}</p>
+                    <div className="validation-info">
+                    <p>
+                        Ton oeuvre <span className="focus-text">{title}</span> a bien été postée, elle doit maintenant être validée par un administrateur afin de figurer sur le site.
+                    </p>
+                    <br/>
+                    <p className="focus-text">
+                        Tes points te seront attribués lors de la validation.
+                    </p>
+                    </div>
+                    <button type="button" className="btn" onClick={navigateToHome}>Revenir à l'accueil</button>
+                    </div>
                 </div>
             </div>
             <BurgerMenuProvider>
                 <NavBarBottom />
             </BurgerMenuProvider>
+
+            }
+
         </>
     )
 }
