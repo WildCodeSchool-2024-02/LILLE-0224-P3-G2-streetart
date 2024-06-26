@@ -7,7 +7,6 @@ import "./styles/ProfileEdition.css";
 function ProfileEdition() {
   const navigate = useNavigate();
   const { member } = useLoaderData();
-  // const hidePassword = (password) => "*".repeat(password.length);
 
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(member.points);
