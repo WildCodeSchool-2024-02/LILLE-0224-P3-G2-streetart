@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNewArtwork } from "../contexts/NewArtworkContext";
 import TopBar from "../components/TopBar/TopBar";
+import NavBarBottom from "../components/NavBarBottom/NavBarBottom"
+import { BurgerMenuProvider } from "../contexts/BurgerMenuContext";
 
 function ValidationArtwork() {
 
@@ -48,7 +50,13 @@ function ValidationArtwork() {
                     <button type="button" className="btn" onClick={navigateToHome}>Revenir à l'accueil</button>
                     </div>
                 </div>
+            </div>
+            <BurgerMenuProvider>
+                <NavBarBottom />
+            </BurgerMenuProvider>
+
             }
+
         </>
     )
 }
