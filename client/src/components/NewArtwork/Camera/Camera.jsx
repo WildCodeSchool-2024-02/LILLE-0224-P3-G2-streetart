@@ -51,7 +51,7 @@ function Camera() {
           <div className="camera-top" />
             {/* A RETIRER UNE FOIS LE MESSAGE D'ERREUR IMPLANTÉ */}
             <p>{errorLocation}</p>
-            {image ? <img src={image} alt="Oeuvre capturé" /> :  
+            {image ? <img src={image} alt="Oeuvre capturée" /> :  
             <Webcam
                 audio={false}
                 ref={webcamRef}
