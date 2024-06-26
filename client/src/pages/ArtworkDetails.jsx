@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./styles/ArtworkDetails.css";
 import OthersArtworks from "../components/OthersArtworks/OthersArtworks";
 import RoadMapDetails from "../components/RoadMapDetails/RoadMapDetails";
-import { useBadges } from "../contexts/GlobalContext";
+import { useBadges } from "../contexts/BadgeContext";
 
 function ArtworkDetails() {
   const artwork = useLoaderData();

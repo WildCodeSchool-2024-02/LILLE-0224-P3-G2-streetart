@@ -30,10 +30,10 @@ const browseMemberById = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const createMember = async (req, res, next) => {
-  const { pseudo, firstname, lastname, city, postcode, email, pwd } = req.body;
+  const { pseudo, firstname, lastname, city, postcode, email, pwd, date } = req.body;
   
   try {
-    const member = { pseudo, firstname, lastname, city, postcode, email, pwd };
+    const member = { pseudo, firstname, lastname, city, postcode, email, pwd, date };
     const insertId = await tables.member.create(member);
     res.status(201).json({ insertId });
   } catch (err) {

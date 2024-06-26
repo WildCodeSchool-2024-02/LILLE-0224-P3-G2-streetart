@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import myAxios from "../../services/myAxios";
-import { useBadges } from "../../contexts/GlobalContext";
+import { useBadges } from "../../contexts/BadgeContext";
 import "../../pages/styles/Homepage.css";
 
 function RankingHomepage() {

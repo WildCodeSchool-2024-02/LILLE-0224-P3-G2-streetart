@@ -19,8 +19,9 @@ CREATE TABLE administrator (
 CREATE TABLE account (
   id_account INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
-  pwd VARCHAR(25) NOT NULL,
+  pwd VARCHAR(255) NOT NULL,
   assignment VARCHAR(15) NOT NULL,
+  date_creation DATE NOT NULL,
   id_member_fk INT UNSIGNED DEFAULT NULL,
   FOREIGN KEY (id_member_fk) REFERENCES member(id_member) ON DELETE SET NULL,
   id_administrator_fk INT UNSIGNED DEFAULT NULL,

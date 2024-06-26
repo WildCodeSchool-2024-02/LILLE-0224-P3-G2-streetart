@@ -2,6 +2,13 @@
   display: flex;
   align-items: center;
   font-size: 1.5rem;
+  padding: 0.3rem 0.5rem;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.profile-details:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .profile-details .profile-picture {
@@ -24,12 +31,18 @@
   cursor: pointer;
 }
 
-.profile-details:hover {
-  transform: scale(1.1);
+.profile-details #pseudo {
+  font-weight: 600;
+  margin-right: 1rem;
 }
 
 .profile-details #coin {
-  width: 20px;
-  height: 20px;
-  margin-bottom: -4px;
+  width: 13px;
+  height: 13px;
+  margin-left: 0.3rem;
+}
+
+.MuiMenuItem-colorNeutral {
+  background-color: blue;
+  color: brown;
 }
