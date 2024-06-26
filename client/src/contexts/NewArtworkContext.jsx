@@ -64,6 +64,8 @@ import myAxios from "../services/myAxios"
     };
     
     const handleSubmit = async () => {
+      // Change to upper case the first letter of the title 
+      setTitle(title.charAt(0).toUpperCase() + title.slice(1))
       // Launch the function for upload the picture        
       try {
         const picture = await handleUpload();
@@ -93,14 +95,11 @@ import myAxios from "../services/myAxios"
           deletePicture,
           title,
           setTitle,
-          latitude,
           setLatitude,
-          longitude,
           setLongitude,
-          formattedDate,
           handleSubmit,
         }),
-        [image, title, latitude, longitude, formattedDate, handleSubmit]
+        [image, title, handleSubmit]
       );    
 
     return (
