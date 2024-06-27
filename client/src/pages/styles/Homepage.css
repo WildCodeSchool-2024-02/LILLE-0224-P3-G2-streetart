@@ -63,13 +63,13 @@
 
   .titles-homepage {
     font-size: 2rem;
-    padding-bottom: 0.5rem;
+    padding-top: 1rem;
   }
 
   .artworks-homepage {
-    /* width: 90%; */
     justify-content: space-evenly;
     margin: 0 auto;
+    padding: 1rem 0;
   }
 
   .artworks-news-homepage .artwork-card {
@@ -89,6 +89,7 @@
   .roadmap-homepage {
     width: 35vw;
     height: 20vw;
+    margin: 1rem 0;
   }
 
   .ranking-homepage {
@@ -100,7 +101,7 @@
   }
 
   .ranking-homepage .rank-container {
-    padding: 0;
+    padding: 0.5rem 0;
   }
 
   .top3-mobile {
