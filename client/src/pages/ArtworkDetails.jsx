@@ -102,7 +102,7 @@ function ArtworkDetails() {
         </div>
       </div>
 
-      <OthersArtworks />
+      <OthersArtworks artworkDisplayed={artwork.id_artwork} />
     </div>
   );
 }

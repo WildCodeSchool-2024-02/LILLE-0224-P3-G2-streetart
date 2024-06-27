@@ -1,41 +1,45 @@
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import ArtworkCard from "../ArtworkCard/ArtworkCard";
+import myAxios from "../../services/myAxios";
 import "./OthersArtworks.css";
 
-function OthersArtworks() {
+function OthersArtworks({ artworkDisplayed }) {
+  const [randomArtworks, setRandomArtworks] = useState([]);
+
+  // TO MIX AND GET RANDOM ARTWORKS
+  const mixArray = (array) => array.sort(() => Math.random() - 0.5);
+
+  useEffect(() => {
+    const getRandomArtworks = async () => {
+      try {
+        const response = await myAxios.get("/api/artworks");
+        const randomArtworksList = response.data;
+        const filteredArtworks = randomArtworksList.filter(
+          (artworks) => artworks.id_artwork !== artworkDisplayed
+        );
+        setRandomArtworks(mixArray(filteredArtworks));
+      } catch (error) {
+        console.error("Erreur", error);
+      }
+    };
+    getRandomArtworks();
+  }, [artworkDisplayed]);
+
   return (
     <div className="others-artworks">
       <h3 className="others-title">À découvrir </h3>
       <div className="img-othersartworks">
-        <img
-          src="https://i0.wp.com/artosoir.fr/wp-content/uploads/2021/02/P5111273-1.jpg?resize=720%2C960&ssl=1"
-          alt="oeuvre de street art"
-        />
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-puy6kk2FkA2E_ouikl48IZGR4NVBtBN-SLrX3LgW2IVVO96QizX_eTXm9om9fmLSJKQ&usqp=CAU"
-          alt="oeuvre de street art"
-        />
-        <img
-          src="https://i0.wp.com/artosoir.fr/wp-content/uploads/2021/02/P5231683.jpg?resize=1024%2C768&ssl=1"
-          alt="oeuvre de street art"
-        />
-        <img
-          src="https://www.street-artwork.com/media/cache/thumb_small/uploads/document/613087ccc1573711103204.jpg"
-          alt="oeuvre de street art"
-        />
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbRU6g_CxbKC3aff54yXBRx_Up1oGrwCAIcPN-X0eYfT5dvVhCd0zgoXZzENXnWtxXr70&usqp=CAU"
-          alt="oeuvre de street art"
-        />
-        <img
-          src="https://image-blog.comptoir.fr/canada/2018/06/IMG_7486.jpg"
-          alt="oeuvre de street art"
-        />
-        <img
-          src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1242356/19667641_1048002068668204_479189388039321060_o.jpg_mthay3.jpg"
-          alt="oeuvre de street art"
-        />
+        {randomArtworks.slice(0, 7).map((randomArtwork) => (
+          <ArtworkCard artwork={randomArtwork} key={randomArtwork.id} />
+        ))}
       </div>
     </div>
   );
 }
+
+OthersArtworks.propTypes = {
+  artworkDisplayed: PropTypes.string.isRequired,
+};
 
 export default OthersArtworks;
