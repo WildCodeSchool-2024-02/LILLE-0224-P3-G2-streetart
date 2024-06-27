@@ -16,6 +16,7 @@ import PanelAdmin from "./pages/PanelAdmin";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
+import ProfileEdition from "./pages/ProfileEdition";
 
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
@@ -90,6 +91,17 @@ const router = createBrowserRouter([
       {
         path: "/profil/:id",
         element: <Profile />,
+      },
+      {
+        path: "/profil/edit/:id",
+        element: <ProfileEdition />,
+        loader: async ({ params }) => {
+          const [membersResponse] = await Promise.all([
+            myAxios.get(`/api/members/${params.id}`),
+          ]);
+          const member = membersResponse.data;
+          return { member };
+        },
       },
     ],
   },

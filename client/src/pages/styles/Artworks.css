@@ -1,5 +1,4 @@
 .artworks-container {
-  padding: 1rem 0;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -9,6 +8,7 @@
 
 @media screen and (min-width: 768px) {
   .artworks-container {
+    padding: 1rem 0;
     justify-content: center;
   }
 }

@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useBadges } from "../contexts/BadgeContext";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 import myAxios from "../services/myAxios";
@@ -38,6 +39,9 @@ function Profile() {
     }, [auth.token, id]
   )
 
+  const { getBadgeForPoints } = useBadges();
+  const ownBadge = getBadgeForPoints(member.points);
+
   return (
     <div className="profile-container">
       {profile && (
@@ -49,7 +53,11 @@ function Profile() {
             <div className="img-profile">
               <img
                 className="image-profile"
-                src="https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn"
+                src={
+                  member.avatar
+                    ? member.avatar
+                    : "../../public/assets/images/icons/profile.png"
+                }
                 alt="profil"
               />
               <p className="pseudo-profile">{profile.pseudo}</p>
@@ -61,7 +69,7 @@ function Profile() {
                 alt="crayon pour modifier les infos du profil"
               />
               <div className="level-points">
-                <p>LVL </p>
+                <p>{ownBadge ? ownBadge.logo : ""}</p>
                 <p>{profile.points} points</p>
               </div>
             </div>
@@ -78,14 +86,18 @@ function Profile() {
               <p>{hidePassword(profile.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
-              <img
-                className="edit-profile-desktop"
-                src="/assets/images/icons/edit.png"
-                alt="crayon pour modifier les infos du profil"
-              />
+              <Link to={`/profil/edit/${member.id_member}`}>
+                <div>
+                  <img
+                    className="edit-profile-desktop"
+                    src="/assets/images/icons/edit.png"
+                    alt="crayon pour modifier les infos du profil"
+                  />
+                </div>
+              </Link>
               <div className="level-points">
-                <p>badge ? </p>
-                <p>{profile.points} points</p>
+                <p>{ownBadge ? ownBadge.logo : ""}</p>
+                <p>{profile.points} point</p>
               </div>
             </div>
           </div>

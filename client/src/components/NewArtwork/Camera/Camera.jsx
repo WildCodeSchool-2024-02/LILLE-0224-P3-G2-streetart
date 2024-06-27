@@ -47,10 +47,11 @@ function Camera() {
   
     return (
       <div className="App">
-        <div className="webcam-container">
+        <div className={ image ? "webcam-container full" : "webcam-container"}>
+          <div className="camera-top" />
             {/* A RETIRER UNE FOIS LE MESSAGE D'ERREUR IMPLANTÉ */}
             <p>{errorLocation}</p>
-            {image ? <img src={image} alt="Oeuvre capturé" /> :  
+            {image ? <img src={image} alt="Oeuvre capturée" /> :  
             <Webcam
                 audio={false}
                 ref={webcamRef}
@@ -67,7 +68,9 @@ function Camera() {
                 <Link to="/ajouter-oeuvre/formulaire"><button type="button" className="camera-btn"><img src="/assets/images/icons/validate.svg" alt="Valider l'oeuvre" /></button></Link>
             </div>  
             :
-            <button type="button" onClick={capturePicture} className="take-picture-btn camera-btn"><img src="/assets/images/icons/take_picture.svg" alt="Capturer l'oeuvre" /></button>
+            <div className="camera-bottom">
+              <button type="button" onClick={capturePicture} className="take-picture-btn camera-btn"><img src="/assets/images/icons/circle.png" alt="Capturer l'oeuvre" /></button>
+            </div>
             }
         </div>   
       </div>

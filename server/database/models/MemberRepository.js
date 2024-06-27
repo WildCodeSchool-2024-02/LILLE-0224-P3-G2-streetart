@@ -53,16 +53,43 @@ class MemberRepository extends AbstractRepository {
   async readMember(id) {
     // Execute the SQL SELECT query to retrieve a specific category by its ID
     const [rows] = await this.database.query(
-        `SELECT ac.id_account, ac.email, ac.pwd, ac.id_member_fk, m.id_member, m.firstname, m.lastname, m.pseudo, m.city, m.postcode, m.avatar, m.points
+      `SELECT ac.id_account, ac.email, ac.pwd, ac.id_member_fk, m.id_member, m.firstname, m.lastname, m.pseudo, m.city, m.postcode, m.avatar, m.points
     FROM member AS m
     RIGHT JOIN account AS ac ON id_member=id_member_fk
     WHERE m.id_member=(?);`,
-        [id]
-      );
-    
-      return rows[0];
-    }
+      [id]
+    );
 
+    return rows[0];
+  }
+
+  async updateMember(memberUpdate) {
+    const connection = await this.database.getConnection();
+
+    try {
+      // Begin many operations in SQL to be executed at once or all rollback
+      await connection.beginTransaction();
+
+      // Execute the SQL UPDATE query to update a specific member
+      await connection.query(
+        `UPDATE ${this.table} SET city = ?, postcode = ? WHERE id_member = ?`,
+        [memberUpdate.city, memberUpdate.postcode, memberUpdate.id]
+      );
+
+      await connection.query(
+        `UPDATE account SET email = ?, pwd = ? WHERE id_member_fk = ? AND assignment = ?`,
+        [memberUpdate.email, memberUpdate.pwd, memberUpdate.id, "user"]
+      );
+      // CONNECTION => COMMIT, ROLLBACK, RELEASE
+      await connection.commit();
+      return memberUpdate; // Return member on success
+    } catch (error) {
+      await connection.rollback();
+      throw error; // Throw error to handle it outside
+    } finally {
+      connection.release();
+    }
+  }
 }
 
 module.exports = MemberRepository;
