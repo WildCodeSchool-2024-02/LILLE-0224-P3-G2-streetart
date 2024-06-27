@@ -11,7 +11,7 @@
 
   .others-title {
     font-size: 1.5rem;
-    padding-bottom: 0.5rem;
+    padding-left: 2.5rem;
   }
 
   .img-othersartworks {
@@ -20,10 +20,12 @@
     justify-content: space-between;
   }
 
-  .img-othersartworks img {
+  .img-othersartworks .artwork-card {
     width: 10vw;
     height: 10vw;
-    border-radius: 1rem;
-    padding: 0 0.3rem;
+  }
+
+  .img-othersartworks .artwork-info {
+    height: 2rem;
   }
 }

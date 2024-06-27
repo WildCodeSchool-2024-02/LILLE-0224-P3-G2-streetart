@@ -27,7 +27,8 @@
 }
 
 .rank-boxes {
-  box-shadow: var(--shadow-container);
+  background-color: aliceblue;
+  border: 1px solid #6092c8;
   height: 4rem;
   border-radius: 1rem;
   display: flex;
