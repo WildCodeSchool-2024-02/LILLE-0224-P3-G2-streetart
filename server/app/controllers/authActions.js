@@ -16,7 +16,7 @@ const login = async (req, res, next) => {
         
         const token = await jwt.sign(
           // PAYLOAD
-            { sub: account.id },
+            { sub: account.id_member_fk },
             process.env.APP_SECRET,
             {
               expiresIn: "1h",

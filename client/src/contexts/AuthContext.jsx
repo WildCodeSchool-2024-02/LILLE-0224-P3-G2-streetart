@@ -1,25 +1,35 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState({
-    token: localStorage.getItem('authToken'),
-    account: JSON.parse(localStorage.getItem('account')),
+    token: Cookies.get('authToken'),
+    account: Cookies.get('account'),
   });
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = Cookies.get('authToken');
+    const account = Cookies.get('account') ? JSON.parse(Cookies.get('account')) : null; 
+
+    if (token && account) {
+      setAuth({ token, account });
+    }
+  }, []);
+
   const logout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('account');
+    Cookies.remove('authToken');
+    Cookies.remove('account');
     setAuth({ token: null, account: null });
     navigate('/connexion');
   };
 
-  const contextValue = useMemo(() => ({ auth, setAuth, logout }), [auth]);
+  const contextValue = useMemo(() => ({ auth, setAuth, logout }), [auth, logout]);
 
   return (
     <AuthContext.Provider value={contextValue}>

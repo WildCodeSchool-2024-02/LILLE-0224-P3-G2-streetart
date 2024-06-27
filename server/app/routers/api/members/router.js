@@ -14,13 +14,13 @@ const {
   editMemberById,
 } = require("../../../controllers/memberActions");
 
-const { hashPassword, verifyToken } = require("../../../services/auth")
+const { hashPassword, verifyToken, verifyProfileAccess } = require("../../../services/auth")
 
 // Route to get a list of members
 router.get("/ranked", browseRanking);
 
 // Route to get a member by ID
-router.get("/:id", verifyToken, browseMemberById);
+router.get("/:id", verifyToken, verifyProfileAccess, browseMemberById);
 
 // Route to get a new member
 router.post("/new-member", hashPassword, createMember);
