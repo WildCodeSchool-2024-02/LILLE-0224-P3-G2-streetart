@@ -1,3 +1,4 @@
+import EditIcon from "@mui/icons-material/Edit";
 import { useLoaderData, Link } from "react-router-dom";
 import { useBadges } from "../contexts/GlobalContext";
 import "./styles/Profile.css";
@@ -5,8 +6,6 @@ import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 
 function Profile() {
   const { member, memberArtworks } = useLoaderData();
-
-  const hidePassword = (password) => "*".repeat(password.length);
 
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(member.points);
@@ -19,24 +18,20 @@ function Profile() {
           key={`${member.firstName} ${member.lastName}`}
         >
           <div className="top-profile">
-            <div className="img-profile">
-              <img
-                className="image-profile"
-                src={
-                  member.avatar
-                    ? member.avatar
-                    : "../../public/assets/images/icons/profile.png"
-                }
-                alt="profil"
-              />
-              <p className="pseudo-profile">{member.pseudo}</p>
-            </div>
+            <img
+              className="image-profile"
+              src={
+                member.avatar
+                  ? member.avatar
+                  : "../../public/assets/images/icons/profile.png"
+              }
+              alt="profil"
+            />
+
             <div className="points-edit-mobile">
-              <img
-                className="edit-profile"
-                src="/assets/images/icons/edit.png"
-                alt="crayon pour modifier les infos du profil"
-              />
+              <Link to={`/profil/edit/${member.id_member}`}>
+                <EditIcon style={{ color: "#666", fontSize: 35 }} />
+              </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
                 <p>{member.points} points</p>
@@ -45,24 +40,18 @@ function Profile() {
           </div>
           <div className="info-desktop">
             <div className="info-profile">
+              <p>{member.pseudo}</p>
               <p>
-                {member.firstName} {member.lastName}
+                {member.firstname} {member.lastname}
               </p>
               <p>{member.email}</p>
               <p>
                 {member.postcode} {member.city}
               </p>
-              <p>{hidePassword(member.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
               <Link to={`/profil/edit/${member.id_member}`}>
-                <div>
-                  <img
-                    className="edit-profile-desktop"
-                    src="/assets/images/icons/edit.png"
-                    alt="crayon pour modifier les infos du profil"
-                  />
-                </div>
+                <EditIcon style={{ color: "#666", fontSize: 35 }} />
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
