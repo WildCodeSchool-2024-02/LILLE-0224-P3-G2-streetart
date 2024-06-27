@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import myAxios from "../../services/myAxios";
-import { useBadges } from "../../contexts/GlobalContext";
+import { useBadges } from "../../contexts/BadgeContext";
 import "./Top3.css";
 
 function Top3() {

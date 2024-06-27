@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 
-const GlobalContext = createContext();
+const BadgeContext = createContext();
 
 export function BadgeProvider({ children }) {
   const badges = [
@@ -25,13 +25,13 @@ export function BadgeProvider({ children }) {
       badges,
       getBadgeForPoints,
     }),
-    [badges]
+    [badges, getBadgeForPoints]
   );
 
   return (
-    <GlobalContext.Provider value={memoBadgeValue}>
+    <BadgeContext.Provider value={memoBadgeValue}>
       {children}
-    </GlobalContext.Provider>
+    </BadgeContext.Provider>
   );
 }
 
@@ -39,4 +39,4 @@ BadgeProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useBadges = () => useContext(GlobalContext);
+export const useBadges = () => useContext(BadgeContext);

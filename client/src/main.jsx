@@ -91,18 +91,6 @@ const router = createBrowserRouter([
       {
         path: "/profil/:id",
         element: <Profile />,
-        loader: async ({ params }) => {
-          // 2 API calls, 1 for artworks of member, 1 for member informations
-          const [artworksResponse, membersResponse] = await Promise.all([
-            myAxios.get(`/api/artworks/profile/${params.id}`),
-            myAxios.get(`/api/members/${params.id}`),
-          ]);
-
-          const memberArtworks = artworksResponse.data;
-          const member = membersResponse.data;
-
-          return { memberArtworks, member };
-        },
       },
       {
         path: "/profil/edit/:id",

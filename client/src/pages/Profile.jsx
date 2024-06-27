@@ -1,22 +1,53 @@
-import { useLoaderData, Link } from "react-router-dom";
-import { useBadges } from "../contexts/GlobalContext";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useBadges } from "../contexts/BadgeContext";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
+import myAxios from "../services/myAxios";
 
 function Profile() {
-  const { member, memberArtworks } = useLoaderData();
+  const { id } = useParams();
+  const { auth } = useAuth();
+  const [ artworks, setArtworks ] = useState([]);
+  const [ profile, setProfile ] = useState();
 
   const hidePassword = (password) => "*".repeat(password.length);
+
+  useEffect(
+    () => {
+      const getData = async () => {
+        const [artworksResponse, membersResponse] = await Promise.all([
+          myAxios.get(`/api/artworks/profile/${id}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            }
+          }),
+          myAxios.get(`/api/members/${id}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            }
+          }),
+        ]);
+  
+        setArtworks(artworksResponse.data);
+        setProfile(membersResponse.data);
+        
+      }
+
+      getData();
+    }, [auth.token, id]
+  )
 
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(member.points);
 
   return (
     <div className="profile-container">
-      {member && (
+      {profile && (
         <div
           className="my-profile"
-          key={`${member.firstName} ${member.lastName}`}
+          key={`${profile.firstName} ${profile.lastName}`}
         >
           <div className="top-profile">
             <div className="img-profile">
@@ -29,7 +60,7 @@ function Profile() {
                 }
                 alt="profil"
               />
-              <p className="pseudo-profile">{member.pseudo}</p>
+              <p className="pseudo-profile">{profile.pseudo}</p>
             </div>
             <div className="points-edit-mobile">
               <img
@@ -39,20 +70,20 @@ function Profile() {
               />
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{member.points} points</p>
+                <p>{profile.points} points</p>
               </div>
             </div>
           </div>
           <div className="info-desktop">
             <div className="info-profile">
               <p>
-                {member.firstName} {member.lastName}
+                {profile.firstName} {profile.lastName}
               </p>
-              <p>{member.email}</p>
+              <p>{profile.email}</p>
               <p>
-                {member.postcode} {member.city}
+                {profile.postcode} {profile.city}
               </p>
-              <p>{hidePassword(member.pwd)}</p>
+              <p>{hidePassword(profile.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
               <Link to={`/profil/edit/${member.id_member}`}>
@@ -66,7 +97,7 @@ function Profile() {
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{member.points} point</p>
+                <p>{profile.points} point</p>
               </div>
             </div>
           </div>
@@ -78,13 +109,15 @@ function Profile() {
           <h2>Mes oeuvres</h2>
         </div>
         <div className="artworks-profile">
-          {memberArtworks.length > 0 ? (
-            memberArtworks.slice(0, 4).map((memberArtwork, index) => (
+          {profile && artworks.length > 0 ? (
+            artworks.slice(0, 4).map((artwork, index) => (
               <div
-                key={memberArtwork.id_artwork}
+                key={artwork.id_artwork}
                 className={index === 3 ? "artwork4" : "artwork-profile"}
               >
-                <ArtworkCard artwork={memberArtwork} />
+                <Link to={`/oeuvre/${artwork.id_artwork_fk}`}>
+                  <ArtworkCard artwork={artwork} />
+                </Link>
               </div>
             ))
           ) : (

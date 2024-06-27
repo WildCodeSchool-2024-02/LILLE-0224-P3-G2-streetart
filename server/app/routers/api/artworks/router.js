@@ -9,6 +9,8 @@ const router = express.Router();
 // Import item-related actions
 const { browse, browseMemberArtwork, read, add } = require("../../../controllers/artworkActions");
 
+const { verifyToken } = require("../../../services/auth")
+
 // Route to get a list of artworks
 router.get("/", browse);
 
@@ -16,7 +18,7 @@ router.get("/", browse);
 router.get("/:id", read)
 
 // Route to get a list of artwork of the profile
-router.get("/profile/:id", browseMemberArtwork);
+router.get("/profile/:id", verifyToken, browseMemberArtwork);
 
 // Route to add a new artwork
 router.post("/", add);
