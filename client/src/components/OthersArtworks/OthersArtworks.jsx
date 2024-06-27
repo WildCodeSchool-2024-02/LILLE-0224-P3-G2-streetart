@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import ArtworkCard from "../ArtworkCard/ArtworkCard";
 import myAxios from "../../services/myAxios";
@@ -31,7 +32,9 @@ function OthersArtworks({ artworkDisplayed }) {
       <h3 className="others-title">À découvrir </h3>
       <div className="img-othersartworks">
         {randomArtworks.slice(0, 7).map((randomArtwork) => (
-          <ArtworkCard artwork={randomArtwork} key={randomArtwork.id} />
+          <Link to={`/oeuvre/${randomArtwork.id_artwork}`} key={randomArtwork.id_artwork}>
+            <ArtworkCard artwork={randomArtwork} />
+          </Link>
         ))}
       </div>
     </div>

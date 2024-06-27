@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useBadges } from "../contexts/GlobalContext";
+import { useBadges } from "../contexts/BadgeContext";
 import myAxios from "../services/myAxios";
 import "./styles/ProfileEdition.css";
 
