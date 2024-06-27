@@ -1,0 +1,29 @@
+.menu-list {
+  background-color: var(--white);
+  color: var(--black);
+  font-size: 0.8em;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  width: 100%;
+  bottom: -5.65rem;
+  left: 0;
+  right: 0;
+  box-shadow: var(--shadow-container);
+  cursor: pointer;
+}
+
+.menu-item {
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+}
+
+.menu-item:hover {
+  background-color: rgba(194, 194, 194, 0.2);
+}

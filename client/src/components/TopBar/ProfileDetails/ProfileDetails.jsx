@@ -1,14 +1,19 @@
 import "./ProfileDetails.css"
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
+import MenuList from "../../MenuList/MenuList";
 
 function ProfileDetails() {
 
     const { auth } = useAuth();
+    const [ openMenuList, setOpenMenuList ] = useState(false);
+
+    const handleClick = () => {
+        setOpenMenuList(!openMenuList)
+    }
 
     return (
-        <div className="profile-details">
-            <Link to={`/profil/${auth.account.id_member}`}>     
+        <button type="button" onClick={handleClick} className="profile-details" id={openMenuList && "is-open"}>
                 <div className="profile-picture">
                     {auth.account.avatar ?
                         <img src={auth.account.avatar} alt={`Avatar de ${auth.account.pseudo}`} />
@@ -16,11 +21,9 @@ function ProfileDetails() {
                         <img src="/assets/images/icons/profile.png" alt={`Avatar de ${auth.account.pseudo}`} />
                     }
                 </div>
-            </Link>
-            <Link to={`/profil/${auth.account.id_member}`}> 
                 <p className="profile-info"><span id="pseudo">{auth.account.pseudo}</span>{auth.account.points}<span><img src="/assets/images/icons/coin.png" alt="Jetons" id="coin" /></span></p>
-            </Link>
-        </div>
+        { openMenuList && <MenuList setOpenMenuList={setOpenMenuList} /> }    
+        </button>
     )
 }
 
