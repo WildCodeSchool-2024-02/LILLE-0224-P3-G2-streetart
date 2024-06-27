@@ -11,9 +11,11 @@ function Profile() {
   const { auth } = useAuth();
   const [ artworks, setArtworks ] = useState([]);
   const [ profile, setProfile ] = useState();
-
+  
   const hidePassword = (password) => "*".repeat(password.length);
-
+  const { getBadgeForPoints } = useBadges();
+  const ownBadge = getBadgeForPoints(profile && profile.points);
+  
   useEffect(
     () => {
       const getData = async () => {
@@ -29,18 +31,15 @@ function Profile() {
             }
           }),
         ]);
-  
         setArtworks(artworksResponse.data);
         setProfile(membersResponse.data);
         
       }
-
+      
       getData();
     }, [auth.token, id]
   )
-
-  const { getBadgeForPoints } = useBadges();
-  const ownBadge = getBadgeForPoints(member.points);
+  
 
   return (
     <div className="profile-container">
@@ -54,8 +53,8 @@ function Profile() {
               <img
                 className="image-profile"
                 src={
-                  member.avatar
-                    ? member.avatar
+                  profile.avatar
+                    ? profile.avatar
                     : "../../public/assets/images/icons/profile.png"
                 }
                 alt="profil"
@@ -86,7 +85,7 @@ function Profile() {
               <p>{hidePassword(profile.pwd)}</p>
             </div>
             <div className="points-edit-desktop">
-              <Link to={`/profil/edit/${member.id_member}`}>
+              <Link to={`/profil/edit/${profile.id_member}`}>
                 <div>
                   <img
                     className="edit-profile-desktop"
