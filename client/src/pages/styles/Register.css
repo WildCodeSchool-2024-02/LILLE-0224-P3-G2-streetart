@@ -23,6 +23,12 @@
   font-size: 0.8rem;
 }
 
+.error {
+  padding-top: 1rem;
+  margin-bottom: -1.3rem;
+  text-align: center;
+}
+
 .register-title {
   display: none;
 }
