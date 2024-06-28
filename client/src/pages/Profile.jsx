@@ -62,7 +62,7 @@ function Profile() {
               <p className="pseudo-profile">{profile.pseudo}</p>
             </div>
             <div className="points-edit-mobile">
-              <Link to={`/profil/edit/${member.id_member}`}>
+              <Link to={`/profil/edit/${profile.id_member}`}>
                 <EditIcon style={{ color: "#666", fontSize: 35 }} />
               </Link>
               <div className="level-points">

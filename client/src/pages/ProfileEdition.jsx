@@ -1,22 +1,46 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState,useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-import { useBadges } from "../contexts/BadgeContext";
+import { useAuth } from "../contexts/AuthContext";
 import myAxios from "../services/myAxios";
 import "./styles/ProfileEdition.css";
 
 function ProfileEdition() {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { member } = useLoaderData();
+  const { auth } = useAuth();
 
-  const [editedCity, setEditedCity] = useState(member.city);
-  const [editedPostcode, setEditedPostcode] = useState(member.postcode);
-  const [editedEmail, setEditedEmail] = useState(member.email);
+  const [ member, setMember ] = useState();
+  
+  const [editedCity, setEditedCity] = useState("");
+  const [editedPostcode, setEditedPostcode] = useState("");
+  const [editedEmail, setEditedEmail] = useState("");
   const [editedPwd, setEditedPwd] = useState("");
   const [confEditedPwd, setConfEditedPwd] = useState("");
+  
+  useEffect (
+    () => {
+      const getData = async () => {
+        const [membersResponse] = await Promise.all([
+          myAxios.get(`/api/members/${id}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            }
+          }),
+        ]);
+
+        setMember(membersResponse.data)
+        setEditedCity(member.city)
+        setEditedPostcode(member.postcode)
+        setEditedEmail(member.email)
+      }
+
+      getData();
+    }, [auth.token, id, member.city, member.email, member.postcode]
+  )
 
   const [isSubmit, setIsSubmit] = useState(false);
-
+  
   const [editPwd, setEditPwd] = useState(false);
 
   const [samePwd, setSamePwd] = useState("");
