@@ -1,18 +1,38 @@
 import "./styles/Homepage.css";
 import { Link, useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 import RoadMap from "./RoadMap";
 import Top3 from "../components/Top3/Top3";
 import RankingHomepage from "../components/RankingHomepage/RankingHomepage";
+import PopupRules from "../components/PopupRules/PopupRules";
 
 function Homepage() {
+
   const artworkIsValidate = useLoaderData();
+  const [ showPopup, setShowPopup ] = useState();
+
+  useEffect(
+    () => {
+
+      const getCookie = () => {
+        const cookie = Cookies.get("popupSLA");
+        if(cookie === "dont-show") {
+          setShowPopup(false)
+        } else {
+          setShowPopup(true)
+        }
+      }
+
+      getCookie();
+      
+    }, []
+  )
 
   return (
     <div className="homepage-container">
-      <Link to="/a-propos" className="btn link-homepage">
-        COMMENT ÇA MARCHE ?
-      </Link>
+      {showPopup && <PopupRules setShowPopup={setShowPopup} />}
       <div className="news-homepage">
         <h3 className="titles-homepage">Les nouveautés</h3>
         <div className="artworks-homepage">
