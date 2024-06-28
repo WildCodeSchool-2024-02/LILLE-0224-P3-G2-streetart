@@ -11,10 +11,13 @@
   height: 100%;
   border-radius: 5px;
   position: relative;
+  cursor: pointer;
 }
 
 .profile-details#is-open {
   background-color: rgba(194, 194, 194, 0.2);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .profile-details:hover {

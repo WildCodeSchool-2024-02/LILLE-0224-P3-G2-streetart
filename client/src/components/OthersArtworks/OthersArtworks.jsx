@@ -42,7 +42,7 @@ function OthersArtworks({ artworkDisplayed }) {
 }
 
 OthersArtworks.propTypes = {
-  artworkDisplayed: PropTypes.string.isRequired,
+  artworkDisplayed: PropTypes.number.isRequired,
 };
 
 export default OthersArtworks;
