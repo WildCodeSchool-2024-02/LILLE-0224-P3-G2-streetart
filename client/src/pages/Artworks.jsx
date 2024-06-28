@@ -40,7 +40,7 @@ function ArtworkCardWithAnimation({ artwork, index }) {
 
 ArtworkCardWithAnimation.propTypes = {
   artwork: PropTypes.shape({
-    id_artwork: PropTypes.string.isRequired,
+    id_artwork: PropTypes.number.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };

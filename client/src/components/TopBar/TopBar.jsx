@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function TopBar ({ title }) {
 
-    const { auth } = useAuth();
+    const { auth } = useAuth(); 
 
     return (
         <>

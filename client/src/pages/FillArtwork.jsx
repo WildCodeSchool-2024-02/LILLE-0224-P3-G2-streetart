@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { NewArtworkProvider } from "../contexts/NewArtworkContext";
+import { AuthProvider } from "../contexts/AuthContext";
 
 function FillArtwork() {
     return (
-            <NewArtworkProvider>
-                <Outlet />
-            </NewArtworkProvider>
+            <AuthProvider>
+                <NewArtworkProvider>
+                    <Outlet />
+                </NewArtworkProvider>
+            </AuthProvider>
     )
 }
 
