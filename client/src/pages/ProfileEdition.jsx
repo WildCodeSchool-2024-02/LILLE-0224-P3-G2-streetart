@@ -1,5 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
 import { useBadges } from "../contexts/BadgeContext";
 import myAxios from "../services/myAxios";
 import "./styles/ProfileEdition.css";
@@ -8,15 +9,33 @@ function ProfileEdition() {
   const navigate = useNavigate();
   const { member } = useLoaderData();
 
-  const { getBadgeForPoints } = useBadges();
-  const ownBadge = getBadgeForPoints(member.points);
-
   const [editedCity, setEditedCity] = useState(member.city);
   const [editedPostcode, setEditedPostcode] = useState(member.postcode);
   const [editedEmail, setEditedEmail] = useState(member.email);
-  const [editedPwd, setEditedPwd] = useState(member.pwd);
+  const [editedPwd, setEditedPwd] = useState("");
+  const [confEditedPwd, setConfEditedPwd] = useState("");
 
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const [editPwd, setEditPwd] = useState(false);
+
+  const [samePwd, setSamePwd] = useState("");
+  const [pwdVisible, setPwdVisible] = useState(false);
+  const [confPwdVisible, setConfPwdVisible] = useState(false);
+
+  // TOGGLE EDIT PASSWORD
+  const toggleEditPwd = () => {
+    setEditPwd(!editPwd);
+  };
+
+  // TOGGLE VISIBILITY PASSWORD
+  const toggleVisibilityPwd = () => {
+    setPwdVisible(!pwdVisible);
+  };
+
+  const toggleVisibilityConf = () => {
+    setConfPwdVisible(!confPwdVisible);
+  };
 
   const handleUpdateProfile = async (e) => {
     // connection to complete DB with new informations
@@ -31,6 +50,16 @@ function ProfileEdition() {
           pwd: editedPwd,
         }
       );
+
+      if (editedPwd !== "") {
+        // PASSWORD VERIFICATION
+        if (editedPwd !== confEditedPwd) {
+          setSamePwd("Les mots de passe ne correspondent pas");
+          return;
+        }
+        setSamePwd("");
+      }
+
       console.info("Modifications enregistrées", response.data);
       setIsSubmit(true);
       setTimeout(() => {
@@ -59,51 +88,134 @@ function ProfileEdition() {
               alt="profil"
             />
           </div>
-
-          <p className="modify-profil">{member.pseudo}</p>
-          <p className="modify-profil">{member.firstname}</p>
-          <p className="modify-profil">{member.lastname}</p>
-          <div className="modify-profil">
+          <div className="modify-profil-container">
+            <p className="modify-profil">{member.pseudo}</p>
+            <p className="modify-profil">{member.firstname}</p>
+            <p className="modify-profil">{member.lastname}</p>
+          </div>
+          <div className="field input-default modify-profil-input">
             <div>
+              <label htmlFor="city">Ville</label>
               <input
                 type="text"
                 value={editedCity}
                 onChange={(e) => setEditedCity(e.target.value)}
+                className="input-default-edit input-default "
               />
+              <div className="line" />
             </div>
           </div>
-          <div className="modify-profil">
+          <div className="field input-default modify-profil-input">
             <div>
+              <label htmlFor="postcode">Code Postal</label>
               <input
                 type="text"
                 value={editedPostcode}
                 onChange={(e) => setEditedPostcode(e.target.value)}
+                className="input-default-edit input-default"
               />
+              <div className="line" />
             </div>
           </div>
-          <div className="modify-profil">
+          <div className="field input-default modify-profil-input">
             <div>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
                 value={editedEmail}
                 onChange={(e) => setEditedEmail(e.target.value)}
+                className="input-default-edit input-default"
               />
+              <div className="line" />
             </div>
           </div>
-          <div className="modify-profil">
+          <div className="edit-password-pen">
             <div>
-              <input
-                type="text"
-                value={editedPwd}
-                onChange={(e) => setEditedPwd(e.target.value)}
-              />
+              <button
+                type="button"
+                className="pwd-modify-btn"
+                onClick={toggleEditPwd}
+              >
+                <p className="pwd-modify-btn-text">
+                  Modifier mon mot de passe{" "}
+                </p>
+                <EditIcon style={{ color: "#666", fontSize: 25 }} />
+              </button>
             </div>
+            {editPwd && (
+              <div className="pwd-edit">
+                <div className="field input-default modify-profil-input-pwd">
+                  <input
+                    type={pwdVisible ? "text" : "password"}
+                    name="pwd"
+                    className="input-default "
+                    placeholder="Mot de passe"
+                    maxLength="25"
+                    value={editedPwd}
+                    onChange={(e) => setEditedPwd(e.target.value)}
+                    required
+                  />
+                  <div className="line" />
+                  <div className="password-visible">
+                    {pwdVisible ? (
+                      <img
+                        src="/assets/images/icons/oeil-barre.png"
+                        className="eye-pwd"
+                        role="presentation"
+                        onClick={toggleVisibilityPwd}
+                        alt="oeil barré pour cacher le mot de passe"
+                      />
+                    ) : (
+                      <img
+                        src="/assets/images/icons/oeil-ouvert.png"
+                        className="eye-pwd"
+                        role="presentation"
+                        onClick={toggleVisibilityPwd}
+                        alt="oeil ouvert pour afficher le mot de passe"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="field input-default modify-profil-input-pwd">
+                  <input
+                    type={confPwdVisible ? "text" : "password"}
+                    name="confPwd"
+                    className="input-default"
+                    placeholder="Confirmer le mot de passe"
+                    maxLength="25"
+                    value={confEditedPwd}
+                    onChange={(e) => setConfEditedPwd(e.target.value)}
+                    required
+                  />
+                  <div className="password-visible">
+                    {confPwdVisible ? (
+                      <img
+                        src="/assets/images/icons/oeil-barre.png"
+                        className="eye-pwd"
+                        role="presentation"
+                        onClick={toggleVisibilityConf}
+                        alt="oeil barré pour cacher le mot de passe"
+                      />
+                    ) : (
+                      <img
+                        src="/assets/images/icons/oeil-ouvert.png"
+                        className="eye-pwd"
+                        role="presentation"
+                        onClick={toggleVisibilityConf}
+                        alt="oeil ouvert pour afficher le mot de passe"
+                      />
+                    )}
+                  </div>
+                  <div className="line" />
+                </div>
+                {samePwd && <div className="error-message">{samePwd}</div>}
+              </div>
+            )}
           </div>
-          <p className="modify-profil">{ownBadge ? ownBadge.logo : ""}</p>
-          <p className="modify-profil">{member.points} points</p>
           {isSubmit ? <p>Modifications enregistrées</p> : ""}
         </div>
       )}
+
       <button
         type="submit"
         className="btn btn-modifications"

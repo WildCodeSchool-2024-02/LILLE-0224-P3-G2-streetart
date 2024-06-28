@@ -1,3 +1,5 @@
+
+import EditIcon from "@mui/icons-material/Edit";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
@@ -12,7 +14,6 @@ function Profile() {
   const [ artworks, setArtworks ] = useState([]);
   const [ profile, setProfile ] = useState();
   
-  const hidePassword = (password) => "*".repeat(password.length);
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(profile && profile.points);
   
@@ -62,11 +63,9 @@ function Profile() {
               <p className="pseudo-profile">{profile.pseudo}</p>
             </div>
             <div className="points-edit-mobile">
-              <img
-                className="edit-profile"
-                src="/assets/images/icons/edit.png"
-                alt="crayon pour modifier les infos du profil"
-              />
+              <Link to={`/profil/edit/${member.id_member}`}>
+                <EditIcon style={{ color: "#666", fontSize: 35 }} />
+              </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
                 <p>{profile.points} points</p>
@@ -75,24 +74,18 @@ function Profile() {
           </div>
           <div className="info-desktop">
             <div className="info-profile">
+              <p>{profile.pseudo}</p>
               <p>
                 {profile.firstName} {profile.lastName}
               </p>
               <p>{profile.email}</p>
               <p>
                 {profile.postcode} {profile.city}
-              </p>
-              <p>{hidePassword(profile.pwd)}</p>
+              </p>          
             </div>
             <div className="points-edit-desktop">
               <Link to={`/profil/edit/${profile.id_member}`}>
-                <div>
-                  <img
-                    className="edit-profile-desktop"
-                    src="/assets/images/icons/edit.png"
-                    alt="crayon pour modifier les infos du profil"
-                  />
-                </div>
+              <EditIcon style={{ color: "#666", fontSize: 35 }} />
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
