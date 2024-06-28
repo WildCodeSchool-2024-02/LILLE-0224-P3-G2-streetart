@@ -3,7 +3,6 @@ import "./styles/Register.css";
 import myAxios from "../services/myAxios";
 
 function Register() {
-
   const [formData, setFormData] = useState({
     pseudo: "",
     lastname: "",
@@ -16,53 +15,86 @@ function Register() {
     date: "",
   });
 
-  useEffect(
-    () => {
-      const getDate = () => {
-        // */////////////////////////////// Get the date of the day formated for BDD ////////////////////////////*
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const day = today.getDate();
-        const formattedMonth = month < 10 ? `0${month}` : month;
-        const formattedDay = day < 10 ? `0${day}` : day;
-        const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          date: formattedDate
-        }));
-      }
-      
-      getDate()
-    }, []
-  )
-
+  // TO CHECK PASSWORDS ARE CORRECTLY WRITTEN
   const [samePwd, setSamePwd] = useState("");
 
+  // TO HIDE AND SHOW PASSWORDS
   const [pwdVisible, setPwdVisible] = useState("password");
   const [confPwdVisible, setConfPwdVisible] = useState("password");
 
+  // TO GET CITIES WITH THE POSTCODE
+  const [cities, setCities] = useState([]);
+
+  // ERROR MESSAGE FOR WRONG EMAIL
+  const [emailError, setEmailError] = useState("");
+
+  // */////////////////////////////// Get the date of the day formatted for BDD ////////////////////////////*
+  useEffect(() => {
+    const getDate = () => {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      const formattedMonth = month < 10 ? `0${month}` : month;
+      const formattedDay = day < 10 ? `0${day}` : day;
+      const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        date: formattedDate,
+      }));
+    };
+
+    getDate();
+  }, []);
+
   // TOGGLE VISIBILITY PASSWORD
   const toggleVisibilityPwd = () => {
-    if (pwdVisible === "password") {
-      setPwdVisible("text");
-    } else {
-      setPwdVisible("password")
-    }
+    setPwdVisible(pwdVisible === "password" ? "text" : "password");
   };
 
   const toggleVisibilityConf = () => {
-    if (confPwdVisible === "password") {
-      setConfPwdVisible("text");
-    } else {
-      setConfPwdVisible("password")
-    }
+    setConfPwdVisible(confPwdVisible === "password" ? "text" : "password");
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // TO VERIFY AN EMAIL
+    if (name === "email") {
+      const emailPattern = /^[^\s][\w-]+(\.[\w-]+)*@([\w-]+\.)+[\w-]{2,3}$/;
+      setEmailError(emailPattern.test(value) ? "" : "Adresse email invalide");
+    }
+
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
+  // POSTCODE TO CITY
+  const handlePostCodeChange = async (e) => {
+    const newPostCode = e.target.value;
+    setFormData((prevFormData) => ({ ...prevFormData, postcode: newPostCode }));
+
+    if (newPostCode.length === 5) {
+      try {
+        const response = await fetch(
+          `https://api.zippopotam.us/fr/${newPostCode}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const places = data.places.map((place) => place["place name"]);
+          setCities(places);
+          setFormData((prevFormData) => ({ ...prevFormData, city: places[0] }));
+        } else {
+          setCities([]);
+          setFormData((prevFormData) => ({ ...prevFormData, city: "" }));
+        }
+      } catch (error) {
+        setCities([]);
+        setFormData((prevFormData) => ({ ...prevFormData, city: "" }));
+      }
+    }
+  };
+
+  // TO CREATE A NEW MEMBER ACCOUNT/SEND DATA TO DDB
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -76,7 +108,6 @@ function Register() {
     try {
       const response = await myAxios.post("/api/members/new-member", formData);
       console.info("Profil enregistré", response.data);
-      // Redirect or other actions after successful registration
     } catch (error) {
       console.error("Erreur", error);
     }
@@ -101,6 +132,7 @@ function Register() {
             name="pseudo"
             className="input-default"
             placeholder="Pseudo"
+            maxLength="15"
             value={formData.pseudo}
             onChange={handleChange}
             required
@@ -133,45 +165,54 @@ function Register() {
           />
           <div className="line" />
         </div>
-
-        <div className="field">
-          <input
-            type="email"
-            name="email"
-            className="input-default"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <div className="line" />
-        </div>
-
-        <div className="field">
-          <input
-            type="number"
-            name="postcode"
-            className="input-default"
-            placeholder="Code Postal"
-            maxLength="5"
-            size={5}
-            value={formData.postcode}
-            onChange={handleChange}
-            required
-          />
-          <div className="line" />
+        <div className="email">
+          <div className="field">
+            <input
+              type="email"
+              name="email"
+              className="input-default"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <div className="line" />
+          </div>
+          <div className="error">
+            {emailError && <div style={{ color: "red" }}>{emailError}</div>}
+          </div>
         </div>
 
         <div className="field">
           <input
             type="text"
+            name="postcode"
+            className="input-default"
+            placeholder="Code Postal"
+            maxLength="5"
+            value={formData.postcode}
+            onChange={handlePostCodeChange}
+            required
+          />
+          <div className="line" />
+        </div>
+
+        <div className="field">
+          <select
+            type="select"
             name="city"
             className="input-default"
             placeholder="Ville"
             value={formData.city}
             onChange={handleChange}
             required
-          />
+          >
+            {cities.map((city) => (
+              <option key={city.id} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
           <div className="line" />
         </div>
 
@@ -188,23 +229,21 @@ function Register() {
           />
           <div className="line" />
           <div className="password-visible">
-            {pwdVisible === "text" ? (
-              <img
-                src="/assets/images/icons/oeil-barre.png"
-                className="eye-pwd"
-                role="presentation"
-                onClick={toggleVisibilityPwd}
-                alt="oeil barré pour cacher le mot de passe"
-              />
-            ) : (
-              <img
-                src="/assets/images/icons/oeil-ouvert.png"
-                className="eye-pwd"
-                role="presentation"
-                onClick={toggleVisibilityPwd}
-                alt="oeil ouvert pour afficher le mot de passe"
-              />
-            )}
+            <img
+              src={
+                pwdVisible === "text"
+                  ? "/assets/images/icons/oeil-barre.png"
+                  : "/assets/images/icons/oeil-ouvert.png"
+              }
+              className="eye-pwd"
+              role="presentation"
+              onClick={toggleVisibilityPwd}
+              alt={
+                pwdVisible === "text"
+                  ? "oeil barré pour cacher le mot de passe"
+                  : "oeil ouvert pour afficher le mot de passe"
+              }
+            />
           </div>
         </div>
 
@@ -220,23 +259,21 @@ function Register() {
             required
           />
           <div className="password-visible">
-            {confPwdVisible === "text" ? (
-              <img
-                src="/assets/images/icons/oeil-barre.png"
-                className="eye-pwd"
-                role="presentation"
-                onClick={toggleVisibilityConf}
-                alt="oeil barré pour cacher le mot de passe"
-              />
-            ) : (
-              <img
-                src="/assets/images/icons/oeil-ouvert.png"
-                className="eye-pwd"
-                role="presentation"
-                onClick={toggleVisibilityConf}
-                alt="oeil ouvert pour afficher le mot de passe"
-              />
-            )}
+            <img
+              src={
+                confPwdVisible === "text"
+                  ? "/assets/images/icons/oeil-barre.png"
+                  : "/assets/images/icons/oeil-ouvert.png"
+              }
+              className="eye-pwd"
+              role="presentation"
+              onClick={toggleVisibilityConf}
+              alt={
+                confPwdVisible === "text"
+                  ? "oeil barré pour cacher le mot de passe"
+                  : "oeil ouvert pour afficher le mot de passe"
+              }
+            />
           </div>
           <div className="line" />
         </div>
