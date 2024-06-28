@@ -1,6 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
+import { useBadges } from "../contexts/BadgeContext";
 import myAxios from "../services/myAxios";
 import "./styles/ProfileEdition.css";
 

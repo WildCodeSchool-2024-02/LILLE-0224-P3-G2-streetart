@@ -25,6 +25,11 @@ const uploadRouter = require("./upload/router")
 
 router.use("/upload", uploadRouter);
 
+// ROAD TO LOGIN
+const authActions = require("../../controllers/authActions");
+
+router.post("/login", authActions.login);
+
 /* ************************************************************************* */
 
 module.exports = router;

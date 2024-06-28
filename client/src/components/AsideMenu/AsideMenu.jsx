@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./AsideMenu.css";
 
 function AsideMenu() {
+
   return (
     <aside className="aside-menu-container">
       <div className="aside-menu" role="presentation">
@@ -10,7 +11,6 @@ function AsideMenu() {
           <Link to="/oeuvres">Oeuvres</Link>
           <Link to="/carte">Carte</Link>
           <Link to="/classement">Classement</Link>
-          <Link to="/profil/2">Profil</Link>
         </div>
         <div className="aside-menu-bottom">
           <Link to="/a-propos">A propos</Link>

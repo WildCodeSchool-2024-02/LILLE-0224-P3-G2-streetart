@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles/Register.css";
 import myAxios from "../services/myAxios";
 
 function Register() {
+
   const [formData, setFormData] = useState({
     pseudo: "",
     lastname: "",
@@ -12,20 +13,50 @@ function Register() {
     city: "",
     pwd: "",
     confPwd: "",
+    date: "",
   });
+
+  useEffect(
+    () => {
+      const getDate = () => {
+        // */////////////////////////////// Get the date of the day formated for BDD ////////////////////////////*
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        const formattedMonth = month < 10 ? `0${month}` : month;
+        const formattedDay = day < 10 ? `0${day}` : day;
+        const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          date: formattedDate
+        }));
+      }
+      
+      getDate()
+    }, []
+  )
 
   const [samePwd, setSamePwd] = useState("");
 
-  const [pwdVisible, setPwdVisible] = useState(false);
-  const [confPwdVisible, setConfPwdVisible] = useState(false);
+  const [pwdVisible, setPwdVisible] = useState("password");
+  const [confPwdVisible, setConfPwdVisible] = useState("password");
 
   // TOGGLE VISIBILITY PASSWORD
   const toggleVisibilityPwd = () => {
-    setPwdVisible(!pwdVisible);
+    if (pwdVisible === "password") {
+      setPwdVisible("text");
+    } else {
+      setPwdVisible("password")
+    }
   };
 
   const toggleVisibilityConf = () => {
-    setConfPwdVisible(!confPwdVisible);
+    if (confPwdVisible === "password") {
+      setConfPwdVisible("text");
+    } else {
+      setConfPwdVisible("password")
+    }
   };
 
   const handleChange = (e) => {
@@ -146,7 +177,7 @@ function Register() {
 
         <div className="field field-password input-default">
           <input
-            type={pwdVisible ? "text" : "password"}
+            type={pwdVisible}
             name="pwd"
             className="input-default"
             placeholder="Mot de passe"
@@ -157,7 +188,7 @@ function Register() {
           />
           <div className="line" />
           <div className="password-visible">
-            {pwdVisible ? (
+            {pwdVisible === "text" ? (
               <img
                 src="/assets/images/icons/oeil-barre.png"
                 className="eye-pwd"
@@ -179,7 +210,7 @@ function Register() {
 
         <div className="field field-password input-default">
           <input
-            type={confPwdVisible ? "text" : "password"}
+            type={confPwdVisible}
             name="confPwd"
             className="input-default"
             placeholder="Confirmer le mot de passe"
@@ -189,7 +220,7 @@ function Register() {
             required
           />
           <div className="password-visible">
-            {confPwdVisible ? (
+            {confPwdVisible === "text" ? (
               <img
                 src="/assets/images/icons/oeil-barre.png"
                 className="eye-pwd"

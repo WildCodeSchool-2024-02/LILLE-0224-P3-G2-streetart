@@ -1,26 +1,30 @@
 import "./ProfileDetails.css"
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { useState } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
+import MenuList from "../../MenuList/MenuList";
 
-function ProfileDetails({ avatar, pseudo, points }) {
+function ProfileDetails() {
+
+    const { auth } = useAuth();
+    const [ openMenuList, setOpenMenuList ] = useState(false);
+
+    const handleClick = () => {
+        setOpenMenuList(!openMenuList)
+    }
+
     return (
-        <div className="profile-details">
-            <Link to="/profil">     
+        <button type="button" onClick={handleClick} className="profile-details" id={openMenuList && "is-open"}>
                 <div className="profile-picture">
-                    <img src={avatar} alt="" />
+                    {auth.account.avatar ?
+                        <img src={auth.account.avatar} alt={`Avatar de ${auth.account.pseudo}`} />
+                        :
+                        <img src="/assets/images/icons/profile.png" alt={`Avatar de ${auth.account.pseudo}`} />
+                    }
                 </div>
-            </Link>
-            <Link to="/profil"> 
-                <p className="profile-info"><span id="pseudo">{pseudo}</span> ( {points} <span><img src="/assets/images/icons/coin.png" alt="Jetons" id="coin" /></span> )</p>
-            </Link>
-        </div>
+                <p className="profile-info"><span id="pseudo">{auth.account.pseudo}</span>{auth.account.points}<span><img src="/assets/images/icons/coin.png" alt="Jetons" id="coin" /></span></p>
+        { openMenuList && <MenuList setOpenMenuList={setOpenMenuList} /> }    
+        </button>
     )
 }
-
-ProfileDetails.propTypes = {
-    avatar: PropTypes.string.isRequired,
-    pseudo: PropTypes.string.isRequired,
-    points: PropTypes.number.isRequired
-  };
 
 export default ProfileDetails;

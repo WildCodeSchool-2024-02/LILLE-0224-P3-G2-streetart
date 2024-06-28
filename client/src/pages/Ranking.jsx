@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import "./styles/Ranking.css";
-import { useBadges } from "../contexts/GlobalContext";
+import { useBadges } from "../contexts/BadgeContext";
 
 function Ranking() {
   const rankingData = useLoaderData();

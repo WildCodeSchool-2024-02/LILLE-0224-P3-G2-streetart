@@ -28,8 +28,8 @@ class MemberRepository extends AbstractRepository {
 
       // SECOND CONNECTION: Insert the account into the "account" table
       await connection.query(
-        `INSERT INTO account (email, pwd, id_member_fk, assignment) VALUES (?, ?, ?, ?)`,
-        [member.email, member.pwd, memberId, "user"]
+        `INSERT INTO account (email, pwd, id_member_fk, assignment, date_creation) VALUES (?, ?, ?, ?, ?)`,
+        [member.email, member.pwd, memberId, "user", member.date]
       );
 
       // CONNECTION => COMMIT, ROLLBACK, RELEASE
