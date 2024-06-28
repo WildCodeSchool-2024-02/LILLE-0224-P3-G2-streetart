@@ -51,4 +51,15 @@ const hashPassword = async (req, res, next) => {
     }
   };
 
-  module.exports= {hashPassword, verifyToken};
+  const verifyProfileAccess = (req, res, next) => {
+    const userId = req.auth.sub; // Assuming 'sub' is the user ID in the token payload
+    const profileId = parseInt(req.params.id, 10); // Assuming the URL is /profil/:id
+
+    if (userId !== profileId) {
+      return res.sendStatus(403);
+    }  
+  
+    return next();
+  };
+
+  module.exports= {hashPassword, verifyToken, verifyProfileAccess};

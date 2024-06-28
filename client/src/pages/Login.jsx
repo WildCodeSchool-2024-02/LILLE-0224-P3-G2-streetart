@@ -1,9 +1,9 @@
+import Cookies from "js-cookie";
 import { useNavigate, Link } from "react-router-dom"
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./styles/Login.css";
 import myAxios from "../services/myAxios";
-
 
 function Login() {
 
@@ -52,11 +52,10 @@ function Login() {
           const { token, account } = response.data;
 
           // Store the token and account information in localStorage
-          localStorage.setItem('authToken', token);
-          localStorage.setItem('account', JSON.stringify(account));
-  
+          Cookies.set('authToken', token, { expires: 1 / 24 }); // Expires in 1 hour
+          Cookies.set('account', JSON.stringify(account), { expires: 1 / 24 }); // Expires in 1 hour
+          
           setAuth({ token, account });
-  
           navigate(`/profil/${account.id_member}`);
         } else {
           console.info(response);

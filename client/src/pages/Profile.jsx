@@ -34,7 +34,6 @@ function Profile() {
         ]);
         setArtworks(artworksResponse.data);
         setProfile(membersResponse.data);
-        
       }
       
       getData();
