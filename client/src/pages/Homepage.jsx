@@ -10,9 +10,6 @@ function Homepage() {
 
   return (
     <div className="homepage-container">
-      <Link to="/a-propos" className="btn link-homepage">
-        COMMENT ÇA MARCHE ?
-      </Link>
       <div className="news-homepage">
         <h3 className="titles-homepage">Les nouveautés</h3>
         <div className="artworks-homepage">

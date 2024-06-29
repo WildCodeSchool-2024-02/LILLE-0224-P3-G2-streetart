@@ -5,12 +5,6 @@
   justify-content: space-evenly;
 }
 
-.link-homepage {
-  width: 75%;
-  font-size: 1rem;
-  margin: 0 auto;
-}
-
 .titles-homepage {
   text-align: center;
   font-size: 1.5rem;
@@ -56,20 +50,16 @@
 
 /* ************************* DESKTOP VERSION **************************/
 @media screen and (min-width: 768px) {
-  .link-homepage {
-    width: 25%;
-    font-size: 1.2rem;
-  }
-
   .titles-homepage {
     font-size: 2rem;
-    padding-top: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
   }
 
   .artworks-homepage {
     justify-content: space-evenly;
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: 0;
   }
 
   .artworks-news-homepage .artwork-card {
@@ -89,7 +79,6 @@
   .roadmap-homepage {
     width: 35vw;
     height: 20vw;
-    margin: 1rem 0;
   }
 
   .ranking-homepage {
@@ -101,7 +90,7 @@
   }
 
   .ranking-homepage .rank-container {
-    padding: 0.5rem 0;
+    padding: 0;
   }
 
   .top3-mobile {
