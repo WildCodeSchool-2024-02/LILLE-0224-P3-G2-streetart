@@ -42,6 +42,10 @@
   justify-content: space-evenly;
 }
 
+.deny-btn {
+  background-image: linear-gradient(#e4261c, #f60b0b);
+}
+
 @media screen and (min-width: 768px) {
   .artworkNV-container {
     height: 90%;
