@@ -17,13 +17,13 @@ class ArtworkRepository extends AbstractRepository {
       // FIRST CONNECTION: Insert the member into the "artwork" table
       const [artworkResult] = await connection.query(
         `insert into ${this.table} (title, picture, date_creation, longitude, latitude) values (?, ?, ?, ?, ?)`,
-      [
-        artwork.title,
-        artwork.picture,
-        artwork.date_creation,
-        artwork.longitude,
-        artwork.latitude,
-      ]
+        [
+          artwork.title,
+          artwork.picture,
+          artwork.date_creation,
+          artwork.longitude,
+          artwork.latitude,
+        ]
       );
 
       const artworkId = artworkResult.insertId;
@@ -31,7 +31,13 @@ class ArtworkRepository extends AbstractRepository {
       // SECOND CONNECTION: Insert the account into the "operation" table
       await connection.query(
         `INSERT INTO operation (kind, details, date_operation, id_account_fk, id_artwork_fk) VALUES (?, ?, ?, ?, ?)`,
-        ["ajout", "Nouvelle oeuvre" ,artwork.date_creation, artwork.id_account_fk, artworkId]
+        [
+          "ajout",
+          "Nouvelle oeuvre",
+          artwork.date_creation,
+          artwork.id_account_fk,
+          artworkId,
+        ]
       );
 
       // CONNECTION => COMMIT, ROLLBACK, RELEASE

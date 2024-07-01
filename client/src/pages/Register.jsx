@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/Register.css";
 import myAxios from "../services/myAxios";
 
 function Register() {
-
   const [formData, setFormData] = useState({
     pseudo: "",
     lastname: "",
@@ -16,26 +16,26 @@ function Register() {
     date: "",
   });
 
-  useEffect(
-    () => {
-      const getDate = () => {
-        // */////////////////////////////// Get the date of the day formated for BDD ////////////////////////////*
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = today.getMonth() + 1;
-        const day = today.getDate();
-        const formattedMonth = month < 10 ? `0${month}` : month;
-        const formattedDay = day < 10 ? `0${day}` : day;
-        const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          date: formattedDate
-        }));
-      }
-      
-      getDate()
-    }, []
-  )
+  useEffect(() => {
+    const getDate = () => {
+      // */////////////////////////////// Get the date of the day formated for BDD ////////////////////////////*
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      const formattedMonth = month < 10 ? `0${month}` : month;
+      const formattedDay = day < 10 ? `0${day}` : day;
+      const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        date: formattedDate,
+      }));
+    };
+
+    getDate();
+  }, []);
+
+  const navigate = useNavigate();
 
   const [samePwd, setSamePwd] = useState("");
 
@@ -47,7 +47,7 @@ function Register() {
     if (pwdVisible === "password") {
       setPwdVisible("text");
     } else {
-      setPwdVisible("password")
+      setPwdVisible("password");
     }
   };
 
@@ -55,7 +55,7 @@ function Register() {
     if (confPwdVisible === "password") {
       setConfPwdVisible("text");
     } else {
-      setConfPwdVisible("password")
+      setConfPwdVisible("password");
     }
   };
 
@@ -76,7 +76,7 @@ function Register() {
     try {
       const response = await myAxios.post("/api/members/new-member", formData);
       console.info("Profil enregistré", response.data);
-      // Redirect or other actions after successful registration
+      navigate(`/connexion`);
     } catch (error) {
       console.error("Erreur", error);
     }
