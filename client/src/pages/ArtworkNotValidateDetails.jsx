@@ -1,4 +1,5 @@
 import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import myAxios from "../services/myAxios";
 import "./styles/ArtworkNotValidateDetails.css";
 
@@ -6,6 +7,7 @@ function ArtworksNVNotValidateDetails() {
   const navigate = useNavigate();
   const artworksNV = useLoaderData();
 
+  // VALIDATE A NEW ARTWORK
   const handleValidate = async () => {
     // Validate if necessary properties are present
 
@@ -27,6 +29,7 @@ function ArtworksNVNotValidateDetails() {
     }
   };
 
+  // DENY A NEW ARTWORK
   const handleDeny = async () => {
     try {
       const response = await myAxios.delete(
@@ -38,6 +41,22 @@ function ArtworksNVNotValidateDetails() {
       console.error("Erreur", error);
     }
   };
+
+  // GET THE ADRESS
+  const [city, setCity] = useState(null);
+
+  // StreetMap API for get the adress with latitude and longitude
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artworksNV.latitude}&lon=${artworksNV.longitude}&zoom=10&addressdetails=1`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.address) {
+        setCity(data.address.city || data.address.town || data.address.village);
+      } else {
+        setCity("inconnu");
+      }
+    });
 
   return (
     <div className="artworkNV-container">
@@ -51,18 +70,34 @@ function ArtworksNVNotValidateDetails() {
         alt={artworksNV.title}
       />
       <div className="artworkNVDetails-info">
-        <p className="focus-text">
-          Ajoutée par :
-          <Link to={`/profile/${artworksNV.id_member}`}>
-            {artworksNV.pseudo}
-          </Link>
-        </p>
+        <h5 className="title-info">Informations sur l'oeuvre :</h5>
+        <div className="user">
+          <p>Ajoutée par :</p>
+
+          <p className="focus-text pseudo">
+            <Link to={`/profile/${artworksNV.id_member}`}>
+              {artworksNV.pseudo}
+            </Link>
+          </p>
+        </div>
+        <div className="city">
+          <p>Ville : </p>
+          <p className="focus-text cityname">{city}</p>
+        </div>
+        <div className="date">
+          <p>Le : </p>
+          <p className="focus-text datepic">{artworksNV.date_creation}</p>
+        </div>
       </div>
       <div className="artworksNVDetails-btn">
-        <button type="button" onClick={handleValidate} className="validate-btn">
+        <button
+          type="button"
+          onClick={handleValidate}
+          className="validate-btn btn"
+        >
           Valider l'oeuvre
         </button>
-        <button type="button" onClick={handleDeny} className="deny-btn">
+        <button type="button" onClick={handleDeny} className="deny-btn btn">
           Refuser l'oeuvre
         </button>
       </div>

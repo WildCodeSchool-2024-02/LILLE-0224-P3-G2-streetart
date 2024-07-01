@@ -129,12 +129,11 @@ const denyNewArtwork = async (req, res, next) => {
     const artwork = await tables.artwork.denyArtwork(req.params.id);
     // If the artwork is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the artwork in JSON format
-    if (artwork == null) {
-      res.sendStatus(404);
-    } else {
-      res.status(200).json(artwork);
-    }
+
+    res.status(200).json(artwork);
+    // }
   } catch (err) {
+    res.sendStatus(404);
     // Pass any errors to the error-handling middleware
     next(err);
   }
