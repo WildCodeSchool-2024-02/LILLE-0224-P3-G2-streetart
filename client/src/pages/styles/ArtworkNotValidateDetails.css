@@ -1,0 +1,41 @@
+.artworkNV-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artworkNV-img {
+  width: 18rem;
+}
+
+.artworkNVDetails-info {
+  background-color: aliceblue;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 18rem;
+}
+
+.artworkNVDetails-info .focus-text {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.artworksNVDetails-btn {
+  width: 18rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+@media screen and (min-width: 768px) {
+  .artworkNV-img {
+    width: 45rem;
+  }
+
+  .artworksNV-title {
+    font-size: 2rem;
+    margin: 1rem;
+  }
+  .artworkNVDetails-info .focus-text {
+    font-size: 1.5rem;
+  }
+}

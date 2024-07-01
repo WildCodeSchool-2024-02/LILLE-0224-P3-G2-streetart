@@ -14,9 +14,13 @@ const {
   editMemberById,
 } = require("../../../controllers/memberActions");
 
-const { hashPassword, verifyToken, verifyProfileAccess } = require("../../../services/auth")
+const {
+  hashPassword,
+  verifyToken,
+  verifyProfileAccess,
+} = require("../../../services/auth");
 
-// Route to get a list of members
+// Route to get a list of members ranked
 router.get("/ranked", browseRanking);
 
 // Route to get a member by ID
