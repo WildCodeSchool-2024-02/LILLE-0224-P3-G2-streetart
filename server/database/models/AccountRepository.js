@@ -22,7 +22,7 @@ class AccountRepository extends AbstractRepository {
   async updateBanAccount(accountUpdate) {
     // Execute the SQL UPDATE query to update a specific category
     const [result] = await this.database.query(
-      `update ${this.table} INNER JOIN member ON ${this.table}.id_member_fk = member.id_member
+      `UPDATE ${this.table} INNER JOIN member ON ${this.table}.id_member_fk = member.id_member
       SET ${this.table}.banned = 1
       WHERE member.id_member = ?`,
       [accountUpdate.id]
