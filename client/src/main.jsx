@@ -17,6 +17,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import ProfileEdition from "./pages/ProfileEdition";
+import RecoverPassword from "./pages/RecoverPassword";
+import PwdEdition from "./pages/PwdEdition";
 
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
@@ -96,6 +98,14 @@ const router = createBrowserRouter([
         path: "/profil/edit/:id",
         element: <ProfileEdition />,
       },
+      {
+        path: "/recuperation-mdp",
+        element: <RecoverPassword />,
+      },
+      {
+        path: "/recuperation-mdp/:token",
+        element: <PwdEdition />,
+      }
     ],
   },
 

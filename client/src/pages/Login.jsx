@@ -1,5 +1,5 @@
-import Cookies from "js-cookie";
 import { useNavigate, Link } from "react-router-dom"
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./styles/Login.css";
@@ -13,6 +13,8 @@ function Login() {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwdVisible, setPwdVisible] = useState("password");
+  const [expiration, setExpiration] = useState("session");
+  const [stayConnected, setStayConnected] = useState(false);
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value)
@@ -30,6 +32,16 @@ function Login() {
       setPwdVisible("password")
     }
   };
+
+  const handleChangeStayConnected = () => {
+    if (stayConnected) {
+      setStayConnected(false)
+      setExpiration("session")
+    } else {
+      setStayConnected(true)
+      setExpiration({ expires: 3560 })
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +64,8 @@ function Login() {
           const { token, account } = response.data;
 
           // Store the token and account information in localStorage
-          Cookies.set('authToken', token, { expires: 1 / 24 }); // Expires in 1 hour
-          Cookies.set('account', JSON.stringify(account), { expires: 1 / 24 }); // Expires in 1 hour
+          Cookies.set('authToken', token, expiration); // Expires in 1 hour
+          Cookies.set('account', JSON.stringify(account), expiration); // Expires in 1 hour
           
           setAuth({ token, account });
           navigate(`/profil/${account.id_member}`);
@@ -66,7 +78,7 @@ function Login() {
 }
 
   return (
-    <div className="login-container">
+      <div className="login-container">
       <div className="login-img-container">
         <img
           className="login-img"
@@ -113,9 +125,16 @@ function Login() {
             )}
           </div>
         </div>
+          <div className="stay-connected">
+            <input type="checkbox" id="stay-connected-checkbox" value={stayConnected} onChange={handleChangeStayConnected} />
+            <label htmlFor="stay-connected-checkbox">Rester connecté</label>
+          </div>
           <button type="submit" className="btn">
             Me connecter
           </button>
+          <Link to="/recuperation-mdp" className="link-recover-pwd">
+            Mot de passe oublié ?
+          </Link>
         </div>
         <div className="inscription-field">
           <Link to="/inscription" className="link-inscription">

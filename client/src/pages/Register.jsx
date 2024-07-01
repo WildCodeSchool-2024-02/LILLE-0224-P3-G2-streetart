@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import "./styles/Register.css";
+import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 import myAxios from "../services/myAxios";
 
 function Register() {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     pseudo: "",
     lastname: "",
@@ -94,6 +99,13 @@ function Register() {
     }
   };
 
+  const [ filledForm, setFilledForm ] = useState(false);
+  const [ captchaVal, setCaptchaVal ] = useState(null);
+
+  const handleChangeCaptcha = (val) => {
+    setCaptchaVal(val)
+  }
+
   // TO CREATE A NEW MEMBER ACCOUNT/SEND DATA TO DDB
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,10 +116,16 @@ function Register() {
       return;
     }
     setSamePwd("");
-
+    setFilledForm(true);
+    if (!captchaVal) return;
     try {
       const response = await myAxios.post("/api/members/new-member", formData);
       console.info("Profil enregistré", response.data);
+      await myAxios.post("/api/mails/welcome", {
+        to: formData.email,
+        name: formData.firstname
+      })
+      navigate("/connexion");
     } catch (error) {
       console.error("Erreur", error);
     }
@@ -122,10 +140,20 @@ function Register() {
           alt="street art représentant un DJ"
         />
       </div>
-
+      {filledForm ?
+        <form className="register-formulaire captcha" onSubmit={handleSubmit}>
+        <h2 className="register-title captcha">Inscription</h2>
+          <div className="captcha-container">
+          <ReCAPTCHA
+          sitekey="6LdvAwQqAAAAADwQFaB-HUAytJjZxlo8ZCxRBbq5"
+          onChange={(val) => handleChangeCaptcha(val)}
+          />
+          <button type="submit" className="btn" disabled={!captchaVal}>Envoyer</button>
+          </div>
+        </form>
+      :
       <form className="register-formulaire" onSubmit={handleSubmit}>
         <h2 className="register-title">Inscription</h2>
-
         <div className="field">
           <input
             type="text"
@@ -283,6 +311,8 @@ function Register() {
           M'inscrire
         </button>
       </form>
+      }
+
     </div>
   );
 }
