@@ -9,14 +9,7 @@ function PanelAdmin() {
   useEffect(() => {
     const getData = async () => {
       const [membersResponse] = await Promise.all([
-        myAxios.get(
-          `/api/members/date`
-          //   , {
-          //   headers: {
-          //     Authorization: `Bearer ${auth.token}`,
-          //   }
-          // }
-        ),
+        myAxios.get(`/api/members/date`),
       ]);
       setMembers(membersResponse.data);
     };
