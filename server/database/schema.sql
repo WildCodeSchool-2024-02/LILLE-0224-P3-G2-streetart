@@ -35,7 +35,8 @@ CREATE TABLE artwork (
   date_creation DATE NOT NULL,
   longitude DECIMAL(17, 16) NOT NULL, 
   latitude DECIMAL(16, 14) NOT NULL, 
-  validate BOOLEAN NOT NULL DEFAULT false
+  validate BOOLEAN NOT NULL DEFAULT false,
+  reported BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE operation (

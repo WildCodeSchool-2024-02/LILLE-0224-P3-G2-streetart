@@ -4,11 +4,14 @@ import "./styles/ArtworkDetails.css";
 import OthersArtworks from "../components/OthersArtworks/OthersArtworks";
 import RoadMapDetails from "../components/RoadMapDetails/RoadMapDetails";
 import { useBadges } from "../contexts/BadgeContext";
+import myAxios from "../services/myAxios";
 
 function ArtworkDetails() {
   const artwork = useLoaderData();
 
   const [city, setCity] = useState(null);
+
+  const [message, setMessage] = useState("");
 
   // StreetMap API for get the adress with latitude and longitude
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artwork.latitude}&lon=${artwork.longitude}&zoom=10&addressdetails=1`;
@@ -37,6 +40,19 @@ function ArtworkDetails() {
     } else if (image.msRequestFullscreen) {
       // IE/Edge
       image.msRequestFullscreen();
+    }
+  };
+
+  // TO REPORT AN ARTWORK
+  const handleClick = async () => {
+    try {
+      const response = await myAxios.post(
+        `/api/artworks/${artwork.id_artwork}/report`
+      );
+      console.info("Oeuvre signalée", response.data);
+      setMessage("Oeuvre signalée");
+    } catch (error) {
+      console.error("Erreur", error);
     }
   };
 
@@ -95,9 +111,17 @@ function ArtworkDetails() {
           </div>
 
           <div className="artworkdetails-reportbtn">
-            <button type="button" className="report-btn">
-              Signaler la disparition de l'oeuvre
-            </button>
+            {!message ? (
+              <button
+                type="button"
+                className="report-btn"
+                onClick={handleClick}
+              >
+                Signaler la disparition de l'oeuvre
+              </button>
+            ) : (
+              <p className="focus-text report-artwork">{message}</p>
+            )}
           </div>
         </div>
       </div>

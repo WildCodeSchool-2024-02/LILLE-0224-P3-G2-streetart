@@ -97,6 +97,11 @@
   font-weight: bold;
 }
 
+.report-artwork {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 @media screen and (min-width: 768px) {
   .artworkdetails-container {
     height: 95%;

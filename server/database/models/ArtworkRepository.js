@@ -17,13 +17,13 @@ class ArtworkRepository extends AbstractRepository {
       // FIRST CONNECTION: Insert the member into the "artwork" table
       const [artworkResult] = await connection.query(
         `insert into ${this.table} (title, picture, date_creation, longitude, latitude) values (?, ?, ?, ?, ?)`,
-      [
-        artwork.title,
-        artwork.picture,
-        artwork.date_creation,
-        artwork.longitude,
-        artwork.latitude,
-      ]
+        [
+          artwork.title,
+          artwork.picture,
+          artwork.date_creation,
+          artwork.longitude,
+          artwork.latitude,
+        ]
       );
 
       const artworkId = artworkResult.insertId;
@@ -31,7 +31,13 @@ class ArtworkRepository extends AbstractRepository {
       // SECOND CONNECTION: Insert the account into the "operation" table
       await connection.query(
         `INSERT INTO operation (kind, details, date_operation, id_account_fk, id_artwork_fk) VALUES (?, ?, ?, ?, ?)`,
-        ["ajout", "Nouvelle oeuvre" ,artwork.date_creation, artwork.id_account_fk, artworkId]
+        [
+          "ajout",
+          "Nouvelle oeuvre",
+          artwork.date_creation,
+          artwork.id_account_fk,
+          artworkId,
+        ]
       );
 
       // CONNECTION => COMMIT, ROLLBACK, RELEASE
@@ -85,6 +91,16 @@ class ArtworkRepository extends AbstractRepository {
     WHERE ac.id_member_fk=(?)
     ORDER BY a.id_artwork DESC;`,
       [id]
+    );
+
+    return rows;
+  }
+
+  async reportArtwork(id) {
+    // Execute the SQL SELECT query to retrieve all artworks from the account
+    const [rows] = await this.database.query(
+      `UPDATE artwork SET reported = ? WHERE id_artwork = ?`,
+      [1, id]
     );
 
     return rows;
