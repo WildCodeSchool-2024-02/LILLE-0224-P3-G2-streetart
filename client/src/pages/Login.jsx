@@ -15,6 +15,7 @@ function Login() {
   const [pwdVisible, setPwdVisible] = useState("password");
   const [expiration, setExpiration] = useState("session");
   const [stayConnected, setStayConnected] = useState(false);
+  const [connexionError, setConnexionError] = useState("");
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value)
@@ -74,6 +75,7 @@ function Login() {
         }
       } catch (err) {
         console.error(err);
+        setConnexionError(err.response.data.message)
       }
 }
 
@@ -136,6 +138,7 @@ function Login() {
             Mot de passe oublié ?
           </Link>
         </div>
+        {connexionError && <p style={{color: "red"}}>{connexionError}</p>}
         <div className="inscription-field">
           <Link to="/inscription" className="link-inscription">
             Pas encore inscrit ? C'est par ici

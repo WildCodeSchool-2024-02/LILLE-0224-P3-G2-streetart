@@ -5,38 +5,40 @@ const jwt = require("jsonwebtoken");
 const tables = require("../../database/tables");
 
 const login = async (req, res, next) => {
+  try {
+    // Fetch a specific user from the database based on the provided email
+    const account = await tables.account.readByEmail(req.body.email);
+
+    if (!account) {
+      return res.status(400).json({ message: "Votre adresse mail ou votre mot de passe est incorrect." });
+    }
+
+    const verified = await argon2.verify(account.pwd, req.body.pwd);
+
+    if (!verified) {
+      return res.status(400).json({ message: "Votre adresse mail ou votre mot de passe est incorrect." });
+    }
     
-    try {
-        // Fetch a specific user from the database based on the provided email
-        const account = await tables.account.readByEmail(req.body.email);
-        const verified = await argon2.verify(account.pwd, req.body.pwd);
+    // Respond with the user in JSON format (but without the hashed password)
+    delete account.pwd;
+    
+    const token = jwt.sign(
+      // PAYLOAD
+      { sub: account.id_member_fk },
+      process.env.APP_SECRET,
+      { expiresIn: "1h" }
+    );
 
-        if (verified) {
-        // Respond with the user in JSON format (but without the hashed password)
-        delete account.pwd;
-        
-        const token = await jwt.sign(
-          // PAYLOAD
-            { sub: account.id_member_fk },
-            process.env.APP_SECRET,
-            {
-              expiresIn: "1h",
-            }
-          );
-        
-          res.json({
-            token,
-            account,
-          });
-      } else {
-        res.sendStatus(422);
-      }    
-
+    return res.json({
+      token,
+      account,
+    });
   } catch (err) {
     // Pass any errors to the error-handling middleware
-    next(err);
+    return next(err);
   }
 };
+
 
 // Recover Password
 const generateResetPwdToken = async (req, res, next) => {

@@ -38,9 +38,15 @@ const sendEmailWelcome = async (req, res, next) => {
     <head>
         <meta charset="UTF-8">
         <title>Bienvenue chez Spot Lille Art</title>
-        <style>
+                <style>
+            .quicksand {
+                font-family: "Quicksand", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+            }
             body {
-                font-family: Arial, sans-serif;
+                font-family: "Quicksand", sans-serif;
                 background-color: #f6f6f6;
                 margin: 0;
                 padding: 0;
@@ -117,10 +123,22 @@ const sendEmailRecoverPwd = async (req, res, next) => {
     <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet"
+        />
         <title>Récupération de mot de passe</title>
         <style>
+            .quicksand {
+                font-family: "Quicksand", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+            }
             body {
-                font-family: Arial, sans-serif;
+                font-family: "Quicksand", sans-serif;
                 background-color: #f6f6f6;
                 margin: 0;
                 padding: 0;

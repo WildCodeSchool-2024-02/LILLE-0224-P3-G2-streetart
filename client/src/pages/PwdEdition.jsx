@@ -11,6 +11,7 @@ function PwdEdition() {
     const [status, setStatus] = useState("");
     const [editionSent, setEditionSent] = useState(false);
     const [errorEdition, setErrorEdition] = useState(false);
+    const [pwdError, setPwdError] = useState("");
 
     useEffect(
         () => {
@@ -33,7 +34,11 @@ function PwdEdition() {
 
     const handleChangePwd = (e) => {
         setPwd(e.target.value)
+        
+        const pwdPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        setPwdError(pwdPattern.test(pwd) ? "" : "Votre mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule, un chiffre et un caractère spécial.");
     }
+    
 
     const handleChangeConfPwd = (e) => {
         setConfPwd(e.target.value)
@@ -41,6 +46,11 @@ function PwdEdition() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(pwdError !== "") {
+            setStatus("Votre mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule, un chiffre et un caractère spécial.");
+            return
+        }
 
         if(pwd === confPwd) {
             try {
@@ -74,20 +84,21 @@ function PwdEdition() {
             />
             </div>
             {editionSent ?
-            <h2>{status} {errorEdition && <Link to="/contact">support.</Link>}</h2>
+            <h2 className="status-recover">{status} {errorEdition && <Link to="/contact">support.</Link>}</h2>
             :
             <form onSubmit={handleSubmit} className="login-formulaire">
                 <h2 className="login-title">Récupération de mot de passe</h2>
                 <div className="field">
-                    <input className="input-default" type="text" value={pwd} onChange={handleChangePwd} placeholder="Saisissez votre nouveau mot de passe"/>
+                    <input className="input-default" type="password" value={pwd} onChange={handleChangePwd} placeholder="Saisissez votre nouveau mot de passe"/>
                     <div className="line"/>
                 </div>
                 <div className="field">
-                    <input className="input-default" type="text" value={confPwd} onChange={handleChangeConfPwd} placeholder="Confirmez votre nouveau mot de passe"/>
+                    <input className="input-default" type="password" value={confPwd} onChange={handleChangeConfPwd} placeholder="Confirmez votre nouveau mot de passe"/>
                     <div className="line"/>
                 </div>
-                <button type="submit" className="btn">Confirmer</button>
-                {status && <p>{status}</p>}
+                {pwdError && <p className="error-message recover">{pwdError}</p>}
+                <button type="submit" className="btn" disabled={pwdError !== ""}>Confirmer</button>
+                {status && <p className="error-message recover">{status}</p>}
             </form>
             }
         </div>

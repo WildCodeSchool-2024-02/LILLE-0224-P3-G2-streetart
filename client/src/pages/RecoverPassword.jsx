@@ -50,8 +50,8 @@ function RecoverPassword() {
             </div>
             {emailSent ?
             <div className="login-formulaire">                
-                <h2>{status}</h2>
-            </div>
+                <h2 className="status-recover">{status}</h2>
+            </div>  
             :
             <form onSubmit={handleSubmit} className="login-formulaire">
                 <h2 className="login-title">Mot de passe oublié</h2>
@@ -64,7 +64,7 @@ function RecoverPassword() {
                     <div className="line"/>
                 </div>
                 <button type="submit" className="btn">Confirmer</button>
-                {status && <p>{status}</p>}
+                {status && <p className="error-message recover">{status}</p>}
             </form>
             }
         </div>

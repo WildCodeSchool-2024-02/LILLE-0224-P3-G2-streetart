@@ -33,6 +33,9 @@ function Register() {
   // ERROR MESSAGE FOR WRONG EMAIL
   const [emailError, setEmailError] = useState("");
 
+  // ERROR MESSAGE FOR WRONG PASSWORD
+  const [pwdError, setPwdError] = useState("");
+
   // */////////////////////////////// Get the date of the day formatted for BDD ////////////////////////////*
   useEffect(() => {
     const getDate = () => {
@@ -68,6 +71,11 @@ function Register() {
     if (name === "email") {
       const emailPattern = /^[^\s][\w-]+(\.[\w-]+)*@([\w-]+\.)+[\w-]{2,3}$/;
       setEmailError(emailPattern.test(value) ? "" : "Adresse email invalide");
+    }
+
+    else if (name === "pwd") {
+      const pwdPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      setPwdError(pwdPattern.test(value) ? "" : "Votre mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule, un chiffre et un caractère spécial.");
     }
 
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -106,6 +114,8 @@ function Register() {
     setCaptchaVal(val)
   }
 
+  const condition = (pwdError !== "") || (formData.pwd !== formData.confPwd) || (emailError !== "")
+
   // TO CREATE A NEW MEMBER ACCOUNT/SEND DATA TO DDB
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,6 +125,7 @@ function Register() {
       setSamePwd("Les mots de passe ne correspondent pas");
       return;
     }
+    if (condition) return;
     setSamePwd("");
     setFilledForm(true);
     if (!captchaVal) return;
@@ -207,7 +218,7 @@ function Register() {
             <div className="line" />
           </div>
           <div className="error">
-            {emailError && <div style={{ color: "red" }}>{emailError}</div>}
+            {emailError && <p className="error-message">{emailError}</p>}
           </div>
         </div>
 
@@ -274,6 +285,7 @@ function Register() {
             />
           </div>
         </div>
+          {pwdError && <p className="error-message">{pwdError}</p>}
 
         <div className="field field-password input-default">
           <input
@@ -306,7 +318,7 @@ function Register() {
           <div className="line" />
         </div>
 
-        {samePwd && <div className="error-message">{samePwd}</div>}
+        {samePwd && <p className="error-message">{samePwd}</p>}
         <button type="submit" className="btn">
           M'inscrire
         </button>
