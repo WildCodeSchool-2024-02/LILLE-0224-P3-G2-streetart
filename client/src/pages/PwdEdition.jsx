@@ -6,6 +6,7 @@ function PwdEdition() {
 
     const { token } = useParams();
     const navigate = useNavigate();
+    const [pwdVisible, setPwdVisible] = useState("password");
     const [pwd, setPwd] = useState("");
     const [confPwd, setConfPwd] = useState("");
     const [status, setStatus] = useState("");
@@ -31,6 +32,15 @@ function PwdEdition() {
             verifyToken();
         }, [token, navigate]        
     )
+
+    // TOGGLE VISIBILITY PASSWORD
+    const toggleVisibilityPwd = () => {
+        if (pwdVisible === "password") {
+        setPwdVisible("text");
+        } else {
+        setPwdVisible("password")
+        }
+    };
 
     const handleChangePwd = (e) => {
         setPwd(e.target.value)
@@ -88,13 +98,51 @@ function PwdEdition() {
             :
             <form onSubmit={handleSubmit} className="login-formulaire">
                 <h2 className="login-title">Récupération de mot de passe</h2>
-                <div className="field">
-                    <input className="input-default" type="password" value={pwd} onChange={handleChangePwd} placeholder="Saisissez votre nouveau mot de passe"/>
+                <div className="field field-password">
+                    <input className="input-default" type={pwdVisible} value={pwd} onChange={handleChangePwd} placeholder="Saisissez votre nouveau mot de passe"/>
                     <div className="line"/>
+                    <div className="password-visible">
+            {pwdVisible === "text" ? (
+              <img
+                src="/assets/images/icons/oeil-barre.png"
+                className="eye-pwd"
+                role="presentation"
+                onClick={toggleVisibilityPwd}
+                alt="oeil barré pour cacher le mot de passe"
+              />
+            ) : (
+              <img
+                src="/assets/images/icons/oeil-ouvert.png"
+                className="eye-pwd"
+                role="presentation"
+                onClick={toggleVisibilityPwd}
+                alt="oeil ouvert pour afficher le mot de passe"
+              />
+            )}
+          </div>
                 </div>
-                <div className="field">
-                    <input className="input-default" type="password" value={confPwd} onChange={handleChangeConfPwd} placeholder="Confirmez votre nouveau mot de passe"/>
+                <div className="field field-password">
+                    <input className="input-default" type={pwdVisible} value={confPwd} onChange={handleChangeConfPwd} placeholder="Confirmez votre nouveau mot de passe"/>
                     <div className="line"/>
+                    <div className="password-visible">
+            {pwdVisible === "text" ? (
+              <img
+                src="/assets/images/icons/oeil-barre.png"
+                className="eye-pwd"
+                role="presentation"
+                onClick={toggleVisibilityPwd}
+                alt="oeil barré pour cacher le mot de passe"
+              />
+            ) : (
+              <img
+                src="/assets/images/icons/oeil-ouvert.png"
+                className="eye-pwd"
+                role="presentation"
+                onClick={toggleVisibilityPwd}
+                alt="oeil ouvert pour afficher le mot de passe"
+              />
+            )}
+          </div>
                 </div>
                 {pwdError && <p className="error-message recover">{pwdError}</p>}
                 <button type="submit" className="btn" disabled={pwdError !== ""}>Confirmer</button>
