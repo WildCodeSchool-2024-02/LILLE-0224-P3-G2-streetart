@@ -43,9 +43,22 @@ class MemberRepository extends AbstractRepository {
     }
   }
 
-  async readAll() {
+  async readAllMembersByDate() {
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} ORDER BY points DESC`
+      `SELECT m.*, DATE_FORMAT(ac.date_creation, '%d/%m/%Y') AS date_creation, ac.email, ac.banned
+      FROM member AS m
+      INNER JOIN account AS ac ON id_member=id_member_fk
+      ORDER BY date_creation DESC`
+    );
+    return rows;
+  }
+
+  async readAllRanked() {
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} 
+      INNER JOIN account AS ac ON ac.id_member_fk = member.id_member
+      WHERE ac.banned = 0
+      ORDER BY member.points DESC;`
     );
     return rows;
   }

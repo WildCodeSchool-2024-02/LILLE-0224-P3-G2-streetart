@@ -20,8 +20,13 @@ const membersRouter = require("./members/router");
 
 router.use("/members", membersRouter);
 
+// ROAD FOR ACCOUNTS
+const accountsRouter = require("./accounts/router");
+
+router.use("/accounts", accountsRouter);
+
 // ROAD TO UPLOAD
-const uploadRouter = require("./upload/router")
+const uploadRouter = require("./upload/router");
 
 router.use("/upload", uploadRouter);
 
@@ -29,6 +34,16 @@ router.use("/upload", uploadRouter);
 const authActions = require("../../controllers/authActions");
 
 router.post("/login", authActions.login);
+
+// ROAD TO RECOVER PASSWORD
+const recoverRouter = require("./recover/router")
+
+router.use("/recover", recoverRouter);
+
+// ROAD TO SEND MAIL
+const mailRouter = require("./mails/router")
+
+router.use("/mails", mailRouter)
 
 /* ************************************************************************* */
 

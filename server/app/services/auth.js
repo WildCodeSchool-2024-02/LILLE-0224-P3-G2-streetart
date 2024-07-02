@@ -1,5 +1,7 @@
+require('dotenv').config();
 const argon2 = require("argon2")
 const jwt = require("jsonwebtoken");
+
 
 const hashingOptions = {
     type: argon2.argon2id,
@@ -16,7 +18,6 @@ const hashPassword = async (req, res, next) => {
       delete req.body.pwd;
 
       req.body.pwd = hashedPassword;
-  
       next();
     } catch (err) {
       next(err);
@@ -62,4 +63,35 @@ const hashPassword = async (req, res, next) => {
     return next();
   };
 
-  module.exports= {hashPassword, verifyToken, verifyProfileAccess};
+  const verifyResetToken = async (req, res, next) => {
+    try {
+      const { token } = req.params;
+      const secret = process.env.APP_SECRET;
+      const account = jwt.verify(token, secret);
+      if (!account) {
+        return res.status(400).json({ valid: false });
+      }
+      res.status(200).json({ valid: true });
+      return next();
+    } catch (error) {
+      res.status(400).json({ valid: false });
+      console.error('Invalid token:', error);
+      return null;
+    }
+  }
+
+  const verifyTokenRecoverPwd = async (req, res, next) => {
+    try {
+      const { token } = req.params;
+      const { pwd } = req.body;
+      const secret = process.env.APP_SECRET;
+      const payload = jwt.verify(token, secret);
+      req.body = {pwd, id: payload.id};
+      return next();
+    } catch (error) {
+      console.error('Invalid token:', error);
+      return null;
+    }
+  };
+
+  module.exports= {hashPassword, verifyToken, verifyProfileAccess, verifyResetToken, verifyTokenRecoverPwd};

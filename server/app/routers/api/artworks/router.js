@@ -10,15 +10,31 @@ const router = express.Router();
 const {
   browse,
   browseMemberArtwork,
+  updateArtwork,
+  browseArtworksNotValidate,
+  readArtworksNotValidate,
   read,
   add,
-  updateArtwork,
+  validateNewArtwork,
+  denyNewArtwork,
 } = require("../../../controllers/artworkActions");
 
 const { verifyToken } = require("../../../services/auth");
 
 // Route to get a list of artworks
 router.get("/", browse);
+
+// Route to get all artworks not validate
+router.get("/not-validate", browseArtworksNotValidate);
+
+// Route to get artwork by id not validate
+router.get("/not-validate/:id", readArtworksNotValidate);
+
+// Route to validate a new artwork
+router.post("/not-validate/:id/validate", validateNewArtwork);
+
+// Route to deny a new artwork
+router.delete("/not-validate/:id/deny", denyNewArtwork);
 
 // Route to get one specific artwork with user info
 router.get("/:id", read);

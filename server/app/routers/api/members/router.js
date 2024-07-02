@@ -8,15 +8,25 @@ const router = express.Router();
 
 // Import member-related actions
 const {
+  browseMembersByDate,
   browseRanking,
   browseMemberById,
   createMember,
   editMemberById,
 } = require("../../../controllers/memberActions");
 
-const { hashPassword, verifyToken, verifyProfileAccess } = require("../../../services/auth")
+const {
+  hashPassword,
+  verifyToken,
+  verifyProfileAccess,
+} = require("../../../services/auth");
 
-// Route to get a list of members
+
+// Route to get a list of members order by creation date
+router.get("/date", browseMembersByDate);
+
+
+// Route to get a list of members ranked
 router.get("/ranked", browseRanking);
 
 // Route to get a member by ID
