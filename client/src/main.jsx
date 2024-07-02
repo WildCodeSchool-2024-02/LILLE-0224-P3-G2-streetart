@@ -12,19 +12,22 @@ import RoadMap from "./pages/RoadMap";
 import Ranking from "./pages/Ranking";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import PanelAdmin from "./pages/PanelAdmin";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import ProfileEdition from "./pages/ProfileEdition";
-import Admin from "./pages/Admin";
-import ArtworkNotValidateDetails from "./pages/ArtworkNotValidateDetails";
 import RecoverPassword from "./pages/RecoverPassword";
 import PwdEdition from "./pages/PwdEdition";
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
 import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
 import ValidationArtwork from "./pages/ValidationArtwork";
+import Admin from "./pages/Admin/Admin";
+import Members from "./pages/Admin/Members";
+import Statistiques from "./pages/Admin/Statistiques";
+import ArtworksReported from "./pages/Admin/ArtworksReported";
+import ArtworksValidation from "./pages/Admin/ArtworksValidation";
+import ArtworkNotValidateDetails from "./pages/ArtworkNotValidateDetails";
 
 const router = createBrowserRouter([
   {
@@ -36,25 +39,6 @@ const router = createBrowserRouter([
         loader: async () => {
           const response = await myAxios.get("/api/artworks");
           return response.data;
-        },
-      },
-      {
-        path: "/admin",
-        element: <Admin />,
-        loader: async () => {
-          const response = await myAxios.get("api/artworks/not-validate");
-          return response.data;
-        },
-      },
-      {
-        path: "/oeuvre-non-validee/:id",
-        element: <ArtworkNotValidateDetails />,
-        loader: async ({ params }) => {
-          const artworksNV = await myAxios.get(
-            `/api/artworks/not-validate/${params.id}`
-          );
-
-          return artworksNV.data;
         },
       },
       {
@@ -99,10 +83,6 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/admin/panel",
-        element: <PanelAdmin />,
-      },
-      {
         path: "/a-propos",
         element: <About />,
       },
@@ -125,7 +105,7 @@ const router = createBrowserRouter([
       {
         path: "/recuperation-mdp/:token",
         element: <PwdEdition />,
-      }
+      },
     ],
   },
 
@@ -143,6 +123,44 @@ const router = createBrowserRouter([
       {
         path: "/ajouter-oeuvre/validation",
         element: <ValidationArtwork />,
+      },
+    ],
+  },
+  {
+    element: <Admin />,
+    children: [
+      {
+        path: "/admin/statistiques",
+        element: <Statistiques />,
+      },
+      {
+        path: "/admin/membres",
+        element: <Members />,
+      },
+      {
+        path: "/admin/oeuvres-a-valider",
+        element: <ArtworksValidation />,
+        loader: async () => {
+          const artworkNV = await myAxios.get(
+            "api/artworks/admin/not-validate"
+          );
+          return artworkNV.data;
+        },
+      },
+      {
+        path: "/oeuvre-non-validee/:id",
+        element: <ArtworkNotValidateDetails />,
+        loader: async ({ params }) => {
+          const artworksNVD = await myAxios.get(
+            `/api/artworks/admin/not-validate/${params.id}`
+          );
+
+          return artworksNVD.data;
+        },
+      },
+      {
+        path: "/admin/oeuvres-signalees",
+        element: <ArtworksReported />,
       },
     ],
   },

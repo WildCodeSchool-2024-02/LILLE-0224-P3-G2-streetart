@@ -1,9 +1,9 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useState, useEffect } from "react";
-import myAxios from "../services/myAxios";
-import "./styles/PanelAdmin.css";
+import myAxios from "../../services/myAxios";
+import "./Members.css";
 
-function PanelAdmin() {
+function Members() {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
@@ -97,4 +97,4 @@ function PanelAdmin() {
   );
 }
 
-export default PanelAdmin;
+export default Members;
