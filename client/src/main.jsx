@@ -19,7 +19,8 @@ import Profile from "./pages/Profile";
 import ProfileEdition from "./pages/ProfileEdition";
 import Admin from "./pages/Admin";
 import ArtworkNotValidateDetails from "./pages/ArtworkNotValidateDetails";
-
+import RecoverPassword from "./pages/RecoverPassword";
+import PwdEdition from "./pages/PwdEdition";
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
 import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
@@ -117,6 +118,14 @@ const router = createBrowserRouter([
         path: "/profil/edit/:id",
         element: <ProfileEdition />,
       },
+      {
+        path: "/recuperation-mdp",
+        element: <RecoverPassword />,
+      },
+      {
+        path: "/recuperation-mdp/:token",
+        element: <PwdEdition />,
+      }
     ],
   },
 
