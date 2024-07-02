@@ -12,7 +12,6 @@ function ArtworkDetails() {
   const { auth } = useAuth();
 
   const [city, setCity] = useState(null);
-
   const [message, setMessage] = useState("");
 
   // StreetMap API for get the adress with latitude and longitude
@@ -119,7 +118,7 @@ function ArtworkDetails() {
           </div>
 
           <div className="artworkdetails-reportbtn">
-            {!message ? (
+            {artwork.reported === 0 ? (
               <button
                 type="button"
                 className="report-btn"
@@ -128,9 +127,12 @@ function ArtworkDetails() {
                 Signaler la disparition de l'oeuvre
               </button>
             ) : (
-              <p className="focus-text report-artwork">{message}</p>
+              <p className="focus-text report-artwork">
+                En cours de vérification : l'oeuvre a été signalée disparue.
+              </p>
             )}
           </div>
+          <p className="focus-text report-artwork">{message}</p>
         </div>
       </div>
 

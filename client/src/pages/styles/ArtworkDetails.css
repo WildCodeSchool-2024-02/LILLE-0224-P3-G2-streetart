@@ -99,7 +99,8 @@
 
 .report-artwork {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  color: red;
 }
 
 @media screen and (min-width: 768px) {
