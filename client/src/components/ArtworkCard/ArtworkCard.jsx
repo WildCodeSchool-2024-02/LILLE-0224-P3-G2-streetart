@@ -17,7 +17,7 @@ ArtworkCard.propTypes = {
   artwork: PropTypes.shape({
     picture: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    validate: PropTypes.bool.isRequired,
+    validate: PropTypes.number.isRequired,
   }).isRequired,
 };
 

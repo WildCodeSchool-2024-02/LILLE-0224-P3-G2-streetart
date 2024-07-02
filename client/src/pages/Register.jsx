@@ -3,11 +3,12 @@ import "./styles/Register.css";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import myAxios from "../services/myAxios";
+import { useAuth } from "../contexts/AuthContext";
 
 function Register() {
 
   const navigate = useNavigate();
-
+  const { auth } = useAuth();
   const [formData, setFormData] = useState({
     pseudo: "",
     lastname: "",
@@ -19,6 +20,14 @@ function Register() {
     confPwd: "",
     date: "",
   });
+
+  useEffect(
+    () => {
+      if (auth.account) {
+        navigate("/")
+      }
+    }, [auth, navigate]
+  )
 
   // TO CHECK PASSWORDS ARE CORRECTLY WRITTEN
   const [samePwd, setSamePwd] = useState("");

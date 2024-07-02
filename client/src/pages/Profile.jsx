@@ -1,6 +1,6 @@
 
 import EditIcon from "@mui/icons-material/Edit";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useBadges } from "../contexts/BadgeContext";
@@ -9,6 +9,7 @@ import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 import myAxios from "../services/myAxios";
 
 function Profile() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { auth } = useAuth();
   const [ artworks, setArtworks ] = useState([]);
@@ -20,24 +21,32 @@ function Profile() {
   useEffect(
     () => {
       const getData = async () => {
-        const [artworksResponse, membersResponse] = await Promise.all([
-          myAxios.get(`/api/artworks/profile/${id}`, {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            }
-          }),
-          myAxios.get(`/api/members/${id}`, {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            }
-          }),
-        ]);
-        setArtworks(artworksResponse.data);
-        setProfile(membersResponse.data);
+        try {
+          const [artworksResponse, membersResponse] = await Promise.all([
+            myAxios.get(`/api/artworks/profile/${id}`, {
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              }
+            }),
+            myAxios.get(`/api/members/${id}`, {
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              }
+            }),
+          ]);
+
+          setArtworks(artworksResponse.data);
+          setProfile(membersResponse.data);
+          
+        } catch (error) {
+          if (error.response.data.access === "denied") {
+            navigate("/erreur")
+          } 
+        }
       }
       
       getData();
-    }, [auth.token, id]
+    }, [auth.token, id, navigate]
   )
   
 
@@ -105,10 +114,13 @@ function Profile() {
               <div
                 key={artwork.id_artwork}
                 className={index === 3 ? "artwork4" : "artwork-profile"}
-              >
+              > {artwork.validate === 1 ? 
                 <Link to={`/oeuvre/${artwork.id_artwork_fk}`}>
                   <ArtworkCard artwork={artwork} />
                 </Link>
+                :
+                <ArtworkCard artwork={artwork} />
+              }
               </div>
             ))
           ) : (
