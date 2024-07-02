@@ -9,8 +9,9 @@ const router = express.Router();
 // Import item-related actions
 const {
   browse,
-  browseArtworksNotValidate,
   browseMemberArtwork,
+  updateArtwork,
+  browseArtworksNotValidate,
   readArtworksNotValidate,
   read,
   add,
@@ -43,6 +44,9 @@ router.get("/profile/:id", verifyToken, browseMemberArtwork);
 
 // Route to add a new artwork
 router.post("/", add);
+
+// Route to report a new artwork
+router.post("/:id/report", updateArtwork);
 
 /* ************************************************************************* */
 

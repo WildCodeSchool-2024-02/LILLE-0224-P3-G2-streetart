@@ -21,10 +21,10 @@ const add = async (req, res, next) => {
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    // Fetch all items from the database
+    // Fetch all artworks from the database
     const artworks = await tables.artwork.readAll();
 
-    // Respond with the items in JSON format
+    // Respond with the artworks in JSON format
     res.json(artworks);
   } catch (err) {
     // Pass any errors to the error-handling middleware
@@ -32,9 +32,10 @@ const browse = async (req, res, next) => {
   }
 };
 
+
 const browseArtworksNotValidate = async (req, res, next) => {
   try {
-    // Fetch all items from the database
+    // Fetch all artworks from the database
     const artworks = await tables.artwork.readAllArtworksNotValidate();
 
     // Respond with the items in JSON format
@@ -50,8 +51,8 @@ const readArtworksNotValidate = async (req, res, next) => {
     // Fetch a specific category from the database based on the provided ID
     const artwork = await tables.artwork.readArtworksNotValidate(req.params.id);
 
-    // If the category is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the category in JSON format
+    // If the artwork is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the artwork in JSON format
     if (artwork == null) {
       res.sendStatus(404);
     } else {
@@ -65,10 +66,10 @@ const readArtworksNotValidate = async (req, res, next) => {
 
 const browseMemberArtwork = async (req, res, next) => {
   try {
-    // Fetch a specific category from the database based on the provided ID
+    // Fetch a specific artwokr from the database based on the provided ID
     const artworks = await tables.artwork.readAllMemberArtwork(req.params.id);
 
-    // If the category is not found, respond with HTTP 404 (Not Found)
+    // If the artwork is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the category in JSON format
     if (artworks == null) {
       res.sendStatus(404);
@@ -83,11 +84,11 @@ const browseMemberArtwork = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific category from the database based on the provided ID
+    // Fetch a specific artwork from the database based on the provided ID
     const artwork = await tables.artwork.read(req.params.id);
 
-    // If the category is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the category in JSON format
+    // If the artwork is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the artwork in JSON format
     if (artwork == null) {
       res.sendStatus(404);
     } else {
@@ -99,6 +100,31 @@ const read = async (req, res, next) => {
   }
 };
 
+const updateArtwork = async (req, res, next) => {
+  const { dateOperationReport, idAccountFk, idArtwork } = req.body;
+
+  try {
+    // Fetch a specific artwork from the database based on the provided ID
+    const artwork = await tables.artwork.reportArtwork(
+      req.params.id,
+      dateOperationReport,
+      idAccountFk,
+      idArtwork
+    );
+
+    // If the artwork is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the artwork in JSON format
+    if (artwork == null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(artwork);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+    
 const validateNewArtwork = async (req, res, next) => {
   const { dateOperation, idAccount, idMember } = req.body;
   try {
@@ -123,6 +149,7 @@ const validateNewArtwork = async (req, res, next) => {
   }
 };
 
+
 const denyNewArtwork = async (req, res, next) => {
   try {
     // Fetch a specific artwork from the database based on the provided ID
@@ -146,6 +173,7 @@ module.exports = {
   readArtworksNotValidate,
   read,
   add,
+  updateArtwork,
   validateNewArtwork,
   denyNewArtwork,
 };

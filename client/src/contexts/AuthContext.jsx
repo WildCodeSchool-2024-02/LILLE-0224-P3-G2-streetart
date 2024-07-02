@@ -7,15 +7,17 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState({
-    token: Cookies.get('authToken'),
-    account: Cookies.get('account'),
+    token: Cookies.get("authToken"),
+    account: Cookies.get("account"),
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = Cookies.get('authToken');
-    const account = Cookies.get('account') ? JSON.parse(Cookies.get('account')) : null; 
+    const token = Cookies.get("authToken");
+    const account = Cookies.get("account")
+      ? JSON.parse(Cookies.get("account"))
+      : null;
 
     if (token && account) {
       setAuth({ token, account });
@@ -23,18 +25,19 @@ export function AuthProvider({ children }) {
   }, []);
 
   const logout = () => {
-    Cookies.remove('authToken');
-    Cookies.remove('account');
+    Cookies.remove("authToken");
+    Cookies.remove("account");
     setAuth({ token: null, account: null });
-    navigate('/connexion');
+    navigate("/connexion");
   };
 
-  const contextValue = useMemo(() => ({ auth, setAuth, logout }), [auth, logout]);
+  const contextValue = useMemo(
+    () => ({ auth, setAuth, logout }),
+    [auth, logout]
+  );
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
 

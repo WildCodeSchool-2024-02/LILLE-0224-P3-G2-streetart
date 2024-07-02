@@ -117,7 +117,7 @@ class ArtworkRepository extends AbstractRepository {
     FROM artwork AS a
     INNER JOIN operation AS o ON id_artwork_fk=id_artwork
     INNER JOIN account AS ac ON id_account=id_account_fk
-    WHERE ac.id_member_fk=(?)
+    WHERE ac.id_member_fk=(?) AND o.kind="validation"
     ORDER BY a.id_artwork DESC;`,
       [id]
     );
@@ -125,6 +125,47 @@ class ArtworkRepository extends AbstractRepository {
     return rows;
   }
 
+  async reportArtwork(id, dateOperationReport, idAccountFk, idArtwork) {
+    const connection = await this.database.getConnection();
+    try {
+      await connection.beginTransaction();
+
+      // FIRST CONNECTION: Insert the member into the "artwork" table
+      const [artworkReport] = await connection.query(
+        `UPDATE artwork SET reported = ? WHERE id_artwork = ?`,
+        [1, id]
+      );
+
+      const artworkReported = artworkReport.insertId;
+
+      const formattedDateOperationReport = new Date(dateOperationReport)
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
+      
+      // SECOND CONNECTION: Insert the account into the "operation" table
+      await connection.query(
+        `INSERT INTO operation (kind, details, date_operation, id_account_fk, id_artwork_fk) VALUES (?, ?, ?, ?, ?)`,
+        [
+          "signalement",
+          "Oeuvre signalée",
+          formattedDateOperationReport,
+          idAccountFk,
+          idArtwork,
+        ]
+      );
+
+      // CONNECTION => COMMIT, ROLLBACK, RELEASE
+      await connection.commit();
+      return artworkReported; // Return artworkId on success
+    } catch (error) {
+      await connection.rollback();
+      throw error; // Throw error to handle it outside
+    } finally {
+      connection.release();
+    }
+  }
+      
   async validateArtwork(id, dateOperation, idAccount, idMember) {
     const connection = await this.database.getConnection();
 
@@ -142,7 +183,7 @@ class ArtworkRepository extends AbstractRepository {
         .toISOString()
         .slice(0, 19)
         .replace("T", " ");
-
+      
       // SECOND CONNECTION : INSERT THE OPERATION
       await connection.query(
         `INSERT INTO operation (kind, details, date_operation, id_account_fk, id_artwork_fk) VALUES (?, ?, ?, ?, ?)`,
@@ -179,6 +220,7 @@ class ArtworkRepository extends AbstractRepository {
 
     return rows[0];
   }
+
 }
 
 module.exports = ArtworkRepository;
