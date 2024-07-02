@@ -4,10 +4,12 @@ import "./styles/ArtworkDetails.css";
 import OthersArtworks from "../components/OthersArtworks/OthersArtworks";
 import RoadMapDetails from "../components/RoadMapDetails/RoadMapDetails";
 import { useBadges } from "../contexts/BadgeContext";
+import { useAuth } from "../contexts/AuthContext";
 import myAxios from "../services/myAxios";
 
 function ArtworkDetails() {
   const artwork = useLoaderData();
+  const { auth } = useAuth();
 
   const [city, setCity] = useState(null);
 
@@ -47,8 +49,14 @@ function ArtworkDetails() {
   const handleClick = async () => {
     try {
       const response = await myAxios.post(
-        `/api/artworks/${artwork.id_artwork}/report`
+        `/api/artworks/${artwork.id_artwork}/report`,
+        {
+          dateOperationReport: new Date().toISOString(),
+          idAccountFk: auth.account.id_account,
+          idArtwork: artwork.id_artwork,
+        }
       );
+
       console.info("Oeuvre signalée", response.data);
       setMessage("Oeuvre signalée");
     } catch (error) {

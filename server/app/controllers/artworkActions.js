@@ -69,9 +69,16 @@ const read = async (req, res, next) => {
 };
 
 const updateArtwork = async (req, res, next) => {
+  const { dateOperationReport, idAccountFk, idArtwork } = req.body;
+
   try {
     // Fetch a specific artwork from the database based on the provided ID
-    const artwork = await tables.artwork.reportArtwork(req.params.id);
+    const artwork = await tables.artwork.reportArtwork(
+      req.params.id,
+      dateOperationReport,
+      idAccountFk,
+      idArtwork
+    );
 
     // If the artwork is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the artwork in JSON format
