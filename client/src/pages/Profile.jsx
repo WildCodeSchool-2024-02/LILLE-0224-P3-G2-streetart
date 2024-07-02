@@ -1,72 +1,94 @@
-import { useLoaderData, Link } from "react-router-dom";
-import { useBadges } from "../contexts/GlobalContext";
+
+import EditIcon from "@mui/icons-material/Edit";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useBadges } from "../contexts/BadgeContext";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
+import myAxios from "../services/myAxios";
 
 function Profile() {
-  const { member, memberArtworks } = useLoaderData();
-
-  const hidePassword = (password) => "*".repeat(password.length);
-
+  const { id } = useParams();
+  const { auth } = useAuth();
+  const [ artworks, setArtworks ] = useState([]);
+  const [ profile, setProfile ] = useState();
+  
   const { getBadgeForPoints } = useBadges();
-  const ownBadge = getBadgeForPoints(member.points);
+  const ownBadge = getBadgeForPoints(profile && profile.points);
+  
+  useEffect(
+    () => {
+      const getData = async () => {
+        const [artworksResponse, membersResponse] = await Promise.all([
+          myAxios.get(`/api/artworks/profile/${id}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            }
+          }),
+          myAxios.get(`/api/members/${id}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            }
+          }),
+        ]);
+        setArtworks(artworksResponse.data);
+        setProfile(membersResponse.data);
+      }
+      
+      getData();
+    }, [auth.token, id]
+  )
+  
 
   return (
     <div className="profile-container">
-      {member && (
+      {profile && (
         <div
           className="my-profile"
-          key={`${member.firstName} ${member.lastName}`}
+          key={`${profile.firstName} ${profile.lastName}`}
         >
           <div className="top-profile">
             <div className="img-profile">
               <img
                 className="image-profile"
                 src={
-                  member.avatar
-                    ? member.avatar
+                  profile.avatar
+                    ? profile.avatar
                     : "../../public/assets/images/icons/profile.png"
                 }
                 alt="profil"
               />
-              <p className="pseudo-profile">{member.pseudo}</p>
+              <p className="pseudo-profile">{profile.pseudo}</p>
             </div>
             <div className="points-edit-mobile">
-              <img
-                className="edit-profile"
-                src="/assets/images/icons/edit.png"
-                alt="crayon pour modifier les infos du profil"
-              />
+              <Link to={`/profil/edit/${profile.id_member}`}>
+                <EditIcon style={{ color: "#666", fontSize: 35 }} />
+              </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{member.points} points</p>
+                <p>{profile.points} points</p>
               </div>
             </div>
           </div>
           <div className="info-desktop">
             <div className="info-profile">
+              <p>{profile.pseudo}</p>
               <p>
-                {member.firstName} {member.lastName}
+                {profile.firstName} {profile.lastName}
               </p>
-              <p>{member.email}</p>
+              <p>{profile.email}</p>
               <p>
-                {member.postcode} {member.city}
-              </p>
-              <p>{hidePassword(member.pwd)}</p>
+                {profile.postcode} {profile.city}
+              </p>          
             </div>
             <div className="points-edit-desktop">
-              <Link to={`/profil/edit/${member.id_member}`}>
-                <div>
-                  <img
-                    className="edit-profile-desktop"
-                    src="/assets/images/icons/edit.png"
-                    alt="crayon pour modifier les infos du profil"
-                  />
-                </div>
+              <Link to={`/profil/edit/${profile.id_member}`}>
+              <EditIcon style={{ color: "#666", fontSize: 35 }} />
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{member.points} point</p>
+                <p>{profile.points} point</p>
               </div>
             </div>
           </div>
@@ -78,13 +100,15 @@ function Profile() {
           <h2>Mes oeuvres</h2>
         </div>
         <div className="artworks-profile">
-          {memberArtworks.length > 0 ? (
-            memberArtworks.slice(0, 4).map((memberArtwork, index) => (
+          {profile && artworks.length > 0 ? (
+            artworks.slice(0, 4).map((artwork, index) => (
               <div
-                key={memberArtwork.id_artwork}
+                key={artwork.id_artwork}
                 className={index === 3 ? "artwork4" : "artwork-profile"}
               >
-                <ArtworkCard artwork={memberArtwork} />
+                <Link to={`/oeuvre/${artwork.id_artwork_fk}`}>
+                  <ArtworkCard artwork={artwork} />
+                </Link>
               </div>
             ))
           ) : (

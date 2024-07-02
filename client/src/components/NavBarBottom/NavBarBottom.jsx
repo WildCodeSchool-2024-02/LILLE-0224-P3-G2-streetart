@@ -8,28 +8,31 @@ import Camera from '@mui/icons-material/AddAPhoto';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useBurgerMenu } from '../../contexts/BurgerMenuContext';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
-
+import MenuListMobil from '../MenuList/MenuListMobil/MenuListMobil';
 
 export default function FixedBottomNavigation() {
   const [value, setValue] = React.useState(null);
   const ref = React.useRef(null);
+  const [ OpenMenuList, setOpenMenuList ] = useState(false);
 
     const navigate = useNavigate()
 
     const { isMenuOpen, handleOpenMenu } = useBurgerMenu();
 
-  function goToCamera() {
+  const goToCamera = () => {
     navigate("/ajouter-oeuvre/camera")
   }
 
-  function goToProfile() {
-    navigate("/profil/2")
+  const handleClick = () => {
+    setOpenMenuList(!OpenMenuList)
   }
 
   return (
-    <>
+    <div className='navbar-bottom'>
+        {OpenMenuList && <MenuListMobil setOpenMenuList={setOpenMenuList} />}
         {isMenuOpen && <BurgerMenu />}
         <Box sx={{ pb: 7 }} ref={ref}>
         <CssBaseline />
@@ -43,10 +46,10 @@ export default function FixedBottomNavigation() {
             >
             <BottomNavigationAction icon={<Menu fontSize="large" />} onClick={handleOpenMenu}/>
             <BottomNavigationAction icon={<Camera fontSize="large" />} onClick={() => goToCamera()} />
-            <BottomNavigationAction icon={<AccountCircle fontSize="large" />} onClick={() => goToProfile()} />
+            <BottomNavigationAction icon={<AccountCircle fontSize="large" />} onClick={() => handleClick()} />
             </BottomNavigation>
         </Paper>
         </Box>
-    </>
+    </div>
   );
 }

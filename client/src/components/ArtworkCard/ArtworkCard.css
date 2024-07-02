@@ -32,6 +32,20 @@
   color: var(--white);
 }
 
+.artwork-card .artwork-info.not-validated {
+  top: 0;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#not-validated {
+  color: greenyellow;
+  font-weight: 600;
+}
+
 @media screen and (min-width: 768px) {
   .artwork-card {
     width: 16vw;

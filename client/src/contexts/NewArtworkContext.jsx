@@ -3,6 +3,7 @@ import {
     createContext, useContext, useState, useMemo
   } from "react";
   import { useNavigate } from "react-router-dom";
+  import { useAuth } from "./AuthContext";
 import myAxios from "../services/myAxios"
 
   const NewArtworkContext = createContext();
@@ -10,6 +11,8 @@ import myAxios from "../services/myAxios"
   export function NewArtworkProvider({
     children,
   }) {
+
+    const { auth } = useAuth();
 
     const navigate = useNavigate();
 
@@ -76,6 +79,7 @@ import myAxios from "../services/myAxios"
           date_creation: formattedDate,
           longitude,
           latitude,
+          id_account_fk: auth.account.id_account, 
         };
 
         // Post the new artwork

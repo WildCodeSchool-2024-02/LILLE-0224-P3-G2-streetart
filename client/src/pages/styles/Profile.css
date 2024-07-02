@@ -16,10 +16,12 @@
 .top-profile {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .image-profile {
   width: 10rem;
+  height: fit-content;
   border-radius: 50%;
 }
 
@@ -39,10 +41,11 @@
   height: auto;
   padding: 0.4rem;
   text-align: center;
+  width: 5rem;
 }
 
 .points-edit-mobile {
-  height: 20vh;
+  height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -122,6 +125,7 @@
     padding-right: 1.5rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+    align-items: flex-end;
   }
 
   .edit-profile-desktop {

@@ -28,8 +28,8 @@ class MemberRepository extends AbstractRepository {
 
       // SECOND CONNECTION: Insert the account into the "account" table
       await connection.query(
-        `INSERT INTO account (email, pwd, id_member_fk, assignment) VALUES (?, ?, ?, ?)`,
-        [member.email, member.pwd, memberId, "user"]
+        `INSERT INTO account (email, pwd, id_member_fk, assignment, date_creation) VALUES (?, ?, ?, ?, ?)`,
+        [member.email, member.pwd, memberId, "user", member.date]
       );
 
       // CONNECTION => COMMIT, ROLLBACK, RELEASE
@@ -75,11 +75,17 @@ class MemberRepository extends AbstractRepository {
         `UPDATE ${this.table} SET city = ?, postcode = ? WHERE id_member = ?`,
         [memberUpdate.city, memberUpdate.postcode, memberUpdate.id]
       );
-
-      await connection.query(
-        `UPDATE account SET email = ?, pwd = ? WHERE id_member_fk = ? AND assignment = ?`,
-        [memberUpdate.email, memberUpdate.pwd, memberUpdate.id, "user"]
-      );
+      if (memberUpdate.pwd === "") {
+        await connection.query(
+          `UPDATE account SET email = ?  WHERE id_member_fk = ? AND assignment = ?`,
+          [memberUpdate.email, memberUpdate.id, "user"]
+        );
+      } else {
+        await connection.query(
+          `UPDATE account SET email = ?, pwd = ? WHERE id_member_fk = ? AND assignment = ?`,
+          [memberUpdate.email, memberUpdate.pwd, memberUpdate.id, "user"]
+        );
+      }
       // CONNECTION => COMMIT, ROLLBACK, RELEASE
       await connection.commit();
       return memberUpdate; // Return member on success

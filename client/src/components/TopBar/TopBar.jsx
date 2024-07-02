@@ -1,10 +1,14 @@
 import "./TopBar.css"
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-// import ProfileDetails from "./ProfileDetails/ProfileDetails";
+import ProfileDetails from "./ProfileDetails/ProfileDetails";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 function TopBar ({ title }) {
+
+    const { auth } = useAuth(); 
+
     return (
         <>
             <div className="top-bar mobile">
@@ -24,19 +28,23 @@ function TopBar ({ title }) {
                         </h2>
                     </Link>
                 </div>
-                <div className="right-container">
-                    <Link to="/inscription">
-                        <button type="button" className="register-btn btn">
-                            Inscription
-                        </button>
-                    </Link>
-                    <Link to="/connexion">
-                        <button type="button" className="login-btn btn">
-                            Connexion
-                        </button>
-                    </Link>
-                </div>
-                {/* <ProfileDetails avatar="/assets/images/icons/profile.png" pseudo="iSayZ" points={3000}/> */}
+                {
+                    auth.account ? 
+                    <ProfileDetails />
+                    :
+                    <div className="right-container">
+                        <Link to="/inscription">
+                            <button type="button" className="register-btn btn">
+                                Inscription
+                            </button>
+                        </Link>
+                        <Link to="/connexion">
+                            <button type="button" className="login-btn btn">
+                                Connexion
+                            </button>
+                        </Link>
+                    </div>
+                }
             </div>
         </>
     )

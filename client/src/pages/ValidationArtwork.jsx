@@ -13,7 +13,7 @@ function ValidationArtwork() {
   useEffect(() => {
     setTimeout(() => {
       setLoader(false);
-    }, 5000);
+    }, 3000);
   }, []);
 
   const navigateToHome = () => {
