@@ -1,8 +1,20 @@
 const tables = require("../../database/tables");
 
+
+// The B of BREAD - Browse (Read All) operation
+const browseMembersByDate = async (req, res, next) => {
+  try {
+    const members = await tables.member.readAllMembersByDate();
+    res.json(members);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 const browseRanking = async (req, res, next) => {
   try {
-    const members = await tables.member.readAll();
+    const members = await tables.member.readAllRanked();
     res.json(members);
   } catch (err) {
     next(err);
@@ -66,6 +78,7 @@ const editMemberById = async (req, res, next) => {
 };
 
 module.exports = {
+  browseMembersByDate,
   browseRanking,
   browseMemberById,
   createMember,

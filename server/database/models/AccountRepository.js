@@ -19,6 +19,16 @@ class AccountRepository extends AbstractRepository {
     return rows[0];
   }
 
+
+  async updateBanAccount(accountUpdate) {
+    // Execute the SQL UPDATE query to update a specific category
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} INNER JOIN member ON ${this.table}.id_member_fk = member.id_member
+      SET ${this.table}.banned = 1
+      WHERE member.id_member = ?`,
+      [accountUpdate.id]
+    );
+
   async verifyEmail(email) {
     // Execute the SQL SELECT query to retrieve a specific user by its email
     const [rows] = await this.database.query(

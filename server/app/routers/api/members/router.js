@@ -8,6 +8,7 @@ const router = express.Router();
 
 // Import member-related actions
 const {
+  browseMembersByDate,
   browseRanking,
   browseMemberById,
   createMember,
@@ -19,6 +20,11 @@ const {
   verifyToken,
   verifyProfileAccess,
 } = require("../../../services/auth");
+
+
+// Route to get a list of members order by creation date
+router.get("/date", browseMembersByDate);
+
 
 // Route to get a list of members ranked
 router.get("/ranked", browseRanking);

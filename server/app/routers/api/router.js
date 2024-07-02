@@ -20,8 +20,13 @@ const membersRouter = require("./members/router");
 
 router.use("/members", membersRouter);
 
+// ROAD FOR ACCOUNTS
+const accountsRouter = require("./accounts/router");
+
+router.use("/accounts", accountsRouter);
+
 // ROAD TO UPLOAD
-const uploadRouter = require("./upload/router")
+const uploadRouter = require("./upload/router");
 
 router.use("/upload", uploadRouter);
 

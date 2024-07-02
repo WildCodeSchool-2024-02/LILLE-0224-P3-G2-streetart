@@ -99,7 +99,7 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/admin",
+        path: "/admin/panel",
         element: <PanelAdmin />,
       },
       {

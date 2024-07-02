@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/Register.css";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import myAxios from "../services/myAxios";
 
 function Register() {
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -19,6 +19,25 @@ function Register() {
     confPwd: "",
     date: "",
   });
+
+  useEffect(() => {
+    const getDate = () => {
+      // */////////////////////////////// Get the date of the day formated for BDD ////////////////////////////*
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      const formattedMonth = month < 10 ? `0${month}` : month;
+      const formattedDay = day < 10 ? `0${day}` : day;
+      const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        date: formattedDate,
+      }));
+    };
+
+    getDate();
+  }, []);
 
   // TO CHECK PASSWORDS ARE CORRECTLY WRITTEN
   const [samePwd, setSamePwd] = useState("");
@@ -57,11 +76,27 @@ function Register() {
 
   // TOGGLE VISIBILITY PASSWORD
   const toggleVisibilityPwd = () => {
+
+    if (pwdVisible === "password") {
+      setPwdVisible("text");
+    } else {
+      setPwdVisible("password");
+    }
+  };
+
+  const toggleVisibilityConf = () => {
+    if (confPwdVisible === "password") {
+      setConfPwdVisible("text");
+    } else {
+      setConfPwdVisible("password");
+    }
+
     setPwdVisible(pwdVisible === "password" ? "text" : "password");
   };
 
   const toggleVisibilityConf = () => {
     setConfPwdVisible(confPwdVisible === "password" ? "text" : "password");
+
   };
 
   const handleChange = (e) => {
@@ -132,11 +167,13 @@ function Register() {
     try {
       const response = await myAxios.post("/api/members/new-member", formData);
       console.info("Profil enregistré", response.data);
+      
       await myAxios.post("/api/mails/welcome", {
         to: formData.email,
         name: formData.firstname
       })
       navigate("/connexion");
+
     } catch (error) {
       console.error("Erreur", error);
     }
