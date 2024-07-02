@@ -22,6 +22,7 @@ CREATE TABLE account (
   pwd VARCHAR(255) NOT NULL,
   assignment VARCHAR(15) NOT NULL,
   date_creation DATE NOT NULL,
+  banned BOOLEAN NOT NULL DEFAULT false,
   id_member_fk INT UNSIGNED DEFAULT NULL,
   FOREIGN KEY (id_member_fk) REFERENCES member(id_member) ON DELETE SET NULL,
   id_administrator_fk INT UNSIGNED DEFAULT NULL,
@@ -35,7 +36,8 @@ CREATE TABLE artwork (
   date_creation DATE NOT NULL,
   longitude DECIMAL(17, 16) NOT NULL, 
   latitude DECIMAL(16, 14) NOT NULL, 
-  validate BOOLEAN NOT NULL DEFAULT false
+  validate BOOLEAN NOT NULL DEFAULT false,
+  reported BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE operation (

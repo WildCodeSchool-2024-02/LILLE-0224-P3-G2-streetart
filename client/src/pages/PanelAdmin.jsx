@@ -32,10 +32,9 @@ function PanelAdmin() {
   )
 
   return (
-    <>
-      <p>PanelAdmin</p>
-      <p>Coucou</p>
-    </>
+    <div>
+      Panel Admin
+    </div>
   );
 }
 
