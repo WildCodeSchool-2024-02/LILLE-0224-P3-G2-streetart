@@ -8,7 +8,6 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  box-shadow: var(--shadow-container);
   height: 100%;
   font-size: 1.2rem;
   padding-left: 2rem;
@@ -21,6 +20,12 @@
 
 .input-default {
   font-size: 0.8rem;
+}
+
+.error {
+  padding-top: 1rem;
+  margin-bottom: -1.3rem;
+  text-align: center;
 }
 
 .register-title {
@@ -39,6 +44,37 @@
 .input-default {
   display: flex;
   width: 50vw;
+}
+
+/* CAPTCHA */
+
+.captcha-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-formulaire.captcha {
+  justify-content: center;
+}
+
+.register-formulaire.captcha button {
+  margin-top: 2rem;
+}
+
+.error-message {
+  font-size: 0.8em;
+  text-align: center;
+  color: red;
+}
+
+.error-message recover {
+  font-size: 1em;
+}
+
+.status-recover {
+  text-align: center;
 }
 
 /**************************DESKTOP VERSION****************************/
@@ -89,5 +125,10 @@
   }
   .input-default {
     font-size: 1rem;
+  }
+
+  /* CAPTCHA */
+  .register-title.captcha {
+    margin-bottom: 4rem;
   }
 }

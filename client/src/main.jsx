@@ -17,7 +17,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import ProfileEdition from "./pages/ProfileEdition";
-
+import Admin from "./pages/Admin";
+import ArtworkNotValidateDetails from "./pages/ArtworkNotValidateDetails";
+import RecoverPassword from "./pages/RecoverPassword";
+import PwdEdition from "./pages/PwdEdition";
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
 import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
@@ -33,6 +36,25 @@ const router = createBrowserRouter([
         loader: async () => {
           const response = await myAxios.get("/api/artworks");
           return response.data;
+        },
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
+        loader: async () => {
+          const response = await myAxios.get("api/artworks/not-validate");
+          return response.data;
+        },
+      },
+      {
+        path: "/oeuvre-non-validee/:id",
+        element: <ArtworkNotValidateDetails />,
+        loader: async ({ params }) => {
+          const artworksNV = await myAxios.get(
+            `/api/artworks/not-validate/${params.id}`
+          );
+
+          return artworksNV.data;
         },
       },
       {
@@ -96,6 +118,14 @@ const router = createBrowserRouter([
         path: "/profil/edit/:id",
         element: <ProfileEdition />,
       },
+      {
+        path: "/recuperation-mdp",
+        element: <RecoverPassword />,
+      },
+      {
+        path: "/recuperation-mdp/:token",
+        element: <PwdEdition />,
+      }
     ],
   },
 

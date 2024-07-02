@@ -35,6 +35,16 @@ const authActions = require("../../controllers/authActions");
 
 router.post("/login", authActions.login);
 
+// ROAD TO RECOVER PASSWORD
+const recoverRouter = require("./recover/router")
+
+router.use("/recover", recoverRouter);
+
+// ROAD TO SEND MAIL
+const mailRouter = require("./mails/router")
+
+router.use("/mails", mailRouter)
+
 /* ************************************************************************* */
 
 module.exports = router;
