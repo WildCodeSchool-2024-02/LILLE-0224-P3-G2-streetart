@@ -66,7 +66,7 @@ class MemberRepository extends AbstractRepository {
   async readMember(id) {
     // Execute the SQL SELECT query to retrieve a specific category by its ID
     const [rows] = await this.database.query(
-      `SELECT ac.id_account, ac.email, ac.pwd, ac.id_member_fk, m.id_member, m.firstname, m.lastname, m.pseudo, m.city, m.postcode, m.avatar, m.points
+      `SELECT ac.id_account, ac.email, ac.id_member_fk, m.id_member, m.firstname, m.lastname, m.pseudo, m.city, m.postcode, m.avatar, m.points
     FROM member AS m
     RIGHT JOIN account AS ac ON id_member=id_member_fk
     WHERE m.id_member=(?);`,

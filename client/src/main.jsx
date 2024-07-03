@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import myAxios from "./services/myAxios";
 
 import App from "./App";
@@ -70,7 +70,9 @@ const router = createBrowserRouter([
         element: <ArtworkDetails />,
         loader: async ({ params }) => {
           const artwork = await myAxios.get(`/api/artworks/${params.id}`);
-
+          if (artwork.data.validate === 0) {
+            return redirect("/oeuvres")
+          }
           return artwork.data;
         },
       },
