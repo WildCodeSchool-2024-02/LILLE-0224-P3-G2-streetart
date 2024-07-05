@@ -13,7 +13,7 @@ function ArtworksNotValidate() {
           artworksNV.map((artworksNotValidate) => (
             <Link
               to={`/oeuvre-non-validee/${artworksNotValidate.id_artwork}`}
-              key={artworksNotValidate.id_artwork} // Moved key prop here for Link
+              key={artworksNotValidate.id_artwork}
             >
               <ArtworkCard artwork={artworksNotValidate} />
             </Link>
