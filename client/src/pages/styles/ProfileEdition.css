@@ -129,4 +129,8 @@
   .edit-password-pen {
     width: 90%;
   }
+
+  .input-default-edit {
+    width: auto;
+  }
 }

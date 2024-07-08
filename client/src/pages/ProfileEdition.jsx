@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAuth } from "../contexts/AuthContext";
 import myAxios from "../services/myAxios";
@@ -10,41 +10,43 @@ function ProfileEdition() {
   const navigate = useNavigate();
   const { auth } = useAuth();
 
-  const [ member, setMember ] = useState();
-  
+  const [member, setMember] = useState();
+
   const [editedCity, setEditedCity] = useState("");
   const [editedPostcode, setEditedPostcode] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
   const [editedPwd, setEditedPwd] = useState("");
   const [confEditedPwd, setConfEditedPwd] = useState("");
-  
-  useEffect (
-    () => {
-      const getData = async () => {
-        try {
-          const [membersResponse] = await Promise.all([
-            myAxios.get(`/api/members/${id}`, {
-              headers: {
-                Authorization: `Bearer ${auth.token}`,
-              }
-            }),
-          ]);
-          setMember(membersResponse.data)
-          setEditedCity(membersResponse.data.city)
-          setEditedPostcode(membersResponse.data.postcode)
-          setEditedEmail(membersResponse.data.email)
-        } catch (error) {
-          if (error.response.data.access === "denied") {
-            navigate("/erreur")
-          } 
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const [membersResponse] = await Promise.all([
+          myAxios.get(`/api/members/${id}`, {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }),
+        ]);
+        setMember(membersResponse.data);
+        // setEditedCity(membersResponse.data.city);
+        setEditedPostcode(membersResponse.data.postcode);
+        setEditedEmail(membersResponse.data.email);
+
+        if (editedPostcode.length !== 5) {
+          setEditedCity(membersResponse.data.city);
+        }
+      } catch (error) {
+        if (error.response.data.access === "denied") {
+          navigate("/erreur");
         }
       }
-      getData();
-    }, [auth.token, id, navigate]
-  )
+    };
+    getData();
+  }, [auth.token, id, navigate]);
 
   const [isSubmit, setIsSubmit] = useState(false);
-  
+
   const [editPwd, setEditPwd] = useState(false);
 
   const [samePwd, setSamePwd] = useState("");
@@ -65,6 +67,34 @@ function ProfileEdition() {
     setConfPwdVisible(!confPwdVisible);
   };
 
+  // POSTCODE GIVE CITY BY API
+  const [cities, setCities] = useState([]);
+
+  const handlePostCodeChange = async (e) => {
+    const newPostCode = e.target.value;
+    setEditedPostcode(newPostCode);
+
+    if (newPostCode.length === 5) {
+      try {
+        const response = await fetch(
+          `https://api.zippopotam.us/fr/${newPostCode}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const places = data.places.map((place) => place["place name"]);
+          setCities(places);
+          setEditedCity(places[0]);
+        } else {
+          setCities([]);
+          setEditedCity("");
+        }
+      } catch (error) {
+        setCities([]);
+        setEditedCity("");
+      }
+    }
+  };
+
   const handleUpdateProfile = async (e) => {
     // connection to complete DB with new informations
     e.preventDefault();
@@ -80,7 +110,7 @@ function ProfileEdition() {
         {
           headers: {
             Authorization: `Bearer ${auth.token}`,
-          }
+          },
         }
       );
 
@@ -128,25 +158,40 @@ function ProfileEdition() {
           </div>
           <div className="field input-default modify-profil-input">
             <div>
-              <label htmlFor="city">Ville</label>
+              <label htmlFor="postcode">Code Postal</label>
               <input
                 type="text"
-                value={editedCity}
-                onChange={(e) => setEditedCity(e.target.value)}
-                className="input-default-edit input-default "
+                value={editedPostcode}
+                onChange={handlePostCodeChange}
+                className="input-default-edit input-default"
               />
               <div className="line" />
             </div>
           </div>
           <div className="field input-default modify-profil-input">
             <div>
-              <label htmlFor="postcode">Code Postal</label>
-              <input
-                type="text"
-                value={editedPostcode}
-                onChange={(e) => setEditedPostcode(e.target.value)}
-                className="input-default-edit input-default"
-              />
+              <label htmlFor="city">Ville</label>
+              {editedPostcode !== member.postcode ? (
+                <select
+                  type="text"
+                  value={editedCity}
+                  onChange={(e) => setEditedCity(e.target.value)}
+                  className="input-default-edit input-default "
+                >
+                  {cities.map((city) => (
+                    <option key={city.id} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  type="text"
+                  value={editedCity}
+                  onChange={(e) => setEditedCity(e.target.value)}
+                  className="input-default-edit input-default "
+                />
+              )}
               <div className="line" />
             </div>
           </div>
