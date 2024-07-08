@@ -5,7 +5,7 @@ import "./styles/ArtworkNotValidateDetails.css";
 
 function ArtworksNVNotValidateDetails() {
   const navigate = useNavigate();
-  const artworksNV = useLoaderData();
+  const artworksNVD = useLoaderData();
 
   // VALIDATE A NEW ARTWORK
   const handleValidate = async () => {
@@ -13,16 +13,16 @@ function ArtworksNVNotValidateDetails() {
 
     try {
       const response = await myAxios.post(
-        `/api/artworks/not-validate/${artworksNV.id_artwork}/validate`,
+        `/api/artworks/admin/not-validate/${artworksNVD.id_artwork}/validate`,
         {
-          id: artworksNV.id_artwork,
+          id: artworksNVD.id_artwork,
           dateOperation: new Date().toISOString(),
-          idAccount: artworksNV.id_account,
-          idMember: artworksNV.id_member,
+          idAccount: artworksNVD.id_account,
+          idMember: artworksNVD.id_member,
         }
       );
 
-      navigate(`/admin`);
+      navigate(`/admin/statistiques`);
       console.info("Oeuvre validée", response.data);
     } catch (error) {
       console.error("Erreur", error);
@@ -33,9 +33,9 @@ function ArtworksNVNotValidateDetails() {
   const handleDeny = async () => {
     try {
       const response = await myAxios.delete(
-        `/api/artworks/not-validate/${artworksNV.id_artwork}/deny`
+        `/api/artworks/admin/not-validate/${artworksNVD.id_artwork}/deny`
       );
-      navigate(`/admin`);
+      navigate(`/admin/statistiques`);
       console.info("Oeuvre refusée", response.data);
     } catch (error) {
       console.error("Erreur", error);
@@ -46,7 +46,7 @@ function ArtworksNVNotValidateDetails() {
   const [city, setCity] = useState(null);
 
   // StreetMap API for get the adress with latitude and longitude
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artworksNV.latitude}&lon=${artworksNV.longitude}&zoom=10&addressdetails=1`;
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artworksNVD.latitude}&lon=${artworksNVD.longitude}&zoom=10&addressdetails=1`;
 
   fetch(url)
     .then((response) => response.json())
@@ -62,12 +62,12 @@ function ArtworksNVNotValidateDetails() {
     <div className="artworkNV-container">
       <h2 className="artworksNV-title">
         <span className="focus-text">Titre : </span>
-        {artworksNV.title}
+        {artworksNVD.title}
       </h2>
       <img
         className="artworkNV-img"
-        src={artworksNV.picture}
-        alt={artworksNV.title}
+        src={artworksNVD.picture}
+        alt={artworksNVD.title}
       />
       <div className="artworkNVDetails-info">
         <h5 className="title-info">Informations sur l'oeuvre :</h5>
@@ -75,8 +75,8 @@ function ArtworksNVNotValidateDetails() {
           <p>Ajoutée par :</p>
 
           <p className="focus-text pseudo">
-            <Link to={`/profile/${artworksNV.id_member}`}>
-              {artworksNV.pseudo}
+            <Link to={`/profile/${artworksNVD.id_member}`}>
+              {artworksNVD.pseudo}
             </Link>
           </p>
         </div>
@@ -86,7 +86,7 @@ function ArtworksNVNotValidateDetails() {
         </div>
         <div className="date">
           <p>Le : </p>
-          <p className="focus-text datepic">{artworksNV.date_creation}</p>
+          <p className="focus-text datepic">{artworksNVD.date_creation}</p>
         </div>
       </div>
       <div className="artworksNVDetails-btn">

@@ -42,16 +42,16 @@ router.post("/:id/report", updateArtwork);
 
 // ARTWORKS NOT VALIDATED
 // Route to get all artworks not validate
-router.get("/not-validate", browseArtworksNotValidate);
+router.get("/admin/not-validate", browseArtworksNotValidate);
 
 // Route to get artwork by id not validate
-router.get("/not-validate/:id", readArtworksNotValidate);
+router.get("/admin/not-validate/:id", readArtworksNotValidate);
 
 // Route to validate a new artwork
-router.post("/not-validate/:id/validate", validateNewArtwork);
+router.post("/admin/not-validate/:id/validate", validateNewArtwork);
 
 // Route to deny a new artwork
-router.delete("/not-validate/:id/deny", denyNewArtwork);
+router.delete("/admin/not-validate/:id/deny", denyNewArtwork);
 
 // ARTWORKS REPORTED
 // Route to get a list of artwork reported

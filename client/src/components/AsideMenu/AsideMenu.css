@@ -37,4 +37,10 @@
   .aside-menu-bottom {
     padding: 1rem;
   }
+
+  .aside-menu-top-admin {
+    padding: 1rem;
+    font-family: var(--secondary-font);
+    font-size: 2rem;
+  }
 }

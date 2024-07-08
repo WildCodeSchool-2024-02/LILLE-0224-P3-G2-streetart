@@ -93,22 +93,6 @@ class ArtworkSeeder extends AbstractSeeder {
         validate: true,
       },
       {
-        title: "Le repas",
-        picture: "/assets/images/artworks/artwork3.png",
-        date_creation: "2024-04-08",
-        longitude: 3.065367,
-        latitude: 50.634839,
-        validate: true,
-      },
-      {
-        title: "La détente",
-        picture: "/assets/images/artworks/artwork4.png",
-        date_creation: "2024-06-11",
-        longitude: 3.043394,
-        latitude: 50.635275,
-        validate: true,
-      },
-      {
         title: "Le moment",
         picture: "/assets/images/artworks/artwork5.png",
         date_creation: "2024-04-10",
