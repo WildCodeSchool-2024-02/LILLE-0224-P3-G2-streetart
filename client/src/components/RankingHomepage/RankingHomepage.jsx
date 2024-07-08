@@ -36,7 +36,7 @@ function RankingHomepage() {
                     src={
                       member.avatar
                         ? member.avatar
-                        : "../../public/assets/images/icons/profile.png"
+                        : "/assets/images/icons/profile.png"
                     }
                     alt="avatar"
                   />

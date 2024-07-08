@@ -8,7 +8,7 @@ const login = async (req, res, next) => {
   try {
     // Fetch a specific user from the database based on the provided email
     const account = await tables.account.readByEmail(req.body.email);
-
+    
     if (!account) {
       return res.status(400).json({ message: "Votre adresse mail ou votre mot de passe est incorrect." });
     }
@@ -24,7 +24,7 @@ const login = async (req, res, next) => {
     
     const token = jwt.sign(
       // PAYLOAD
-      { sub: account.id_member_fk },
+      { sub: account.id_member_fk ? account.id_member_fk : account.id_administrator_fk, assignment: account.assignment },
       process.env.APP_SECRET,
       { expiresIn: "1h" }
     );

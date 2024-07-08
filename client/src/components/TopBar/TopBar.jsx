@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import { useAuth } from "../../contexts/AuthContext";
 
-
 function TopBar ({ title }) {
 
     const { auth } = useAuth(); 

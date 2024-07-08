@@ -1,11 +1,32 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import myAxios from "../../services/myAxios";
 import "./Members.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Members() {
   const [members, setMembers] = useState([]);
+  const { auth } = useAuth();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const verifyAccess = async () => {
+      try {
+        await myAxios.get(`/api/admin/verify`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+      } catch (error) {
+        if (error.response.data.access === "denied") {
+          navigate("/erreur");
+        }
+      }
+    };
+
+    verifyAccess();
+  }, [auth, navigate]);
   useEffect(() => {
     const getData = async () => {
       const [membersResponse] = await Promise.all([

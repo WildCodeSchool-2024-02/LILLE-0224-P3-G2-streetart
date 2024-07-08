@@ -38,7 +38,6 @@ export default function FixedBottomNavigation() {
         <CssBaseline />
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 3 }} elevation={4}>
             <BottomNavigation
-            showLabel={false}
             value={value}
             onChange={(event, newValue) => {
                 setValue(newValue);

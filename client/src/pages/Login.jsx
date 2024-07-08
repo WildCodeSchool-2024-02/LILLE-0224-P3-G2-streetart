@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom"
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./styles/Login.css";
 import myAxios from "../services/myAxios";
@@ -8,7 +8,7 @@ import myAxios from "../services/myAxios";
 function Login() {
 
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
@@ -16,6 +16,14 @@ function Login() {
   const [expiration, setExpiration] = useState("session");
   const [stayConnected, setStayConnected] = useState(false);
   const [connexionError, setConnexionError] = useState("");
+
+  useEffect(
+    () => {
+      if (auth.account) {
+        navigate("/")
+      }
+    }, [auth, navigate]
+  )
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value)
@@ -69,7 +77,11 @@ function Login() {
           Cookies.set('account', JSON.stringify(account), expiration); // Expires in 1 hour
           
           setAuth({ token, account });
-          navigate(`/profil/${account.id_member}`);
+          if (account.assignment === "user") {
+            navigate(`/profil/${account.id_member_fk}`);
+          } else if (account.assignment === "admin") {
+            navigate('/admin')
+          }
         } else {
           console.info(response);
         }
