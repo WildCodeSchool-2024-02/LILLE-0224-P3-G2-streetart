@@ -18,7 +18,7 @@ import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import ProfileEdition from "./pages/ProfileEdition";
 import Admin from "./pages/Admin";
-import ArtworkNotValidateDetails from "./pages/ArtworkNotValidateDetails";
+import ArtworkReportedDetails from "./pages/ArtworkReportedDetails";
 import RecoverPassword from "./pages/RecoverPassword";
 import PwdEdition from "./pages/PwdEdition";
 import FillArtwork from "./pages/FillArtwork";
@@ -42,19 +42,21 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <Admin />,
         loader: async () => {
-          const response = await myAxios.get("api/artworks/not-validate");
-          return response.data;
+          const artworksReported = await myAxios.get(
+            "api/artworks/admin/reported"
+          );
+          return artworksReported.data;
         },
       },
       {
-        path: "/oeuvre-non-validee/:id",
-        element: <ArtworkNotValidateDetails />,
+        path: "/oeuvre-a-valider/:id",
+        element: <ArtworkReportedDetails />,
         loader: async ({ params }) => {
-          const artworksNV = await myAxios.get(
-            `/api/artworks/not-validate/${params.id}`
+          const artworksReportedByID = await myAxios.get(
+            `/api/artworks/admin/reported/${params.id}`
           );
 
-          return artworksNV.data;
+          return artworksReportedByID.data;
         },
       },
       {
@@ -127,7 +129,7 @@ const router = createBrowserRouter([
       {
         path: "/recuperation-mdp/:token",
         element: <PwdEdition />,
-      }
+      },
     ],
   },
 

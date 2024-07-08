@@ -1,10 +1,10 @@
 import "./styles/Admin.css";
-import ArtworksNotValidate from "../components/ArtworksNotValidate/ArtworksNotValidate";
+import ArtworksReported from "../components/ArtworksReported/ArtworksReported";
 
 function Admin() {
   return (
     <div>
-      <ArtworksNotValidate />
+      <ArtworksReported />
     </div>
   );
 }

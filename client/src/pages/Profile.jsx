@@ -1,4 +1,3 @@
-
 import EditIcon from "@mui/icons-material/Edit";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -12,9 +11,9 @@ function Profile() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { auth } = useAuth();
-  const [ artworks, setArtworks ] = useState([]);
-  const [ profile, setProfile ] = useState();
-  
+  const [artworks, setArtworks] = useState([]);
+  const [profile, setProfile] = useState();
+
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(profile && profile.points);
   
@@ -64,7 +63,7 @@ function Profile() {
                 src={
                   profile.avatar
                     ? profile.avatar
-                    : "../../public/assets/images/icons/profile.png"
+                    : "assets/images/icons/profile.png"
                 }
                 alt="profil"
               />
@@ -89,11 +88,11 @@ function Profile() {
               <p>{profile.email}</p>
               <p>
                 {profile.postcode} {profile.city}
-              </p>          
+              </p>
             </div>
             <div className="points-edit-desktop">
               <Link to={`/profil/edit/${profile.id_member}`}>
-              <EditIcon style={{ color: "#666", fontSize: 35 }} />
+                <EditIcon style={{ color: "#666", fontSize: 35 }} />
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>

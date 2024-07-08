@@ -95,7 +95,7 @@ class ArtworkRepository extends AbstractRepository {
   }
 
   async readArtworksNotValidate(id) {
-    // Execute the SQL SELECT query to retrieve a specific category by its ID
+    // Execute the SQL SELECT query to retrieve a specific artwork by its ID
     const [rows] = await this.database.query(
       `SELECT a.*, DATE_FORMAT(a.date_creation, '%d/%m/%Y') AS date_creation, m.pseudo, m.points, m.id_member, ac.id_account
       FROM artwork AS a
@@ -139,10 +139,10 @@ class ArtworkRepository extends AbstractRepository {
       const artworkReported = artworkReport.insertId;
 
       const formattedDateOperationReport = new Date(dateOperationReport)
-      .toISOString()
-      .slice(0, 19)
-      .replace("T", " ");
-      
+        .toISOString()
+        .slice(0, 19)
+        .replace("T", " ");
+
       // SECOND CONNECTION: Insert the account into the "operation" table
       await connection.query(
         `INSERT INTO operation (kind, details, date_operation, id_account_fk, id_artwork_fk) VALUES (?, ?, ?, ?, ?)`,
@@ -165,7 +165,7 @@ class ArtworkRepository extends AbstractRepository {
       connection.release();
     }
   }
-      
+
   async validateArtwork(id, dateOperation, idAccount, idMember) {
     const connection = await this.database.getConnection();
 
@@ -183,7 +183,7 @@ class ArtworkRepository extends AbstractRepository {
         .toISOString()
         .slice(0, 19)
         .replace("T", " ");
-      
+
       // SECOND CONNECTION : INSERT THE OPERATION
       await connection.query(
         `INSERT INTO operation (kind, details, date_operation, id_account_fk, id_artwork_fk) VALUES (?, ?, ?, ?, ?)`,
@@ -221,6 +221,79 @@ class ArtworkRepository extends AbstractRepository {
     return rows[0];
   }
 
+  async readAllArtworksReported() {
+    // GET ARTWORKS REPORTED
+    // Execute the SQL SELECT query to retrieve all artworks from the "artwork" table
+    const [rows] = await this.database.query(
+      `SELECT id_artwork, title, picture, DATE_FORMAT(date_creation, '%d-%m-%Y') AS formatted_date, longitude, latitude, validate, reported
+    FROM ${this.table} 
+    WHERE reported = true 
+    ORDER BY date_creation DESC`
+    );
+
+    // Return the array of artworks not validate
+    return rows;
+  }
+
+  async readArtworksReported(id) {
+    // Execute the SQL SELECT query to retrieve a specific artwork by its ID
+    const [rows] = await this.database.query(
+      `SELECT a.*, DATE_FORMAT(a.date_creation, '%d/%m/%Y') AS date_creation, m.pseudo, m.points, m.id_member, ac.id_account
+      FROM artwork AS a
+      INNER JOIN operation AS o ON id_artwork_fk=id_artwork
+      INNER JOIN account AS ac ON id_account=id_account_fk
+      INNER JOIN member AS m ON id_member=id_member_fk
+      WHERE reported = true AND id_artwork=(?);`,
+      [id]
+    );
+
+    // Return the first row of the result, which represents the category
+    return rows[0];
+  }
+
+  async keepArtworkReported(id) {
+    const [rows] = await this.database.query(
+      `UPDATE artwork SET reported = ? WHERE id_artwork = ?`,
+      [false, id]
+    );
+
+    // Return the array of artworks reported that are now not reported
+    return rows;
+  }
+
+  async deleteArtworkReported(id) {
+    const connection = await this.database.getConnection();
+
+    try {
+      // Begin the transaction
+      await connection.beginTransaction();
+
+      // COMMENT RÉCUPÉRER L'OPÉRATION ET DONC L'ID DE L'ACCOUNT À L'ORIGINE DU SIGNALEMENT ?????
+      // FIRST CONNECTION : ADD POINTS
+      await connection.query(
+        `UPDATE member AS m
+        INNER JOIN account AS ac ON m.id_member=ac.id_member_fk
+        INNER JOIN operation AS o ON o.id_account_fk=ac.id_account
+        SET m.points = points + ?
+        WHERE o.id_artwork_fk = ? AND o.kind = "signalement"`,
+        [3, id]
+      );
+
+      // SECOND CONNECTION : VALIDATE THE ARTWORK
+      await connection.query(`DELETE FROM artwork WHERE id_artwork = ?;`, [id]);
+
+      // Commit the transaction
+      await connection.commit();
+      return { success: true, message: "Artwork validated successfully." };
+    } catch (error) {
+      // Rollback the transaction on error
+      await connection.rollback();
+      throw error; // Throw error to handle it outside
+    } finally {
+      // Release the connection
+      connection.release();
+    }
+  }
 }
 
 module.exports = ArtworkRepository;
