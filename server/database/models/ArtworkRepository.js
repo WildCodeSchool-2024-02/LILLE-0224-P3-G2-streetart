@@ -117,7 +117,7 @@ class ArtworkRepository extends AbstractRepository {
     FROM artwork AS a
     INNER JOIN operation AS o ON id_artwork_fk=id_artwork
     INNER JOIN account AS ac ON id_account=id_account_fk
-    WHERE ac.id_member_fk=(?) AND o.kind="validation"
+    WHERE ac.id_member_fk=(?)
     ORDER BY a.id_artwork DESC;`,
       [id]
     );

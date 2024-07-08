@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import myAxios from "./services/myAxios";
 
+// APP PAGES
 import App from "./App";
 import Homepage from "./pages/Homepage";
 import Artworks from "./pages/Artworks";
@@ -22,16 +23,21 @@ import Profile from "./pages/Profile";
 import ProfileEdition from "./pages/ProfileEdition";
 import RecoverPassword from "./pages/RecoverPassword";
 import PwdEdition from "./pages/PwdEdition";
+
+// NEW ARTWORK PAGES
 import FillArtwork from "./pages/FillArtwork";
 import Camera from "./components/NewArtwork/Camera/Camera";
 import FormArtwork from "./components/NewArtwork/FormArtwork/FormArtwork";
 import ValidationArtwork from "./pages/ValidationArtwork";
+
+// ADMIN PAGES
 import Admin from "./pages/Admin/Admin";
 import Members from "./pages/Admin/Members";
 import Statistiques from "./pages/Admin/Statistiques";
-import ArtworksReported from "./pages/Admin/ArtworksReported";
-import ArtworksValidation from "./pages/Admin/ArtworksValidation";
-import ArtworkNotValidateDetails from "./pages/ArtworkNotValidateDetails";
+import ArtworkReported from "./pages/Admin/ArtworkReported";
+import ArtworkReportedDetails from "./pages/Admin/ArtworkReportedDetails";
+import ArtworkValidation from "./pages/Admin/ArtworkValidation";
+import ArtworkValidationDetails from "./pages/Admin/ArtworkValidationDetails";
 
 const router = createBrowserRouter([
   {
@@ -145,7 +151,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin/oeuvres-a-valider",
-        element: <ArtworksValidation />,
+        element: <ArtworkValidation />,
         loader: async () => {
           const artworkNV = await myAxios.get(
             "api/artworks/admin/not-validate"
@@ -154,8 +160,8 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/oeuvre-non-validee/:id",
-        element: <ArtworkNotValidateDetails />,
+        path: "/admin/oeuvre-non-validee/:id",
+        element: <ArtworkValidationDetails />,
         loader: async ({ params }) => {
           const artworksNVD = await myAxios.get(
             `/api/artworks/admin/not-validate/${params.id}`
@@ -166,7 +172,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin/oeuvres-signalees",
-        element: <ArtworksReported />,
+        element: <ArtworkReported />,
+        loader: async () => {
+          const artworksReported = await myAxios.get(
+            "api/artworks/admin/reported"
+          );
+          return artworksReported.data;
+        },
+      },
+      {
+        path: "/admin/oeuvre-a-valider/:id",
+        element: <ArtworkReportedDetails />,
+        loader: async ({ params }) => {
+          const artworksReportedByID = await myAxios.get(
+            `/api/artworks/admin/reported/${params.id}`
+          );
+          return artworksReportedByID.data;
+        },
       },
     ],
   },

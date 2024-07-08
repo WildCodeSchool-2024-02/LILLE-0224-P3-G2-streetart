@@ -80,7 +80,7 @@ function Login() {
           if (account.assignment === "user") {
             navigate(`/profil/${account.id_member_fk}`);
           } else if (account.assignment === "admin") {
-            navigate('/admin')
+            navigate('/admin/statistiques')
           }
         } else {
           console.info(response);

@@ -1,4 +1,4 @@
-import "./Admin.css";
+import "./styles/Admin.css";
 import { Outlet } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { BurgerMenuProvider } from "../../contexts/BurgerMenuContext";

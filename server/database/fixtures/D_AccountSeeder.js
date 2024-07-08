@@ -15,14 +15,14 @@ class AccountSeeder extends AbstractSeeder {
     const accounts = [
       {
         email: "admin@gmail.com",
-        pwd: "admin",
+        pwd: "$argon2id$v=19$m=19456,t=2,p=1$978g/FrQ9t5Wz1V0JC8jdg$JsFs5kboOsWsCq36pLZK5kreaGOvciZ9LzAhM9jy9ek",
         assignment: "admin",
         date_creation: "2024-01-01",
         id_administrator_fk: 1,
       },
       {
-        email: "user1@gmail.com",
-        pwd: "user",
+        email: "user@gmail.com",
+        pwd: "$argon2id$v=19$m=19456,t=2,p=1$978g/FrQ9t5Wz1V0JC8jdg$JsFs5kboOsWsCq36pLZK5kreaGOvciZ9LzAhM9jy9ek",
         assignment: "user",
         date_creation: "2024-02-01",
         id_member_fk: 1,

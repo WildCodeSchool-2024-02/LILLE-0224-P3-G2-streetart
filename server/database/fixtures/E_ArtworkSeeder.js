@@ -91,6 +91,7 @@ class ArtworkSeeder extends AbstractSeeder {
         longitude: 3.066053,
         latitude: 50.643984,
         validate: true,
+        reported: true,
       },
       {
         title: "Le moment",
@@ -98,7 +99,7 @@ class ArtworkSeeder extends AbstractSeeder {
         date_creation: "2024-04-10",
         longitude: 3.168363,
         latitude: 50.714036,
-        validate: true,
+        validate: false,
       },
     ];
 
