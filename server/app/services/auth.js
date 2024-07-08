@@ -62,7 +62,8 @@ const hashPassword = async (req, res, next) => {
   };
   
   const verifyAdminAccess = (req, res, next) => {
-    const { assignment } = req.auth.assignment; // Assuming 'assingment' in the token payload
+    /* eslint-disable-next-line prefer-destructuring */
+    const assignment = req.auth.assignment; // Assuming 'assingment' in the token payload
     
     if (assignment !== "admin") {
       return res.status(404).json({ access: "denied"});

@@ -1,11 +1,11 @@
 import { useLoaderData, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import myAxios from "../services/myAxios";
-import "./styles/ArtworkReportedDetails.css";
+import myAxios from "../../services/myAxios";
+import "./styles/ArtworkValidationDetails.css";
 
-function ArtworksReportedDetails() {
-  const artworksReportedByID = useLoaderData();
+function ArtworksValidationDetails() {
   const navigate = useNavigate();
+  const artworksNVD = useLoaderData();
 
   // VALIDATE A NEW ARTWORK
   const handleValidate = async () => {
@@ -13,10 +13,17 @@ function ArtworksReportedDetails() {
 
     try {
       const response = await myAxios.post(
-        `/api/artworks/admin/reported/${artworksReportedByID.id_artwork}/validate`
+        `/api/artworks/admin/not-validate/${artworksNVD.id_artwork}/validate`,
+        {
+          id: artworksNVD.id_artwork,
+          dateOperation: new Date().toISOString(),
+          idAccount: artworksNVD.id_account,
+          idMember: artworksNVD.id_member,
+        }
       );
-      navigate(`/admin`);
-      console.info("Oeuvre conservée", response.data);
+
+      navigate(`/admin/oeuvres-a-valider`);
+      console.info("Oeuvre validée", response.data);
     } catch (error) {
       console.error("Erreur", error);
     }
@@ -26,10 +33,10 @@ function ArtworksReportedDetails() {
   const handleDeny = async () => {
     try {
       const response = await myAxios.delete(
-        `/api/artworks/admin/reported/${artworksReportedByID.id_artwork}/deny`
+        `/api/artworks/admin/not-validate/${artworksNVD.id_artwork}/deny`
       );
-      navigate(`/admin`);
-      console.info("Oeuvre supprimée", response.data);
+      navigate(`/admin/oeuvres-a-valider`);
+      console.info("Oeuvre refusée", response.data);
     } catch (error) {
       console.error("Erreur", error);
     }
@@ -39,7 +46,7 @@ function ArtworksReportedDetails() {
   const [city, setCity] = useState(null);
 
   // StreetMap API for get the adress with latitude and longitude
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artworksReportedByID.latitude}&lon=${artworksReportedByID.longitude}&zoom=10&addressdetails=1`;
+  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artworksNVD.latitude}&lon=${artworksNVD.longitude}&zoom=10&addressdetails=1`;
 
   fetch(url)
     .then((response) => response.json())
@@ -52,24 +59,24 @@ function ArtworksReportedDetails() {
     });
 
   return (
-    <div className="artworkReported-container">
-      <h2 className="artworksReported-title">
+    <div className="artworkNV-container">
+      <h2 className="artworksNV-title">
         <span className="focus-text">Titre : </span>
-        {artworksReportedByID.title}
+        {artworksNVD.title}
       </h2>
       <img
-        className="artworkReported-img"
-        src={artworksReportedByID.picture}
-        alt={artworksReportedByID.title}
+        className="artworkNV-img"
+        src={artworksNVD.picture}
+        alt={artworksNVD.title}
       />
-      <div className="artworkReportedDetails-info">
+      <div className="artworkNVDetails-info">
         <h5 className="title-info">Informations sur l'oeuvre :</h5>
         <div className="user">
           <p>Ajoutée par :</p>
 
           <p className="focus-text pseudo">
-            <Link to={`/profile/${artworksReportedByID.id_member}`}>
-              {artworksReportedByID.pseudo}
+            <Link to={`/profile/${artworksNVD.id_member}`}>
+              {artworksNVD.pseudo}
             </Link>
           </p>
         </div>
@@ -79,25 +86,23 @@ function ArtworksReportedDetails() {
         </div>
         <div className="date">
           <p>Le : </p>
-          <p className="focus-text datepic">
-            {artworksReportedByID.date_creation}
-          </p>
+          <p className="focus-text datepic">{artworksNVD.date_creation}</p>
         </div>
       </div>
-      <div className="artworkReportedDetails-btn">
+      <div className="artworksNVDetails-btn">
         <button
           type="button"
           onClick={handleValidate}
           className="validate-btn btn"
         >
-          Conserver
+          Valider l'oeuvre
         </button>
         <button type="button" onClick={handleDeny} className="deny-btn btn">
-          Supprimer
+          Refuser l'oeuvre
         </button>
       </div>
     </div>
   );
 }
 
-export default ArtworksReportedDetails;
+export default ArtworksValidationDetails;

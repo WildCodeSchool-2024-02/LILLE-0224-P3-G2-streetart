@@ -2,7 +2,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import myAxios from "../../services/myAxios";
-import "./Members.css";
+import "./styles/Members.css";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Members() {
@@ -27,6 +27,7 @@ function Members() {
 
     verifyAccess();
   }, [auth, navigate]);
+
   useEffect(() => {
     const getData = async () => {
       const [membersResponse] = await Promise.all([

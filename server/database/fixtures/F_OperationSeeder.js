@@ -50,14 +50,14 @@ class OperationSeeder extends AbstractSeeder {
         details: "Oeuvre validée",
         date_operation: "2024-06-06",
         id_artwork_fk: 6,
-        id_account_fk: 1,
+        id_account_fk: 3,
       },
       {
         kind: "validation",
         details: "Oeuvre validée",
         date_operation: "2024-06-07",
         id_artwork_fk: 7,
-        id_account_fk: 1,
+        id_account_fk: 2,
       },
       {
         kind: "validation",
@@ -81,27 +81,12 @@ class OperationSeeder extends AbstractSeeder {
         id_account_fk: 3,
       },
       {
-        kind: "validation",
-        details: "Oeuvre validée",
+        kind: "signalement",
+        details: "Oeuvre signalée",
         date_operation: "2024-06-11",
         id_artwork_fk: 11,
         id_account_fk: 4,
       },
-      {
-        kind: "validation",
-        details: "Oeuvre validée",
-        date_operation: "2024-06-12",
-        id_artwork_fk: 12,
-        id_account_fk: 4,
-      },
-      {
-        kind: "validation",
-        details: "Oeuvre validée",
-        date_operation: "2024-06-13",
-        id_artwork_fk: 13,
-        id_account_fk: 4,
-      },
-
     ];
 
     operations.forEach((operation) => {
