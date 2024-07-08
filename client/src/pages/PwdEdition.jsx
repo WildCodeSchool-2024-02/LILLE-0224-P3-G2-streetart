@@ -94,7 +94,7 @@ function PwdEdition() {
             />
             </div>
             {editionSent ?
-            <h2 className="status-recover">{status} {errorEdition && <Link to="/contact">support.</Link>}</h2>
+            <h2 className="login-formulaire status-recover">{status} {errorEdition && <Link to="/contact">support.</Link>}</h2>
             :
             <form onSubmit={handleSubmit} className="login-formulaire">
                 <h2 className="login-title">Récupération de mot de passe</h2>

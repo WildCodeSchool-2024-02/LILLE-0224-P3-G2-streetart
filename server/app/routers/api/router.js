@@ -35,6 +35,11 @@ const authActions = require("../../controllers/authActions");
 
 router.post("/login", authActions.login);
 
+// ROAD TO VERIFY ADMIN ACCESS
+const { verifyAdminAccess, verifyToken } = require("../../services/auth");
+
+router.get("/admin/verify", verifyToken, verifyAdminAccess)
+
 // ROAD TO RECOVER PASSWORD
 const recoverRouter = require("./recover/router")
 

@@ -21,22 +21,26 @@ function ProfileEdition() {
   useEffect (
     () => {
       const getData = async () => {
-        const [membersResponse] = await Promise.all([
-          myAxios.get(`/api/members/${id}`, {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            }
-          }),
-        ]);
-
-        setMember(membersResponse.data)
-        setEditedCity(member.city)
-        setEditedPostcode(member.postcode)
-        setEditedEmail(member.email)
+        try {
+          const [membersResponse] = await Promise.all([
+            myAxios.get(`/api/members/${id}`, {
+              headers: {
+                Authorization: `Bearer ${auth.token}`,
+              }
+            }),
+          ]);
+          setMember(membersResponse.data)
+          setEditedCity(membersResponse.data.city)
+          setEditedPostcode(membersResponse.data.postcode)
+          setEditedEmail(membersResponse.data.email)
+        } catch (error) {
+          if (error.response.data.access === "denied") {
+            navigate("/erreur")
+          } 
+        }
       }
-
       getData();
-    }, [auth.token, id, member.city, member.email, member.postcode]
+    }, [auth.token, id, navigate]
   )
 
   const [isSubmit, setIsSubmit] = useState(false);
@@ -72,6 +76,11 @@ function ProfileEdition() {
           postcode: editedPostcode,
           email: editedEmail,
           pwd: editedPwd,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          }
         }
       );
 

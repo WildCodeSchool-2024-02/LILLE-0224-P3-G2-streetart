@@ -36,7 +36,7 @@ router.get("/:id", verifyToken, verifyProfileAccess, browseMemberById);
 router.post("/new-member", hashPassword, createMember);
 
 // Route to put a member informations
-router.put("/edit-member/:id", editMemberById);
+router.put("/edit-member/:id", verifyToken, verifyProfileAccess, editMemberById);
 
 /* ************************************************************************* */
 

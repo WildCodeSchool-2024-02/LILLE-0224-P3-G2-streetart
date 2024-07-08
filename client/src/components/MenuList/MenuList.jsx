@@ -16,7 +16,7 @@ function MenuList({ setOpenMenuList }) {
     }
 
     const goToProfile = () => {
-        navigate(`/profil/${auth.account.id_member}`)
+        navigate(`/profil/${auth.account.id_member_fk}`)
     }
 
     const handleOutsideClick = () => {
