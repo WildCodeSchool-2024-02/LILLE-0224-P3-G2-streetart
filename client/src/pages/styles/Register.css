@@ -77,6 +77,10 @@
   text-align: center;
 }
 
+.city-option {
+  color: #757575;
+}
+
 /**************************DESKTOP VERSION****************************/
 
 @media screen and (min-width: 768px) {

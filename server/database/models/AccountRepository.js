@@ -30,6 +30,37 @@ class AccountRepository extends AbstractRepository {
     return result.affectedRows;
   }
 
+  async deleteAccountWithMember(id) {
+    const connection = await this.database.getConnection();
+
+    try {
+      // Begin the transaction
+      await connection.beginTransaction();
+
+      // COMMENT RÉCUPÉRER L'OPÉRATION ET DONC L'ID DE L'ACCOUNT À L'ORIGINE DU SIGNALEMENT ?????
+      // FIRST CONNECTION : DELETE ACCOUNT
+      await connection.query(
+        `DELETE FROM account WHERE id_member_fk = ?;`,
+        [id]
+      );
+
+      // SECOND CONNECTION : DELETE MEMBER
+      await connection.query(`DELETE FROM member WHERE id_member = ?;`, [id]);
+
+      // Commit the transaction
+      await connection.commit();
+      return { success: true, message: "Account/member deleted successfully." };
+    } catch (error) {
+      // Rollback the transaction on error
+      await connection.rollback();
+      throw error; // Throw error to handle it outside
+    } finally {
+      // Release the connection
+      connection.release();
+    }
+  }
+
+
   async verifyEmail(email) {
     // Execute the SQL SELECT query to retrieve a specific user by its email
     const [rows] = await this.database.query(

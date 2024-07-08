@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
 import Cookies from "js-cookie";
+import CheckUserStatut from "../services/CheckUserStatut";
 
 const AuthContext = createContext();
 
@@ -30,6 +31,25 @@ export function AuthProvider({ children }) {
     setAuth({ token: null, account: null });
     navigate("/connexion");
   };
+
+  // Check if the user was banned or not
+  useEffect(
+    () => {
+      const verify = async () => {
+          if (auth.account) {
+            if(await CheckUserStatut(auth) === "banned") {
+              logout()
+              navigate("/connexion");
+            };
+          };
+      };
+      const interval = setInterval(verify, 300000); // Check every 5 minutes
+
+      // Clean the interval each time
+      return () => clearInterval(interval);
+    }, [auth, logout, navigate]
+  );
+
 
   const contextValue = useMemo(
     () => ({ auth, setAuth, logout }),

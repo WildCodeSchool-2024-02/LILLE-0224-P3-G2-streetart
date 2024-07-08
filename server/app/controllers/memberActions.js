@@ -30,6 +30,8 @@ const browseMemberById = async (req, res, next) => {
     // Otherwise, respond with the category in JSON format
     if (member == null) {
       res.sendStatus(404);
+    } else if (member.banned) {
+      res.status(403).json("banned")
     } else {
       res.status(200).json(member);
     }

@@ -89,6 +89,16 @@
   display: none;
 }
 
+.btn-delete-account {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 768px) {
   .my-profile {
     display: flex;
