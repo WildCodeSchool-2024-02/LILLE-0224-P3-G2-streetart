@@ -15,8 +15,11 @@ function ProfileEdition() {
   const [editedCity, setEditedCity] = useState("");
   const [editedPostcode, setEditedPostcode] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [editedPwd, setEditedPwd] = useState("");
   const [confEditedPwd, setConfEditedPwd] = useState("");
+
+  const containerClass = `field input-default modify-profil-input ${emailError ? "modify-profil-input-error" : ""}`;
 
   useEffect(() => {
     const getData = async () => {
@@ -93,6 +96,16 @@ function ProfileEdition() {
         setEditedCity("");
       }
     }
+  };
+
+  // Check Email by regex and stock it
+  const handleChangeEmail = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      const emailPattern = /^[^\s][\w-]+(\.[\w-]+)*@([\w-]+\.)+[\w-]{2,3}$/;
+      setEmailError(emailPattern.test(value) ? "" : "Adresse email invalide");
+    }
+    setEditedEmail(value);
   };
 
   const handleUpdateProfile = async (e) => {
@@ -195,16 +208,18 @@ function ProfileEdition() {
               <div className="line" />
             </div>
           </div>
-          <div className="field input-default modify-profil-input">
+          <div className={containerClass}>
             <div>
               <label htmlFor="email">Email</label>
               <input
+                name="email"
                 type="text"
                 value={editedEmail}
-                onChange={(e) => setEditedEmail(e.target.value)}
+                onChange={handleChangeEmail}
                 className="input-default-edit input-default"
               />
               <div className="line" />
+              {emailError && <div style={{ color: "red" }}>{emailError}</div>}
             </div>
           </div>
           <div className="edit-password-pen">
