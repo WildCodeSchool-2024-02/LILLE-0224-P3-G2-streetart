@@ -37,7 +37,6 @@ class AccountRepository extends AbstractRepository {
       // Begin the transaction
       await connection.beginTransaction();
 
-      // COMMENT RÉCUPÉRER L'OPÉRATION ET DONC L'ID DE L'ACCOUNT À L'ORIGINE DU SIGNALEMENT ?????
       // FIRST CONNECTION : DELETE ACCOUNT
       await connection.query(
         `DELETE FROM account WHERE id_member_fk = ?;`,
