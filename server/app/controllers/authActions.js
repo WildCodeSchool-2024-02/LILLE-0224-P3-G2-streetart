@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
     }
 
     if(account.banned) {
-      return res.status(400).json({ message: "Votre compte est banni." })
+      return res.status(400).json({ message: "Votre compte a été banni." })
     }
     
     // Respond with the user in JSON format (but without the hashed password)

@@ -43,7 +43,7 @@ export function AuthProvider({ children }) {
             };
           };
       };
-      const interval = setInterval(verify, 300000); // Check every 5 minutes
+      const interval = setInterval(verify, 100000); // Check every 2 minutes
 
       // Clean the interval each time
       return () => clearInterval(interval);
