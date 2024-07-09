@@ -10,7 +10,7 @@ import myAxios from "../services/myAxios";
 function Profile() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { auth } = useAuth();
+  const { auth } = useAuth(); 
   const [artworks, setArtworks] = useState([]);
   const [profile, setProfile] = useState();
 
@@ -75,7 +75,8 @@ function Profile() {
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{profile.points} points</p>
+                <div className="points"><p>{profile.points}</p>
+                <img src="/assets/images/icons/coin.png" alt="Jetons"  className="img-coin"/></div>
               </div>
             </div>
           </div>
@@ -96,7 +97,7 @@ function Profile() {
               </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <p>{profile.points} point</p>
+                <div className="points"> <p>{profile.points}</p><img src="/assets/images/icons/coin.png" alt="Jetons" className="img-coin"/></div>
               </div>
             </div>
           </div>
