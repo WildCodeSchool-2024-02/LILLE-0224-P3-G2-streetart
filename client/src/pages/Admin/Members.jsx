@@ -1,32 +1,10 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import myAxios from "../../services/myAxios";
 import "./styles/Members.css";
-import { useAuth } from "../../contexts/AuthContext";
 
 function Members() {
   const [members, setMembers] = useState([]);
-  const { auth } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const verifyAccess = async () => {
-      try {
-        await myAxios.get(`/api/admin/verify`, {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        });
-      } catch (error) {
-        if (error.response.data.access === "denied") {
-          navigate("/erreur");
-        }
-      }
-    };
-
-    verifyAccess();
-  }, [auth, navigate]);
 
   useEffect(() => {
     const getData = async () => {
@@ -104,10 +82,10 @@ function Members() {
                     {member.banned === 0 ? (
                       <DeleteForeverIcon
                         onClick={() => handleBanUser(member.id_member)}
-                        style={{ color: "#666", fontSize: 35 }}
+                        style={{ color: "#666", fontSize: 35, cursor: "pointer" }}
                       />
                     ) : (
-                      <p>Membre banni</p>
+                      <p style={{color: "red", fontWeight: "600"}}>Membre banni</p>
                     )}
                   </td>
                 </tr>

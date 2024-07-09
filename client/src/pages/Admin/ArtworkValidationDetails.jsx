@@ -4,6 +4,7 @@ import myAxios from "../../services/myAxios";
 import "./styles/ArtworkValidationDetails.css";
 
 function ArtworksValidationDetails() {
+
   const navigate = useNavigate();
   const artworksNVD = useLoaderData();
 
