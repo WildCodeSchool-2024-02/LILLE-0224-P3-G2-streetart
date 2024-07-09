@@ -55,6 +55,8 @@ function ProfileEdition() {
   const [samePwd, setSamePwd] = useState("");
   const [pwdVisible, setPwdVisible] = useState(false);
   const [confPwdVisible, setConfPwdVisible] = useState(false);
+  // ERROR MESSAGE FOR WRONG PASSWORD
+  const [pwdError, setPwdError] = useState("");
 
   // TOGGLE EDIT PASSWORD
   const toggleEditPwd = () => {
@@ -106,6 +108,20 @@ function ProfileEdition() {
       setEmailError(emailPattern.test(value) ? "" : "Adresse email invalide");
     }
     setEditedEmail(value);
+  };
+
+  // Check password regex and stock it
+  const handleChangePwd = (e) => {
+    const { name, value } = e.target;
+    if (name === "pwd") {
+      const pwdPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      setPwdError(
+        pwdPattern.test(value)
+          ? ""
+          : "Votre mot de passe doit contenir au moins 8 caractères, incluant une majuscule, une minuscule, un chiffre et un caractère spécial."
+      );
+    }
+    setEditedPwd(value);
   };
 
   const handleUpdateProfile = async (e) => {
@@ -245,7 +261,7 @@ function ProfileEdition() {
                     placeholder="Mot de passe"
                     maxLength="25"
                     value={editedPwd}
-                    onChange={(e) => setEditedPwd(e.target.value)}
+                    onChange={handleChangePwd}
                     required
                   />
                   <div className="line" />
@@ -269,6 +285,7 @@ function ProfileEdition() {
                     )}
                   </div>
                 </div>
+                {pwdError && <p className="error-message">{pwdError}</p>}
                 <div className="field input-default modify-profil-input-pwd">
                   <input
                     type={confPwdVisible ? "text" : "password"}
