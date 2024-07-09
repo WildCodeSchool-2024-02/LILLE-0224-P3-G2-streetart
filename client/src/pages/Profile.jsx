@@ -1,4 +1,5 @@
 import EditIcon from "@mui/icons-material/Edit";
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
@@ -13,7 +14,8 @@ function Profile() {
   const { auth } = useAuth();
   const [artworks, setArtworks] = useState([]);
   const [profile, setProfile] = useState();
-
+  const [showArtworks, setShowArtworks] = useState(false)
+  
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(profile && profile.points);
   
@@ -48,6 +50,17 @@ function Profile() {
     }, [auth.token, id, navigate]
   )
   
+  // SHOW 3/4 CARDS OR ALL 
+  const getAllCards = () => {
+    setShowArtworks(!showArtworks)
+  }
+
+  // RULES FOR MOBILE ARTWORKS DISPLAYED
+  const isMobile = useMediaQuery('(max-width:768px)');
+  const artworksToShow = isMobile ? 3 : 4; 
+
+  // HOW MANY ARTWORKS TO SHOW 
+  const displayedArtworks = showArtworks ? artworks : artworks.slice(0, artworksToShow);
 
   return (
     <div className="profile-container">
@@ -103,16 +116,18 @@ function Profile() {
         </div>
       )}
 
+
       <div className="my-artworks">
         <div className="title-my-artworks">
           <h2>Mes oeuvres</h2>
         </div>
         <div className="artworks-profile">
+          <div className="user-artworks">
           {profile && artworks.length > 0 ? (
-            artworks.slice(0, 4).map((artwork, index) => (
+            displayedArtworks.map((artwork) => (
               <div
                 key={artwork.id_artwork}
-                className={index === 3 ? "artwork4" : "artwork-profile"}
+                className="artwork-profile"
               > {artwork.validate === 1 ? 
                 <Link to={`/oeuvre/${artwork.id_artwork_fk}`}>
                   <ArtworkCard artwork={artwork} />
@@ -125,6 +140,8 @@ function Profile() {
           ) : (
             <p>Tu n'as posté aucune oeuvre pour le moment.</p>
           )}
+</div>
+         <div className="btn-see"> <button type="button" className="btn btn-see-more-less" onClick={getAllCards}>{showArtworks ? <div>Voir moins </div>: <div>Voir plus </div>}</button></div>
         </div>
       </div>
     </div>

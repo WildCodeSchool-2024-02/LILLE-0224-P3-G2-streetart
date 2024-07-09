@@ -78,15 +78,25 @@
 }
 
 .artworks-profile {
-  display: flex;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-.artwork4,
 .title-my-artworks,
 .points-edit-desktop {
   display: none;
+}
+
+.user-artworks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.btn-see-more-less {
+  font-size: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -165,11 +175,5 @@
 
   .points-edit-mobile {
     display: none;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .artwork4 {
-    display: block;
   }
 }
