@@ -39,6 +39,9 @@ import ArtworkReportedDetails from "./pages/Admin/ArtworkReportedDetails";
 import ArtworkValidation from "./pages/Admin/ArtworkValidation";
 import ArtworkValidationDetails from "./pages/Admin/ArtworkValidationDetails";
 
+// ERROR PAGE
+import Error from "./pages/Error";
+
 const router = createBrowserRouter([
   {
     element: <App />,
@@ -192,6 +195,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    element: <Error />,
+    path: "/erreur",
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
