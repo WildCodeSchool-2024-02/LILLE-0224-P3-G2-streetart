@@ -157,7 +157,7 @@ const router = createBrowserRouter([
         element: <ArtworkValidation />,
         loader: async () => {
           const artworkNV = await myAxios.get(
-            "api/artworks/admin/not-validate"
+            "/api/artworks/admin/not-validate"
           );
           return artworkNV.data;
         },
@@ -178,7 +178,7 @@ const router = createBrowserRouter([
         element: <ArtworkReported />,
         loader: async () => {
           const artworksReported = await myAxios.get(
-            "api/artworks/admin/reported"
+            "/api/artworks/admin/reported"
           );
           return artworksReported.data;
         },

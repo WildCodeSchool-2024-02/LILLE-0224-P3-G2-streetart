@@ -50,6 +50,10 @@
   width: 80%;
 }
 
+.modify-profil-input-error {
+  height: 5rem;
+}
+
 .modify-profil-input-pwd {
   display: flex;
   flex-direction: row;
@@ -128,5 +132,9 @@
 
   .edit-password-pen {
     width: 90%;
+  }
+
+  .input-default-edit {
+    width: auto;
   }
 }

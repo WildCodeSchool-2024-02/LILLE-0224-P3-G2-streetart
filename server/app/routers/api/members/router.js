@@ -21,10 +21,8 @@ const {
   verifyProfileAccess,
 } = require("../../../services/auth");
 
-
 // Route to get a list of members order by creation date
 router.get("/date", browseMembersByDate);
-
 
 // Route to get a list of members ranked
 router.get("/ranked", browseRanking);
@@ -36,7 +34,13 @@ router.get("/:id", verifyToken, verifyProfileAccess, browseMemberById);
 router.post("/new-member", hashPassword, createMember);
 
 // Route to put a member informations
-router.put("/edit-member/:id", verifyToken, verifyProfileAccess, editMemberById);
+router.put(
+  "/edit-member/:id",
+  verifyToken,
+  verifyProfileAccess,
+  hashPassword,
+  editMemberById
+);
 
 /* ************************************************************************* */
 

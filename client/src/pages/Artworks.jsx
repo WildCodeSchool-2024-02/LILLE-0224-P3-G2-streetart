@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import { Link, useLoaderData } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -7,15 +10,43 @@ import "./styles/Artworks.css";
 
 function Artworks() {
   const artworkIsValidate = useLoaderData();
+  const [pagination, setPagination] = useState(1);
+  const limit = 12;
+
+  // CALCULATE TOTAL PAGES
+  const totalPages = Math.ceil(artworkIsValidate.length / limit);
+
+  // PAGINATION
+  const paginate = (array, paginationFromState, limitArg) => {
+    const offset = (paginationFromState - 1) * limitArg;
+    return array.slice(offset, offset + limitArg);
+  };
+
+  // ARTWORKS ON THIS PAGE
+  const paginatedArtworks = paginate(artworkIsValidate, pagination, limit);
+
+  // CLICK TO CHANGE THE PAGE
+  const handlePagination = (event, value) => {
+    setPagination(value);
+  };
+
 
   return (
     <div className="artworks-container">
-      {artworkIsValidate.map((artwork, index) => (
+      <div className="all-artworks">
+      {paginatedArtworks.map((artwork, index) => (
         <ArtworkCardWithAnimation key={artwork.id_artwork} artwork={artwork} index={index} />
       ))}
     </div>
+    <div>
+      <Stack spacing={2} className='pagination'>
+        <Pagination count={totalPages} color="primary" page={pagination} onChange={handlePagination}/>
+      </Stack></div>
+    </div>
   );
 }
+
+
 
 function ArtworkCardWithAnimation({ artwork, index }) {
   const { ref, inView } = useInView({
@@ -24,6 +55,7 @@ function ArtworkCardWithAnimation({ artwork, index }) {
   });
 
   return (
+    <div>
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
@@ -35,7 +67,11 @@ function ArtworkCardWithAnimation({ artwork, index }) {
         <ArtworkCard artwork={artwork} />
       </Link>
     </motion.div>
-  );
+</div>
+);
+
+
+
 }
 
 ArtworkCardWithAnimation.propTypes = {
