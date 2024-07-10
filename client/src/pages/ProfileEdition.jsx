@@ -32,7 +32,6 @@ function ProfileEdition() {
           }),
         ]);
         setMember(membersResponse.data);
-        // setEditedCity(membersResponse.data.city);
         setEditedPostcode(membersResponse.data.postcode);
         setEditedEmail(membersResponse.data.email);
 
