@@ -138,6 +138,7 @@ function Profile() {
               </div>
             </div>
           </div>
+          </div>
         )}
       <div className="my-artworks">
         <div className="title-my-artworks">
@@ -168,8 +169,9 @@ function Profile() {
          <div className="btn-see"> <button type="button" className="btn btn-see-more-less" onClick={getAllCards}>{showArtworks ? <div>Voir moins </div>: <div>Voir plus </div>}</button></div> : <div/>}
         </div>
       </div>
+      </div>
     </>
-  );
+  )
 }
 
 export default Profile;
