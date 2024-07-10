@@ -33,7 +33,7 @@ import ValidationArtwork from "./pages/ValidationArtwork";
 // ADMIN PAGES
 import Admin from "./pages/Admin/Admin";
 import Members from "./pages/Admin/Members";
-import Statistiques from "./pages/Admin/Statistiques";
+import Statistics from "./pages/Admin/Statistics";
 import ArtworkReported from "./pages/Admin/ArtworkReported";
 import ArtworkReportedDetails from "./pages/Admin/ArtworkReportedDetails";
 import ArtworkValidation from "./pages/Admin/ArtworkValidation";
@@ -143,7 +143,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin/statistiques",
-        element: <Statistiques />,
+        element: <Statistics />,
       },
       {
         path: "/admin/membres",
