@@ -13,8 +13,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [pwdVisible, setPwdVisible] = useState("password");
-  const [expiration, setExpiration] = useState("session");
-  const [stayConnected, setStayConnected] = useState(false);
+  const [rememberMail, setRememberMail] = useState(false);
   const [connexionError, setConnexionError] = useState("");
 
   useEffect(
@@ -23,6 +22,17 @@ function Login() {
         navigate("/")
       }
     }, [auth, navigate]
+  )
+
+  // IF REMEMBER MAIL IS TRUE, CHECK ON THE COOKIE THE LAST MAIL ADRESS
+  useEffect(
+    () => {
+      const lastEmail = Cookies.get('lastEmail')
+      if (lastEmail) {
+        setRememberMail(true)
+        setEmail(lastEmail)
+      }
+    }, []
   )
 
   const handleChangeEmail = (e) => {
@@ -42,18 +52,21 @@ function Login() {
     }
   };
 
-  const handleChangeStayConnected = () => {
-    if (stayConnected) {
-      setStayConnected(false)
-      setExpiration("session")
+  const handleRememberMail = () => {
+    if (rememberMail) {
+      setRememberMail(false)
+      Cookies.remove('lastEmail')
     } else {
-      setStayConnected(true)
-      setExpiration({ expires: 3560 })
+      setRememberMail(true)
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (rememberMail) {
+      Cookies.set('lastEmail', email, { expires: 3650 })
+    }
 
     try {
         // API call to request a connection
@@ -73,8 +86,8 @@ function Login() {
           const { token, account } = response.data;
 
           // Store the token and account information in localStorage
-          Cookies.set('authToken', token, expiration); // Expires in 1 hour
-          Cookies.set('account', JSON.stringify(account), expiration); // Expires in 1 hour
+          Cookies.set('authToken', token, { expires: 1 / 24 }); // Expires in 1 hour
+          Cookies.set('account', JSON.stringify(account), { expires: 1 / 24 }); // Expires in 1 hour
           
           setAuth({ token, account });
           if (account.assignment === "user") {
@@ -140,8 +153,8 @@ function Login() {
           </div>
         </div>
           <div className="stay-connected">
-            <input type="checkbox" id="stay-connected-checkbox" value={stayConnected} onChange={handleChangeStayConnected} />
-            <label htmlFor="stay-connected-checkbox">Rester connecté</label>
+            <input type="checkbox" id="stay-connected-checkbox" checked={rememberMail} value={rememberMail} onChange={handleRememberMail} />
+            <label htmlFor="stay-connected-checkbox">Se souvenir de moi</label>
           </div>
           <button type="submit" className="btn">
             Me connecter
