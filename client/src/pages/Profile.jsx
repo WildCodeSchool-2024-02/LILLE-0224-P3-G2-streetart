@@ -7,13 +7,15 @@ import { useBadges } from "../contexts/BadgeContext";
 import "./styles/Profile.css";
 import ArtworkCard from "../components/ArtworkCard/ArtworkCard";
 import myAxios from "../services/myAxios";
+import PopupAnswer from "../components/PopupAnswer/PopupAnswer";
 
 function Profile() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { auth } = useAuth(); 
+  const { auth, logout } = useAuth();
   const [artworks, setArtworks] = useState([]);
   const [profile, setProfile] = useState();
+  const [showPopup, setShowPopup] = useState(false);
   const [showArtworks, setShowArtworks] = useState(false)
   const [showBtn, setShowBtn] = useState(false);
 
@@ -50,8 +52,18 @@ function Profile() {
       getData();
     }, [auth.token, id, navigate]
   )
+
+  const handleShowPopup = () => {
+    setShowPopup(!showPopup)
+  }
   
-  // SHOW 3/4 CARDS OR ALL 
+  const deleteAccount = async () => {
+    setShowPopup(false)
+    await myAxios.delete(`/api/accounts/delete/${id}`)
+    logout();
+  }
+  
+    // SHOW 3/4 CARDS OR ALL 
   const getAllCards = () => {
     setShowArtworks(!showArtworks)
   }
@@ -73,60 +85,60 @@ function Profile() {
   }, [artworks, artworksToShow]);
 
   return (
-    <div className="profile-container">
-      {profile && (
-        <div
-          className="my-profile"
-          key={`${profile.firstName}-${profile.lastName}-${profile.id_member}`}>
-          <div className="top-profile">
-            <div className="img-profile">
-              <img
-                className="image-profile"
-                src={
-                  profile.avatar
-                    ? profile.avatar
-                    : "assets/images/icons/profile.png"
-                }
-                alt="profil"
-              />
-              <p className="pseudo-profile">{profile.pseudo}</p>
-            </div>
-            <div className="points-edit-mobile">
-              <Link to={`/profil/edit/${profile.id_member}`}>
-                <EditIcon style={{ color: "#666", fontSize: 35 }} />
-              </Link>
-              <div className="level-points">
-                <p>{ownBadge ? ownBadge.logo : ""}</p>
-                <div className="points"><p>{profile.points}</p>
-                <img src="/assets/images/icons/coin.png" alt="Jetons"  className="img-coin"/></div>
+    <>
+      {showPopup && <PopupAnswer title="Êtes-vous sûr de vouloir supprimer votre compte ?" content="Votre compte sera supprimé définitivement. Vos œuvres seront conservées mais ne vous seront plus associées." choiceOne="Supprimer" roleOne={deleteAccount} choiceTwo="Annuler" roleTwo={handleShowPopup} />}
+      <div className="profile-container">
+        {profile && (
+          <div
+            className="my-profile"
+            key={`${profile.firstName} ${profile.lastName}`}
+          >
+            <div className="top-profile">
+              <div className="img-profile">
+                <img
+                  className="image-profile"
+                  src={
+                    profile.avatar
+                      ? profile.avatar
+                      : "assets/images/icons/profile.png"
+                  }
+                  alt="profil"
+                />
+                <p className="pseudo-profile">{profile.pseudo}</p>
+              </div>
+              <div className="points-edit-mobile">
+                <Link to={`/profil/edit/${profile.id_member}`}>
+                  <EditIcon style={{ color: "#666", fontSize: 35 }} />
+                </Link>
+                <div className="level-points">
+                  <p>{ownBadge ? ownBadge.logo : ""}</p>
+                  <p>{profile.points} points</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="info-desktop">
-            <div className="info-profile">
-              <p>{profile.pseudo}</p>
-              <p>
-                {profile.firstName} {profile.lastName}
-              </p>
-              <p>{profile.email}</p>
-              <p>
-                {profile.postcode} {profile.city}
-              </p>
-            </div>
-            <div className="points-edit-desktop">
-              <Link to={`/profil/edit/${profile.id_member}`}>
-                <EditIcon style={{ color: "#666", fontSize: 35 }} />
-              </Link>
+            <div className="info-desktop">
+              <div className="info-profile">
+                <p>{profile.pseudo}</p>
+                <p>
+                  {profile.firstName} {profile.lastName}
+                </p>
+                <p>{profile.email}</p>
+                <p>
+                  {profile.postcode} {profile.city}
+                </p>
+              <button type="button" className="btn-delete-account" onClick={handleShowPopup}>Désactiver et supprimer mon compte.</button>
+              </div>
+              <div className="points-edit-desktop">
+                <Link to={`/profil/edit/${profile.id_member}`}>
+                  <EditIcon style={{ color: "#666", fontSize: 35 }} />
+                </Link>
               <div className="level-points">
                 <p>{ownBadge ? ownBadge.logo : ""}</p>
                 <div className="points"> <p>{profile.points}</p><img src="/assets/images/icons/coin.png" alt="Jetons" className="img-coin"/></div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-
-
+        )}
       <div className="my-artworks">
         <div className="title-my-artworks">
           <h2>Mes oeuvres</h2>
@@ -156,7 +168,7 @@ function Profile() {
          <div className="btn-see"> <button type="button" className="btn btn-see-more-less" onClick={getAllCards}>{showArtworks ? <div>Voir moins </div>: <div>Voir plus </div>}</button></div> : <div/>}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

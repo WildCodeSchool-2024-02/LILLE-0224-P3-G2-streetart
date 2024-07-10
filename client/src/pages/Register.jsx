@@ -282,12 +282,13 @@ function Register() {
             <select
               type="select"
               name="city"
-              className="input-default"
+              className="input-default city-option"
               placeholder="Ville"
               value={formData.city}
               onChange={handleChange}
               required
             >
+              <option value="">Ville</option>
               {cities.map((city) => (
                 <option key={city.id} value={city}>
                   {city}

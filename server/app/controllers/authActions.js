@@ -18,6 +18,10 @@ const login = async (req, res, next) => {
     if (!verified) {
       return res.status(400).json({ message: "Votre adresse mail ou votre mot de passe est incorrect." });
     }
+
+    if(account.banned) {
+      return res.status(400).json({ message: "Votre compte a été banni." })
+    }
     
     // Respond with the user in JSON format (but without the hashed password)
     delete account.pwd;
