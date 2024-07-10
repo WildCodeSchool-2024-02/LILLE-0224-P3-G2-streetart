@@ -85,8 +85,13 @@ class MemberRepository extends AbstractRepository {
 
       // Execute the SQL UPDATE query to update a specific member
       await connection.query(
-        `UPDATE ${this.table} SET city = ?, postcode = ? WHERE id_member = ?`,
-        [memberUpdate.city, memberUpdate.postcode, memberUpdate.id]
+        `UPDATE ${this.table} SET city = ?, postcode = ?, avatar = ? WHERE id_member = ?`,
+        [
+          memberUpdate.city,
+          memberUpdate.postcode,
+          memberUpdate.picture,
+          memberUpdate.id,
+        ]
       );
       if (memberUpdate.pwd === "") {
         await connection.query(

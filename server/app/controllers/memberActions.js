@@ -1,6 +1,5 @@
 const tables = require("../../database/tables");
 
-
 // The B of BREAD - Browse (Read All) operation
 const browseMembersByDate = async (req, res, next) => {
   try {
@@ -10,7 +9,6 @@ const browseMembersByDate = async (req, res, next) => {
     next(err);
   }
 };
-
 
 const browseRanking = async (req, res, next) => {
   try {

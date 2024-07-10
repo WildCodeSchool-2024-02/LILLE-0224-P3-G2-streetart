@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAuth } from "../contexts/AuthContext";
 import myAxios from "../services/myAxios";
@@ -32,7 +32,6 @@ function ProfileEdition() {
           }),
         ]);
         setMember(membersResponse.data);
-        // setEditedCity(membersResponse.data.city);
         setEditedPostcode(membersResponse.data.postcode);
         setEditedEmail(membersResponse.data.email);
 
@@ -124,10 +123,53 @@ function ProfileEdition() {
     setEditedPwd(value);
   };
 
+  // MODIFY AVATAR
+  const [selectedFile, setSelectedFile] = useState(null);
+  const fileInput = useRef();
+  // Extract and Stock file of avatar
+  // const handleFileSelect = (file) => {
+  //   setSelectedFile(file)
+  // };
+
+  // change picture displayed
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
+    setSelectedFile(file); // App  eler handleFileSelect pour mettre à jour selectedFile
+  };
+
+  const handleUpload = async (image) => {
+    if (!image) {
+      console.error("No image selected");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", image);
+
+    // SEND DATAFORM to UPLOAD Avatar
+    try {
+      const response = await myAxios.post("/api/upload/avatar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const { data: imageData } = response;
+      const { filePath } = imageData;
+      // eslint-disable-next-line consistent-return
+      return `${filePath}`;
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
+  // SEND UPDATE INFORMATIONS
   const handleUpdateProfile = async (e) => {
     // connection to complete DB with new informations
     e.preventDefault();
+    const newAvatar = fileInput.current.files[0];
     try {
+      // CALL handleUpload for Avatar
+      const picture = await handleUpload(newAvatar);
       const response = await myAxios.put(
         `/api/members/edit-member/${member.id_member}`,
         {
@@ -135,6 +177,7 @@ function ProfileEdition() {
           postcode: editedPostcode,
           email: editedEmail,
           pwd: editedPwd,
+          picture,
         },
         {
           headers: {
@@ -170,15 +213,42 @@ function ProfileEdition() {
           className="profile-edit-box"
         >
           <div className="modify-profil-avatar">
-            <img
-              className="avatar-profile-edit"
-              src={
-                member.avatar
-                  ? member.avatar
-                  : "../../public/assets/images/icons/profile.png"
-              }
-              alt="profil"
-            />
+            {selectedFile ? (
+              <img
+                className="avatar-profile-edit"
+                src={URL.createObjectURL(selectedFile)}
+                alt="profil"
+              />
+            ) : (
+              <img
+                className="avatar-profile-edit"
+                src={
+                  member.avatar
+                    ? member.avatar
+                    : "/assets/images/icons/profile.png"
+                }
+                alt="profil"
+              />
+            )}
+            <div>
+              <input
+                type="file"
+                ref={fileInput}
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+              <button
+                type="button"
+                onClick={() => fileInput.current.click()}
+                className="button-edit-avatar"
+                id="fileInput"
+              >
+                <label htmlFor="fileInput" style={{ display: "none" }}>
+                  Edit Avatar
+                </label>
+                <EditIcon style={{ color: "#666", fontSize: 25 }} />
+              </button>
+            </div>
           </div>
           <div className="modify-profil-container">
             <p className="modify-profil">{member.pseudo}</p>
