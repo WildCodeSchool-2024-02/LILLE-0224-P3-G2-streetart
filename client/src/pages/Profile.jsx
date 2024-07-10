@@ -15,7 +15,8 @@ function Profile() {
   const [artworks, setArtworks] = useState([]);
   const [profile, setProfile] = useState();
   const [showArtworks, setShowArtworks] = useState(false)
-  
+  const [showBtn, setShowBtn] = useState(false);
+
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(profile && profile.points);
   
@@ -59,16 +60,24 @@ function Profile() {
   const isMobile = useMediaQuery('(max-width:768px)');
   const artworksToShow = isMobile ? 3 : 4; 
 
+  
   // HOW MANY ARTWORKS TO SHOW 
-  const displayedArtworks = showArtworks ? artworks : artworks.slice(0, artworksToShow);
+  const displayedArtworks = showArtworks ? artworks : artworks.slice(0, artworksToShow)  
+  
+  useEffect(() => {
+    if (artworks.length > artworksToShow) {
+      setShowBtn(true);
+    } else {
+      setShowBtn(false);
+    }
+  }, [artworks, artworksToShow]);
 
   return (
     <div className="profile-container">
       {profile && (
         <div
           className="my-profile"
-          key={`${profile.firstName} ${profile.lastName}`}
-        >
+          key={`${profile.firstName}-${profile.lastName}-${profile.id_member}`}>
           <div className="top-profile">
             <div className="img-profile">
               <img
@@ -127,9 +136,10 @@ function Profile() {
           {profile && artworks.length > 0 ? (
             displayedArtworks.map((artwork) => (
               <div
-                key={artwork.id_artwork}
-                className="artwork-profile"
-              > {artwork.validate === 1 ? 
+              key={artwork.id_artwork}
+              className="artwork-profile"
+              > 
+              {artwork.validate === 1 ? 
                 <Link to={`/oeuvre/${artwork.id_artwork_fk}`}>
                   <ArtworkCard artwork={artwork} />
                 </Link>
@@ -142,7 +152,8 @@ function Profile() {
             <p>Tu n'as posté aucune oeuvre pour le moment.</p>
           )}
 </div>
-         <div className="btn-see"> <button type="button" className="btn btn-see-more-less" onClick={getAllCards}>{showArtworks ? <div>Voir moins </div>: <div>Voir plus </div>}</button></div>
+       { showBtn ? 
+         <div className="btn-see"> <button type="button" className="btn btn-see-more-less" onClick={getAllCards}>{showArtworks ? <div>Voir moins </div>: <div>Voir plus </div>}</button></div> : <div/>}
         </div>
       </div>
     </div>
