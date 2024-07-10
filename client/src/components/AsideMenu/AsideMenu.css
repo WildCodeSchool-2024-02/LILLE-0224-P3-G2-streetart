@@ -19,6 +19,7 @@
     background-color: aliceblue;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding-top: 10vh;
+    z-index: 2;
   }
 
   .aside-menu {
@@ -41,6 +42,12 @@
   .aside-menu-top-admin {
     padding: 1rem;
     font-family: var(--secondary-font);
-    font-size: 2rem;
+    font-size: 0.6em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 800;
+    gap: 3rem;
   }
 }

@@ -28,8 +28,8 @@ function TopBarAdmin({ title }) {
           <Link to="/">
             <h2 className="title">Spot Lille Art</h2>
           </Link>
-          <p className="admin-page-title">Page Administrateur</p>
         </div>
+          <h3 className="admin-page-title">Panel Administrateur</h3>
 
         <div className="right-container">
           <Link to="/">

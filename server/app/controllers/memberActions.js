@@ -1,4 +1,6 @@
+const Joi = require("joi");
 const tables = require("../../database/tables");
+
 
 
 // The B of BREAD - Browse (Read All) operation
@@ -41,28 +43,52 @@ const browseMemberById = async (req, res, next) => {
   }
 };
 
+
 // The A of BREAD - Add (Create) operation
 const createMember = async (req, res, next) => {
-  const { pseudo, firstname, lastname, city, postcode, email, pwd, date } =
-    req.body;
+  const formSchema = Joi.object({
+    firstname: Joi.string().max(25).required(),
+    lastname: Joi.string().max(25).required(),
+    pseudo: Joi.string().max(15).required(),
+    city: Joi.string().max(50).required(),
+    postcode: Joi.string().pattern(/^[0-9]{5}$/).required(),
+    email: Joi.string().email().max(100).required(),
+    pwd: Joi.string().max(255).required(),
+    date: Joi.date().required(),
+  });
+
+  const filteredBody = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    pseudo: req.body.pseudo,
+    city: req.body.city,
+    postcode: req.body.postcode,
+    email: req.body.email,
+    pwd: req.body.pwd,
+    date: req.body.date,
+  };
 
   try {
-    const member = {
-      pseudo,
-      firstname,
-      lastname,
-      city,
-      postcode,
-      email,
-      pwd,
-      date,
-    };
-    const insertId = await tables.member.create(member);
-    res.status(201).json({ insertId });
+    // CHECK THE DATA WITH JOI
+    const { error, value } = formSchema.validate(filteredBody);
+
+    // IF ERROR
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    // IF DATA ARE OK, CREATE THE MEMBER
+    const insertId = await tables.member.create(value);
+
+    // RETURN SUCCESS RESPONSE
+    return res.status(201).json({ insertId });
   } catch (err) {
-    next(err);
+    // PASS ERROR TO EXPRESS ERROR HANDLER
+    return next(err);
   }
 };
+
+
 
 // The E of BREAD - Edit (Update) operation
 const editMemberById = async (req, res, next) => {

@@ -67,6 +67,7 @@
   font-size: 0.8em;
   text-align: center;
   color: red;
+  padding-top: 0.5rem;
 }
 
 .error-message recover {

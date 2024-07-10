@@ -117,6 +117,7 @@ function ArtworkDetails() {
             </p>
           </div>
 
+{auth.token ?
           <div className="artworkdetails-reportbtn">
             {artwork.reported === 0 ? (
               <button
@@ -132,8 +133,11 @@ function ArtworkDetails() {
               </p>
             )}
           </div>
+          
+          : <div/>}
           <p className="focus-text report-artwork">{message}</p>
         </div>
+      
       </div>
 
       <OthersArtworks artworkDisplayed={artwork.id_artwork} />
