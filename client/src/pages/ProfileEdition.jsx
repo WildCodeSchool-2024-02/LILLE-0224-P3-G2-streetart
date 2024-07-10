@@ -123,13 +123,9 @@ function ProfileEdition() {
     setEditedPwd(value);
   };
 
-  // MODIFY AVATAR
+  // -----------------  MODIFY AVATAR ----------------------------------------
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInput = useRef();
-  // Extract and Stock file of avatar
-  // const handleFileSelect = (file) => {
-  //   setSelectedFile(file)
-  // };
 
   // change picture displayed
   const handleFileChange = (e) => {
@@ -162,7 +158,7 @@ function ProfileEdition() {
     }
   };
 
-  // SEND UPDATE INFORMATIONS
+  // --------------------- SEND UPDATE INFORMATIONS ----------------------------
   const handleUpdateProfile = async (e) => {
     // connection to complete DB with new informations
     e.preventDefault();

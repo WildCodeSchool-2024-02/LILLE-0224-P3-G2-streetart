@@ -30,8 +30,6 @@ const addArtwork = async (req, res, next) => {
 };
 
 // Configure multer storage AVATAR
-
-// Configure multer storage ARTWORKS
 const storageAvatar = multer.diskStorage({
   destination(req, file, cb) {
     const uploadPath = path.resolve(
