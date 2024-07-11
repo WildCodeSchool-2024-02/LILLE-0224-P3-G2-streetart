@@ -54,7 +54,7 @@ class ArtworkRepository extends AbstractRepository {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific category by its ID
     const [rows] = await this.database.query(
-      `SELECT a.*, DATE_FORMAT(a.date_creation, '%d-%m-%Y') AS date_creation, m.pseudo, m.points
+      `SELECT a.*, DATE_FORMAT(a.date_creation, '%d-%m-%Y') AS date_creation, m.pseudo, m.points, m.avatar
       FROM artwork AS a
       INNER JOIN operation AS o ON id_artwork_fk=id_artwork
       INNER JOIN account AS ac ON id_account=id_account_fk
