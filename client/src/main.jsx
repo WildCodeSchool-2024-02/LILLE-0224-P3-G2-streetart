@@ -33,11 +33,14 @@ import ValidationArtwork from "./pages/ValidationArtwork";
 // ADMIN PAGES
 import Admin from "./pages/Admin/Admin";
 import Members from "./pages/Admin/Members";
-import Statistiques from "./pages/Admin/Statistiques";
+import Statistics from "./pages/Admin/Statistics";
 import ArtworkReported from "./pages/Admin/ArtworkReported";
 import ArtworkReportedDetails from "./pages/Admin/ArtworkReportedDetails";
 import ArtworkValidation from "./pages/Admin/ArtworkValidation";
 import ArtworkValidationDetails from "./pages/Admin/ArtworkValidationDetails";
+
+// ERROR PAGE
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -143,7 +146,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin/statistiques",
-        element: <Statistiques />,
+        element: <Statistics />,
       },
       {
         path: "/admin/membres",
@@ -192,6 +195,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    element: <Error />,
+    path: "/erreur",
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

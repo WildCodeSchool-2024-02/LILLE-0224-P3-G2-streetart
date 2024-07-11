@@ -7,10 +7,13 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import account-related actions
-const { banAccountById } = require("../../../controllers/accountActions");
+const { banAccountById, deleteAccount } = require("../../../controllers/accountActions");
 
 // Route to ban an Account depend on id_member
 router.put("/ban/:id", banAccountById);
+
+// Route to delete an Account
+router.delete("/delete/:id", deleteAccount)
 
 /* ************************************************************************* */
 

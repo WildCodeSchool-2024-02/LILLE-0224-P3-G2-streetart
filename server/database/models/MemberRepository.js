@@ -66,7 +66,7 @@ class MemberRepository extends AbstractRepository {
   async readMember(id) {
     // Execute the SQL SELECT query to retrieve a specific category by its ID
     const [rows] = await this.database.query(
-      `SELECT ac.id_account, ac.email, ac.id_member_fk, m.id_member, m.firstname, m.lastname, m.pseudo, m.city, m.postcode, m.avatar, m.points
+      `SELECT ac.id_account, ac.email, ac.id_member_fk, ac.banned, m.id_member, m.firstname, m.lastname, m.pseudo, m.city, m.postcode, m.avatar, m.points
     FROM member AS m
     RIGHT JOIN account AS ac ON id_member=id_member_fk
     WHERE m.id_member=(?);`,
@@ -114,6 +114,58 @@ class MemberRepository extends AbstractRepository {
       connection.release();
     }
   }
+
+  // ---------------------- STATISTICS ----------------------
+  async readAllStatistics() {
+    const connection = await this.database.getConnection();
+
+    try {
+      // Begin many operations in SQL to be executed at once or all rollback
+      await connection.beginTransaction();
+
+      // STEP 1 -- COLLECT STATISTICS FOR MEMBERS REGISTERED
+      const [members] = await connection.query(
+        `SELECT
+    COUNT(*) AS total_registered,
+    SUM(CASE WHEN WEEK(a.date_creation) = WEEK(CURDATE()) THEN 1 ELSE 0 END) AS week_registered,
+    SUM(CASE WHEN MONTH(a.date_creation) = MONTH(CURDATE()) THEN 1 ELSE 0 END) AS month_registered
+    FROM member AS m
+    RIGHT JOIN account AS a ON m.id_member = a.id_member_fk;`,
+        []
+      );
+      
+      // STEP 2 -- COLLECT STATISTICS FOR ARTWORKS REGISTERED
+      const [artworks] = await connection.query(
+          `SELECT
+    COUNT(*) AS total_artworks,
+    SUM(CASE WHEN WEEK(date_creation) = WEEK(CURDATE()) THEN 1 ELSE 0 END) AS week_artworks,
+    SUM(CASE WHEN MONTH(date_creation) = MONTH(CURDATE()) THEN 1 ELSE 0 END) AS month_artworks
+    FROM artwork;`,
+          []
+      );
+
+      // STEP 3 -- COLLECT STATISTICS FOR ARTWORKS COVERED
+      const [covered] = await connection.query(
+        `SELECT
+      COUNT(*) AS total_artworks_covered
+      FROM operation
+      WHERE kind = 'signalement' AND id_artwork_fk IS NULL;`,
+        []
+      );
+
+      const statistics = { members, artworks, covered }
+      
+      // CONNECTION => COMMIT, ROLLBACK, RELEASE
+      await connection.commit();
+      return statistics; // Return member on success
+    } catch (error) {
+      await connection.rollback();
+      throw error; // Throw error to handle it outside
+    } finally {
+      connection.release();
+    }
+  }
+
 }
 
 module.exports = MemberRepository;

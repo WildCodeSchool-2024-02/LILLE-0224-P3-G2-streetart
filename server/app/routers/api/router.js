@@ -50,6 +50,11 @@ const mailRouter = require("./mails/router")
 
 router.use("/mails", mailRouter)
 
+// ROAD TO STATISTICS
+const statisticsActions = require("../../controllers/statisticActions")
+
+router.use("/statistics", statisticsActions.browse)
+
 /* ************************************************************************* */
 
 module.exports = router;

@@ -4,6 +4,7 @@ import myAxios from "../../services/myAxios";
 import "./styles/ArtworkReportedDetails.css";
 
 function ArtworkReportedDetails() {
+
   const artworksReportedByID = useLoaderData();
   const navigate = useNavigate();
 

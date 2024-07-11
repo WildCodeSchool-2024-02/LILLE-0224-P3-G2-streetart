@@ -15,6 +15,23 @@ const banAccountById = async (req, res, next) => {
   }
 };
 
+const deleteAccount = async (req, res, next) => {
+  try {
+    // Fetch a specific account from the database based on the provided ID
+    const account = await tables.account.deleteAccountWithMember(req.params.id);
+    // If the account is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the account in JSON format
+
+    res.status(200).json(account);
+    // }
+  } catch (err) {
+    res.sendStatus(404);
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
 module.exports = {
   banAccountById,
+  deleteAccount,
 };
