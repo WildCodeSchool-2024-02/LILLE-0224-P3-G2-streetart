@@ -1,4 +1,4 @@
-import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import myAxios from "../../services/myAxios";
 import "./styles/ArtworkReportedDetails.css";
@@ -54,10 +54,6 @@ function ArtworkReportedDetails() {
 
   return (
     <div className="artworkReported-container">
-      <h2 className="artworksReported-title">
-        <span className="focus-text">Titre : </span>
-        {artworksReportedByID.title}
-      </h2>
       <img
         className="artworkReported-img"
         src={artworksReportedByID.picture}
@@ -65,17 +61,19 @@ function ArtworkReportedDetails() {
       />
       <div className="artworkReportedDetails-info">
         <h5 className="title-info">Informations sur l'oeuvre :</h5>
+        <div className="title">
+        <p>Titre : </p>
+        <p className="focus-text title">{" "}{artworksReportedByID.title}</p>
+      </div>
         <div className="user">
-          <p>Ajoutée par :</p>
+          <p>Ajoutée par : </p>
 
           <p className="focus-text pseudo">
-            <Link to={`/profile/${artworksReportedByID.id_member}`}>
               {artworksReportedByID.pseudo}
-            </Link>
           </p>
         </div>
         <div className="city">
-          <p>Ville : </p>
+          <p>Ville :</p>
           <p className="focus-text cityname">{city}</p>
         </div>
         <div className="date">
