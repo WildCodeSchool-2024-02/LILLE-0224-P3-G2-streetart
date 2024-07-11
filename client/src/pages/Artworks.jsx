@@ -21,15 +21,14 @@ function Artworks() {
     const offset = (paginationFromState - 1) * limitArg;
     return array.slice(offset, offset + limitArg);
   };
-
+  
   // ARTWORKS ON THIS PAGE
   const paginatedArtworks = paginate(artworkIsValidate, pagination, limit);
-
+  
   // CLICK TO CHANGE THE PAGE
   const handlePagination = (event, value) => {
     setPagination(value);
   };
-
 
   return (
     <div className="artworks-container">
@@ -39,9 +38,10 @@ function Artworks() {
       ))}
     </div>
     <div>
-      <Stack spacing={2} className='pagination'>
+    {artworkIsValidate.length > limit ? <Stack spacing={2} className='pagination'>
         <Pagination count={totalPages} color="primary" page={pagination} onChange={handlePagination}/>
-      </Stack></div>
+      </Stack>: <div/>}
+      </div> 
     </div>
   );
 }

@@ -22,12 +22,12 @@ function Ranking() {
   /* RANKING ON THIS PAGE */
   const paginatedRanking = paginate(rankingData, pagination, limit);
 
+  
   /* CLICK TO CHANGE THE PAGE */
   const handlePagination = (event, value) => {
     setPagination(value);
   };
-
-
+  
   const { badges, getBadgeForPoints } = useBadges();
 
   return (
@@ -95,9 +95,10 @@ function Ranking() {
           </tbody>
         </table>
         <div>
-      <Stack spacing={2} className='pagination'>
+      {rankingData > limit ? <Stack spacing={2} className='pagination'>
         <Pagination count={totalPages} color="primary" page={pagination} onChange={handlePagination}/>
-      </Stack></div>
+      </Stack> : <div/>}
+      </div>
     </div>
     </div>
     </div>
