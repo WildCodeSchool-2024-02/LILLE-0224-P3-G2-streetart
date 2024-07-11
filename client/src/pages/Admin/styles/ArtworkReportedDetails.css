@@ -1,9 +1,9 @@
 .artworkReported-container {
-  height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  padding: 1rem;
 }
 
 .artworkReported-img {
@@ -23,16 +23,12 @@
   text-decoration: underline;
 }
 
-.user,
-.city,
-.date {
-  display: flex;
-}
-
+.artworkReportedDetails-info .title,
 .artworkReportedDetails-info .pseudo,
 .artworkReportedDetails-info .cityname,
 .artworkReportedDetails-info .datepic {
   margin-left: 10px;
+  display: flex;
 }
 
 .artworkReportedDetails-btn {
@@ -50,11 +46,6 @@
   .artworkReported-container {
     height: 90%;
     justify-content: space-around;
-  }
-
-  .artworksReported-title {
-    font-size: 2rem;
-    margin: 1rem;
   }
 
   .artworkReported-img {
@@ -82,5 +73,6 @@
     width: 100%;
     gap: 2rem;
     justify-content: center;
+    padding-bottom: 1rem;
   }
 }

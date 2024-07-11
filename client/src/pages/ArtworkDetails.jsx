@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./styles/ArtworkDetails.css";
 import OthersArtworks from "../components/OthersArtworks/OthersArtworks";
 import RoadMapDetails from "../components/RoadMapDetails/RoadMapDetails";
+import PopupAnswer from "../components/PopupAnswer/PopupAnswer";
 import { useBadges } from "../contexts/BadgeContext";
 import { useAuth } from "../contexts/AuthContext";
 import myAxios from "../services/myAxios";
@@ -13,6 +14,8 @@ function ArtworkDetails() {
 
   const [city, setCity] = useState(null);
   const [message, setMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
 
   // StreetMap API for get the adress with latitude and longitude
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artwork.latitude}&lon=${artwork.longitude}&zoom=10&addressdetails=1`;
@@ -45,7 +48,7 @@ function ArtworkDetails() {
   };
 
   // TO REPORT AN ARTWORK
-  const handleClick = async () => {
+  const handleReport = async () => {
     try {
       const response = await myAxios.post(
         `/api/artworks/${artwork.id_artwork}/report`,
@@ -58,16 +61,24 @@ function ArtworkDetails() {
 
       console.info("Oeuvre signalée", response.data);
       setMessage("Oeuvre signalée");
+      setShowPopup(!showPopup)
     } catch (error) {
       console.error("Erreur", error);
     }
   };
+
+  // SHOW OR CLOSE POPUP
+  const handleShowPopup = () => {
+    setShowPopup(!showPopup)
+  }
+
 
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(artwork.points);
 
   return (
     <div className="artworkdetails-container">
+    {showPopup && <PopupAnswer title="Êtes-vous sûr de vouloir signaler cette oeuvre ?" content="Si vous signalez l'oeuvre, un administrateur vérifiera que l'oeuvre n'existe plus. " choiceOne="Confirmer" roleOne={handleReport} choiceTwo="Annuler" roleTwo={handleShowPopup} />}
       <div className="artworkdetails-right-container">
         <div className="artworkdetails-img-container">
           <h2 className="artwork-title">{artwork.title}</h2>
@@ -123,7 +134,7 @@ function ArtworkDetails() {
               <button
                 type="button"
                 className="report-btn"
-                onClick={handleClick}
+                onClick={handleShowPopup}
               >
                 Signaler la disparition de l'oeuvre
               </button>
