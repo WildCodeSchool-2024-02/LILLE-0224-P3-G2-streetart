@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Function for send an e-mail
+// Function to send an e-mail
 const sendEmail = async (to, subject, text, html) => {
     const mailOptions = {
         from: process.env.EMAIL_ADDRESS, // sender address
@@ -98,7 +98,7 @@ const sendEmailWelcome = async (req, res, next) => {
                 <p>Bonjour ${name},</p>
                 <p>Bienvenue chez Spot Lille Art! Nous sommes ravis de vous avoir parmi nous. Vous pouvez maintenant explorer notre site et découvrir les merveilles de l'art de rue à Lille.</p>
                 <p>Merci de votre inscription et à bientôt!</p>
-                <p>Merci,<br>L'équipe Spot Lille Art.</p>
+                <p>L'équipe Spot Lille Art.</p>
             </div>
             <div class="footer">
                 <p>&copy; 2024 Spot Lille Art. Tous droits réservés.</p>
@@ -208,7 +208,192 @@ const sendEmailRecoverPwd = async (req, res, next) => {
     }
 }
 
+const sendEmailContact = async (req, res, next) => {
+    const { to, name } = req.body;
+    const subject = `Confirmation de votre message à Spot Lille Art`;
+    const textContent = `Bonjour ${name},\n\nNous avons bien reçu votre message et notre équipe de support est en train de l'examiner. Nous vous répondrons dans les plus brefs délais.\n\nMerci de nous avoir contactés. Ceci est un message automatique, veuillez ne pas y répondre.\n\nMerci pour votre patience et à bientôt!\n\nL'équipe Spot Lille Art.`;
+    const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de votre message à Spot Lille Art</title>
+    <style>
+        .quicksand {
+            font-family: "Quicksand", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+        body {
+            font-family: "Quicksand", sans-serif;
+            background-color: #f6f6f6;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            padding: 20px;
+        }
+        .header {
+            background-color: #007BFF;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .content {
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #dddddd;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Confirmation de votre message à Spot Lille Art</h1>
+        </div>
+        <div class="content">
+            <p>Bonjour ${name},</p>
+            <p>Nous avons bien reçu votre message et notre équipe de support est en train de l'examiner. Nous vous répondrons dans les plus brefs délais.</p>
+            <p>Merci de nous avoir contactés. Ceci est un message automatique, veuillez ne pas y répondre.</p>
+            <p>Merci pour votre patience et à bientôt!</p>
+            <p>L'équipe Spot Lille Art.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Spot Lille Art. Tous droits réservés.</p>
+            <p>Lille, France.</p>
+        </div>
+    </div>
+</body>
+</html>
+`;
+    try {
+        await sendEmail(to, subject, textContent, htmlContent)
+        res.status(201);
+        next();
+    } catch (error) {
+        next(error)
+    }
+}
+
+const sendEmailContactSla = async (req, res, next) => {
+    const { to, name, content } = req.body;
+    const subject = `Support - Demande de ${name}`;
+    const textContent = `Bonjour,\n\nVous avez reçu une nouvelle demande de support. Voici les détails :\n\nNom : ${name}\nEmail : ${to}\nDemande :\n${content}\n\nMerci de traiter cette demande dans les plus brefs délais.\n\nCordialement,\nL'équipe Spot Lille Art.`;
+    const htmlContent = `<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Nouvelle demande de support à Spot Lille Art</title>
+        <style>
+            .quicksand {
+                font-family: "Quicksand", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+            }
+            body {
+                font-family: "Quicksand", sans-serif;
+                background-color: #f6f6f6;
+                margin: 0;
+                padding: 0;
+            }
+            .email-container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                border: 1px solid #dddddd;
+                padding: 20px;
+            }
+            .header {
+                background-color: #007BFF;
+                color: #ffffff;
+                text-align: center;
+                padding: 10px 0;
+            }
+            .header h1 {
+                margin: 0;
+            }
+            .content {
+                margin: 20px 0;
+            }
+            .footer {
+                text-align: center;
+                font-size: 12px;
+                color: #888888;
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px solid #dddddd;
+            }
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007BFF;
+                color: #ffffff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="email-container">
+            <div class="header">
+                <h1>Nouvelle demande de support à Spot Lille Art</h1>
+            </div>
+            <div class="content">
+                <p>Bonjour,</p>
+                <p>Vous avez reçu une nouvelle demande de support. Voici les détails :</p>
+                <p><strong>Nom :</strong> ${name}</p>
+                <p><strong>Email :</strong> ${to}</p>
+                <p><strong>Demande :</strong></p>
+                </hr>
+                <blockquote>${content}</blockquote>
+                </hr>
+                <p>Merci de traiter cette demande dans les plus brefs délais.</p>
+                <p>Cordialement,</p>
+                <p>L'équipe Spot Lille Art.</p>
+            </div>
+            <div class="footer">
+                <p>&copy; 2024 Spot Lille Art. Tous droits réservés.</p>
+                <p>Lille, France.</p>
+            </div>
+        </div>
+    </body>
+    </html>`;
+
+    try {
+        await sendEmail(process.env.EMAIL_ADDRESS, subject, textContent, htmlContent)
+        res.status(201);
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     sendEmailWelcome,
-    sendEmailRecoverPwd
+    sendEmailRecoverPwd,
+    sendEmailContact,
+    sendEmailContactSla,
 }
