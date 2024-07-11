@@ -162,6 +162,7 @@ function Login() {
             Mot de passe oublié ?
           </Link>
         </div>
+        </div>
         {connexionError && <p style={{ color: "red" }}>{connexionError}</p>}
         <div className="inscription-field">
           <Link to="/inscription" className="link-inscription">
