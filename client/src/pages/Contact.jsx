@@ -46,7 +46,7 @@ import myAxios from "../services/myAxios"
         <div className="contact-img-container">
           <img
             className="contact-img"
-            src="/public/assets/images/artworks/artwork8.png"
+            src="/assets/images/artworks/artwork8.png"
             alt="street art représentant une tête de guépard robotisée"
           />
         </div>

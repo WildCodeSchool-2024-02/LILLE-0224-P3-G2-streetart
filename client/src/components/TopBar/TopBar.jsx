@@ -19,7 +19,7 @@ function TopBar ({ title }) {
             <div className="top-bar desktop">
                 <div className="left-container">
                     <Link to="/">
-                        <img src="/assets/images/logo.png" alt="Logo de Spot Lille Art" className="logo" />
+                        <img src="/assets/images/logo.svg" alt="Logo de Spot Lille Art" className="logo" />
                     </Link>
                     <Link to="/">
                         <h2 className="title">
