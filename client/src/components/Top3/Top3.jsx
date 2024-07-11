@@ -36,7 +36,7 @@ function Top3() {
                     src={
                       member.avatar
                         ? member.avatar
-                        : "../../public/assets/images/icons/profile.png"
+                        : "/assets/images/icons/profile.png"
                     }
                     alt="avatar"
                   />
@@ -44,7 +44,7 @@ function Top3() {
                 <td className="td-points td-points-homepage">
                   {member.points}{" "}
                   <img
-                    src="../../public/assets/images/icons/coin.png"
+                    src="/assets/images/icons/coin.png"
                     alt="piece"
                     className="img-coin"
                   />{" "}
