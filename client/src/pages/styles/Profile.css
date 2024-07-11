@@ -15,7 +15,7 @@
 
 .top-profile {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -30,13 +30,15 @@
 }
 
 .points .img-coin {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.3rem;
 }
 
 .points {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .edit-profile {
@@ -119,7 +121,11 @@
   font-size: 1rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
+  .profile-container {
+    height: auto;
+  }
+
   .my-profile {
     display: flex;
     justify-content: space-around;

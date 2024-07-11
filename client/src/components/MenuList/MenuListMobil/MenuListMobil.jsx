@@ -37,7 +37,7 @@ function MenuListMobil({ setOpenMenuList }) {
     
     return (
         <ClickAwayListener onClickAway={handleOutsideClick}>
-            <div ref={menuList} className="menu-list">
+            <div ref={menuList} className="menu-list mobil">
                 {auth.account ? 
                 <>
                     <button type="button" onClick={goToProfile} className="menu-item">

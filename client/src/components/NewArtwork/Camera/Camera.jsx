@@ -2,6 +2,7 @@ import "./Camera.css"
 import { useRef, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
 import { useNavigate, Link } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 import { useNewArtwork } from "../../../contexts/NewArtworkContext";
 import { useAuth } from "../../../contexts/AuthContext";
 
@@ -11,6 +12,15 @@ function Camera() {
     const { image, setImage, deletePicture, setLatitude, setLongitude } = useNewArtwork();
     const navigate = useNavigate();
     const webcamRef = useRef(null);
+    const isMobile = useMediaQuery('(max-width:768px)');
+
+    useEffect(
+      () => {
+        if (!isMobile) {
+          navigate("/erreur")
+        }
+      }, [isMobile, navigate]
+    )
   
     const capturePicture = () => {
       const imageSrc = webcamRef.current.getScreenshot();

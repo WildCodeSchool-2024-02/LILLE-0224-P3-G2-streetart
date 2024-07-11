@@ -29,7 +29,7 @@ function Top3() {
             return (
               <tr key={member.id_member} className="rank-boxes">
                 <td className="td-position">{index + 1}</td>
-                <td className="td-pseudo">{member.pseudo}</td>
+                <td className="td-pseudo home">{member.pseudo}</td>
                 <td className="td-img">
                   <img
                     className="user-img-ranking"

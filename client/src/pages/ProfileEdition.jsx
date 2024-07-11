@@ -180,7 +180,7 @@ function ProfileEdition() {
             />
           </div>
           <div className="modify-profil-container">
-            <p className="modify-profil">{member.pseudo}</p>
+            <p className="modify-profil focus-text">{member.pseudo}</p>
             <p className="modify-profil">{member.firstname}</p>
             <p className="modify-profil">{member.lastname}</p>
           </div>

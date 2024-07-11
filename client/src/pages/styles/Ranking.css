@@ -41,6 +41,7 @@
   justify-content: space-between;
   padding: 0 0.5rem;
   margin: 0.5rem 0;
+  overflow: hidden;
   font-weight: 600;
   width: 90vw;
 }
@@ -89,14 +90,14 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   .rank-container {
     padding-left: 5rem;
-    padding: 2rem;
+    padding: 1.5rem;
   }
-  © .classement-title {
+  .classement-title {
     width: 43vw;
     text-align: center;
   }
@@ -106,10 +107,11 @@
     border-radius: 0;
     padding: 0rem;
     background-color: transparent;
-    position: sticky;
+    margin: 0;
+    /* position: sticky;
     top: 1rem;
     margin: 0.5rem 0;
-    width: 50%;
+    width: 50%; */
   }
 
   .rank-explain {
@@ -120,7 +122,8 @@
   }
 
   .rank-explain-box {
-    height: 65vh;
+    /* height: 65vh; */
+    margin-top: 2.2rem;
   }
 
   .rank-box {
@@ -160,5 +163,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
   }
 }

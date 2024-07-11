@@ -104,7 +104,7 @@ function Profile() {
                   }
                   alt="profil"
                 />
-                <p className="pseudo-profile">{profile.pseudo}</p>
+                <p className="pseudo-profile focus-text">{profile.pseudo}</p>
               </div>
               <div className="points-edit-mobile">
                 <Link to={`/profil/edit/${profile.id_member}`}>
@@ -112,8 +112,8 @@ function Profile() {
                 </Link>
                 <div className="level-points">
                   <p>{ownBadge ? ownBadge.logo : ""}</p>
-                  <p>{profile.points} points</p>
-                </div>
+                  <div className="points"> <p>{profile.points}</p><img src="/assets/images/icons/coin.png" alt="Jetons" className="img-coin"/></div>
+                  </div>
               </div>
             </div>
             <div className="info-desktop">
@@ -137,6 +137,7 @@ function Profile() {
                 <div className="points"> <p>{profile.points}</p><img src="/assets/images/icons/coin.png" alt="Jetons" className="img-coin"/></div>
               </div>
             </div>
+          </div>
           </div>
         )}
       <div className="my-artworks">
@@ -163,10 +164,11 @@ function Profile() {
           ) : (
             <p>Tu n'as posté aucune oeuvre pour le moment.</p>
           )}
-</div>
+        </div>
        { showBtn ? 
          <div className="btn-see"> <button type="button" className="btn btn-see-more-less" onClick={getAllCards}>{showArtworks ? <div>Voir moins </div>: <div>Voir plus </div>}</button></div> : <div/>}
         </div>
+      </div>
       </div>
     </>
   );

@@ -117,14 +117,14 @@ function Login() {
         <div className="connexion-field">
           <h2 className="login-title">Connexion</h2>
           <div className="field">
-            <input type="email" className="input-default" placeholder="E-mail" onChange={handleChangeEmail} value={email}/>
+            <input type="email" className="input-default login-field" placeholder="E-mail" onChange={handleChangeEmail} value={email}/>
             <div className="line" />
           </div>
           <div className="field field-password input-default">
           <input
             type={pwdVisible}
             name="pwd"
-            className="input-default"
+            className="input-default login-field"
             placeholder="Mot de passe"
             maxLength="25"
             value={pwd}
