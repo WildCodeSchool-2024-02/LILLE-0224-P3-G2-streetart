@@ -111,46 +111,39 @@ function Login() {
         <div className="connexion-field">
           <h2 className="login-title">Connexion</h2>
           <div className="field">
-            <input
-              type="email"
-              className="input-default"
-              placeholder="E-mail"
-              onChange={handleChangeEmail}
-              value={email}
-            />
+            <input type="email" className="input-default login-field" placeholder="E-mail" onChange={handleChangeEmail} value={email}/>
             <div className="line" />
           </div>
           <div className="field field-password input-default">
-            <input
-              type={pwdVisible}
-              name="pwd"
-              className="input-default"
-              placeholder="Mot de passe"
-              maxLength="25"
-              value={pwd}
-              onChange={handleChangePwd}
-              required
-            />
-            <div className="line" />
-            <div className="password-visible">
-              {pwdVisible === "text" ? (
-                <img
-                  src="/assets/images/icons/oeil-barre.png"
-                  className="eye-pwd"
-                  role="presentation"
-                  onClick={toggleVisibilityPwd}
-                  alt="oeil barré pour cacher le mot de passe"
-                />
-              ) : (
-                <img
-                  src="/assets/images/icons/oeil-ouvert.png"
-                  className="eye-pwd"
-                  role="presentation"
-                  onClick={toggleVisibilityPwd}
-                  alt="oeil ouvert pour afficher le mot de passe"
-                />
-              )}
-            </div>
+          <input
+            type={pwdVisible}
+            name="pwd"
+            className="input-default login-field"
+            placeholder="Mot de passe"
+            maxLength="25"
+            value={pwd}
+            onChange={handleChangePwd}
+            required
+          />
+          <div className="line" />
+          <div className="password-visible">
+            {pwdVisible === "text" ? (
+              <img
+                src="/assets/images/icons/oeil-barre.png"
+                className="eye-pwd"
+                role="presentation"
+                onClick={toggleVisibilityPwd}
+                alt="oeil barré pour cacher le mot de passe"
+              />
+            ) : (
+              <img
+                src="/assets/images/icons/oeil-ouvert.png"
+                className="eye-pwd"
+                role="presentation"
+                onClick={toggleVisibilityPwd}
+                alt="oeil ouvert pour afficher le mot de passe"
+              />
+            )}
           </div>
           <div className="stay-connected">
             <input

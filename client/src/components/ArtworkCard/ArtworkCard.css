@@ -27,9 +27,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3rem;
   background-color: rgba(0, 0, 0, 0.4);
   color: var(--white);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.artwork-info h3 {
+  width: 90%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .artwork-card .artwork-info.not-validated {
@@ -39,17 +49,38 @@
   flex-direction: column;
   justify-content: space-around;
   background-color: rgba(0, 0, 0, 0.6);
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+.artwork-card .artwork-info.not-validated h3 {
+  display: none;
 }
 
 #not-validated {
   color: greenyellow;
   font-weight: 600;
+  white-space: wrap;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
   .artwork-card {
     width: 16vw;
     height: 16vw;
+  }
+
+  .artwork-card .artwork-info.not-validated h3 {
+    display: block;
+    white-space: wrap;
+    text-align: center;
+  }
+
+  #not-validated {
+    color: greenyellow;
+    font-weight: 600;
+    white-space: wrap;
+    text-align: center;
   }
 }
 
@@ -58,6 +89,10 @@
     width: 19vw;
     height: 19vw;
     margin: 1rem 0.7rem;
+  }
+
+  .artwork-info {
+    padding: 0.2rem 0;
   }
 }
 

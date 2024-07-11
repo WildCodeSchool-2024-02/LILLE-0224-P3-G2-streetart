@@ -29,7 +29,7 @@ function RankingHomepage() {
             return (
               <tr key={member.id_member} className="rank-boxes">
                 <td className="td-position">{index + 1}</td>
-                <td className="td-pseudo">{member.pseudo}</td>
+                <td className="td-pseudo home">{member.pseudo}</td>
                 <td className="td-img">
                   <img
                     className="user-img-ranking"
@@ -48,7 +48,9 @@ function RankingHomepage() {
                     alt="piece"
                     className="img-coin"
                   />{" "}
-                  <p className="badge-homepage">{ownBadge.logo}</p>
+                </td>
+                <td>
+                  <p className="badge-homepage home">{ownBadge.logo}</p>
                 </td>
               </tr>
             );

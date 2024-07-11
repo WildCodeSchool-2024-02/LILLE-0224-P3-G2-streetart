@@ -22,7 +22,7 @@ function RoadMap() {
   const artworkMap = useLoaderData();
 
   return (
-    <>
+    <div className="roadmap-container">
       <p className="text-roadmap">
         Retrouve ici les oeuvres street art de la MEL
       </p>
@@ -56,7 +56,7 @@ function RoadMap() {
           <SearchRoadMap />
         </MapContainer>
       </div>
-    </>
+    </div>
   );
 }
 
