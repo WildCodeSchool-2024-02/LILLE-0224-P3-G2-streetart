@@ -13,7 +13,6 @@ class AdministratorSeeder extends AbstractSeeder {
       {
         firstname: "John",
         lastname: "Doe",
-        pseudo: "admin",
       },
     ];
 

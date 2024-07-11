@@ -20,13 +20,11 @@ function Register() {
     date: "",
   });
 
-  useEffect(
-    () => {
-      if (auth.account) {
-        navigate("/")
-      }
-    }, [auth, navigate]
-  )
+  useEffect(() => {
+    if (auth.account) {
+      navigate("/");
+    }
+  }, [auth, navigate]);
 
   useEffect(() => {
     const getDate = () => {
@@ -187,7 +185,7 @@ function Register() {
       <div className="inscription-img-container">
         <img
           className="inscription-img"
-          src="/public/assets/images/inscription-img.png"
+          src="/assets/images/inscription-img.png"
           alt="street art représentant un DJ"
         />
       </div>

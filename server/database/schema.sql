@@ -12,8 +12,7 @@ CREATE TABLE member (
 CREATE TABLE administrator (
   id_administrator INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
   firstname VARCHAR(25) NOT NULL, 
-  lastname VARCHAR(25) NOT NULL, 
-  pseudo VARCHAR(15) NOT NULL
+  lastname VARCHAR(25) NOT NULL  
 );
 
 CREATE TABLE account (
