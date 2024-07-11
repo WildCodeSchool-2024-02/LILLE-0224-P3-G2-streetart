@@ -15,6 +15,7 @@ const { generateResetPwdToken, changePwd } = require("../../../controllers/authA
 router.post("/", generateResetPwdToken, sendEmailRecoverPwd);
 
 const { verifyResetToken ,verifyTokenRecoverPwd, hashPassword } = require("../../../services/auth");
+
 // ROAD TO VERIFY TOKEN AND REDIRECT TO INDEX IF THE TOKEN IS INVALID
 router.get("/verify-reset-token/:token", verifyResetToken)
 
