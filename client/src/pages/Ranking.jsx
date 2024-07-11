@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
-import { useState } from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import { useState } from "react";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import "./styles/Ranking.css";
 import { useBadges } from "../contexts/BadgeContext";
 
@@ -27,7 +27,6 @@ function Ranking() {
     setPagination(value);
   };
 
-
   const { badges, getBadgeForPoints } = useBadges();
 
   return (
@@ -48,7 +47,7 @@ function Ranking() {
                 <p key={badge.range} className="badge-info">
                   {badge.range}
                   <img
-                    src="../../public/assets/images/icons/coin.png"
+                    src="/assets/images/icons/coin.png"
                     alt="badge"
                     className="img-coin"
                   />
@@ -59,47 +58,59 @@ function Ranking() {
           </div>
         </div>
         <div className="ranking-pagination">
-        <h2 className="classement-title">Classement</h2>
-        <table className="rank-box">
-          <tbody>
-            {paginatedRanking.map((member, index) => {
-              const ownBadge = getBadgeForPoints(member.points);
-              const absoluteIndex = (pagination - 1) * limit + index + 1;
-              return (
-                <tr key={member.id_member} className="rank-boxes">
-                  <td className="td-position">{absoluteIndex}</td>
-                  <td className="td-pseudo">{member.pseudo}</td>
-                  <td className="td-img">
-                    <img
-                      className="user-img-ranking"
-                      src={
-                        member.avatar
-                          ? member.avatar
-                          : "/assets/images/icons/profile.png"
-                      }
-                      alt="avatar"
-                    />
-                  </td>
-                  <td className="td-points">
-                    {member.points}{" "}
-                    <img
-                      src="../../public/assets/images/icons/coin.png"
-                      alt="piece"
-                      className="img-coin"
-                    />{" "}
-                  </td>
-                  <td className="td-badge">{ownBadge ? ownBadge.logo : ""}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <div>
-      <Stack spacing={2} className='pagination'>
-        <Pagination count={totalPages} color="primary" page={pagination} onChange={handlePagination}/>
-      </Stack></div>
-    </div>
-    </div>
+          <h2 className="classement-title">Classement</h2>
+          <table className="rank-box">
+            <tbody>
+              {paginatedRanking.map((member, index) => {
+                const ownBadge = getBadgeForPoints(member.points);
+                const absoluteIndex = (pagination - 1) * limit + index + 1;
+                return (
+                  <tr key={member.id_member} className="rank-boxes">
+                    <td className="td-position">{absoluteIndex}</td>
+                    <td className="td-pseudo">{member.pseudo}</td>
+                    <td className="td-img">
+                      <img
+                        className="user-img-ranking"
+                        src={
+                          member.avatar
+                            ? member.avatar
+                            : "/assets/images/icons/profile.png"
+                        }
+                        alt="avatar"
+                      />
+                    </td>
+                    <td className="td-points">
+                      {member.points}{" "}
+                      <img
+                        src="/assets/images/icons/coin.png"
+                        alt="piece"
+                        className="img-coin"
+                      />{" "}
+                    </td>
+                    <td className="td-badge">
+                      {ownBadge ? ownBadge.logo : ""}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div>
+            {rankingData > limit ? (
+              <Stack spacing={2} className="pagination">
+                <Pagination
+                  count={totalPages}
+                  color="primary"
+                  page={pagination}
+                  onChange={handlePagination}
+                />
+              </Stack>
+            ) : (
+              <div />
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

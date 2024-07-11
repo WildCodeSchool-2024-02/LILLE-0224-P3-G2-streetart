@@ -44,7 +44,7 @@ function RankingHomepage() {
                 <td className="td-points">
                   {member.points}{" "}
                   <img
-                    src="../../public/assets/images/icons/coin.png"
+                    src="/assets/images/icons/coin.png"
                     alt="piece"
                     className="img-coin"
                   />{" "}

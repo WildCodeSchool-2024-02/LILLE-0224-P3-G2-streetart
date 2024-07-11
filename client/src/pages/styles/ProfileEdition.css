@@ -65,12 +65,22 @@
 }
 
 .modify-profil-avatar {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 50%;
   height: 7rem;
+}
+
+.button-edit-avatar {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  border: unset;
+  background: unset;
+  color: 666;
 }
 
 .btn-modifications {
