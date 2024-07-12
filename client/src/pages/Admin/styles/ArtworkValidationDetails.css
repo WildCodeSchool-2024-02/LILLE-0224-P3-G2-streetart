@@ -23,12 +23,14 @@
   text-decoration: underline;
 }
 
+.artworksNV-title,
 .user,
 .city,
 .date {
   display: flex;
 }
 
+.artworkNVDetails-info .title,
 .artworkNVDetails-info .pseudo,
 .artworkNVDetails-info .cityname,
 .artworkNVDetails-info .datepic {
@@ -48,13 +50,7 @@
 
 @media screen and (min-width: 768px) {
   .artworkNV-container {
-    height: 90%;
     justify-content: space-around;
-  }
-
-  .artworksNV-title {
-    font-size: 2rem;
-    margin: 1rem;
   }
 
   .artworkNV-img {
