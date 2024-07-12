@@ -95,8 +95,6 @@ function Register() {
     } else {
       setConfPwdVisible("password");
     }
-
-    setPwdVisible(pwdVisible === "password" ? "text" : "password");
   };
 
   const handleChange = (e) => {

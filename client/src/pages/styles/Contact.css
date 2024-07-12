@@ -59,6 +59,11 @@
   color: red;
 }
 
+textarea {
+  font-family: var(--secondary-font);
+  font-weight: 500;
+}
+
 /**************************DESKTOP VERSION****************************/
 
 @media screen and (min-width: 1024px) {
