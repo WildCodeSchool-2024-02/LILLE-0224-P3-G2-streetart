@@ -289,7 +289,7 @@ function Register() {
             >
               <option value="">Ville</option>
               {cities.map((city) => (
-                <option key={city.id} value={city}>
+                <option key={`${formData.postcode}-${city}`} value={city}>
                   {city}
                 </option>
               ))}
