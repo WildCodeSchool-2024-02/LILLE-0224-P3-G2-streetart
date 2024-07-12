@@ -44,12 +44,12 @@ class MemberRepository extends AbstractRepository {
     }
   }
 
-  async readAllMembersByDate() {
+  async readAllMembersInAdmin() {
     const [rows] = await this.database.query(
       `SELECT m.*, DATE_FORMAT(ac.date_creation, '%d/%m/%Y') AS date_creation, ac.email, ac.banned
       FROM member AS m
       INNER JOIN account AS ac ON id_member=id_member_fk
-      ORDER BY date_creation DESC`
+      ORDER BY id_member DESC`
     );
     return rows;
   }
