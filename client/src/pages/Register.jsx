@@ -95,8 +95,6 @@ function Register() {
     } else {
       setConfPwdVisible("password");
     }
-
-    setPwdVisible(pwdVisible === "password" ? "text" : "password");
   };
 
   const handleChange = (e) => {
@@ -291,7 +289,7 @@ function Register() {
             >
               <option value="">Ville</option>
               {cities.map((city) => (
-                <option key={city.id} value={city}>
+                <option key={`${formData.postcode}-${city}`} value={city}>
                   {city}
                 </option>
               ))}
