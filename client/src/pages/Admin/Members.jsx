@@ -1,4 +1,6 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import { useState, useEffect } from "react";
 import myAxios from "../../services/myAxios";
 import "./styles/Members.css";
@@ -32,6 +34,29 @@ function Members() {
     }
   };
 
+
+  // PAGINATION
+  const [pagination, setPagination] = useState(1);
+  const limit = 6;
+
+  /* CALCULATE TOTAL PAGES */
+  const totalPages = Math.ceil(members.length / limit);
+
+  /* PAGINATION */
+  const paginate = (array, paginationFromState, limitArg) => {
+    const offset = (pagination - 1) * limitArg;
+    return array.slice(offset, offset + limitArg);
+  };
+
+  /* RANKING ON THIS PAGE */
+  const paginatedMembers = paginate(members, pagination, limit);
+
+  /* CLICK TO CHANGE THE PAGE */
+  const handlePagination = (event, value) => {
+    setPagination(value);
+  };
+
+
   return (
     <div>
       <div>
@@ -52,7 +77,7 @@ function Members() {
           </thead>
           <tbody className="tbl-content">
             {members &&
-              members.map((member) => (
+              paginatedMembers.map((member) => (
                 <tr
                   key={member.id_member}
                   style={{
@@ -92,7 +117,21 @@ function Members() {
               ))}
           </tbody>
         </table>
+        {members > limit ?    
+        (
+        <div />      
+            ) : (
+              <Stack spacing={2} className="pagination">
+              <Pagination
+                count={totalPages}
+                color="primary"
+                page={pagination}
+                onChange={handlePagination}
+              />
+            </Stack>
+            )}
       </div>
+     
     </div>
   );
 }
