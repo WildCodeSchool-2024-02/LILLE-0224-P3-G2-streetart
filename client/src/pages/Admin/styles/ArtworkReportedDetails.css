@@ -23,12 +23,18 @@
   text-decoration: underline;
 }
 
+.title,
+.user,
+.city,
+.date {
+  display: flex;
+}
+
 .artworkReportedDetails-info .title,
 .artworkReportedDetails-info .pseudo,
 .artworkReportedDetails-info .cityname,
 .artworkReportedDetails-info .datepic {
   margin-left: 10px;
-  display: flex;
 }
 
 .artworkReportedDetails-btn {
