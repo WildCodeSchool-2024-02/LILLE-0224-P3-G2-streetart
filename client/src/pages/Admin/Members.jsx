@@ -9,7 +9,7 @@ function Members() {
   useEffect(() => {
     const getData = async () => {
       const [membersResponse] = await Promise.all([
-        myAxios.get(`/api/members/date`),
+        myAxios.get(`/api/members/last-register`),
       ]);
       setMembers(membersResponse.data);
     };
@@ -82,10 +82,16 @@ function Members() {
                     {member.banned === 0 ? (
                       <DeleteForeverIcon
                         onClick={() => handleBanUser(member.id_member)}
-                        style={{ color: "#666", fontSize: 35, cursor: "pointer" }}
+                        style={{
+                          color: "#666",
+                          fontSize: 35,
+                          cursor: "pointer",
+                        }}
                       />
                     ) : (
-                      <p style={{color: "red", fontWeight: "600"}}>Membre banni</p>
+                      <p style={{ color: "red", fontWeight: "600" }}>
+                        Membre banni
+                      </p>
                     )}
                   </td>
                 </tr>
