@@ -105,7 +105,7 @@ function Login() {
           className="login-img"
           src="/assets/images/login-img.png"
           alt="street art représentant un DJ"
-        />
+          />
       </div>
       <form onSubmit={handleSubmit} className="login-formulaire">
         <div className="connexion-field">
@@ -124,27 +124,29 @@ function Login() {
             value={pwd}
             onChange={handleChangePwd}
             required
-          />
+            />
           <div className="line" />
           <div className="password-visible">
             {pwdVisible === "text" ? (
               <img
-                src="/assets/images/icons/oeil-barre.png"
-                className="eye-pwd"
-                role="presentation"
-                onClick={toggleVisibilityPwd}
-                alt="oeil barré pour cacher le mot de passe"
+              src="/assets/images/icons/oeil-barre.png"
+              className="eye-pwd"
+              role="presentation"
+              onClick={toggleVisibilityPwd}
+              alt="oeil barré pour cacher le mot de passe"
               />
             ) : (
               <img
-                src="/assets/images/icons/oeil-ouvert.png"
-                className="eye-pwd"
-                role="presentation"
-                onClick={toggleVisibilityPwd}
-                alt="oeil ouvert pour afficher le mot de passe"
+              src="/assets/images/icons/oeil-ouvert.png"
+              className="eye-pwd"
+              role="presentation"
+              onClick={toggleVisibilityPwd}
+              alt="oeil ouvert pour afficher le mot de passe"
               />
             )}
           </div>
+          </div>
+            {connexionError && <div><p style={{ color: "red", textAlign: "center", fontSize: "0.8em"}}>{connexionError}</p></div>}
           <div className="stay-connected">
             <input
               type="checkbox"
@@ -162,8 +164,6 @@ function Login() {
             Mot de passe oublié ?
           </Link>
         </div>
-        </div>
-        {connexionError && <p style={{ color: "red" }}>{connexionError}</p>}
         <div className="inscription-field">
           <Link to="/inscription" className="link-inscription">
             Pas encore inscrit ? C'est par ici

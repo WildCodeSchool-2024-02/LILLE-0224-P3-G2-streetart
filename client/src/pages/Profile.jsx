@@ -95,8 +95,8 @@ function Profile() {
           >
             <div className="top-profile">
               <div className="img-profile">
+                <div className="image-profile">
                 <img
-                  className="image-profile"
                   src={
                     profile.avatar
                       ? profile.avatar
@@ -104,6 +104,7 @@ function Profile() {
                   }
                   alt="profil"
                 />
+                </div>
                 <p className="pseudo-profile focus-text">{profile.pseudo}</p>
               </div>
               <div className="points-edit-mobile">
@@ -126,7 +127,7 @@ function Profile() {
                 <p>
                   {profile.postcode} {profile.city}
                 </p>
-              <button type="button" className="btn-delete-account" onClick={handleShowPopup}>Désactiver et supprimer mon compte.</button>
+              <button type="button" className="btn-delete-account" onClick={handleShowPopup}>Désactiver et supprimer mon compte</button>
               </div>
               <div className="points-edit-desktop">
                 <Link to={`/profil/edit/${profile.id_member}`}>

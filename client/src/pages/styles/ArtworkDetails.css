@@ -69,9 +69,20 @@
 .user-img-artwork {
   width: 3.5rem;
   height: 3.5rem;
-  object-fit: cover;
   border-radius: 50%;
-  padding: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-container);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.user-img-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .artworkdetails-reportbtn {
@@ -107,7 +118,8 @@
   .artworkdetails-container {
     height: 95%;
     width: 100%;
-    padding: 1rem 0;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

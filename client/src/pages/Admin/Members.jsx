@@ -61,15 +61,16 @@ function Members() {
                 >
                   <td className="table-info">{member.id_member}</td>
                   <td className="table-info">
-                    <img
-                      src={
-                        member.avatar
-                          ? member.avatar
-                          : "/assets/images/icons/profile.png"
-                      }
-                      alt="avatar du membre"
-                      className="table-avatar"
-                    />
+                    <div className="table-avatar">
+                      <img
+                        src={
+                          member.avatar
+                            ? member.avatar
+                            : "/assets/images/icons/profile.png"
+                        }
+                        alt="avatar du membre"
+                      />
+                    </div>
                   </td>
                   <td className="table-info">{member.firstname}</td>
                   <td className="table-info">{member.lastname}</td>

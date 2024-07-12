@@ -114,11 +114,12 @@ function ArtworkDetails() {
                 <p>Ajoutée par :</p>
                 <p className="focus-text">{artwork.pseudo}</p>
               </div>
-              <img
-                className="user-img-artwork"
-                src="https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg"
-                alt="avatar de la personne qui a ajouté l'oeuvre"
-              />
+              <div className="user-img-artwork">
+                <img
+                  src="https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg"
+                  alt="avatar de la personne qui a ajouté l'oeuvre"
+                />
+              </div>
               <p className="focus-text">{artwork.points} points</p>
               <p>{ownBadge.logo}</p>
             </div>

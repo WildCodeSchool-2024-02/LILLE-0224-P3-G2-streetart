@@ -13,6 +13,11 @@ const hashingOptions = {
 const hashPassword = async (req, res, next) => {
     try {
       const { pwd } = req.body;
+      
+      if (!pwd) {
+        next();
+      }
+
       const hashedPassword = await argon2.hash(pwd, hashingOptions);
 
       delete req.body.pwd;

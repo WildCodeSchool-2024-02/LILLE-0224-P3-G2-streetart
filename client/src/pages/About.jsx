@@ -67,7 +67,7 @@ function About() {
           incontournables où l'art urbain s'épanouit.
         </li>
         <li>
-        <span className="focus-text">3.</span> Participer au classement en renseignant des oeuvres, gagner des points et obtenir des badges, <Link to="/classement" id="ranking-link">regarde ici</Link> les règles du classement afin de devenir le meilleur chasseur !
+        <span className="focus-text">3.</span> Participer au classement : En renseignant des oeuvres, gagnez des points et obtenez des badges, <Link to="/classement" id="ranking-link">regardez ici</Link> les règles du classement afin de devenir le meilleur chasseur !
         </li>
       </ul>
       <img

@@ -19,10 +19,29 @@
   align-items: center;
 }
 
+.img-profile {
+  display: flex;
+  flex-direction: column;
+}
+
 .image-profile {
-  width: 10rem;
-  height: fit-content;
+  overflow: hidden;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 10rem;
+  box-shadow: var(--shadow-container);
+  background-color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.image-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .pseudo-profile {
@@ -136,6 +155,7 @@
 
   .image-profile {
     width: 15rem;
+    height: 15rem;
   }
 
   .info-profile {
