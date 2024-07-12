@@ -14,13 +14,14 @@ class MemberRepository extends AbstractRepository {
 
       // FIRST CONNECTION: Insert the member into the "member" table
       const [memberResult] = await connection.query(
-        `INSERT INTO member (firstname, lastname, pseudo, city, postcode) VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO member (firstname, lastname, pseudo, city, postcode, avatar) VALUES (?, ?, ?, ?, ?, ?)`,
         [
           member.firstname,
           member.lastname,
           member.pseudo,
           member.city,
           member.postcode,
+          member.avatar,
         ]
       );
 
@@ -133,15 +134,15 @@ class MemberRepository extends AbstractRepository {
     RIGHT JOIN account AS a ON m.id_member = a.id_member_fk;`,
         []
       );
-      
+
       // STEP 2 -- COLLECT STATISTICS FOR ARTWORKS REGISTERED
       const [artworks] = await connection.query(
-          `SELECT
+        `SELECT
     COUNT(*) AS total_artworks,
     SUM(CASE WHEN WEEK(date_creation) = WEEK(CURDATE()) THEN 1 ELSE 0 END) AS week_artworks,
     SUM(CASE WHEN MONTH(date_creation) = MONTH(CURDATE()) THEN 1 ELSE 0 END) AS month_artworks
     FROM artwork;`,
-          []
+        []
       );
 
       // STEP 3 -- COLLECT STATISTICS FOR ARTWORKS COVERED
@@ -153,8 +154,8 @@ class MemberRepository extends AbstractRepository {
         []
       );
 
-      const statistics = { members, artworks, covered }
-      
+      const statistics = { members, artworks, covered };
+
       // CONNECTION => COMMIT, ROLLBACK, RELEASE
       await connection.commit();
       return statistics; // Return member on success
@@ -165,7 +166,6 @@ class MemberRepository extends AbstractRepository {
       connection.release();
     }
   }
-
 }
 
 module.exports = MemberRepository;

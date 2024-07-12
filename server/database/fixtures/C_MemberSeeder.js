@@ -17,8 +17,7 @@ class MemberSeeder extends AbstractSeeder {
         city: "Templemars",
         postcode: 59175,
         points: 80,
-        avatar:
-          "https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn",
+        avatar: "/assets/images/icons/profile.png",
       },
       {
         firstname: "Alexis",
@@ -26,8 +25,7 @@ class MemberSeeder extends AbstractSeeder {
         pseudo: "Lebgdu59260RPZA",
         city: "Lille",
         postcode: 59000,
-        avatar:
-          "https://www.parismatch.com/lmnr/var/pm/public/media/image/2022/02/28/16/Francois-Civil.jpg?VersionId=3NZNfTbY_QeYa6WOzqlWurka0zzg9TGn",
+        avatar: "/assets/images/icons/profile.png",
       },
       {
         firstname: "Sebastien",
@@ -36,6 +34,7 @@ class MemberSeeder extends AbstractSeeder {
         city: "Lille",
         postcode: 59000,
         points: 10,
+        avatar: "/assets/images/icons/profile.png",
       },
       {
         firstname: "Audrey",
@@ -44,6 +43,7 @@ class MemberSeeder extends AbstractSeeder {
         city: "Lille",
         postcode: 59000,
         points: 5,
+        avatar: "/assets/images/icons/profile.png",
       },
     ];
 
