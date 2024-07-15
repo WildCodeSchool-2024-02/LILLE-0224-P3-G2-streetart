@@ -101,7 +101,7 @@ import myAxios from "../services/myAxios"
           setTitle,
           setLatitude,
           setLongitude,
-          handleSubmit,
+          handleSubmit
         }),
         [image, title, handleSubmit]
       );    

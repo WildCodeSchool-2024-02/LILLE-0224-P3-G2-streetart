@@ -50,7 +50,6 @@ export function AuthProvider({ children }) {
     }, [auth, logout, navigate]
   );
 
-
   const contextValue = useMemo(
     () => ({ auth, setAuth, logout }),
     [auth, logout]

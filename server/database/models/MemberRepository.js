@@ -79,30 +79,35 @@ class MemberRepository extends AbstractRepository {
 
   async updateMember(memberUpdate) {
     const connection = await this.database.getConnection();
-
     try {
       // Begin many operations in SQL to be executed at once or all rollback
       await connection.beginTransaction();
 
       // Execute the SQL UPDATE query to update a specific member
       await connection.query(
-        `UPDATE ${this.table} SET city = ?, postcode = ?, avatar = ? WHERE id_member = ?`,
+        `UPDATE ${this.table} SET city = ?, postcode = ? WHERE id_member = ?`,
         [
           memberUpdate.city,
           memberUpdate.postcode,
-          memberUpdate.picture,
           memberUpdate.id,
         ]
       );
-      if (memberUpdate.pwd === "") {
+      await connection.query(
+        `UPDATE account SET email = ? WHERE id_member_fk = ?`,
+        [
+          memberUpdate.email,
+          memberUpdate.id
+        ]
+      );
+      if (memberUpdate.pwd) {
         await connection.query(
-          `UPDATE account SET email = ?  WHERE id_member_fk = ? AND assignment = ?`,
-          [memberUpdate.email, memberUpdate.id, "user"]
+          `UPDATE account SET pwd = ?  WHERE id_member_fk = ?`,
+          [memberUpdate.pwd, memberUpdate.id]
         );
-      } else {
+      } if (memberUpdate.picture) {
         await connection.query(
-          `UPDATE account SET email = ?, pwd = ? WHERE id_member_fk = ? AND assignment = ?`,
-          [memberUpdate.email, memberUpdate.pwd, memberUpdate.id, "user"]
+          `UPDATE member SET avatar = ? WHERE id_member = ?`,
+          [memberUpdate.picture, memberUpdate.id]
         );
       }
       // CONNECTION => COMMIT, ROLLBACK, RELEASE

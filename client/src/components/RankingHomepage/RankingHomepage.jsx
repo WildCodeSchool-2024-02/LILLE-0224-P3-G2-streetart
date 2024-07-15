@@ -31,15 +31,16 @@ function RankingHomepage() {
                 <td className="td-position">{index + 1}</td>
                 <td className="td-pseudo home">{member.pseudo}</td>
                 <td className="td-img">
-                  <img
-                    className="user-img-ranking"
-                    src={
-                      member.avatar
-                        ? member.avatar
-                        : "/assets/images/icons/profile.png"
-                    }
-                    alt="avatar"
-                  />
+                  <div className="user-img-ranking">
+                    <img
+                      src={
+                        member.avatar
+                          ? member.avatar
+                          : "/assets/images/icons/profile.png"
+                      }
+                      alt="avatar"
+                    />
+                  </div>
                 </td>
                 <td className="td-points">
                   {member.points}{" "}

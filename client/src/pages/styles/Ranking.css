@@ -53,8 +53,19 @@
 .user-img-ranking {
   width: 3.5rem;
   height: 3.5rem;
-  object-fit: cover;
   border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-container);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-img-ranking img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .td-pseudo {

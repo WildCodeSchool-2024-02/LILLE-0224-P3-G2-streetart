@@ -91,7 +91,7 @@ const createMember = async (req, res, next) => {
 // The E of BREAD - Edit (Update) operation
 const editMemberById = async (req, res, next) => {
   const memberUpdate = { ...req.body, id: req.params.id };
-
+  
   try {
     // Update the category in the database
     await tables.member.updateMember(memberUpdate);

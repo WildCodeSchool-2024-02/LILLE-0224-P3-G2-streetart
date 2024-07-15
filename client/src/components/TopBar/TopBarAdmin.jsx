@@ -20,7 +20,7 @@ function TopBarAdmin({ title }) {
         <div className="left-container">
           <Link to="/">
             <img
-              src="/assets/images/logo.png"
+              src="/assets/images/logo.svg"
               alt="Logo de Spot Lille Art"
               className="logo"
             />

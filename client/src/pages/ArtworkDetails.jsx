@@ -121,11 +121,13 @@ function ArtworkDetails() {
                 <p>Ajoutée par :</p>
                 <p className="focus-text">{artwork.pseudo}</p>
               </div>
-              <img
-                className="user-img-artwork"
-                src={artwork.avatar}
-                alt="avatar de la personne qui a ajouté l'oeuvre"
-              />
+              <div className="user-img-artwork">
+                <img
+                  className="user-img-artwork"
+                  src={artwork.avatar}
+                  alt="avatar de la personne qui a ajouté l'oeuvre"
+                />
+              </div>
               <p className="focus-text">{artwork.points} points</p>
               <p>{ownBadge.logo}</p>
             </div>

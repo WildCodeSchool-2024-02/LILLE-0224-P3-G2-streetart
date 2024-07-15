@@ -29,13 +29,16 @@
   overflow: hidden;
   height: 50px;
   width: 50px;
-  object-fit: cover;
   cursor: pointer;
+  box-shadow: var(--shadow-container);
+  z-index: 2;
 }
 
 .profile-details .profile-picture img {
   height: 50px;
   width: 50px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .profile-details .profile-info {
