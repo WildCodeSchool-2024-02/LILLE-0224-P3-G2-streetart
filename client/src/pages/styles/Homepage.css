@@ -94,7 +94,18 @@
 
   .roadmap-homepage {
     width: 35vw;
-    height: 22vw;
+    height: 20vw;
+  }
+
+  .tbody-ranking {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20vw;
+  }
+
+  .tbody-ranking .rank-boxes {
+    margin: 0;
   }
 
   .ranking-homepage {

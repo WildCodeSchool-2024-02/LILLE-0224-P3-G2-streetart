@@ -61,10 +61,7 @@ function ArtworksValidationDetails() {
 
   return (
     <div className="artworkNV-container">
-      <h2 className="artworksNV-title">
-        <span className="focus-text">Titre : </span>
-        {artworksNVD.title}
-      </h2>
+  
       <img
         className="artworkNV-img"
         src={artworksNVD.picture}
@@ -72,6 +69,12 @@ function ArtworksValidationDetails() {
       />
       <div className="artworkNVDetails-info">
         <h5 className="title-info">Informations sur l'oeuvre :</h5>
+
+      <div className="artworksNV-title">
+        <p>Titre : </p>
+        <p className="focus-text title">{artworksNVD.title}</p>
+</div>
+
         <div className="user">
           <p>Ajoutée par :</p>
 

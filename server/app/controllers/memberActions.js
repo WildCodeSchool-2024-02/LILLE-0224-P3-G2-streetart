@@ -2,9 +2,9 @@ const Joi = require("joi");
 const tables = require("../../database/tables");
 
 // The B of BREAD - Browse (Read All) operation
-const browseMembersByDate = async (req, res, next) => {
+const browseMembersInAdmin = async (req, res, next) => {
   try {
-    const members = await tables.member.readAllMembersByDate();
+    const members = await tables.member.readAllMembersInAdmin();
     res.json(members);
   } catch (err) {
     next(err);
@@ -30,7 +30,7 @@ const browseMemberById = async (req, res, next) => {
     if (member == null) {
       res.sendStatus(404);
     } else if (member.banned) {
-      res.status(403).json("banned")
+      res.status(403).json("banned");
     } else {
       res.status(200).json(member);
     }
@@ -40,7 +40,6 @@ const browseMemberById = async (req, res, next) => {
   }
 };
 
-
 // The A of BREAD - Add (Create) operation
 const createMember = async (req, res, next) => {
   const formSchema = Joi.object({
@@ -48,10 +47,13 @@ const createMember = async (req, res, next) => {
     lastname: Joi.string().max(25).required(),
     pseudo: Joi.string().max(15).required(),
     city: Joi.string().max(50).required(),
-    postcode: Joi.string().pattern(/^[0-9]{5}$/).required(),
+    postcode: Joi.string()
+      .pattern(/^[0-9]{5}$/)
+      .required(),
     email: Joi.string().email().max(100).required(),
     pwd: Joi.string().max(255).required(),
     date: Joi.date().required(),
+    avatar: Joi.string().max(255).required(),
   });
 
   const filteredBody = {
@@ -63,6 +65,7 @@ const createMember = async (req, res, next) => {
     email: req.body.email,
     pwd: req.body.pwd,
     date: req.body.date,
+    avatar: req.body.avatar,
   };
 
   try {
@@ -85,8 +88,6 @@ const createMember = async (req, res, next) => {
   }
 };
 
-
-
 // The E of BREAD - Edit (Update) operation
 const editMemberById = async (req, res, next) => {
   const memberUpdate = { ...req.body, id: req.params.id };
@@ -103,7 +104,7 @@ const editMemberById = async (req, res, next) => {
 };
 
 module.exports = {
-  browseMembersByDate,
+  browseMembersInAdmin,
   browseRanking,
   browseMemberById,
   createMember,

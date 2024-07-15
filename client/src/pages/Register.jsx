@@ -95,8 +95,6 @@ function Register() {
     } else {
       setConfPwdVisible("password");
     }
-
-    setPwdVisible(pwdVisible === "password" ? "text" : "password");
   };
 
   const handleChange = (e) => {
@@ -168,7 +166,10 @@ function Register() {
     setFilledForm(true);
     if (!captchaVal) return;
     try {
-      const response = await myAxios.post("/api/members/new-member", formData);
+      const response = await myAxios.post("/api/members/new-member", {
+        ...formData,
+        avatar: "/assets/images/icons/profile.png",
+      });
       console.info("Profil enregistré", response.data);
       navigate("/connexion");
       await myAxios.post("/api/mails/welcome", {
@@ -288,7 +289,7 @@ function Register() {
             >
               <option value="">Ville</option>
               {cities.map((city) => (
-                <option key={city.id} value={city}>
+                <option key={`${formData.postcode}-${city}`} value={city}>
                   {city}
                 </option>
               ))}

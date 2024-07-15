@@ -23,7 +23,7 @@ function RankingHomepage() {
   return (
     <div className="rank-container">
       <table className="rank-box">
-        <tbody>
+        <tbody className="tbody-ranking">
           {memberRanking.slice(0, 4).map((member, index) => {
             const ownBadge = getBadgeForPoints(member.points);
             return (

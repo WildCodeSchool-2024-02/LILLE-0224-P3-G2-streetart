@@ -1,40 +1,38 @@
-import "./Camera.css"
-import { useRef, useEffect, useState } from 'react';
-import Webcam from 'react-webcam';
+import "./Camera.css";
+import { useRef, useEffect, useState } from "react";
+import Webcam from "react-webcam";
 import { useNavigate, Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 import { useNewArtwork } from "../../../contexts/NewArtworkContext";
 import { useAuth } from "../../../contexts/AuthContext";
 
 function Camera() {
+  const { auth } = useAuth();
+  const { image, setImage, deletePicture, setLatitude, setLongitude } =
+    useNewArtwork();
+  const navigate = useNavigate();
+  const webcamRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width:768px)");
 
-    const { auth } = useAuth();
-    const { image, setImage, deletePicture, setLatitude, setLongitude } = useNewArtwork();
-    const navigate = useNavigate();
-    const webcamRef = useRef(null);
-    const isMobile = useMediaQuery('(max-width:768px)');
+  useEffect(() => {
+    if (!isMobile) {
+      navigate("/erreur");
+    }
+  }, [isMobile, navigate]);
 
-    useEffect(
-      () => {
-        if (!isMobile) {
-          navigate("/erreur")
-        }
-      }, [isMobile, navigate]
-    )
-  
-    const capturePicture = () => {
-      const imageSrc = webcamRef.current.getScreenshot();
-      setImage(imageSrc);
-    };
+  const capturePicture = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setImage(imageSrc);
+  };
 
-    // A REMETTRE POUR LA VUE ENVIRONNEMENT DE LA CAMERA POUR MOBILE
-    // const videoConstraints = {
-    //     facingMode: { exact: "environment" }
-    // };
+  // VUE ENVIRONNEMENT DE LA CAMERA POUR MOBILE
+  const videoConstraints = {
+    facingMode: { exact: "environment" },
+  };
 
-    // *//////////////////////////////// LOCALISATION ///////////////////////////////////*
+  // *//////////////////////////////// LOCALISATION ///////////////////////////////////*
 
-    const [errorLocation, setErrorLocation] = useState(null);
+  const [errorLocation, setErrorLocation] = useState(null);
   
     // ANCIENNE GEOLOCALISATION A RE-UTILISER EN CAS DE DYSFONCTIONNEMENT DE LA NOUVELLE METHODE 
 
@@ -90,41 +88,65 @@ function Camera() {
       } else {
         navigate("/connexion");
       }
-    
-      return () => {
-        if (watchId !== null) {
-          navigator.geolocation.clearWatch(watchId);
-        }
-      };
-    }, [auth.account, navigate, setLatitude, setLongitude]);    
-  
-    return auth.account && (
-          <div className={ image ? "webcam-container full" : "webcam-container"}>
-            <div className="camera-top" />
-              {/* A RETIRER UNE FOIS LE MESSAGE D'ERREUR IMPLANTÉ */}
-              <p>{errorLocation}</p>
-              {image ? <img src={image} alt="Oeuvre capturée" /> :  
-              <Webcam
-                  audio={false}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  className="webcam"
-                  // A REMETTRE POUR LA VUE ENVIRONNEMENT DE LA CAMERA POUR MOBILE
-                  // videoConstraints={videoConstraints}
+
+  return (
+    auth.account && (
+      <div className={image ? "webcam-container full" : "webcam-container"}>
+        <div className="camera-top" />
+        <p>{errorLocation}</p>
+        {image ? (
+          <img src={image} alt="Oeuvre capturée" />
+        ) : (
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            className="webcam"
+            videoConstraints={videoConstraints}
+          />
+        )}
+        <Link to="/">
+          <button type="button" className="exit-picture-btn camera-btn">
+            <img src="/assets/images/icons/return.png" alt="Revenir au site" />
+          </button>
+        </Link>
+        {image ? (
+          <div className="after-picture-btn">
+            <button
+              type="button"
+              onClick={deletePicture}
+              className="camera-btn"
+            >
+              <img
+                src="/assets/images/icons/cancel.svg"
+                alt="Supprimer et revenir à la camera"
               />
-              }
-              <Link to="/"><button type="button" className="exit-picture-btn camera-btn"><img src="/assets/images/icons/return.png" alt="Revenir au site" /></button></Link>
-              {image ?
-              <div className="after-picture-btn">
-                  <button type="button" onClick={deletePicture} className="camera-btn"><img src="/assets/images/icons/cancel.svg" alt="Supprimer et revenir à la camera" /></button>
-                  <Link to="/ajouter-oeuvre/formulaire"><button type="button" className="camera-btn"><img src="/assets/images/icons/validate.svg" alt="Valider l'oeuvre" /></button></Link>
-              </div>  
-              :
-              <div className="camera-bottom">
-                <button type="button" onClick={capturePicture} className="take-picture-btn camera-btn"><img src="/assets/images/icons/circle.png" alt="Capturer l'oeuvre" /></button>
-              </div>
-              }
+            </button>
+            <Link to="/ajouter-oeuvre/formulaire">
+              <button type="button" className="camera-btn">
+                <img
+                  src="/assets/images/icons/validate.svg"
+                  alt="Valider l'oeuvre"
+                />
+              </button>
+            </Link>
           </div>
+        ) : (
+          <div className="camera-bottom">
+            <button
+              type="button"
+              onClick={capturePicture}
+              className="take-picture-btn camera-btn"
+            >
+              <img
+                src="/assets/images/icons/circle.png"
+                alt="Capturer l'oeuvre"
+              />
+            </button>
+          </div>
+        )}
+      </div>
+    )
   );
 }
 

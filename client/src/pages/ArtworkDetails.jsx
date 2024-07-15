@@ -16,7 +16,6 @@ function ArtworkDetails() {
   const [message, setMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-
   // StreetMap API for get the adress with latitude and longitude
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${artwork.latitude}&lon=${artwork.longitude}&zoom=10&addressdetails=1`;
 
@@ -61,7 +60,7 @@ function ArtworkDetails() {
 
       console.info("Oeuvre signalée", response.data);
       setMessage("Oeuvre signalée");
-      setShowPopup(!showPopup)
+      setShowPopup(!showPopup);
     } catch (error) {
       console.error("Erreur", error);
     }
@@ -69,16 +68,24 @@ function ArtworkDetails() {
 
   // SHOW OR CLOSE POPUP
   const handleShowPopup = () => {
-    setShowPopup(!showPopup)
-  }
-
+    setShowPopup(!showPopup);
+  };
 
   const { getBadgeForPoints } = useBadges();
   const ownBadge = getBadgeForPoints(artwork.points);
 
   return (
     <div className="artworkdetails-container">
-    {showPopup && <PopupAnswer title="Êtes-vous sûr de vouloir signaler cette oeuvre ?" content="Si vous signalez l'oeuvre, un administrateur vérifiera que l'oeuvre n'existe plus. " choiceOne="Confirmer" roleOne={handleReport} choiceTwo="Annuler" roleTwo={handleShowPopup} />}
+      {showPopup && (
+        <PopupAnswer
+          title="Êtes-vous sûr de vouloir signaler cette oeuvre ?"
+          content="Si vous signalez l'oeuvre, un administrateur vérifiera que l'oeuvre n'existe plus. "
+          choiceOne="Confirmer"
+          roleOne={handleReport}
+          choiceTwo="Annuler"
+          roleTwo={handleShowPopup}
+        />
+      )}
       <div className="artworkdetails-right-container">
         <div className="artworkdetails-img-container">
           <h2 className="artwork-title">{artwork.title}</h2>
@@ -116,7 +123,8 @@ function ArtworkDetails() {
               </div>
               <div className="user-img-artwork">
                 <img
-                  src="https://www.radiofrance.fr/s3/cruiser-production/2022/10/4221556a-d1ba-4f34-9ec4-2819e102ea57/1200x680_pierre-niney.jpg"
+                  className="user-img-artwork"
+                  src={artwork.avatar}
                   alt="avatar de la personne qui a ajouté l'oeuvre"
                 />
               </div>
@@ -129,27 +137,27 @@ function ArtworkDetails() {
             </p>
           </div>
 
-{auth.token ?
-          <div className="artworkdetails-reportbtn">
-            {artwork.reported === 0 ? (
-              <button
-                type="button"
-                className="report-btn"
-                onClick={handleShowPopup}
-              >
-                Signaler la disparition de l'oeuvre
-              </button>
-            ) : (
-              <p className="focus-text report-artwork">
-                En cours de vérification : l'oeuvre a été signalée disparue.
-              </p>
-            )}
-          </div>
-          
-          : <div/>}
+          {auth.token ? (
+            <div className="artworkdetails-reportbtn">
+              {artwork.reported === 0 ? (
+                <button
+                  type="button"
+                  className="report-btn"
+                  onClick={handleShowPopup}
+                >
+                  Signaler la disparition de l'oeuvre
+                </button>
+              ) : (
+                <p className="focus-text report-artwork">
+                  En cours de vérification : l'oeuvre a été signalée disparue.
+                </p>
+              )}
+            </div>
+          ) : (
+            <div />
+          )}
           <p className="focus-text report-artwork">{message}</p>
         </div>
-      
       </div>
 
       <OthersArtworks artworkDisplayed={artwork.id_artwork} />

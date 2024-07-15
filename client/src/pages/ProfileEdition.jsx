@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAuth } from "../contexts/AuthContext";
 import myAxios from "../services/myAxios";
-import PopupAnswer from "../components/PopupAnswer/PopupAnswer"
+import PopupAnswer from "../components/PopupAnswer/PopupAnswer";
 import "./styles/ProfileEdition.css";
 
 function ProfileEdition() {
@@ -19,6 +19,9 @@ function ProfileEdition() {
   const [emailError, setEmailError] = useState("");
   const [editedPwd, setEditedPwd] = useState("");
   const [confEditedPwd, setConfEditedPwd] = useState("");
+
+  const [showPopup, setShowPopup] = useState(false);
+
 
   const containerClass = `field input-default modify-profil-input ${emailError ? "modify-profil-input-error" : ""}`;
 
@@ -47,8 +50,6 @@ function ProfileEdition() {
     };
     getData();
   }, [auth.token, id, navigate]);
-
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const [editPwd, setEditPwd] = useState(false);
 
@@ -205,13 +206,19 @@ function ProfileEdition() {
       }
 
       console.info("Modifications enregistrées", response.data);
-      setIsSubmit(true);
+      setShowPopup(!showPopup);
       setTimeout(() => {
         navigate(`/profil/${member.id_member}`);
       }, "3000");
     } catch (error) {
       console.error("Erreur", error);
     }
+    
+  };
+
+// POPUP 
+  const handleShowPopup = () => {
+    setShowPopup(!showPopup);
   };
 
   return (
@@ -402,7 +409,14 @@ function ProfileEdition() {
               </div>
             )}
           </div>
-          {isSubmit ? <p>Modifications enregistrées</p> : ""}
+          {showPopup && (
+        <PopupAnswer
+          title="Confirmation de vos modifications"
+          content="Vos modifications ont bien été enregistrées."
+          choiceTwo="Fermer"
+          roleTwo={handleShowPopup}
+        />
+      )}
         </div>
       )}
 
