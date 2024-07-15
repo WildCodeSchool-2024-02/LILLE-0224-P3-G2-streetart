@@ -22,7 +22,6 @@ function ProfileEdition() {
 
   const [showPopup, setShowPopup] = useState(false);
 
-
   const containerClass = `field input-default modify-profil-input ${emailError ? "modify-profil-input-error" : ""}`;
 
   useEffect(() => {
@@ -131,16 +130,16 @@ function ProfileEdition() {
   const [badExtension, setBadExtension] = useState(false);
 
   function getExtension(filename) {
-    const lastDotIndex = filename.lastIndexOf('.');
-    return lastDotIndex !== -1 ? filename.substring(lastDotIndex + 1) : '';
+    const lastDotIndex = filename.lastIndexOf(".");
+    return lastDotIndex !== -1 ? filename.substring(lastDotIndex + 1) : "";
   }
 
   // change picture displayed
   const handleFileChange = (e) => {
     const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
-    const extension = getExtension(file.name)
+    const extension = getExtension(file.name);
     const allowedExtensions = ["png", "jpg", "jpeg", "webp"];
-    if ((allowedExtensions.includes(extension)) && file.size <= 7000000) {
+    if (allowedExtensions.includes(extension) && file.size <= 7000000) {
       setSelectedFile(file); // App  eler handleFileSelect pour mettre à jour selectedFile
     } else {
       setBadExtension(true);
@@ -213,17 +212,22 @@ function ProfileEdition() {
     } catch (error) {
       console.error("Erreur", error);
     }
-    
   };
 
-// POPUP 
+  // POPUP
   const handleShowPopup = () => {
     setShowPopup(!showPopup);
   };
 
   return (
     <div className="profile-edit-container">
-      {badExtension && <PopupAnswer content="Seules les images aux formats 'png', 'jpg', 'jpeg' et 'webp' d'une taille maximale de 7 Mo sont autorisées." choiceTwo="Fermer" roleTwo={() => setBadExtension(false)} />}
+      {badExtension && (
+        <PopupAnswer
+          content="Seules les images aux formats 'png', 'jpg', 'jpeg' et 'webp' d'une taille maximale de 7 Mo sont autorisées."
+          choiceTwo="Fermer"
+          roleTwo={() => setBadExtension(false)}
+        />
+      )}
       {member && (
         <div
           key={`${member.firstName} ${member.lastName}`}
@@ -231,40 +235,39 @@ function ProfileEdition() {
         >
           <div className="modify-profil-avatar">
             <div className="avatar-profile-edit">
-            {selectedFile ? (
-              <img
-                src={URL.createObjectURL(selectedFile)}
-                alt="profil"
-              />
-            ) : (
-              <img
-                src={
-                  member.avatar
-                    ? member.avatar
-                    : "/assets/images/icons/profile.png"
-                }
-                alt="profil"
-              />
-            )}
-            <div className="button-edit-container">
-              <input
-                type="file"
-                ref={fileInput}
-                style={{ display: "none" }}
-                onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                onClick={() => fileInput.current.click()}
-                className="button-edit-avatar"
-                id="fileInput"
-              >
-                <label htmlFor="fileInput" style={{ display: "none" }}>
-                  Edit Avatar
-                </label>
-                <EditIcon style={{ color: "#666", fontSize: 22, cursor: "pointer" }} />
-              </button>
-            </div>
+              {selectedFile ? (
+                <img src={URL.createObjectURL(selectedFile)} alt="profil" />
+              ) : (
+                <img
+                  src={
+                    member.avatar
+                      ? member.avatar
+                      : "/assets/images/icons/profile.png"
+                  }
+                  alt="profil"
+                />
+              )}
+              <div className="button-edit-container">
+                <input
+                  type="file"
+                  ref={fileInput}
+                  style={{ display: "none" }}
+                  onChange={handleFileChange}
+                  id="fileInput"
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInput.current.click()}
+                  className="button-edit-avatar"
+                >
+                  <label htmlFor="fileInput" style={{ display: "none" }}>
+                    Edit Avatar
+                  </label>
+                  <EditIcon
+                    style={{ color: "#666", fontSize: 22, cursor: "pointer" }}
+                  />
+                </button>
+              </div>
             </div>
           </div>
           <div className="modify-profil-container">
@@ -276,6 +279,7 @@ function ProfileEdition() {
             <div>
               <label htmlFor="postcode">Code Postal</label>
               <input
+                id="postcode"
                 type="text"
                 value={editedPostcode}
                 onChange={handlePostCodeChange}
@@ -289,13 +293,14 @@ function ProfileEdition() {
               <label htmlFor="city">Ville</label>
               {editedPostcode !== member.postcode ? (
                 <select
+                  id="city"
                   type="text"
                   value={editedCity}
                   onChange={(e) => setEditedCity(e.target.value)}
                   className="input-default-edit input-default "
                 >
                   {cities.map((city) => (
-                    <option key={city.id} value={city}>
+                    <option key={`${editedPostcode}-${city}`} value={city}>
                       {city}
                     </option>
                   ))}
@@ -315,6 +320,7 @@ function ProfileEdition() {
             <div>
               <label htmlFor="email">Email</label>
               <input
+                id="email"
                 name="email"
                 type="text"
                 value={editedEmail}
@@ -335,7 +341,9 @@ function ProfileEdition() {
                 <p className="pwd-modify-btn-text">
                   Modifier mon mot de passe{" "}
                 </p>
-                <EditIcon style={{ color: "#666", fontSize: 25, cursor: "pointer" }} />
+                <EditIcon
+                  style={{ color: "#666", fontSize: 25, cursor: "pointer" }}
+                />
               </button>
             </div>
             {editPwd && (
@@ -410,13 +418,13 @@ function ProfileEdition() {
             )}
           </div>
           {showPopup && (
-        <PopupAnswer
-          title="Confirmation de vos modifications"
-          content="Vos modifications ont bien été enregistrées."
-          choiceTwo="Fermer"
-          roleTwo={handleShowPopup}
-        />
-      )}
+            <PopupAnswer
+              title="Confirmation de vos modifications"
+              content="Vos modifications ont bien été enregistrées."
+              choiceTwo="Fermer"
+              roleTwo={handleShowPopup}
+            />
+          )}
         </div>
       )}
 
