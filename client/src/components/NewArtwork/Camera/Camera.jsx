@@ -82,13 +82,14 @@ function Camera() {
       if (auth.account) {
         if (navigator.geolocation) {
           watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, options);
+          console.info(watchId)
         } else {
           setErrorLocation("La géolocalisation n'est pas supportée par ce navigateur.");
         }
       } else {
         navigate("/connexion");
       }
-
+    })
   return (
     auth.account && (
       <div className={image ? "webcam-container full" : "webcam-container"}>

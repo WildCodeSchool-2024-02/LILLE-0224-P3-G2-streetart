@@ -290,7 +290,7 @@ const sendEmailContact = async (req, res, next) => {
 `;
     try {
         await sendEmail(to, subject, textContent, htmlContent)
-        res.status(201);
+        res.status(200).send({ message: "Email sent successfully"});
         next();
     } catch (error) {
         next(error)
@@ -385,7 +385,7 @@ const sendEmailContactSla = async (req, res, next) => {
 
     try {
         await sendEmail(process.env.EMAIL_ADDRESS, subject, textContent, htmlContent)
-        res.status(201);
+        res.status(200).send({ message: "Email sent successfully"});
     } catch (error) {
         next(error)
     }

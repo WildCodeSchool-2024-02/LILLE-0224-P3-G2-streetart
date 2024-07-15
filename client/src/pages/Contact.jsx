@@ -24,21 +24,27 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (confidentiality) {
-      await myAxios.post("/api/mails/contact", {
-        name: `${formData.firstname} ${formData.lastname}`,
-        to: formData.email,
-        content: formData.content,
-      });
-      setStatut("Votre message a bien été envoyé.");
-      setFormData({
-        lastname: "",
-        firstname: "",
-        email: "",
-        content: "",
-      });
-      setConfidentiality(false);
+    try {
+      // debugger;
+        await myAxios.post("/api/mails/contact", {
+          name: `${formData.firstname} ${formData.lastname}`,
+          to: formData.email,
+          content: formData.content,
+        });
+        setStatut("Votre message a bien été envoyé.");
+        setFormData({
+          lastname: "",
+          firstname: "",
+          email: "",
+          content: "",
+        });
+        setConfidentiality(false);
+        // // SHOW POPUP
+        setShowPopup(true);
+    } catch (error) {
+      console.error(error)
+    }
     } else if (!confidentiality) {
       setStatut("Veuillez accepter la politique de confidentialité.");
     }
@@ -47,11 +53,6 @@ function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
-  // SHOW OR CLOSE POPUP
-  const handleShowPopup = () => {
-    setShowPopup(!showPopup);
   };
 
   const handleShowPopupEnd = () => {
@@ -132,7 +133,7 @@ function Contact() {
           </label>
         </div>
         {statut && <p className={stateStatut}>{statut}</p>}
-        <button type="submit" className="btn" onClick={handleShowPopup}>
+        <button type="submit" className="btn">
           Envoyer
         </button>
       </form>
