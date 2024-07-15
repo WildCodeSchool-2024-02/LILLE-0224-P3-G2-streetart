@@ -91,6 +91,7 @@
 }
 
 .report-btn {
+  cursor: pointer;
   box-shadow: var(--shadow-container);
   background-color: aliceblue;
   color: #1368d0b0;

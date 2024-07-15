@@ -9,26 +9,21 @@ import RankingHomepage from "../components/RankingHomepage/RankingHomepage";
 import PopupRules from "../components/PopupRules/PopupRules";
 
 function Homepage() {
-
   const artworkIsValidate = useLoaderData();
-  const [ showPopup, setShowPopup ] = useState();
+  const [showPopup, setShowPopup] = useState();
 
-  useEffect(
-    () => {
-
-      const getCookie = () => {
-        const cookie = Cookies.get("popupSLA");
-        if(cookie === "dont-show") {
-          setShowPopup(false)
-        } else {
-          setShowPopup(true)
-        }
+  useEffect(() => {
+    const getCookie = () => {
+      const cookie = Cookies.get("popupSLA");
+      if (cookie === "dont-show") {
+        setShowPopup(false);
+      } else {
+        setShowPopup(true);
       }
+    };
 
-      getCookie();
-      
-    }, []
-  )
+    getCookie();
+  }, []);
 
   return (
     <div className="homepage-container">
@@ -63,10 +58,12 @@ function Homepage() {
           <h3 className="titles-homepage">Le top 3</h3>
           <Top3 />
         </div>
-        <div className="ranking-homepage">
-          <h3 className="titles-homepage">Le classement</h3>
-          <RankingHomepage />
-        </div>
+        <Link to="/classement">
+          <div className="ranking-homepage">
+            <h3 className="titles-homepage">Le classement</h3>
+            <RankingHomepage />
+          </div>
+        </Link>
       </div>
     </div>
   );

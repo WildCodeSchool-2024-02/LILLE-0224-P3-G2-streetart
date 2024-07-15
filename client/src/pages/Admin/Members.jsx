@@ -34,7 +34,6 @@ function Members() {
     }
   };
 
-
   // PAGINATION
   const [pagination, setPagination] = useState(1);
   const limit = 6;
@@ -55,7 +54,6 @@ function Members() {
   const handlePagination = (event, value) => {
     setPagination(value);
   };
-
 
   return (
     <div>
@@ -124,21 +122,19 @@ function Members() {
               ))}
           </tbody>
         </table>
-        {members > limit ?    
-        (
-        <div />      
-            ) : (
-              <Stack spacing={2} className="pagination">
-              <Pagination
-                count={totalPages}
-                color="primary"
-                page={pagination}
-                onChange={handlePagination}
-              />
-            </Stack>
-            )}
+        {members > limit ? (
+          <Stack spacing={2} className="pagination">
+            <Pagination
+              count={totalPages}
+              color="primary"
+              page={pagination}
+              onChange={handlePagination}
+            />
+          </Stack>
+        ) : (
+          <div />
+        )}
       </div>
-     
     </div>
   );
 }
