@@ -33,7 +33,7 @@ export default function FixedBottomNavigationAdmin() {
           elevation={4}
         >
           <BottomNavigation
-            showLabel={false}
+            showLabels={false}
             value={value}
             onChange={(event, newValue) => {
               setValue(newValue);

@@ -29,7 +29,7 @@ function About() {
         Spot Lille Art est bien plus qu'un simple site de référencement d'œuvres
         de street art. C'est une communauté dynamique et engagée qui célèbre la
         diversité et la créativité artistique présente dans les rues de la MEL.
-        Nous mettons en lumière les artistes locaux, les fresques emblématiques
+        Nous mettons en lumière les oeuvres locales, les fresques emblématiques
         et les lieux où l'art urbain prend vie.
       </p>
       <div className="images-about" id="regles">
@@ -63,7 +63,7 @@ function About() {
         </li>
         <li>
         <span className="focus-text">2.</span> Explorer l'art urbain local : Parcourez notre collection en ligne pour
-          découvrir les dernières créations, les artistes émergents et les lieux
+          découvrir les dernières créations et les lieux
           incontournables où l'art urbain s'épanouit.
         </li>
         <li>
@@ -89,8 +89,8 @@ function About() {
         <p>
           Ceci est un site que nous avons réalisé dans le cadre d'un projet
           pédagogique au cours de notre formation "Développeur Web Full Stack" à
-          la Wild Code School. Nous avons réalisé le frontend du site en
-          utilisant React.js et nous avons utilisé express.js pour le backend.
+          la Wild Code School. Nous avons réalisé le front-end du site en
+          utilisant React.js et Express.js pour le back-end.
         </p>
         <p>
           Site réalisé par Alexis Estrine, Elodie Régnier, Audrey Baudry et
