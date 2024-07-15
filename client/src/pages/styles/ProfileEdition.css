@@ -115,6 +115,7 @@
 
 .input-default-edit {
   font-size: 1rem;
+  width: 60vw;
 }
 
 .pwd-edit .input-default {
@@ -168,9 +169,5 @@
 
   .edit-password-pen {
     width: 90%;
-  }
-
-  .input-default-edit {
-    width: auto;
   }
 }
