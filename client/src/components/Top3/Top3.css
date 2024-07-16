@@ -8,9 +8,6 @@
   width: 90vw;
   border-radius: 0.4rem;
   margin: 0.2rem 0;
-  box-shadow:
-    rgba(50, 50, 93, 0.25) 0px 3px 6px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .top3-container .user-img-ranking {
