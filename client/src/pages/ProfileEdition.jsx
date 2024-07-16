@@ -136,11 +136,11 @@ function ProfileEdition() {
 
   // change picture displayed
   const handleFileChange = (e) => {
-    const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
+    const file = e.target.files[0]; 
     const extension = getExtension(file.name);
     const allowedExtensions = ["png", "jpg", "jpeg", "webp"];
     if (allowedExtensions.includes(extension) && file.size <= 7000000) {
-      setSelectedFile(file); // App  eler handleFileSelect pour mettre à jour selectedFile
+      setSelectedFile(file);
     } else {
       setBadExtension(true);
     }

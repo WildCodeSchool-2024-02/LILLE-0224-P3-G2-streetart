@@ -19,6 +19,7 @@
   margin: 0 auto;
   box-shadow: var(--shadow-container);
   position: relative;
+  box-sizing: border-box;
 }
 
 .return-camera-btn {

@@ -32,7 +32,7 @@ function FormArtwork() {
                         <div className="line" />
                     </div>
                     <div>
-                        <p className="warning">Attention : La photo doit être prise au format portrait.</p>
+                        <p className="warning">Attention : Privilégiez le format paysage si cela est possible.</p>
                     </div>
                     <button type="button" onClick={handleSubmit} className="btn send-picture-btn">Envoyer</button>
                 </div>

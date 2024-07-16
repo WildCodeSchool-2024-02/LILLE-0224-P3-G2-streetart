@@ -34,68 +34,68 @@ function Camera() {
 
   const [errorLocation, setErrorLocation] = useState(null);
 
-  // ANCIENNE GEOLOCALISATION A RE-UTILISER EN CAS DE DYSFONCTIONNEMENT DE LA NOUVELLE METHODE
-
-  // useEffect(() => {
-  //   if (auth.account) {
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition(
-  //         (position) => {
-  //           setLatitude(position.coords.latitude);
-  //           setLongitude(position.coords.longitude);
-  //         },
-  //         (error) => {
-  //           setErrorLocation(error.message);
-  //         },
-  //         {
-  //           enableHighAccuracy: true,
-  //           timeout: 5000,
-  //           maximumAge: 0
-  //         }
-  //       );
-  //     } else {
-  //       setErrorLocation("La géolocalisation n'est pas suportée par ce navigateur.");
-  //     }
-  //   } else {
-  //     navigate("/connexion")
-  //   }
-  // }, [setLatitude, setLongitude, auth.account, navigate]);
-
   useEffect(() => {
-    let watchId = null;
-
-    const successCallback = (position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    };
-
-    const errorCallback = (error) => {
-      setErrorLocation(error.message);
-    };
-
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
-
     if (auth.account) {
       if (navigator.geolocation) {
-        watchId = navigator.geolocation.watchPosition(
-          successCallback,
-          errorCallback,
-          options
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            setErrorLocation(error.message);
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+          }
         );
-        console.info(watchId);
       } else {
-        setErrorLocation(
-          "La géolocalisation n'est pas supportée par ce navigateur."
-        );
+        setErrorLocation("La géolocalisation n'est pas suportée par ce navigateur.");
       }
     } else {
-      navigate("/connexion");
+      navigate("/connexion")
     }
-  });
+  }, [setLatitude, setLongitude, auth.account, navigate]);
+
+    // ANCIENNE GEOLOCALISATION A RE-UTILISER EN CAS DE DYSFONCTIONNEMENT DE LA NOUVELLE METHODE
+
+  // useEffect(() => {
+  //   let watchId = null;
+
+  //   const successCallback = (position) => {
+  //     setLatitude(position.coords.latitude);
+  //     setLongitude(position.coords.longitude);
+  //   };
+
+  //   const errorCallback = (error) => {
+  //     setErrorLocation(error.message);
+  //   };
+
+  //   const options = {
+  //     enableHighAccuracy: true,
+  //     timeout: 5000,
+  //     maximumAge: 0,
+  //   };
+
+  //   if (auth.account) {
+  //     if (navigator.geolocation) {
+  //       watchId = navigator.geolocation.watchPosition(
+  //         successCallback,
+  //         errorCallback,
+  //         options
+  //       );
+  //       console.info(watchId);
+  //     } else {
+  //       setErrorLocation(
+  //         "La géolocalisation n'est pas supportée par ce navigateur."
+  //       );
+  //     }
+  //   } else {
+  //     navigate("/connexion");
+  //   }
+  // });
 
   return (
     auth.account && (
