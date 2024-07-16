@@ -54,11 +54,11 @@ function Homepage() {
             </div>
           </Link>
         </div>
-        <div className="top3-mobile">
-          <h3 className="titles-homepage">Le top 3</h3>
-          <Top3 />
-        </div>
         <Link to="/classement">
+          <div className="top3-mobile">
+            <h3 className="titles-homepage">Le top 3</h3>
+            <Top3 />
+          </div>
           <div className="ranking-homepage">
             <h3 className="titles-homepage">Le classement</h3>
             <RankingHomepage />
