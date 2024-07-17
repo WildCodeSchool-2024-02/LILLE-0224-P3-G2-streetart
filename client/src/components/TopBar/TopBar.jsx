@@ -22,11 +22,7 @@ function TopBar({ title }) {
         <h2 className="title">{title}</h2>
         <div className="splash" />
       </div>
-      <div
-        className="top-bar desktop"
-        onClick={handleGoHome}
-        role="presentation"
-      >
+      <div className="top-bar desktop">
         <div className="left-container">
           <Link to="/">
             <img
