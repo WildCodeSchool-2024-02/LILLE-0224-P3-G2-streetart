@@ -46,9 +46,10 @@ class MemberRepository extends AbstractRepository {
 
   async readAllMembersInAdmin() {
     const [rows] = await this.database.query(
-      `SELECT m.*, DATE_FORMAT(ac.date_creation, '%d/%m/%Y') AS date_creation, ac.email, ac.banned
+      `SELECT m.*, DATE_FORMAT(ac.date_creation, '%d/%m/%Y') AS date_creation, ac.email, ac.banned, ac.assignment
       FROM member AS m
       INNER JOIN account AS ac ON id_member=id_member_fk
+      WHERE ac.assignment = 'user'
       ORDER BY id_member DESC`
     );
     return rows;
@@ -86,25 +87,19 @@ class MemberRepository extends AbstractRepository {
       // Execute the SQL UPDATE query to update a specific member
       await connection.query(
         `UPDATE ${this.table} SET city = ?, postcode = ? WHERE id_member = ?`,
-        [
-          memberUpdate.city,
-          memberUpdate.postcode,
-          memberUpdate.id,
-        ]
+        [memberUpdate.city, memberUpdate.postcode, memberUpdate.id]
       );
       await connection.query(
         `UPDATE account SET email = ? WHERE id_member_fk = ?`,
-        [
-          memberUpdate.email,
-          memberUpdate.id
-        ]
+        [memberUpdate.email, memberUpdate.id]
       );
       if (memberUpdate.pwd) {
         await connection.query(
           `UPDATE account SET pwd = ?  WHERE id_member_fk = ?`,
           [memberUpdate.pwd, memberUpdate.id]
         );
-      } if (memberUpdate.picture) {
+      }
+      if (memberUpdate.picture) {
         await connection.query(
           `UPDATE member SET avatar = ? WHERE id_member = ?`,
           [memberUpdate.picture, memberUpdate.id]

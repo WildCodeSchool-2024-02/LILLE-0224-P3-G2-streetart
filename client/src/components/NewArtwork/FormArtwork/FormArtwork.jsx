@@ -48,8 +48,7 @@ function FormArtwork() {
           </div>
           <div>
             <p className="warning">
-              Attention : Privilégiez le format paysage si cela est possible.{" "}
-              <br />
+              Attention : Prenez la photo en format portrait <br />
               Si vous rencontrez des problèmes, veuillez utiliser Google Chrome
             </p>
           </div>
