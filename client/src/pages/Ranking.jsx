@@ -97,7 +97,10 @@ function Ranking() {
             </tbody>
           </table>
           <div>
-            {rankingData > limit ? (
+            {rankingData > limit ?
+             (
+              <div />
+            )  : (
               <Stack spacing={2} className="pagination">
                 <Pagination
                   count={totalPages}
@@ -106,9 +109,8 @@ function Ranking() {
                   onChange={handlePagination}
                 />
               </Stack>
-            ) : (
-              <div />
-            )}
+            )
+            }
           </div>
         </div>
       </div>

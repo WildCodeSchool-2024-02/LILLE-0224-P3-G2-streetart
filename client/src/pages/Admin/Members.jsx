@@ -123,6 +123,9 @@ function Members() {
           </tbody>
         </table>
         {members > limit ? (
+          <div />
+        ) : 
+        (
           <Stack spacing={2} className="pagination">
             <Pagination
               count={totalPages}
@@ -131,8 +134,6 @@ function Members() {
               onChange={handlePagination}
             />
           </Stack>
-        ) : (
-          <div />
         )}
       </div>
     </div>
