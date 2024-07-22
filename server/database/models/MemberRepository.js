@@ -59,7 +59,7 @@ class MemberRepository extends AbstractRepository {
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} 
       INNER JOIN account AS ac ON ac.id_member_fk = member.id_member
-      WHERE ac.banned = 0
+      WHERE ac.banned = 0 AND ac.assignment = 'user'
       ORDER BY member.points DESC;`
     );
     return rows;
